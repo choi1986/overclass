@@ -1,5 +1,11 @@
 package kr.co.overclass.service;
 
-public interface ReplyService {
+import java.util.List;
 
+import kr.co.overclass.domain.ReplyVO;
+
+public interface ReplyService {
+	public void addReply(ReplyVO vo)throws Exception;
+	public void removeReply(int rno)throws Exception;
+	public List<ReplyVO> listReply(int dno)throws Exception;
 }

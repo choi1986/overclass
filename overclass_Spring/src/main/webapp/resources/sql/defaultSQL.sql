@@ -5,8 +5,9 @@ create table oc_user(
 	user_name varchar2(15) not null,
 	user_email varchar2(30) not null,
 	user_tel varchar2(13) not null,
-	user_loc varchar2(15) not null,
-	user_hobby varchar2(15) not null,
+	user_loc varchar2(150) not null,
+	user_hobby1 varchar2(15) not null,
+	user_hobby2 varchar2(15) not null,
 	user_birth varchar2(6) not null,
 	user_gender varchar2(3) not null,
 	user_pwdq number not null,
@@ -16,6 +17,9 @@ create table oc_user(
 	user_logincnt number,
 	user_admin number default 0
 );
+
+-- 비밀번호 질문
+-- 1. 나의 고향은?   2. 나의 친한 친구 이름은?   3. 나의 별명은?   4. 나의 출신 학교는?   5. 부모님의 성함은?   6. 보물 제1호는?
 
 drop table oc_document cascade constraints;
 create table oc_document(
@@ -29,6 +33,13 @@ create table oc_document(
 	replycnt number default 0,
 	foreign key (writer) references oc_user (user_id)
 );
+
+drop sequence oc_document_seq;
+create sequence oc_document_seq
+	start with 1
+	increment by 1
+	nocycle
+	nocache;
 
 drop table good cascade constraints;
 create table good(
@@ -52,8 +63,8 @@ create table oc_report(
 drop table oc_reply cascade constraints;
 create table oc_reply(
 	rno number primary key,
-	replyer varchar2(12) not null,
 	dno number not null,
+	replyer varchar2(12) not null,
 	content varchar2(150) not null,
 	foreign key (replyer) references oc_user (user_id),
 	foreign key (dno) references oc_document (dno)
@@ -85,4 +96,8 @@ create table oc_msg(
 	content varchar2(210) not null,
 	writedate date default sysdate
 );
+
+
+
+
 
