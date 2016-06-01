@@ -5,10 +5,12 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Repository;
 
 import kr.co.overclass.domain.DocumentVO;
 import kr.co.overclass.domain.UserVO;
 
+@Repository
 public class SearchDAOImpl implements SearchDAO {
 
 	@Inject

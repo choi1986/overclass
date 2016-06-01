@@ -4,10 +4,13 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.stereotype.Service;
+
 import kr.co.overclass.domain.DocumentVO;
 import kr.co.overclass.domain.UserVO;
 import kr.co.overclass.persistence.SearchDAO;
 
+@Service
 public class SearchServiceImpl implements SearchService {
 
 	@Inject

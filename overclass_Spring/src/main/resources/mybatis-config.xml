@@ -3,6 +3,8 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="kr.co.overclass.domain.ReplyVO" alias="reply"/>
+		<typeAlias type="kr.co.overclass.domain.UserVO" alias="user"/>
+		<typeAlias type="kr.co.overclass.domain.DocumentVO" alias="document"/>
 		<!-- <package name="com.kosta.domain"/> -->
 	</typeAliases>
 </configuration>

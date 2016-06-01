@@ -1,9 +1,12 @@
-<%@page import="oc.model.beans.MemberDTO"%>
+<%@page import="kr.co.overclass.domain.UserVO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<% List<MemberDTO> search_list = (List<MemberDTO>)request.getAttribute("search_list"); %>
-<br><br>
+	검색페이지
+<% UserVO user = (UserVO)request.getAttribute("selectId"); %>
+<input type="text" value="${user.user_id }">
+<input type="text" value="${user.user_name }">
+<%-- <br><br>
 <div id="edit-profile" class="tab-pane">
 	<section class="panel">
 		<div class="panel-body bio-graph-info">
@@ -33,6 +36,5 @@
 
 		</div>
 	</section>
-</div>
-
+</div> --%>
 

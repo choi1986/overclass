@@ -37,5 +37,11 @@
        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg> 
    </bean>
    
+   <!-- DAO객체를 스프링에서 관리  -->
+   <context:component-scan base-package="kr.co.overclass.persistence"/>
+   
+   <!-- Service객체를 스프링에서 관리  -->
+   <!-- <bean class="com.kosta.service.BoardServiceImpl"></bean> -->
+   <context:component-scan base-package="kr.co.overclass.service"/>
    
 </beans>
