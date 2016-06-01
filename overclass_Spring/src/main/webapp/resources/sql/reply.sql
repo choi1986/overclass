@@ -4,4 +4,4 @@ create table reply(
 	user_id varchar2(12) not null,
 	doc_num number not null,
 	reply_content varchar2(150) not null
-)
+);

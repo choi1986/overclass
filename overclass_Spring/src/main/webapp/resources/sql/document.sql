@@ -7,4 +7,4 @@ create table document(
 	doc_writedate date default sysdate,
 	doc_image varchar2(120),
 	doc_goodcnt number default 0
-)
+);
