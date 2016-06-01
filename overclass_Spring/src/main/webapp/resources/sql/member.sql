@@ -14,5 +14,5 @@ create table member(
 	user_joindate date default sysdate,
 	user_image varchar2(120) default '/img/profile_default.jpg',
 	user_logincnt number,
-	user_admin number default 0,
-)
+	user_admin number default 0
+);
