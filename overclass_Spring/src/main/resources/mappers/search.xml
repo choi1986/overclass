@@ -12,7 +12,7 @@
 	</select>
 	
 	<select id="searchTag" resultType="document">
-		select * from oc_document
+		select dno,writer,content,tag from oc_document
 		where tag=#{tag}
 	</select>
 </mapper>

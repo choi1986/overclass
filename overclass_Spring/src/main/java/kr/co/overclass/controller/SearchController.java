@@ -19,6 +19,11 @@ public class SearchController {
 	@Inject
 	private SearchService service;
 	
+	@RequestMapping(value="/search", method=RequestMethod.GET)
+	public String searchMain(){
+		return "/addfunction/search";
+	}
+	
 	@RequestMapping(value="/searchId", method=RequestMethod.GET)
 	public String searchId(String user_id, Model model) throws Exception{
 		logger.info("아이디검색........................");
@@ -29,14 +34,14 @@ public class SearchController {
 	@RequestMapping(value="/searchName", method=RequestMethod.GET)
 	public String searchName(String user_name, Model model) throws Exception{
 		logger.info("이름검색........................");
-		//model.addAttribute("searchName", service.selectName(user_name));
+		model.addAttribute("selectName", service.selectName(user_name));
 		return "/addfunction/search";
 	}
 	
 	@RequestMapping(value="/searchTag", method=RequestMethod.GET)
 	public String searchTag(String doc_tag, Model model) throws Exception{
 		logger.info("태그검색........................");
-		//model.addAttribute("searchName", service.selectTag(doc_tag));
+		model.addAttribute("selectTag", service.selectTag(doc_tag));
 		return "/addfunction/search";
 	}
 }
