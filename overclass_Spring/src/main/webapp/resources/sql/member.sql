@@ -1,5 +1,5 @@
-drop table member;
-create table member(
+drop table oc_user cascade constraints;
+create table oc_user(
 	user_id varchar2(12) primary key,
 	user_pwd varchar2(12) not null,
 	user_name varchar2(15) not null,

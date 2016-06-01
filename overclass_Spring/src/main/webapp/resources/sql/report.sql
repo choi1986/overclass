@@ -1,8 +1,10 @@
-drop table report;
-create table report(
-	rep_num number primary key,
-	user_id varchar2(12) not null,
-	doc_num number not null,
-	rep_content varchar2(120),
-	rep_date date	-- 脚绊贸府老磊
+drop table oc_report cascade constraints;
+create table oc_report(
+	reportno number primary key,
+	reporter varchar2(12) not null,
+	dno number not null,
+	content varchar2(120),
+	reportdate date,	-- 脚绊贸府老磊
+	foreign key (reporter) references oc_user (user_id),
+	foreign key (dno) references oc_document (dno)
 );
