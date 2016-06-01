@@ -1,0 +1,137 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<div class="row">
+	<%
+		for (int i = 0; i < list.size(); i++) {
+	%>
+	<div class="col-lg-offset-3 col-lg-5 portlets">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="pull-left">
+					<h4>
+						<i class="fa fa-4x fa-list-alt"></i>
+					</h4>
+				</div>
+				<div class="widget-icons pull-right">
+					<a id="content_repot" class="wclose"><i style="color: red;"
+						class="fa fa-warning" data-toggle="modal" data-target="#repot"></i></a>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="panel-body">
+				<div class="padd">
+					<div class="form quick-post">
+						<!-- 글쓰기폼-->
+						<form class="form-horizontal">
+							<!-- 타이틀 -->
+							<div class="form-group">
+								<div class="photo col-lg-2" style="text-align: center;">
+									<img alt="avatar" src='<%=user.getId_img_path()%>' width='70'
+										height='70'>
+									<h4></h4>
+									<p>
+										<b><%=user.getName()%></b>
+									</p>
+								</div>
+								<div class="col-lg-10">
+									<div class="panel-content"
+										style="width: 100%; height: 100px; overflow: hidden; word-break: break-all;">
+										<%=list.get(i).getContent()%>
+									</div>
+								</div>
+							</div>
+							<!-- 글내용 -->
+							<!-- <div class="form-group">
+																		<label class="control-label col-lg-2" for="content">글내용</label>
+																		<div class="col-lg-8">
+																			<div class="panel-content" style="width: 100%; height: 100px;">글내용DB</div>
+																		</div>
+																	</div> -->
+							<!-- 좋아요 -->
+							<div class="form-group">
+								<p data-toggle="modal" data-target="#good">
+									<a href="" class="control-label col-lg-2">좋아요&nbsp;&nbsp; <span
+										id="good_icon" class="fa fa-lg fa-thumbs-o-up"
+										style="color: blue;"></span> <!-- <img id="good_icon" src="${initParam.root}img/좋아요1.png"> -->
+									</a>
+								</p>
+
+								<div class="col-lg-8">
+									<i class="fa fa-lg fa-heart" style="color: red;"><span
+										style="color: black;">&nbsp;0</span></i>
+								</div>
+							</div>
+							<!-- 태그 -->
+							<div class="form-group">
+								<label class="control-label col-lg-2" for="content">태그</label>
+								<div class="col-lg-9">
+									<%
+										if (list.get(i).getTag() != null) {
+												String tag[] = list.get(i).getTag().split(",");
+												for (int j = 0; j < tag.length; j++) {
+									%>
+									<button class="btn btn-info"><%=tag[j]%></button>
+									<%
+										} // for j 끝
+											} // if끝
+									%>
+								</div>
+							</div>
+						</form>
+					</div>
+
+				</div>
+				<div class="widget-foot">
+					<!-- Footer goes here -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<%
+		}
+	%>
+</div>
+
+<footer>
+	<!-- 페이징버튼 -->
+	<div id="page_div" class="col-lg-offset-5 col-lg-5">
+		<%
+			int totalPage = (int) request.getAttribute("totalPage");
+			int currentPage = (int) request.getAttribute("currentPage");
+			int start;
+			if (currentPage <= 5)
+				start = 1;
+			else
+				start = (currentPage / 5) * 5 + 1;
+
+			int end;
+			if (start + 4 < totalPage) {
+				end = start + 4;
+			} else
+				end = totalPage;
+			int prev;
+			if (start == 1)
+				prev = 1;
+			else
+				prev = start - 1;
+			int next;
+			if (end == totalPage)
+				next = totalPage;
+			else
+				next = end + 1;
+		%>
+		<a href="feedaction.do?action=myfeed&page=<%=prev%>" id="page_back"
+			type="button" class="btn btn-default">«</a>
+		<%
+			for (int i = start; i < end + 1; i++) {
+		%>
+		<a href="feedaction.do?action=myfeed&page=<%=i%>"><button
+				type="button" class="btn btn-primary"><%=i%></button></a>
+		<%
+			}
+		%>
+		<a href="feedaction.do?action=myfeed&page=<%=next%>" id="page_front"
+			type="button" class="btn btn-default">»</a>
+	</div>
+	<!--페이징버튼-->
+</footer>
