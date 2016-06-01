@@ -2,7 +2,7 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
 <configuration>
 	<typeAliases>
-
+		<typeAlias type="kr.co.overclass.domain.ReplyVO" alias="reply"/>
 		<!-- <package name="com.kosta.domain"/> -->
 	</typeAliases>
 </configuration>
