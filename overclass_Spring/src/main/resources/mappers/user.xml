@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="user">
+	<select id="read" resultType="user">
+		select * from oc_user
+		where user_id=#{user_id}
+	</select>
+	<insert id="create">
+		insert into oc_user (user_id, user_pwd, user_name, user_email, user_tel, user_loc, user_hobby, user_birth, user_gender, user_pwdq, user_pwda)
+		values (#{user_id}, #{user_pwd}, #{user_name}, #{user_email}, #{user_tel}, #{user_loc}, #{user_hobby}, #{user_birth}, #{user_gender}, #{user_pwdq}, #{user_pwda})
+	</insert>
+	<update id="update_user">
+		update oc_user set user_pwd=#{user_pwd}, user_email=#{user_email}, user_tel=#{user_tel}, user_loc=#{user_loc}, user_hobby=#{user_hobby}, user_pwdq=#{user_pwdq}, user_pwda=#{user_pwda}
+		where user_id=#{user_id}
+	</update>
+	<update id="update_img">
+		update oc_user set user_image=#{user_image}
+		where user_id=#{user_id}
+	</update>
+	<delete id="delete">
+		delete from oc_user
+		where user_id=#{user_id}
+	</delete>
+</mapper>
