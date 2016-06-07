@@ -1,20 +1,20 @@
-<%@page import="oc.model.beans.ContentDTO2"%>
 <%@page import="java.util.List"%>
+<%-- <%@page import="oc.model.beans.ContentDTO2"%>
 <%@page import="oc.model.beans.TmpinfoDTO"%>
-<%@page import="oc.model.beans.MemberDTO"%>
+<%@page import="oc.model.beans.MemberDTO"%> --%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
+<%-- <%
 	MemberDTO user = (MemberDTO) session.getAttribute("user");
 	TmpinfoDTO tmpinfo = (TmpinfoDTO) session.getAttribute("tmpinfo");
 	List<ContentDTO2> list = (List<ContentDTO2>) request.getAttribute("list");
 	int msg_num = (int) request.getAttribute("msg_num");
 	int f_req_num = (int) request.getAttribute("f_req_num");
-%>
+%> --%>
 
 <!-- 헤더 -->
-<%@include file="/document/header.jsp"%>
+<%@include file="../include/header.jsp"%>
 <!-- 헤더끝 -->
 
 <section id="my_page" class="wrapper">
@@ -28,7 +28,7 @@
 							<div class="col-lg-offset-3 col-lg-5 portlets">
 							
 								<!-- 글쓰기폼 시작 -->
-								<%@include file="/document/write.jsp"%>
+								<%@include file="../include/write.jsp"%>
 								<!-- 글쓰기폼 끝 -->
 								
 							</div>
@@ -37,14 +37,14 @@
 								<div class="row">
 									<div class="col-md-offset-7 col-md-2 portlets">
 									<!-- 메세지폼 -->
-										<%@ include file="/document/message.jsp" %>
+										<%@ include file="../include/message.jsp" %>
 									<!-- 메세지폼 끝 -->
 									</div>
 								</div>
 							</div>
 
 							<!-- 게시글시작 -->
-							<%@ include file="/document/board.jsp"%>
+							<%@ include file="../include/board.jsp"%>
 							<!-- 게시글폼 끝 -->
 
 						</div>

@@ -2,9 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div id="main_Board">
-	<%
+<%-- 	<%
 		for (int i = 0; i < list.size(); i++) {
-	%>
+	%> --%>
 	<div class="row">
 		<div class="col-lg-offset-3 col-lg-5 portlets">
 			<div class="panel panel-default">
@@ -31,18 +31,18 @@
 								<!-- 타이틀 -->
 								<div class="form-group">
 									<div class="photo col-lg-2" style="text-align: center;">
-										<img alt="avatar" src="<%=list.get(i).getId_img_path()%>"
+										<img alt="avatar" src="<%-- <%=list.get(i).getId_img_path()%> --%>"
 											width='70' height='70'>
 										<h4></h4>
 										<p>
-											<b><%=list.get(i).getName()%></b>
+											<b><%-- <%=list.get(i).getName()%> --%></b>
 										</p>
 									</div>
 									<!-- 글내용 -->
 									<div class="col-lg-10">
 										<div class="panel-content"
 											style="width: 100%; height: 100px; overflow: hidden; word-break: break-all;">
-											<%=list.get(i).getContent()%>
+											<%-- <%=list.get(i).getContent()%> --%>
 										</div>
 									</div>
 								</div>
@@ -65,16 +65,16 @@
 								<div class="form-group">
 									<label class="control-label col-lg-2" for="content">태그</label>
 									<div class="col-lg-9">
-										<%
+										<%-- <%
 											if (list.get(i).getTag() != null) {
 													String tag[] = list.get(i).getTag().split(",");
 													for (int j = 0; j < tag.length; j++) {
-										%>
-										<button class="btn btn-info"><%=tag[j]%></button>
-										<%
+										%> --%>
+										<button class="btn btn-info"><%-- <%=tag[j]%> --%></button>
+									<%-- 	<%
 											} // for j 끝
 												} // if끝
-										%>
+										%> --%>
 									</div>
 								</div>
 								
@@ -129,14 +129,14 @@
 			</div>
 		</div>
 	</div>
-	<%
+<%-- 	<%
 		}
-	%>
+	%> --%>
 </div>
 <footer>
 	<!-- 페이징버튼 -->
 	<div id="page_div" class="col-lg-offset-5 col-lg-5">
-		<%
+		<%-- <%
 			int totalPage = (int) request.getAttribute("totalPage");
 			int currentPage = (int) request.getAttribute("currentPage");
 			int start;
@@ -160,18 +160,18 @@
 				next = totalPage;
 			else
 				next = end + 1;
-		%>
-		<a href="documentaction.do?action=list&page=<%=prev%>" id="page_back"
+		%> --%>
+		<a href="documentaction.do?action=list&page=<%-- <%=prev%> --%>" id="page_back"
 			type="button" class="btn btn-default">«</a>
-		<%
+		<%-- <%
 			for (int i = start; i < end + 1; i++) {
-		%>
-		<a href="documentaction.do?action=list&page=<%=i%>"><button
-				type="button" class="btn btn-primary"><%=i%></button></a>
-		<%
+		%> --%>
+		<a href="documentaction.do?action=list&page=<%-- <%=i%> --%>"><button
+				type="button" class="btn btn-primary"><%-- <%=i%> --%></button></a>
+		<%-- <%
 			}
-		%>
-		<a href="documentaction.do?action=list&page=<%=next%>" id="page_front"
+		%> --%>
+		<a href="documentaction.do?action=list&page=<%-- <%=next%> --%>" id="page_front"
 			type="button" class="btn btn-default">»</a>
 	</div>
 	<!--페이징버튼-->

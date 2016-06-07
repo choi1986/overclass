@@ -287,8 +287,8 @@
                                                 <select class="form-control" id="pwd_q" name="pwd_q">
                                                 	<option>-- 선택 --</option>  
                                                 	<option>나의 고향은?</option>  
-                                                	<option>나의 취미는?</option>  
-                                                	<option>나의 특기는?</option>  
+                                                	<option>나의 친한 친구 이름은?</option>  
+                                                	<option>나의 별명은?</option>  
                                                 	<option>나의 출신학교는?</option>  
                                                 	<option>부모님의 성함은?</option>  
                                                 	<option>보물제1호</option>  

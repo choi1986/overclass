@@ -68,7 +68,7 @@
 				<!-- 메세지알림 -->
 				<li id="mail_notificatoin_bar" class="dropdown"><a
 					data-toggle="dropdown" class="dropdown-toggle" href="#"> <i
-						class="icon-envelope-l"></i> <span class="badge bg-important"><%=msg_num%></span>
+						class="icon-envelope-l"></i> <span class="badge bg-important"><%-- <%=msg_num%> --%></span>
 						<!-- 메세지온 개수 -->
 				</a>
 					<ul id="msg4" class="dropdown-menu extended inbox">
@@ -87,7 +87,7 @@
 			<li id="alert_notificatoin_bar" class="dropdown">
 				<a data-toggle="dropdown" class="dropdown-toggle" href="#"> 
 					<i class="icon-bell-l"></i> 
-					<span class="badge bg-important"><%=f_req_num %></span>
+					<span class="badge bg-important"><%-- <%=f_req_num %> --%></span>
 				</a>
 					<ul id="notice" class="dropdown-menu extended notification">
 						<div class="notify-arrow notify-arrow-blue"></div>
@@ -121,9 +121,9 @@
 				<!-- 로그인한 유저정보 시작-->
 				<li class="dropdown"><a data-toggle="dropdown"
 					class="dropdown-toggle" href="#"> <span class="profile-ava">
-							<img src="${initParam.root}<%=user.getId_img_path()%>" width='30'
+							<img src="${initParam.root}<%-- <%=user.getId_img_path()%> --%>" width='30'
 							height='30'>
-					</span> <span class="username"><%=user.getName()%></span> <b class="caret"></b>
+					</span> <span class="username"><%-- <%=user.getName()%> --%></span> <b class="caret"></b>
 				</a>
 					<ul class="dropdown-menu extended logout">
 						<div class="log-arrow-up"></div>
