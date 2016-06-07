@@ -22,13 +22,13 @@
 					<div class="form-group">
 						<div class="col-lg-2">
 							<span class="photo"><img alt="avatar"
-								src="<%=user.getId_img_path()%>" width='70' height='70'></span>
-							<p><%=user.getName()%></p>
+								src="<%-- <%=user.getId_img_path()%> --%>" width='70' height='70'></span>
+							<p><%-- <%=user.getName()%> --%></p>
 						</div>
 						<div class="col-lg-10">
 							<input type="hidden" id="action" name="action"
 								value="contentInsert"> <input type="hidden" id="user_id"
-								name="user_id" value=<%=user.getUser_id()%>>
+								name="user_id" value=<%-- <%=user.getUser_id()%> --%>>
 							<textarea class="form-control" name="content" id="content"
 								rows="5"></textarea>
 						</div>

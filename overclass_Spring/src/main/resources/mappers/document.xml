@@ -15,8 +15,7 @@
 	
 	<!-- 메인피드 게시글 목록 -->
 	<select id="mainFeed_list" resultType="document">
-		select dno, writer, content, tag, writedate, image, goodcnt, replycnt, user_image
-		from( select dno, writer, content, tag, writedate, image, goodcnt, replycnt, user_image, rownum rn
+			select dno, writer, content, tag, writedate, image, goodcnt, replycnt, user_image
 			from( select dno, writer, content, tag, writedate, imgae, goodcnt, replycnt, user_image
 				from oc_document natural join oc_user
 					where writer IN 
@@ -27,8 +26,7 @@
 						select receiver 
 						from oc_friend_rel
 						where sender = #{sender} )
-			order by writedate desc ))
-		where rn between #{start} and #{end}
+			order by writedate desc )
 	</select>
 	
 	<!-- 메인피드 게시글 개수 -->
@@ -38,12 +36,12 @@
 		where writer IN ( 
 			select sender 
 			from oc_friend_rel 
-			where sender = #{receiver}
+			where sender = #{user_id}
 			
 			union
-			select sender 
+			select receiver
 			from oc_friend_rel 
-			where sender = #{sender}
+			where sender = #{user_id}
 			
 			union
 			select user_id 
@@ -65,8 +63,6 @@
 	<!-- 마이피드 게시글 개수 -->
 	<select id="myFeed_count" resultType="int">
 		select count(*) cnt from oc_document
-		where wirter = #{wirter}
+		where wirter = #{user_id}
 	</select>
-	
-	
 </mapper>

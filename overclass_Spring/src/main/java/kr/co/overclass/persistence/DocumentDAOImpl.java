@@ -6,9 +6,11 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import kr.co.overclass.domain.Criteria;
 import kr.co.overclass.domain.DocumentVO;
 
 @Repository
@@ -28,27 +30,23 @@ public class DocumentDAOImpl implements DocumentDAO{
 	}
 
 	@Override
-	public List<DocumentVO> mainFeed_list() throws Exception { //메인피드 게시글 조회
+	public List<DocumentVO> mainFeed_list(Criteria cri) throws Exception { //메인피드 게시글 조회
 		return session.selectList("document.mainFeed_list");
 	}
 
 	@Override
-	public int mainFeed_count(String writer, String sender, String receiver) 
-			throws Exception { //메인피드 게시글 개수
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("writer", writer);
-		map.put("sender", sender);
-		map.put("receiver", receiver);
-		return session.selectOne("document.mainFeed_count", map);
+	public int mainFeed_count(String user_id) throws Exception { //메인피드 게시글 개수
+		return session.selectOne("document.mainFeed_count", user_id);
 	}
 
 	@Override
-	public List<DocumentVO> myFeed_list() throws Exception { //마이피드 게시글 조회
-		return session.selectList("document.myFeed_list");
+	public List<DocumentVO> myFeed_list(Criteria cri) throws Exception { //마이피드 게시글 조회
+		return session.selectList("document.myFeed_list", null, 
+				new RowBounds(cri.getPageStart(), cri.getPerPageNum()));
 	}
 
 	@Override
-	public int myFeed_count(String writer) throws Exception { //마이피드 게시글 개수
-		return session.selectOne("document.mainFeed_count", writer);
+	public int myFeed_count(String user_id) throws Exception { //마이피드 게시글 개수
+		return session.selectOne("document.mainFeed_count", user_id);
 	}
 }

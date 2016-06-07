@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <div class="row">
-	<%
+<%-- 	<%
 		for (int i = 0; i < list.size(); i++) {
-	%>
+	%> --%>
 	<div class="col-lg-offset-3 col-lg-5 portlets">
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -26,17 +26,17 @@
 							<!-- 타이틀 -->
 							<div class="form-group">
 								<div class="photo col-lg-2" style="text-align: center;">
-									<img alt="avatar" src='<%=user.getId_img_path()%>' width='70'
+									<img alt="avatar" src='<%-- <%=user.getId_img_path()%> --%>' width='70'
 										height='70'>
 									<h4></h4>
 									<p>
-										<b><%=user.getName()%></b>
+										<b><%-- <%=user.getName()%> --%></b>
 									</p>
 								</div>
 								<div class="col-lg-10">
 									<div class="panel-content"
 										style="width: 100%; height: 100px; overflow: hidden; word-break: break-all;">
-										<%=list.get(i).getContent()%>
+										<%-- <%=list.get(i).getContent()%> --%>
 									</div>
 								</div>
 							</div>
@@ -65,16 +65,16 @@
 							<div class="form-group">
 								<label class="control-label col-lg-2" for="content">태그</label>
 								<div class="col-lg-9">
-									<%
+									<%-- <%
 										if (list.get(i).getTag() != null) {
 												String tag[] = list.get(i).getTag().split(",");
 												for (int j = 0; j < tag.length; j++) {
-									%>
-									<button class="btn btn-info"><%=tag[j]%></button>
-									<%
+									%> --%>
+									<button class="btn btn-info"><%-- <%=tag[j]%> --%></button>
+									<%-- <%
 										} // for j 끝
 											} // if끝
-									%>
+									%> --%>
 								</div>
 							</div>
 						</form>
@@ -87,15 +87,15 @@
 			</div>
 		</div>
 	</div>
-	<%
+<%-- 	<%
 		}
-	%>
+	%> --%>
 </div>
 
 <footer>
 	<!-- 페이징버튼 -->
 	<div id="page_div" class="col-lg-offset-5 col-lg-5">
-		<%
+		<%-- <%
 			int totalPage = (int) request.getAttribute("totalPage");
 			int currentPage = (int) request.getAttribute("currentPage");
 			int start;
@@ -119,18 +119,18 @@
 				next = totalPage;
 			else
 				next = end + 1;
-		%>
-		<a href="feedaction.do?action=myfeed&page=<%=prev%>" id="page_back"
+		%> --%>
+		<a href="feedaction.do?action=myfeed&page=<%-- <%=prev%> --%>" id="page_back"
 			type="button" class="btn btn-default">«</a>
-		<%
+		<%-- <%
 			for (int i = start; i < end + 1; i++) {
-		%>
-		<a href="feedaction.do?action=myfeed&page=<%=i%>"><button
-				type="button" class="btn btn-primary"><%=i%></button></a>
-		<%
+		%> --%>
+		<a href="feedaction.do?action=myfeed&page=<%-- <%=i%> --%>"><button
+				type="button" class="btn btn-primary"><%-- <%=i%> --%></button></a>
+		<%-- <%
 			}
-		%>
-		<a href="feedaction.do?action=myfeed&page=<%=next%>" id="page_front"
+		%> --%>
+		<a href="feedaction.do?action=myfeed&page=<%-- <%=next%> --%>" id="page_front"
 			type="button" class="btn btn-default">»</a>
 	</div>
 	<!--페이징버튼-->

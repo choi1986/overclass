@@ -1,23 +1,23 @@
-<%@page import="oc.model.beans.ContentDTO"%>
+<%@page import="java.util.List"%>
+<%-- <%@page import="oc.model.beans.ContentDTO"%>
 <%@page import="oc.model.beans.ContentDTO2"%>
 <%@page import="org.apache.struts.taglib.bean.IncludeTag"%>
 <%@page import="oc.model.beans.TmpinfoDTO"%>
-<%@page import="java.util.List"%>
-<%@page import="oc.model.beans.MemberDTO"%>
+<%@page import="oc.model.beans.MemberDTO"%> --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<%
+<%-- <%
 	MemberDTO user = (MemberDTO) session.getAttribute("user");
 	TmpinfoDTO tmpinfo = (TmpinfoDTO) session.getAttribute("tmpinfo");
 	List<ContentDTO> list = (List<ContentDTO>) request.getAttribute("list");
 	int msg_num = (int) request.getAttribute("msg_num");
 	int f_req_num = (int) request.getAttribute("f_req_num");
 	List<MemberDTO> friend_list = (List<MemberDTO>) request.getAttribute("friend_list");
-%>
+%> --%>
 <!-- 헤더 -->
-<%@include file="/document/header.jsp"%>
+<%@include file="../include/header.jsp"%>
 <!-- 헤더끝 -->
 <section id="my_page" class="wrapper">
 	<div class="row">
@@ -27,20 +27,20 @@
 			<div class="profile-widget profile-widget-info">
 				<div class="panel-body">
 					<div class="col-lg-2 col-lg-2">
-						<h4><%=user.getName()%></h4>
+						<h4><%-- <%=user.getName()%> --%></h4>
 						<div class="follow-ava">
-							<img src="<%=user.getId_img_path()%>" width='70' height='70'>
+							<img src="<%-- <%=user.getId_img_path()%> --%>" width='70' height='70'>
 						</div>
-						<h6><%=user.getUser_id()%></h6>
+						<h6><%-- <%=user.getUser_id()%> --%></h6>
 					</div>
 					<div class="col-lg-4 col-lg-4 follow-info">
 						<p>
 							<i class="fa fa-lg fa-github-alt">&nbsp;MyPage</i>
 						</p>
-						<i class="fa fa-twitter"><span>&nbsp;</span><%=user.getBirth().substring(2, 4)%>월
-							<%=user.getBirth().substring(4)%>일</i><br> <i
-							class="fa fa-envelope-o"><span>&nbsp;</span><%=user.getEmail()%></i><br>
-						<i class="icon_pin_alt"><i><%=user.getLoc()%></i></i>
+						<i class="fa fa-twitter"><span>&nbsp;</span><%-- <%=user.getBirth().substring(2, 4)%>월
+							<%=user.getBirth().substring(4)%> --%>일</i><br> <i
+							class="fa fa-envelope-o"><span>&nbsp;</span><%-- <%=user.getEmail()%> --%></i><br>
+						<i class="icon_pin_alt"><i><%-- <%=user.getLoc()%> --%></i></i>
 					</div>
 				</div>
 			</div>
@@ -75,7 +75,7 @@
 								<div class="col-lg-offset-3 col-lg-5 portlets">
 
 									<!-- 글쓰기폼 시작 -->
-									<%@include file="/document/write.jsp"%>
+									<%@include file="../include/write.jsp"%>
 									<!-- 글쓰기폼 끝 -->
 
 								</div>
@@ -84,7 +84,7 @@
 										<div class="col-md-offset-7 col-md-2 portlets">
 
 											<!-- 메세지폼 -->
-											<%@ include file="/document/message.jsp"%>
+											<%@ include file="../include/message.jsp"%>
 											<!-- 메세지폼 끝 -->
 
 										</div>
@@ -92,7 +92,7 @@
 								</div>
 
 								<!-- 게시글시작 -->
-								<%@ include file="/document/myboard.jsp"%>
+								<%@ include file="../include/myboard.jsp"%>
 								<!-- 게시글폼 끝 -->
 
 							</div>
@@ -111,7 +111,7 @@
 													<label class="col-lg-3 control-label">아이디</label>
 													<div class="col-lg-3">
 														<input type="text" class="form-control" readonly
-															value="<%=user.getUser_id()%>">
+															value="<%-- <%=user.getUser_id()%> --%>">
 													</div>
 												</div>
 											</div>
@@ -120,7 +120,7 @@
 													<label class="col-lg-3 control-label">이름</label>
 													<div class="col-lg-3">
 														<input type="text" class="form-control" readonly
-															value="<%=user.getName()%>">
+															value="<%-- <%=user.getName()%> --%>">
 													</div>
 												</div>
 											</div>
@@ -137,7 +137,7 @@
 													<label class="col-lg-3 control-label">이메일</label>
 													<div class="col-lg-3">
 														<input type="text" class="form-control"
-															value="<%=user.getEmail()%>">
+															value="<%-- <%=user.getEmail()%> --%>">
 													</div>
 												</div>
 											</div>
@@ -215,7 +215,7 @@
 													<label class="col-lg-3 control-label">생일</label>
 													<div class="col-lg-3">
 														<input type="text" class="form-control"
-															value="<%=user.getBirth()%>">
+															value="<%-- <%=user.getBirth()%> --%>">
 													</div>
 												</div>
 											</div>
@@ -274,31 +274,31 @@
 
 								<!-- 친구목록 -->
 								<div class="panel-body bio-graph-info">
-									<%
+									<%-- <%
 										for (int i = 0; i < friend_list.size(); i++) {
-									%>
+									%> --%>
 									<div class="act-time">
 										<div class="activity-body act-in">
 											<span class="arrow"></span>
 											<div class="text">
 												<a
-													href="friendfeed.do?action=friendfeed&friend=<%=friend_list.get(i).getUser_id()%>"
+													href="friendfeed.do?action=friendfeed&friend=<%-- <%=friend_list.get(i).getUser_id()%> --%>"
 													class="activity-img"><img class="avatar"
-													src="<%=friend_list.get(i).getId_img_path()%>" alt="">
+													src="<%-- <%=friend_list.get(i).getId_img_path()%> --%>" alt="">
 												</a>
 												<p class="attribution">
 													<a
-														href="friendfeed.do?action=friendfeed&friend=<%=friend_list.get(i).getUser_id()%>"
-														style="color: blue;"><%=friend_list.get(i).getName()%></a>
+														href="friendfeed.do?action=friendfeed&friend=<%-- <%=friend_list.get(i).getUser_id()%> --%>"
+														style="color: blue;"><%-- <%=friend_list.get(i).getName()%> --%></a>
 												<p>
-													<i class="icon_pin_alt" style="color: green"></i><i><%=friend_list.get(i).getLoc()%></i>
+													<i class="icon_pin_alt" style="color: green"></i><i><%-- <%=friend_list.get(i).getLoc()%> --%></i>
 												</p>
 											</div>
 										</div>
 									</div>
-									<%
+									<%-- <%
 										}
-									%>
+									%> --%>
 								</div>
 								<!-- 친구목록 끝 -->
 
