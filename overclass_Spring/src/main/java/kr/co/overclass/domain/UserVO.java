@@ -9,7 +9,8 @@ public class UserVO {
 	private String user_email;
 	private String user_tel;
 	private String user_loc;
-	private String user_hobby;
+	private String user_hobby1;
+	private String user_hobby2;
 	private String user_birth;
 	private String user_gender;
 	private String user_pwdq;
@@ -31,7 +32,8 @@ public class UserVO {
 				", 이메일: "+user_email+
 				", 핸드폰번호: "+user_tel+
 				", 지역: "+user_loc+
-				", 취미: "+user_hobby+
+				", 취미1: "+user_hobby1+
+				", 취미2: "+user_hobby2+
 				", 생일: "+user_birth+
 				", 성별: "+user_gender+
 				", 비밀번호질문: "+user_pwdq+
@@ -91,12 +93,20 @@ public class UserVO {
 		this.user_loc = user_loc;
 	}
 
-	public String getUser_hobby() {
-		return user_hobby;
+	public String getUser_hobby1() {
+		return user_hobby1;
 	}
 
-	public void setUser_hobby(String user_hobby) {
-		this.user_hobby = user_hobby;
+	public void setUser_hobby1(String user_hobby1) {
+		this.user_hobby1 = user_hobby1;
+	}
+
+	public String getUser_hobby2() {
+		return user_hobby2;
+	}
+
+	public void setUser_hobby2(String user_hobby2) {
+		this.user_hobby2 = user_hobby2;
 	}
 
 	public String getUser_birth() {
