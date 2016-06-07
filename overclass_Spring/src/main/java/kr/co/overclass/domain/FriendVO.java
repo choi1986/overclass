@@ -6,11 +6,9 @@ public class FriendVO {
 	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
+		return "[보내는 사람: "+ sender + ", 받는 사람: "+ receiver + "]";
 	}
-	
-	
+		
 	public String getSender() {
 		return sender;
 	}
