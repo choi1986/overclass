@@ -17,7 +17,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws Exception {
+			throws Exception { // /loginPost 호출 전 실행하는 인터셉터 -> 이전 세션 정보 삭제
 		
 		HttpSession session = request.getSession();
 		
@@ -31,18 +31,17 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws Exception {
+			ModelAndView modelAndView) throws Exception { // /loginPost 호출 후 실행하는 인터셉터
+																			// 컨트롤러에서 모델 객체에 저장한 유저 정보를 로그인 성공 후 세션에 저장 
 		
 		HttpSession session = request.getSession();
 		ModelMap modelMap = modelAndView.getModelMap();
-		Object userVO = modelMap.get("userVO");
+		Object userVO = modelMap.get("userVO"); // 모델에서 객체 얻어옴
 		
 		if (userVO != null){
 			logger.info("로그인 성공!");
-			session.setAttribute(LOGIN, userVO);
-			response.sendRedirect("/");
+			session.setAttribute(LOGIN, userVO); // 로그인 성공하면 객체를 세션에 저장
+			response.sendRedirect("/"); // 메인 화면으로
 		}
-		
-		super.postHandle(request, response, handler, modelAndView);
 	}
 }
