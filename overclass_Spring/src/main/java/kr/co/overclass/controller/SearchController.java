@@ -23,25 +23,33 @@ public class SearchController {
 	public String searchMain(){
 		return "/addfunction/search";
 	}
+
+	@RequestMapping(value="/search2", method=RequestMethod.GET)
+	public String searchResult(){
+		return "/addfunction/search2";
+	}
 	
 	@RequestMapping(value="/searchId", method=RequestMethod.GET)
 	public String searchId(String user_id, Model model) throws Exception{
-		logger.info("아이디검색........................");
+		logger.info("아이디검색........................"+user_id);
 		model.addAttribute("selectId",service.selectId(user_id));
-		return "/addfunction/search";
+		logger.info(user_id+"검색성공");
+		return "/addfunction/search2";
 	};
 	
 	@RequestMapping(value="/searchName", method=RequestMethod.GET)
 	public String searchName(String user_name, Model model) throws Exception{
-		logger.info("이름검색........................");
+		logger.info("이름검색........................"+user_name);
 		model.addAttribute("selectName", service.selectName(user_name));
-		return "/addfunction/search";
+		logger.info(user_name+"검색성공");
+		return "/addfunction/search2";
 	}
 	
 	@RequestMapping(value="/searchTag", method=RequestMethod.GET)
-	public String searchTag(String doc_tag, Model model) throws Exception{
-		logger.info("태그검색........................");
-		model.addAttribute("selectTag", service.selectTag(doc_tag));
-		return "/addfunction/search";
+	public String searchTag(String tag, Model model) throws Exception{
+		logger.info("태그검색........................"+tag);
+		logger.info(tag+"검색성공");
+		model.addAttribute("selectTag", service.selectTag(tag));
+		return "/addfunction/search2";
 	}
 }
