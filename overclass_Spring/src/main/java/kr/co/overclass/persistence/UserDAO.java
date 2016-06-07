@@ -14,5 +14,5 @@ public interface UserDAO {
 	// È¸¿ø Å»Åð
 	public void deleteUser (String user_id) throws Exception;
 	// ·Î±×ÀÎ
-	public void login (String user_id, String user_pwd) throws Exception;
+	public int login (String user_id, String user_pwd) throws Exception;
 }
