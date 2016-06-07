@@ -22,6 +22,6 @@
 		where user_id=#{user_id}
 	</delete>
 	<select id="login"  resultType="user">
-		select count(*) from member where user_id=#{user_id} and user_pwd=#{user_pwd}
+		select count(*) from oc_user where user_id=#{user_id} and user_pwd=#{user_pwd}
 	</select>
 </mapper>
