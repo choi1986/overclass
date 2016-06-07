@@ -6,11 +6,11 @@
 		where user_id=#{user_id}
 	</select>
 	<insert id="createUser">
-		insert into oc_user (user_id, user_pwd, user_name, user_email, user_tel, user_loc, user_hobby, user_birth, user_gender, user_pwdq, user_pwda)
-		values (#{user_id}, #{user_pwd}, #{user_name}, #{user_email}, #{user_tel}, #{user_loc}, #{user_hobby}, #{user_birth}, #{user_gender}, #{user_pwdq}, #{user_pwda})
+		insert into oc_user (user_id, user_pwd, user_name, user_email, user_tel, user_loc, user_hobby1, user_hobby2, user_birth, user_gender, user_pwdq, user_pwda)
+		values (#{user_id}, #{user_pwd}, #{user_name}, #{user_email}, #{user_tel}, #{user_loc}, #{user_hobby1}, #{user_hobby2}, #{user_birth}, #{user_gender}, #{user_pwdq}, #{user_pwda})
 	</insert>
 	<update id="updateUser">
-		update oc_user set user_pwd=#{user_pwd}, user_email=#{user_email}, user_tel=#{user_tel}, user_loc=#{user_loc}, user_hobby=#{user_hobby}, user_pwdq=#{user_pwdq}, user_pwda=#{user_pwda}
+		update oc_user set user_pwd=#{user_pwd}, user_email=#{user_email}, user_tel=#{user_tel}, user_loc=#{user_loc}, user_hobby1=#{user_hobby1}, user_hobby2=#{user_hobby2}, user_pwdq=#{user_pwdq}, user_pwda=#{user_pwda}
 		where user_id=#{user_id}
 	</update>
 	<update id="updateUserImg">
