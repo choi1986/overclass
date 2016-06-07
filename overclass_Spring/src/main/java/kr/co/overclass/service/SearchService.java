@@ -9,3 +9,5 @@ public interface SearchService {
 	public List<UserVO> select(String info)throws Exception;
 	public List<DocumentVO> selectTag(String doc_tag)throws Exception;
 }
+
+

@@ -5,6 +5,7 @@
 	pageEncoding="UTF-8"%>
 검색페이지
 <br>
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script type="text/javascript">

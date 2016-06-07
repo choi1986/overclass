@@ -11,3 +11,5 @@ public interface SearchDAO {
 	//태그검색
 	public List<DocumentVO> searchTag(String doc_tag)throws Exception;
 }
+
+

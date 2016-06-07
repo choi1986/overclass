@@ -45,3 +45,5 @@ public class SearchController {
 		return "/addfunction/search2";
 	}
 }
+
+
