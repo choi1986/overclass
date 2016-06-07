@@ -3,31 +3,12 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	if (request.getAttribute("selectId") != null) {
-		UserVO user = (UserVO) request.getAttribute("selectId");
-%>
-<hr>
-생일:
-<%=user.getUser_birth()%><br>
-성별:
-<%=user.getUser_gender()%><br>
-아이디:
-<%=user.getUser_id()%><br>
-이미지:
-<%=user.getUser_image()%><br>
-지역:
-<%=user.getUser_loc()%><br>
-이름:
-<%=user.getUser_name()%><br>
-전화번호:
-<%=user.getUser_tel()%><br>
 
 <%
-	} else if (request.getAttribute("selectName") != null) {
+	if (request.getAttribute("selectIdName") != null) {
 %>
 <%
-	List<UserVO> list = (List<UserVO>) request.getAttribute("selectName");
+	List<UserVO> list = (List<UserVO>) request.getAttribute("selectIdName");
 %>
 <%
 	for (int i = 0; i < list.size(); i++) {

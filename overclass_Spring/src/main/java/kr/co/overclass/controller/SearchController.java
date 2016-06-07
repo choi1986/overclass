@@ -29,21 +29,13 @@ public class SearchController {
 		return "/addfunction/search2";
 	}
 	
-	@RequestMapping(value="/searchId", method=RequestMethod.GET)
-	public String searchId(String user_id, Model model) throws Exception{
-		logger.info("아이디검색........................"+user_id);
-		model.addAttribute("selectId",service.selectId(user_id));
-		logger.info(user_id+"검색성공");
+	@RequestMapping(value="/searchIdName", method=RequestMethod.GET)
+	public String searchId(String info, Model model) throws Exception{
+		logger.info("아이디/이름검색........................"+info);
+		model.addAttribute("selectIdName",service.select(info));
+		logger.info(info+"검색성공");
 		return "/addfunction/search2";
 	};
-	
-	@RequestMapping(value="/searchName", method=RequestMethod.GET)
-	public String searchName(String user_name, Model model) throws Exception{
-		logger.info("이름검색........................"+user_name);
-		model.addAttribute("selectName", service.selectName(user_name));
-		logger.info(user_name+"검색성공");
-		return "/addfunction/search2";
-	}
 	
 	@RequestMapping(value="/searchTag", method=RequestMethod.GET)
 	public String searchTag(String tag, Model model) throws Exception{

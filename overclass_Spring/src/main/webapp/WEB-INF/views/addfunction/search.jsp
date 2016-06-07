@@ -9,44 +9,32 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("#bt1").click(function() {
+		$("#bt").click(function() {
+			var txtvar = $('#txt').val();
+			if(txtvar.substring(0,1)=='#'){
+			var txt = txtvar.substring(1,txtvar.length);
 			$.ajax({
 				type:'GET',
-				url:'/overclass/searchId?user_id='+$('#user_id').val(),
+				url:'/overclass/searchTag?tag='+txt,
 						success:function(data){
 							$('div').html(data);
 						}
 			});
-		});
-		$("#bt2").click(function() {
-			$.ajax({
+			}else{
+				$.ajax({
 				type:'GET',
-				url:'/overclass/searchName?user_name='+$('#user_name').val(),
+				url:'/overclass/searchIdName?info='+txtvar,
 						success:function(data){
 							$('div').html(data);
 						}
-			});
-		});
-		$("#bt3").click(function() {
-			$.ajax({
-				type:'GET',
-				url:'/overclass/searchTag?tag='+$('#tag').val(),
-						success:function(data){
-							$('div').html(data);
-						}
-			});
+				});
+			}
 		});
 	});
 </script>
 
-<input type="text" id="user_id">
-<input type="button" id="bt1" value="아이디검색">
-<br>
-<input type="text" id="user_name">
-<input type="button" id="bt2" value="이름검색">
-<br>
-<input type="text" id="tag">
-<input type="button" id="bt3" value="태그검색">
+<input type="text" id="txt">
+<input type="button" id="bt" value="검색">
 <br>
 <div></div>
 
