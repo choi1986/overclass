@@ -12,7 +12,7 @@ public class UserVO {
 	private String user_hobby;
 	private String user_birth;
 	private String user_gender;
-	private int user_pwdq;
+	private String user_pwdq;
 	private String user_pwda;
 	private Date user_joindate;
 	private String user_image;
@@ -115,11 +115,11 @@ public class UserVO {
 		this.user_gender = user_gender;
 	}
 
-	public int getUser_pwdq() {
+	public String getUser_pwdq() {
 		return user_pwdq;
 	}
 
-	public void setUser_pwdq(int user_pwdq) {
+	public void setUser_pwdq(String user_pwdq) {
 		this.user_pwdq = user_pwdq;
 	}
 
