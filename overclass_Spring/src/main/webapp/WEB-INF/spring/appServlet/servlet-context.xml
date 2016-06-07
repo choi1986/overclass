@@ -22,6 +22,15 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="kr.co.overclass.controller" />
+	
+	<!-- 인터셉터 -->
+	<beans:bean id="loginInterceptor" class="kr.co.overclass.interceptor.LoginInterceptor"></beans:bean>
+	<interceptors>
+		<interceptor>
+			<mapping path="/loginPost"/>
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+	</interceptors>
 
 	<!-- 파일업로드 -->
 	<beans:bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">

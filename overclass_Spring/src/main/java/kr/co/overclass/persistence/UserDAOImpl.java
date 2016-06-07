@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import kr.co.overclass.domain.UserVO;
+import kr.co.overclass.dto.LoginDTO;
 
 @Repository
 public class UserDAOImpl implements UserDAO {
@@ -45,11 +46,8 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public UserVO login(String user_id, String user_pwd) throws Exception {
-		Map<String, String> map = new HashMap<>();
-		map.put("user_id", user_id);
-		map.put("pwd", user_pwd);
-		return session.selectOne("user.login", map);
+	public UserVO login(LoginDTO dto) throws Exception {
+		return session.selectOne("user.login", dto);
 	}
 
 }

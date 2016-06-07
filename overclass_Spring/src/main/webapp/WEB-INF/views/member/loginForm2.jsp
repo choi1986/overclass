@@ -157,16 +157,16 @@
 <div id="loginForm" style="display: ">
   <div id="panel" style="display:">
     <div class="container">
-      <form class="login-form" action="login.do" method="post">        
+      <form class="login-form" action="/overclass/loginPost" method="post">        
         <div class="login-wrap">
             <p class="login-img"><i class="icon_lock_alt"></i></p>
             <div class="input-group">
               <span class="input-group-addon"><i class="icon_profile"></i></span>
-              <input type="text" name="id" class="form-control" placeholder="아이디" autofocus>
+              <input type="text" name="user_id" class="form-control" placeholder="아이디" autofocus>
             </div>
             <div class="input-group">
                 <span class="input-group-addon"><i class="icon_key_alt"></i></span>
-                <input type="password" name="pwd" class="form-control" placeholder="패스워드">
+                <input type="password" name="user_pwd" class="form-control" placeholder="패스워드">
             </div>
             <label class="checkbox">
                 <input type="checkbox" value="remember-me"> 아이디 저장

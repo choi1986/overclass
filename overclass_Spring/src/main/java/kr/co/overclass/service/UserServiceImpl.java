@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import kr.co.overclass.domain.UserVO;
+import kr.co.overclass.dto.LoginDTO;
 import kr.co.overclass.persistence.UserDAO;
 
 @Service
@@ -39,8 +40,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserVO login(String user_id, String user_pwd) throws Exception {
-		return userDAO.login(user_id, user_pwd);
+	public UserVO login(LoginDTO dto) throws Exception {
+		return userDAO.login(dto);
 	}
 
 }
