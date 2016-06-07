@@ -10,11 +10,11 @@ create table oc_user(
 	user_hobby2 varchar2(15) not null,
 	user_birth varchar2(6) not null,
 	user_gender varchar2(3) not null,
-	user_pwdq number not null,
+	user_pwdq varchar2(99) not null,
 	user_pwda varchar2(99) not null,
 	user_joindate date default sysdate,
 	user_image varchar2(120) default '/img/profile_default.jpg',
-	user_logincnt number,
+	user_logincnt number default 0,
 	user_admin number default 0
 );
 
@@ -96,8 +96,4 @@ create table oc_msg(
 	content varchar2(210) not null,
 	writedate date default sysdate
 );
-
-
-
-
 

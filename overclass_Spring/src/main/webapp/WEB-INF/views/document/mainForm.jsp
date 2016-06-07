@@ -2,6 +2,7 @@
 <%@page import="java.util.List"%>
 <%@page import="oc.model.beans.TmpinfoDTO"%>
 <%@page import="oc.model.beans.MemberDTO"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
