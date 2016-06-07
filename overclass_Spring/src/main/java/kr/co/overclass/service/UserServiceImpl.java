@@ -39,8 +39,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void login(String user_id, String user_pwd) throws Exception {
-		userDAO.login(user_id, user_pwd);
+	public UserVO login(String user_id, String user_pwd) throws Exception {
+		return userDAO.login(user_id, user_pwd);
 	}
 
 }

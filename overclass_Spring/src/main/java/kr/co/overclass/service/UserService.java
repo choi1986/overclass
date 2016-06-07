@@ -9,5 +9,5 @@ public interface UserService {
 	public void updateUser (UserVO user) throws Exception;
 	public void updateUserImg (String user_image) throws Exception;
 	public void deleteUser (String user_id) throws Exception;
-	public void login (String user_id, String user_pwd) throws Exception;
+	public UserVO login (String user_id, String user_pwd) throws Exception;
 }

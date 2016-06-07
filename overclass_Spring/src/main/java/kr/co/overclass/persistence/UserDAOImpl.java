@@ -45,11 +45,11 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public int login(String user_id, String user_pwd) throws Exception {
+	public UserVO login(String user_id, String user_pwd) throws Exception {
 		Map<String, String> map = new HashMap<>();
 		map.put("user_id", user_id);
 		map.put("pwd", user_pwd);
-		return session.update("user.login", map);
+		return session.selectOne("user.login", map);
 	}
 
 }
