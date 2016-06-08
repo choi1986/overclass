@@ -41,7 +41,10 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		if (userVO != null){
 			logger.info("로그인 성공!");
 			session.setAttribute(LOGIN, userVO); // 로그인 성공하면 객체를 세션에 저장
-			response.sendRedirect("/"); // 메인 화면으로
+			//response.sendRedirect("/"); // 메인 화면으로
+			Object dest = session.getAttribute("dest");
+			
+			response.sendRedirect(dest != null ? (String)dest : "/");
 		}
 	}
 }
