@@ -25,11 +25,16 @@
 	
 	<!-- 인터셉터 -->
 	<beans:bean id="loginInterceptor" class="kr.co.overclass.interceptor.LoginInterceptor"></beans:bean>
+	<beans:bean id="AuthInterceptor" class="kr.co.overclass.interceptor.AuthInterceptor"></beans:bean>
 	<interceptors>
 		<interceptor>
 			<mapping path="/loginPost"/>
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
+		<!-- <interceptor> 로그인 해야만 들어갈 수 있는 페이지들을 mapping path로 등록
+			<mapping path=""/>
+			<beans:ref bean="AuthInterceptor"/>
+		</interceptor> -->
 	</interceptors>
 
 	<!-- 파일업로드 -->
