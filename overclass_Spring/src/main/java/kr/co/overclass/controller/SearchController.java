@@ -21,18 +21,18 @@ public class SearchController {
 	
 	@RequestMapping(value="/search", method=RequestMethod.GET)
 	public String searchMain(){
-		return "/addfunction/search";
+		return "/addfunction/search";//search요청시 검색 메인 페이지로 이동
 	}
 
 	@RequestMapping(value="/search2", method=RequestMethod.GET)
 	public String searchResult(){
-		return "/addfunction/search2";
+		return "/addfunction/search2";//검색 결과페이지
 	}
 	
 	@RequestMapping(value="/searchIdName", method=RequestMethod.GET)
 	public String searchId(String info, Model model) throws Exception{
 		logger.info("아이디/이름검색........................"+info);
-		model.addAttribute("selectIdName",service.select(info));
+		model.addAttribute("selectIdName",service.select(info));//아이디 이름 검색
 		logger.info(info+"검색성공");
 		return "/addfunction/search2";
 	};
@@ -41,7 +41,7 @@ public class SearchController {
 	public String searchTag(String tag, Model model) throws Exception{
 		logger.info("태그검색........................"+tag);
 		logger.info(tag+"검색성공");
-		model.addAttribute("selectTag", service.selectTag(tag));
+		model.addAttribute("selectTag", service.selectTag(tag));//태그검색
 		return "/addfunction/search2";
 	}
 }

@@ -22,12 +22,12 @@ public class SearchDAOImpl implements SearchDAO {
 
 	@Override
 	public List<DocumentVO> searchTag(String doc_tag) {
-		return session.selectList("search.searchTag", doc_tag);
+		return session.selectList("search.searchTag", doc_tag);//태그 검색
 	}
 
 	@Override
 	public List<UserVO> search(String info) throws Exception {
-		return session.selectList("search.search", info);
+		return session.selectList("search.search", info);//아이디 이름 검색
 	}
 
 }

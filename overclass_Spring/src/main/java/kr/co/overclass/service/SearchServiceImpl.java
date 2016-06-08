@@ -18,12 +18,12 @@ public class SearchServiceImpl implements SearchService {
 
 	@Override
 	public List<DocumentVO> selectTag(String doc_tag) throws Exception {
-		return search.searchTag(doc_tag);
+		return search.searchTag(doc_tag);//태그 검색
 	}
 
 	@Override
 	public List<UserVO> select(String info) throws Exception {
-		return search.search(info);
+		return search.search(info);//아이디 검색
 	}
 
 }
