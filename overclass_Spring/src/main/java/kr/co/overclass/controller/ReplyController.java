@@ -1,5 +1,6 @@
 package kr.co.overclass.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import kr.co.overclass.domain.Criteria;
+import kr.co.overclass.domain.PageMaker;
 import kr.co.overclass.domain.ReplyVO;
 import kr.co.overclass.service.ReplyService;
 
@@ -27,16 +30,24 @@ public class ReplyController {
 	private ReplyService service;
 	
 	@RequestMapping(value="/list/{dno}/{page}", method=RequestMethod.GET)
-	public ResponseEntity<Map<String, Object>> replyList(@PathVariable("dno") int dno, @PathVariable("page") int page) {
-		ResponseEntity<List<ReplyVO>> entity = null;
+	public ResponseEntity<Map<String, Object>> replyList(@PathVariable("dno") int dno,
+			@PathVariable("page") int page) {
+		ResponseEntity<Map<String, Object>> entity = null;
 		
-		List<ReplyVO> list;
 		try {
-			list = service.listReply(dno);
-			entity = new ResponseEntity<List<ReplyVO>>(list,HttpStatus.OK);
+			Criteria cri = new Criteria();
+			cri.setPage(page);
+			
+			PageMaker pageMaker = new PageMaker();
+			pageMaker.setCri(cri);
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			List<ReplyVO> list = service.listReply(dno,cri);
+			
+			entity = new ResponseEntity<Map<String, Object>>(map,HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			entity = new ResponseEntity<List<ReplyVO>>(HttpStatus.BAD_REQUEST);
+			entity = new ResponseEntity<Map<String, Object>>(HttpStatus.BAD_REQUEST);
 		}
 		
 		return entity;

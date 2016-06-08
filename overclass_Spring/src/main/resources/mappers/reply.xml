@@ -2,12 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="reply">
 	<select id="read" resultType="reply">
-		select rno, dno, replyer, content, writedate
-		from (select rno, dno, replyer, content, writedate, rownum rn
-		from (select rno, dno, replyer, content, writedate from oc_reply
+		select rno, dno, replyer, content, writedate from oc_reply
 		where dno=#{dno}
-		order by writedate desc))
-		where rn between #{start} and #{end}
+		order by writedate desc
 	</select>
 	<insert id="create">
 		insert into oc_reply
@@ -17,4 +14,9 @@
 		delete from oc_reply
 		where rno=#{rno}
 	</delete>
+	
+	<select id="count" resultType="int">
+		select count(dno) from oc_reply
+		where dno=#{dno}
+	</select>
 </mapper>

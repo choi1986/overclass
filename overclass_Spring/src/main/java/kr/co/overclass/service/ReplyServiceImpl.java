@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import kr.co.overclass.domain.Criteria;
 import kr.co.overclass.domain.ReplyVO;
 import kr.co.overclass.persistence.ReplyDAO;
 
@@ -26,8 +27,8 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 
 	@Override
-	public List<ReplyVO> listReply(int dno) throws Exception {
-		return dao.list(dno);
+	public List<ReplyVO> listReply(int dno, Criteria cri) throws Exception {
+		return dao.list(dno,cri);
 	}
 
 }
