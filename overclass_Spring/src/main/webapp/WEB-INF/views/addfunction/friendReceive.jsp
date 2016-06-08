@@ -1,9 +1,9 @@
-<%@page import="oc.model.beans.FriendDTO"%>
+<%@page import="kr.co.overclass.domain.FriendVO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	List<FriendDTO> list = (List<FriendDTO>) request.getAttribute("friend_req_result");
+	List<FriendVO> list = (List<FriendVO>) request.getAttribute("friend_req_result");
 %>
 <%-- 상단바 친구요청 알림생성하는 페이지 --%>
 <a data-toggle="dropdown" class="dropdown-toggle" href="#"> <i
@@ -21,9 +21,9 @@
 		for (int i = 0; i < list.size(); i++) {
 %>
 <li><a
-	href="javascript:friend_process('<%=list.get(i).getUser_id()%>')">
+	href="javascript:friend_process('<%=list.get(i).getReceiver()%>')">
 		<span class="label label-primary"> <i class="icon_profile"></i></span>
-		<%=list.get(i).getUser_id()%> 님이 친구 요청
+		<%=list.get(i).getSender()%> 님이 친구 요청
 </a></li>
 <%--<li><a href="#"> <span class="label label-warning"><i
 			class="icon_pin"></i></span> 땡땡 <span class="small italic pull-right">50분
