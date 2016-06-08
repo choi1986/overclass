@@ -5,6 +5,7 @@
 <%-- 	<%
 		for (int i = 0; i < list.size(); i++) {
 	%> --%>
+	<c:forEach items="${list }" var="DocumentVO">
 	<div class="row">
 		<div class="col-lg-offset-3 col-lg-5 portlets">
 			<div class="panel panel-default">
@@ -17,8 +18,7 @@
 					<div class="widget-icons pull-right">
 						<!-- 신고 -->
 						<a id="content_repot" class="wclose">
-							<i style="color: red;" class="fa fa-warning" data-toggle="modal" data-target="#repot">
-							</i>
+							<i style="color: red;" class="fa fa-warning" data-toggle="modal" data-target="#repot"></i>
 						</a>
 					</div>
 					<div class="clearfix"></div>
@@ -31,18 +31,16 @@
 								<!-- 타이틀 -->
 								<div class="form-group">
 									<div class="photo col-lg-2" style="text-align: center;">
-										<img alt="avatar" src="<%-- <%=list.get(i).getId_img_path()%> --%>"
-											width='70' height='70'>
+										<img alt="avatar" src="<%-- <%=list.get(i).getId_img_path()%> --%>${DocumentVO.image}" width='70' height='70'>
 										<h4></h4>
 										<p>
-											<b><%-- <%=list.get(i).getName()%> --%></b>
+											<b><%-- <%=list.get(i).getName()%> --%>${DocumentVO.writer }</b>
 										</p>
 									</div>
 									<!-- 글내용 -->
 									<div class="col-lg-10">
-										<div class="panel-content"
-											style="width: 100%; height: 100px; overflow: hidden; word-break: break-all;">
-											<%-- <%=list.get(i).getContent()%> --%>
+										<div class="panel-content" style="width: 100%; height: 100px; overflow: hidden; word-break: break-all;">
+											<%-- <%=list.get(i).getContent()%> --%>${DocumentVO.content }
 										</div>
 									</div>
 								</div>
@@ -50,15 +48,17 @@
 								<!-- 좋아요 -->
 								<div class="form-group">
 									<p data-toggle="modal" data-target="#good">
-										<a href="" class="control-label col-lg-2">좋아요&nbsp;&nbsp;
-											<span id="good_icon" class="fa fa-lg fa-thumbs-o-up"
-											style="color: blue;"></span> <!-- <img id="good_icon" src="${initParam.root}img/좋아요1.png"> -->
+										<a href="" class="control-label col-lg-2">
+											좋아요&nbsp;&nbsp;
+											<span id="good_icon" class="fa fa-lg fa-thumbs-o-up" style="color: blue;"></span>
+											<img id="good_icon" src="${initParam.root}img/좋아요1.png">
 										</a>
 									</p>
 
 									<div class="col-lg-8">
-										<i class="fa fa-lg fa-heart" style="color: red;"><span
-											style="color: black;">&nbsp;0</span></i>
+										<i class="fa fa-lg fa-heart" style="color: red;">
+											<span style="color: black;">&nbsp;${DocumentVO.goodcnt }</span>
+										</i>
 									</div>
 								</div>
 								<!-- 태그 -->
@@ -70,11 +70,16 @@
 													String tag[] = list.get(i).getTag().split(",");
 													for (int j = 0; j < tag.length; j++) {
 										%> --%>
-										<button class="btn btn-info"><%-- <%=tag[j]%> --%></button>
+										<c:if test="${DocumentVO.tag != null }">
+										<c:set var="tags" value="${DocumentVO.tag }"/>
+										<c:forEach items="${tags }" var="tag">
+										<button class="btn btn-info">${tag}<%-- <%=tag[j]%> --%></button>
 									<%-- 	<%
 											} // for j 끝
 												} // if끝
 										%> --%>
+										</c:forEach>
+										</c:if>
 									</div>
 								</div>
 								
@@ -129,13 +134,15 @@
 			</div>
 		</div>
 	</div>
+	</c:forEach>
 <%-- 	<%
 		}
 	%> --%>
 </div>
 <footer>
 	<!-- 페이징버튼 -->
-	<div id="page_div" class="col-lg-offset-5 col-lg-5">
+	<div id="page_div" class="col-lg-offset-4 col-lg-4">
+		<div class="col-lg-offset-1 col-lg-8">
 		<%-- <%
 			int totalPage = (int) request.getAttribute("totalPage");
 			int currentPage = (int) request.getAttribute("currentPage");
@@ -161,18 +168,44 @@
 			else
 				next = end + 1;
 		%> --%>
-		<a href="documentaction.do?action=list&page=<%-- <%=prev%> --%>" id="page_back"
+		<%-- <a href="documentaction.do?action=list&page=<%=prev%>" id="page_back"
 			type="button" class="btn btn-default">«</a>
-		<%-- <%
+		<%
 			for (int i = start; i < end + 1; i++) {
-		%> --%>
-		<a href="documentaction.do?action=list&page=<%-- <%=i%> --%>"><button
-				type="button" class="btn btn-primary"><%-- <%=i%> --%></button></a>
-		<%-- <%
+		%>
+		<a href="documentaction.do?action=list&page=<%=i%>"><button
+				type="button" class="btn btn-primary"><%=i%></button></a>
+		<%
 			}
-		%> --%>
-		<a href="documentaction.do?action=list&page=<%-- <%=next%> --%>" id="page_front"
-			type="button" class="btn btn-default">»</a>
+		%>
+		<a href="documentaction.do?action=list&page=<%=next%>" id="page_front"
+			type="button" class="btn btn-default">»</a> --%>
+			
+			<div class="btn-toolbar">
+				<div class="btn-group">
+					<c:if test="${pageMaker.prev }">
+					<a href="mainFeed_Page?page=${pageMaker.startPage -1 }">
+						<button class="btn btn-default" type="button">«</button>
+					</a>
+					</c:if>
+				</div>
+				<div class="btn-group">
+					<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
+					<a href="mainFeed_Page?page=${idx }">
+						<input type="text" <c:out value="${pageMaker.cri.page == idx?'class =btn btn-primary active':'' }" /> >
+						${idx }
+					</a>
+					</c:forEach>
+				</div>
+				<div class="btn-group">
+					<c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
+					<a href="mainFeed_Page?page=${pageMaker.endPage +1 }">
+						<button class="btn btn-default" type="button">»</button>
+					</a>
+					</c:if>
+				</div>
+			</div>
+		</div>
 	</div>
 	<!--페이징버튼-->
 </footer>

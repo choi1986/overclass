@@ -47,7 +47,7 @@ public class DocumentController {
 	}
 	
 	//메인피드 게시글 조회
-	@RequestMapping(value="/",method=RequestMethod.GET)
+	@RequestMapping(value="/mainFeed_page",method=RequestMethod.GET)
 	public void mainFeed_list(Criteria cri, Model model, HttpServletRequest request)throws Exception{
 		logger.info("메인피드..."+ model);	
 		model.addAttribute("list", service.mainFeed_list(cri));
