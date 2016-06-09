@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.inject.Inject;import javax.net.ssl.HttpsURLConnection;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +25,10 @@ import kr.co.overclass.domain.ReplyVO;
 import kr.co.overclass.service.ReplyService;
 
 @RestController
-@RequestMapping("value=/reply")
+@RequestMapping("/reply")
 public class ReplyController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(ReplyController.class);
 	
 	@Inject
 	private ReplyService service;
@@ -40,9 +44,11 @@ public class ReplyController {
 			
 			PageMaker pageMaker = new PageMaker();
 			pageMaker.setCri(cri);
+			pageMaker.setTotalCount(1);
 			
 			Map<String, Object> map = new HashMap<String, Object>();
 			List<ReplyVO> list = service.listReply(dno,cri);
+			map.put("list", list);
 			
 			entity = new ResponseEntity<Map<String, Object>>(map,HttpStatus.OK);
 		} catch (Exception e) {

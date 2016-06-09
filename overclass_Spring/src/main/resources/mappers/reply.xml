@@ -7,8 +7,8 @@
 		order by writedate desc
 	</select>
 	<insert id="create">
-		insert into oc_reply
-		values(oc_reply_seq.nextval, #{user_id}, #{dno}, #{content})
+		insert into oc_reply(rno, dno, replyer, content)
+		values(oc_reply_seq.nextval, #{dno}, #{replyer}, #{content})
 	</insert>
 	<delete id="delete">
 		delete from oc_reply
