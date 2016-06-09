@@ -1,8 +1,6 @@
 package kr.co.overclass.persistence;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -12,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.overclass.domain.Criteria;
 import kr.co.overclass.domain.DocumentVO;
+import kr.co.overclass.dto.DocumentDTO;
 
 @Repository
 public class DocumentDAOImpl implements DocumentDAO{
@@ -30,7 +29,7 @@ public class DocumentDAOImpl implements DocumentDAO{
 	}
 
 	@Override
-	public List<DocumentVO> mainFeed_list(Criteria cri, String user_id) throws Exception { //메인피드 게시글 조회
+	public List<DocumentDTO> mainFeed_list(Criteria cri, String user_id) throws Exception { //메인피드 게시글 조회
 		return session.selectList("document.mainFeed_list", user_id, 
 				new RowBounds(cri.getPageStart(), cri.getPerPageNum()));
 	}
@@ -41,7 +40,7 @@ public class DocumentDAOImpl implements DocumentDAO{
 	}
 
 	@Override
-	public List<DocumentVO> myFeed_list(Criteria cri, String user_id) throws Exception { //마이피드 게시글 조회
+	public List<DocumentDTO> myFeed_list(Criteria cri, String user_id) throws Exception { //마이피드 게시글 조회
 		return session.selectList("document.myFeed_list", user_id, 
 				new RowBounds(cri.getPageStart(), cri.getPerPageNum()));
 	}

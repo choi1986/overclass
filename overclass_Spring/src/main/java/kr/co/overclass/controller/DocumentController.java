@@ -1,5 +1,7 @@
 package kr.co.overclass.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,7 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import kr.co.overclass.domain.Criteria;
 import kr.co.overclass.domain.DocumentVO;
 import kr.co.overclass.domain.PageMaker;
-import kr.co.overclass.domain.UserVO;
+import kr.co.overclass.dto.DocumentDTO;
 import kr.co.overclass.service.DocumentService;
 
 
@@ -48,12 +50,14 @@ public class DocumentController {
 	}
 	
 	//메인피드 게시글 조회
-	@RequestMapping(value="/",method=RequestMethod.GET)
+	@RequestMapping(value="",method=RequestMethod.GET)
 	public String mainFeed_list(Criteria cri, Model model, HttpServletRequest request)throws Exception{
 		String user_id = "test1";
-		logger.info("메인피드..."+ model);
-		model.addAttribute("list", service.mainFeed_list(cri, user_id));
 		//String user_id = (String) request.getSession().getAttribute("user_id");
+		List<DocumentDTO> list = service.mainFeed_list(cri, user_id);
+		logger.info("메인피드...리스트 개수: "+ list.size());
+		
+		model.addAttribute("list", list);
 		PageMaker maker = new PageMaker();
 		maker.setCri(cri);
 		maker.setTotalCount(service.mainFeed_count(user_id));

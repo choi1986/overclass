@@ -14,7 +14,7 @@
 	</delete>
 	
 	<!-- 메인피드 게시글 목록 -->
-	<select id="mainFeed_list" resultType="document">
+	<select id="mainFeed_list" resultType="document_dto">
 			select dno, writer, content, tag, writedate, image, goodcnt, replycnt, user_image
 			from(select dno, writer, content, tag, writedate, image, goodcnt, replycnt, user_image
 				from oc_document natural join oc_user
@@ -50,7 +50,7 @@
 	</select>
 	
 	<!-- 마이피드 게시글 목록 -->
-	<select id="myFeed_list" resultType="document">
+	<select id="myFeed_list" resultType="document_dto">
 		select dno, writer, content, tag, writedate, image, goodcnt, replycnt, user_image 
 		from( select dno, writer, content, tag, writedate, image, goodcnt, replycnt, user_image, rownum rn
 			from( select dno, writer, content, tag, writedate, image, goodcnt, replycnt, user_image
