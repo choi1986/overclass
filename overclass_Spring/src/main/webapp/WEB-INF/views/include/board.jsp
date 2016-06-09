@@ -97,6 +97,7 @@
 								</div><br>
 								<!-- 댓글 -->
 								<div id="reply_div">
+								<c:forEach items="">
 									<div class="act-time">
 										<div class="activity-body act-in">
 										
@@ -108,6 +109,7 @@
 											</div>
 										</div>
 									</div>
+								</c:forEach>
 									
 									<div class="act-time">
 										<div class="activity-body act-in">

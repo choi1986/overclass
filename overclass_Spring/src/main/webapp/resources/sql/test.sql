@@ -32,3 +32,9 @@ insert into oc_document (dno,writer,content,tag) values (oc_document_seq.nextval
 insert into oc_document (dno,writer,content,tag) values (oc_document_seq.nextval,'test4','결재 부탁 드립니다','요구');
 insert into oc_document (dno,writer,content,tag) values (oc_document_seq.nextval,'test5','가갸거겨고교구고','요구');
 
+
+
+
+
+select * from OC_DOCUMENT;
+select * from OC_REPLY;
