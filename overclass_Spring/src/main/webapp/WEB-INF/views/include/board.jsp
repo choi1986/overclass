@@ -195,8 +195,8 @@
 				<div class="btn-group">
 					<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
 					<a href="mainFeed_Page?page=${idx }">
-						<input type="text" <c:out value="${pageMaker.cri.page == idx?'class =btn btn-primary active':'' }" /> >
-						${idx }
+						
+						<button class="<c:out value="${pageMaker.cri.page == idx?'btn btn-primary active':'btn btn-primary' }"/>">${idx }</button>
 					</a>
 					</c:forEach>
 				</div>
