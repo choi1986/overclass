@@ -32,6 +32,12 @@ public class UserController {
 		return "/member/loginForm2"; // 해당 유저가 없다면 로그인 화면으로 리턴, 있다면 세션에 로그인 정보 저장하고 메인으로.
 	}
 	
+	@RequestMapping(value="/dupl", method=RequestMethod.POST) // 로그인 버튼 눌린 후
+	public void duplicate (LoginDTO dto, HttpSession session, Model model) throws Exception { // 로그인 정보 전송
+		System.out.println("컨트롤러 듀플"+dto.getUser_id());
+		return;
+	}
+	
 	@RequestMapping(value="/join") // 회원 가입 버튼 눌린 후
 	public String join (JoinDTO dto, HttpSession session, Model model) throws Exception { // 회원 가입 화면으로
 		System.out.println(dto.toString());
