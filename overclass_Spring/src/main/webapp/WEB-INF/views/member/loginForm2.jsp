@@ -33,10 +33,10 @@
     <script src="<%= request.getContextPath() %>/resources/js/jquery.cookie.js"></script>
 <script type="text/javascript">
 
-	duplCk=0;
+	////duplCk=0;
 	//joinForm JQuery
 		$(document).ready(function(){
-	var duplCheck = "<%=session.getAttribute("dupl")%>";
+	/*//var duplCheck = "<-%=session.getAttribute("dupl")%>";
 	$("#id").val(sessionStorage.getItem("dupl"));
 	if ((sessionStorage.getItem("dupl") != null)||(sessionStorage.getItem("duplFail")==1)) {
 		if($("#id").val()!=''){
@@ -53,28 +53,10 @@
 				duplCk = 0;
 			}
 		}
-	}
-		/* 			$("#login").click(function() {
-		 $.ajax({
-		 url:"/overclass/memberaction.do",
-		 type:"POST",
-		 data:{
-		 id:$("[name='id']").val(),
-		 pwd:$("[name='pwd']").val(),
-		 action:"login"
-		 },
-		 success:function(result){
-		 $("#loginForm").hide()
-		 $("body").attr("class","")
-		 $("body").html(result)
-		 }
-		 })
-		 })  */
-
+	}*///
 		var cnt = 0; //birth 공백으로 바꾸는이벤트 1번만 하기위해 선언
 		// if($("#action").val()
 		$("#join").click(function() { //로그인 화면에서 회원가입버튼 눌렀을시
-			alert("adfadsf");
 			$("#panel").hide(); //로그인하는 아이디,비밀번호 감춤
 			$("#joinForm").show(); //회원가입폼 보여줌
 			$("#birth").click(function() { //예)900317이 입력된 텍스트클릭시 공백으로 바꿈
@@ -83,10 +65,6 @@
 					cnt++
 				}
 			});
-			var tel1 = $("#tel1").val();
-			var tel2 = $("#tel2").val();
-			var tel3 = $("#tel3").val();
-			var tel = tel1 + "-" + tel2 + "-" + tel3;
 		}) //join click 
 		$("#back").click(function() {
 			$("#joinForm").hide(); //회원가입폼 감춤
@@ -105,30 +83,7 @@
 				alert("먼저 중복체크를 해주세요!");
 				sessionStorage.setItem("duplFail", 1);
 				$("#register_form").removeAttr('action');
-				//$("#join_join").attr('type' , 'button');
-			}/*
-						$.ajax({
-							url : "../joinForm.do",
-							type : "POST",
-							data : {
-								id : $("#id").val(),
-								pwd : $("#pwd").val(),
-								pwd_check : $("#pwd_check").val(),
-								name : $("#name").val(),
-								email : $("#email1").val(),
-								tel : $("#tel1").val()+$("#tel2").val()+$("#tel3").val(),
-								loc : $("#loc").val(),
-								birth : $("#birth").val(),
-								gender : $("gender:checked"),
-								action : "join"
-							},
-							success : function(result) {
-								alert("성공!");
-								$("#joinForm").hide(); //회원가입폼 감춤
-								$("#panel").show(); //로그인하는 아이디,비밀번호 다시보여줌
-							}
-						}) //ajax
-			 */
+			}
 		}) //join_join click 
 		$("#dupl").click(function() { //회원가입폼에서 중복검사버튼 눌렀을시
 			$("#action").val('dupl');
@@ -200,11 +155,11 @@
                           </header>
                           <div class="panel-body">
                               <div class="form">
-                                  <form class="form-validate form-horizontal " id="register_form" action="login.do" method="post">
+                                  <form class="form-validate form-horizontal " id="register_form" action="/overclass/join" method="post">
                                       <div class="form-group ">
                                           <label for="fullname" class="control-label col-sm-4">아이디<span class="required">*</span></label>
                                           <div class="col-sm-4">
-                                              <input class=" form-control" id="id" name="fullname" type="text" />
+                                              <input class=" form-control" id="user_id" name="user_id" type="text" />
                                           </div>
                                           
                                           <div class="col-sm-1">
@@ -215,28 +170,28 @@
                                       <div class="form-group ">
                                           <label for="password" class="control-label col-sm-4">비밀번호 <span class="required">*</span></label>
                                           <div class="col-sm-4">
-                                              <input class="form-control " id="pwd" name="password" type="password" onkeyup="allowWS(this)"/>
+                                              <input class="form-control " id="pwd" name="user_pwd" type="password" onkeyup="allowWS(this)"/>
                                           </div>
                                       </div>
                                       
                                       <div class="form-group ">
                                           <label for="confirm_password" class="control-label col-sm-4">비밀번호 확인 <span class="required">*</span></label>
                                           <div class="col-sm-4">
-                                              <input class="form-control " id="pwd_check" name="confirm_password" type="password" onkeyup="allowWS(this)"/>
+                                              <input class="form-control " id="pwd_check" name="user_pwd_confirm" type="password" onkeyup="allowWS(this)"/>
                                           </div>
                                       </div>
                                       
                                       <div class="form-group ">
                                           <label for="username" class="control-label col-sm-4">이름 <span class="required">*</span></label>
                                           <div class="col-sm-4">
-                                              <input class="form-control " id="name" name="username" type="text" placeholder="ex) 홍길동" />
+                                              <input class="form-control " id="name" name="user_name" type="text" placeholder="ex) 홍길동" />
                                           </div>
                                       </div>
                                       
                                       <div class="form-group ">
                                           <label for="email" class="control-label col-sm-4">이메일 <span class="required">*</span></label>
                                           <div class="col-sm-4">
-                                              <input class="form-control " id="email" name="email" type="email" placeholder="ex) kosta113"/>
+                                              <input class="form-control " id="email" name="user_email" type="email" placeholder="ex) kosta113"/>
                                           </div><!--  onkeyup="allowEmail(this)" -->
                                       </div>
                                       
@@ -245,13 +200,13 @@
                                       <div class="col-sm-8">
                                           <div class="row">
                                               <div class="col-sm-3">
-                                                  <input type="text" class="form-control" name="tel1" placeholder="010" onkeyup="allowNUM(this)">
+                                                  <input type="text" class="form-control" name="user_tel1" placeholder="010" onkeyup="allowNUM(this)">
                                               </div>
                                               <div class="col-sm-3">
-                                                  <input type="text" class="form-control" name="tel2" placeholder="1234" onkeyup="allowNUM(this)">
+                                                  <input type="text" class="form-control" name="user_tel2" placeholder="1234" onkeyup="allowNUM(this)">
                                               </div>
                                               <div class="col-sm-3">
-                                                  <input type="text" class="form-control" name="tel3" placeholder="4567" onkeyup="allowNUM(this)">
+                                                  <input type="text" class="form-control" name="user_tel3" placeholder="4567" onkeyup="allowNUM(this)">
                                               </div>
                                           </div>
 
@@ -261,7 +216,7 @@
                                       <div class="form-group">
                                             <label class="control-label col-sm-4">주소<span class="required">*</span></label>
                                             <div class="col-sm-4">                               
-                                                <select class="form-control" id="loc" name="address">
+                                                <select class="form-control" id="user_loc" name="user_loc">
                                                   <option>-- 선택 --</option>
                                                   <option>경기도</option>
                                                   <option>서울특별시</option>
@@ -278,12 +233,36 @@
                                                   <option>제주도</option>
                                                 </select>  
                                             </div>
-                                          </div>            
+                                          </div>
+                                          
+                                      <div class="form-group">
+                                            <label class="control-label col-sm-4">첫번째 취미<span class="required">*</span></label>
+                                            <div class="col-sm-4">                               
+                                                <select class="form-control" id="user_hobby1" name="user_hobby1">
+                                                  <option>-- 선택 --</option>
+                                                  <option>음악 감상</option>
+                                                  <option>독서</option>
+                                                  <option>수정예정</option>
+                                                </select>  
+                                            </div>
+                                          </div>
+                                          
+                                      <div class="form-group">
+                                            <label class="control-label col-sm-4">두번째 취미<span class="required">*</span></label>
+                                            <div class="col-sm-4">                               
+                                                <select class="form-control" id="user_hobby2" name="user_hobby2">
+                                                  <option>-- 선택 --</option>
+                                                  <option>영화 감상</option>
+                                                  <option>여행</option>
+                                                  <option>수정예정</option>
+                                                </select>  
+                                            </div>
+                                          </div>
                                           
                                            <div class="form-group">
                                             <label class="control-label col-sm-4">비밀번호찾기 질문<span class="required">*</span></label>
                                             <div class="col-sm-4">                               
-                                                <select class="form-control" id="pwd_q" name="pwd_q">
+                                                <select class="form-control" id="user_pwdq" name="user_pwdq">
                                                 	<option>-- 선택 --</option>  
                                                 	<option>나의 고향은?</option>  
                                                 	<option>나의 친한 친구 이름은?</option>  
@@ -298,19 +277,19 @@
                                       <div class="form-group ">
                                           <label for="birth" class="control-label col-sm-4">비밀번호찾기 답변<span class="required">*</span></label>
                                           <div class="col-sm-4">
-                                              <input class=" form-control" id="pwd_a" name="pwd_a" type="text" placeholder="ex) 코딩하기" />
+                                              <input class=" form-control" id="user_pwda" name="user_pwda" type="text" placeholder="ex) 코딩하기" />
                                           </div>
                                       </div>
                                           
                                       <div class="form-group ">
                                           <label for="birth" class="control-label col-sm-4">생일 <span class="required">*</span></label>
                                           <div class="col-sm-4">
-                                              <input class=" form-control" id="birth" name="birth" type="text" placeholder="ex) 900317" onkeyup="allowNUM(this)" />
+                                              <input class=" form-control" id="birth" name="user_birth" type="text" placeholder="ex) 900317" onkeyup="allowNUM(this)" />
                                           </div>
                                       </div>
                                       
                                       <div class="form-group ">
-                                          <label for="gender" class="control-label col-sm-4">성별 <span class="required">*</span></label>
+                                          <label for="user_gender" class="control-label col-sm-4">성별 <span class="required">*</span></label>
                                            <div class="control-label col-sm-3" >
                                                   <input name="radio"  value="남" type="radio" checked /> 남자
                                                   <input name="radio"  value="여" type="radio" /> 여자
