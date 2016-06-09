@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <div id="main_Board">
 <%-- 	<%
 		for (int i = 0; i < list.size(); i++) {
@@ -71,7 +72,7 @@
 													for (int j = 0; j < tag.length; j++) {
 										%> --%>
 										<c:if test="${DocumentVO.tag != null }">
-										<c:set var="tags" value="${DocumentVO.tag }"/>
+										<c:set var="tags" value="${fn:split(DocumentVO.tag,',' )}"/>
 										<c:forEach items="${tags }" var="tag">
 										<button class="btn btn-info">${tag}<%-- <%=tag[j]%> --%></button>
 									<%-- 	<%
@@ -209,3 +210,11 @@
 	</div>
 	<!--페이징버튼-->
 </footer>
+<script>
+	var result = '${msg}';
+	if (result == 'Write_SUCCESS') {
+		alert("글이 등록되었습니다.");
+	} else if (result == 'Remove_SUCCESS') {
+		alert("글이 삭제되었습니다.")
+	}
+</script>

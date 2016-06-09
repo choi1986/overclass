@@ -13,7 +13,7 @@ public class DocumentVO {
 	private int replycnt;
 
 	public DocumentVO() {
-		// TODO Auto-generated constructor stub
+		image = "";
 	}
 	
 	@Override

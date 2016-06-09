@@ -3,8 +3,8 @@
 <mapper namespace="document">
 	<!-- 글 쓰기 -->
 	<insert id="insert">
-		insert into oc_document (dno, writer, content, tag, writedate, image)
-		values (oc_document_seq.nextval, #{writer}, #{content}, #{tag}, sysdate, #{imge})
+		insert into oc_document (dno, writer, content, tag, image)
+		values (oc_document_seq.nextval, #{writer}, #{content}, #{tag}, #{image})
 	</insert>
 	
 	<!-- 특정 게시글 삭제 -->
@@ -16,17 +16,17 @@
 	<!-- 메인피드 게시글 목록 -->
 	<select id="mainFeed_list" resultType="document">
 			select dno, writer, content, tag, writedate, image, goodcnt, replycnt, user_image
-			from( select dno, writer, content, tag, writedate, imgae, goodcnt, replycnt, user_image
+			from(select dno, writer, content, tag, writedate, image, goodcnt, replycnt, user_image
 				from oc_document natural join oc_user
 					where writer IN 
-						( select sender 
+						(select sender 
 						from oc_friend_rel 
-						where sender = #{receiver}
+						where sender = #{user_id}
 						union
 						select receiver 
 						from oc_friend_rel
-						where sender = #{sender} )
-			order by writedate desc )
+						where sender = #{user_id})
+			order by writedate desc)
 	</select>
 	
 	<!-- 메인피드 게시글 개수 -->
