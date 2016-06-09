@@ -133,7 +133,7 @@
 <footer>
 	<!-- 페이징버튼 -->
 	<div id="page_div" class="col-lg-offset-4 col-lg-4">
-		<div class="col-lg-offset-1 col-lg-8">
+		<div class="col-lg-offset-2 col-lg-8">
 		<%-- <%
 			int totalPage = (int) request.getAttribute("totalPage");
 			int currentPage = (int) request.getAttribute("currentPage");
