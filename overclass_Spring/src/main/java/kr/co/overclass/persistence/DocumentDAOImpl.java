@@ -30,8 +30,9 @@ public class DocumentDAOImpl implements DocumentDAO{
 	}
 
 	@Override
-	public List<DocumentVO> mainFeed_list(Criteria cri) throws Exception { //메인피드 게시글 조회
-		return session.selectList("document.mainFeed_list");
+	public List<DocumentVO> mainFeed_list(Criteria cri, String user_id) throws Exception { //메인피드 게시글 조회
+		return session.selectList("document.mainFeed_list", user_id, 
+				new RowBounds(cri.getPageStart(), cri.getPerPageNum()));
 	}
 
 	@Override
@@ -40,8 +41,8 @@ public class DocumentDAOImpl implements DocumentDAO{
 	}
 
 	@Override
-	public List<DocumentVO> myFeed_list(Criteria cri) throws Exception { //마이피드 게시글 조회
-		return session.selectList("document.myFeed_list", null, 
+	public List<DocumentVO> myFeed_list(Criteria cri, String user_id) throws Exception { //마이피드 게시글 조회
+		return session.selectList("document.myFeed_list", user_id, 
 				new RowBounds(cri.getPageStart(), cri.getPerPageNum()));
 	}
 

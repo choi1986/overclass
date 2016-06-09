@@ -32,8 +32,8 @@ public class DocumentServiceImpl implements DocumentService {
 	
 	//메인피드 게시글 조회
 	@Override
-	public List<DocumentVO> mainFeed_list(Criteria cri) throws Exception {
-		return dao.mainFeed_list(cri);
+	public List<DocumentVO> mainFeed_list(Criteria cri, String user_id) throws Exception {
+		return dao.mainFeed_list(cri, user_id);
 	}
 	
 	//메인피드 게시글 개수
@@ -44,8 +44,8 @@ public class DocumentServiceImpl implements DocumentService {
 	
 	//마이피드 게시글 조회
 	@Override
-	public List<DocumentVO> myFeed_list(Criteria cri) throws Exception {
-		return dao.myFeed_list(cri);
+	public List<DocumentVO> myFeed_list(Criteria cri, String user_id) throws Exception {
+		return dao.myFeed_list(cri, user_id);
 	}
 
 	//마이피드 게시글 개수

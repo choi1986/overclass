@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import kr.co.overclass.domain.Criteria;
 import kr.co.overclass.domain.DocumentVO;
 import kr.co.overclass.domain.PageMaker;
+import kr.co.overclass.domain.UserVO;
 import kr.co.overclass.service.DocumentService;
 
 
@@ -31,7 +32,7 @@ public class DocumentController {
 	public String create(DocumentVO vo, RedirectAttributes attr) throws Exception {
 		logger.info("글쓰기...[" + vo + "]");	
 		service.create(vo);
-		attr.addFlashAttribute("writeMsg", "SUCCESS");
+		attr.addFlashAttribute("msg", "Write_SUCCESS");
 		
 		return "redirect:/main";
 	}
@@ -41,22 +42,22 @@ public class DocumentController {
 	public String delete(int dno, RedirectAttributes attr) throws Exception {
 		logger.info("게시물 삭제...["+ dno +"]");
 		service.delete(dno);
-		attr.addFlashAttribute("writeMsg", "SUCCESS");
+		attr.addFlashAttribute("msg", "Remove_SUCCESS");
 		
 		return "redirect:/main";
 	}
 	
 	//메인피드 게시글 조회
-	@RequestMapping(value="/mainFeed_page",method=RequestMethod.GET)
-	public void mainFeed_list(Criteria cri, Model model, HttpServletRequest request)throws Exception{
-		logger.info("메인피드..."+ model);	
-		model.addAttribute("list", service.mainFeed_list(cri));
-		String user_id = (String) request.getAttribute("user_id");
-		
+	@RequestMapping(value="/",method=RequestMethod.GET)
+	public String mainFeed_list(Criteria cri, Model model, HttpServletRequest request)throws Exception{
+		String user_id = "test1";
+		logger.info("메인피드..."+ model);
+		model.addAttribute("list", service.mainFeed_list(cri, user_id));
+		//String user_id = (String) request.getSession().getAttribute("user_id");
 		PageMaker maker = new PageMaker();
 		maker.setCri(cri);
 		maker.setTotalCount(service.mainFeed_count(user_id));
-
 		model.addAttribute("pageMaker", maker);  
+		return "document/mainForm";
 	}
 }
