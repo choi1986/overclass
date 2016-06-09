@@ -26,11 +26,9 @@
 							<p><%-- <%=user.getName()%> --%></p>
 						</div>
 						<div class="col-lg-10">
-							<input type="hidden" id="action" name="action"
-								value="contentInsert"> <input type="hidden" id="user_id"
-								name="user_id" value=<%-- <%=user.getUser_id()%> --%>>
-							<textarea class="form-control" name="content" id="content"
-								rows="5"></textarea>
+							<input type="hidden" id="action" name="action" value="contentInsert"> 
+								<input type="hidden" id="writer" name="writer" value="test1"<%-- <%=user.getUser_id()%> --%>>
+							<textarea class="form-control" name="content" id="content" rows="5"></textarea>
 						</div>
 					</div>
 
@@ -38,7 +36,7 @@
 					<div class="form-group">
 						<label class="control-label col-lg-2" for="content">태그</label>
 						<div class="col-lg-10">
-							<input name="tagsinput" id="tagsinput" class="tagsinput" value="" />
+							<input name="tag" id="tagsinput" class="tagsinput" value="" />
 						</div>
 					</div>
 
@@ -57,7 +55,7 @@
 					<div class="form-group">
 						<!-- Buttons -->
 						<div class="col-lg-offset-4 col-lg-4">
-							<button type="submit" id="docWriteSubmitBt"
+							<button type="button" id="docWriteSubmitBt"
 								class="btn btn-primary btn-block">등록</button>
 						</div>
 					</div>

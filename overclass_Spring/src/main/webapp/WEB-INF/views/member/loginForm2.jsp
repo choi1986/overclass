@@ -19,19 +19,18 @@
     <!--external css-->
     <!-- font icon -->
     <link href="<%= request.getContextPath() %>/resources/css/elegant-icons-style.css" rel="stylesheet" />
-    <!-- <link href="<-%= request.getContextPath() %>/resources/css/font-awesome.css" rel="stylesheet" /> -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" >
     <!-- Custom styles -->
     <link href="<%= request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
     <link href="<%= request.getContextPath() %>/resources/css/style-responsive.css" rel="stylesheet" />
     
-	<!-- <link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css"> -->
+	<link href="<%= request.getContextPath() %>/resources/css/bootstrap.min.css" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/animate.css">
     
-   	<!-- <script type="text/javascript" src="<-%= request.getContextPath() %>/resources/js/jquery2.js"></script>-->
+   	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="<%= request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
     <script src="<%= request.getContextPath() %>/resources/js/animation.js"></script>
     <script src="<%= request.getContextPath() %>/resources/js/jquery.cookie.js"></script>
-	<!-- <script type="text/javascript" src="<-%= request.getContextPath() %>/resources/js/validateCheck.js"></script>-->
 <script type="text/javascript">
 
 	duplCk=0;
