@@ -19,7 +19,7 @@
     <!--external css-->
     <!-- font icon -->
     <link href="<%= request.getContextPath() %>/resources/css/elegant-icons-style.css" rel="stylesheet" />
-    <link href="<%= request.getContextPath() %>/resources/css/font-awesome.css" rel="stylesheet" />
+    <!-- <link href="<-%= request.getContextPath() %>/resources/css/font-awesome.css" rel="stylesheet" /> -->
     <!-- Custom styles -->
     <link href="<%= request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
     <link href="<%= request.getContextPath() %>/resources/css/style-responsive.css" rel="stylesheet" />
@@ -27,11 +27,11 @@
 	<!-- <link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css"> -->
     <link type="text/css" rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/animate.css">
     
-   	<script type="text/javascript" src="<%= request.getContextPath() %>/resources/js/jquery2.js"></script>
+   	<!-- <script type="text/javascript" src="<-%= request.getContextPath() %>/resources/js/jquery2.js"></script>-->
     <script src="<%= request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
     <script src="<%= request.getContextPath() %>/resources/js/animation.js"></script>
     <script src="<%= request.getContextPath() %>/resources/js/jquery.cookie.js"></script>
-	<script type="text/javascript" src="<%= request.getContextPath() %>/resources/js/validateCheck.js"></script>
+	<!-- <script type="text/javascript" src="<-%= request.getContextPath() %>/resources/js/validateCheck.js"></script>-->
 <script type="text/javascript">
 
 	duplCk=0;
@@ -75,7 +75,7 @@
 		var cnt = 0; //birth 공백으로 바꾸는이벤트 1번만 하기위해 선언
 		// if($("#action").val()
 		$("#join").click(function() { //로그인 화면에서 회원가입버튼 눌렀을시
-
+			alert("adfadsf");
 			$("#panel").hide(); //로그인하는 아이디,비밀번호 감춤
 			$("#joinForm").show(); //회원가입폼 보여줌
 			$("#birth").click(function() { //예)900317이 입력된 텍스트클릭시 공백으로 바꿈
