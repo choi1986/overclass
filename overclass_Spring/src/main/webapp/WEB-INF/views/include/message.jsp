@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <div style="position: fixed;">
 	<div class="col-lg-offset-12">
-		<a href="#"><img id="msg_icon" src="${initParam.root}img/메세지.png" style="position: fixed;"></a>
+		<a href="#"><img id="msg_icon" src="/overclass/resources/img/메세지.png" style="position: fixed;"></a>
 	</div>
 	<div class="panel panel-default" id="msg_bar">
 		<div class="panel-heading">

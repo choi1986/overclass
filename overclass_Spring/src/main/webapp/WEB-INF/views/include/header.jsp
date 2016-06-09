@@ -121,7 +121,7 @@
 				<!-- 로그인한 유저정보 시작-->
 				<li class="dropdown"><a data-toggle="dropdown"
 					class="dropdown-toggle" href="#"> <span class="profile-ava">
-							<img src="/overclass/resources/img/<%-- <%=user.getId_img_path()%> --%>" width='30'
+							<img src="/overclass/resources/img/헤더아이콘.jpg<%-- <%=user.getId_img_path()%> --%>" width='30'
 							height='30'>
 					</span> <span class="username"><%-- <%=user.getName()%> --%></span> <b class="caret"></b>
 				</a>
