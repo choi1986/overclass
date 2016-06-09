@@ -97,32 +97,20 @@
 								</div><br>
 								<!-- 댓글 -->
 								<div id="reply_div">
-								<c:forEach items="">
+								<c:forEach items="list" var="reply">
 									<div class="act-time">
 										<div class="activity-body act-in">
 										
 											<div class="text">
-												<a href="#" class="activity-img"><img class="avatar" src="img/chat-avatar.jpg"></a>
+												<a href="#" class="activity-img"><img class="avatar" src="${reply.user_image }"></a>
 												<p class="attribution">
-													<a href="#" style="color: blue;">아이디</a>
-												<p>댓글ㅇㅇㅇㅇㅇㅇ</p>
+													<a href="#" style="color: blue;">${reply.replyer }</a>
+												<p>${reply.content }</p>
 											</div>
 										</div>
 									</div>
 								</c:forEach>
-									
-									<div class="act-time">
-										<div class="activity-body act-in">
-										
-											<div class="text">
-												<a href="#" class="activity-img"><img class="avatar" src="img/chat-avatar.jpg"></a>
-												<p class="attribution">
-													<a href="#" style="color: blue;">아이디222</a>
-												<p>댓글22ㅇ</p>
-											</div>
-										</div>
-										
-									</div>
+
 								</div>
 							</div>
 								

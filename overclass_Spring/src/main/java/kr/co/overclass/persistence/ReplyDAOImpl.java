@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.overclass.domain.Criteria;
 import kr.co.overclass.domain.ReplyVO;
+import kr.co.overclass.dto.ReplyDTO;
 
 @Repository
 public class ReplyDAOImpl implements ReplyDAO {
@@ -26,7 +27,7 @@ public class ReplyDAOImpl implements ReplyDAO {
 	}
 
 	@Override
-	public List<ReplyVO> list(int dno, Criteria cri) throws Exception {
+	public List<ReplyDTO> list(int dno, Criteria cri) throws Exception {
 		RowBounds bounds= new RowBounds(cri.getPageStart(), 
                 cri.getPerPageNum());
 		logger.info(dno+"");

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.overclass.domain.Criteria;
 import kr.co.overclass.domain.ReplyVO;
+import kr.co.overclass.dto.ReplyDTO;
 import kr.co.overclass.persistence.ReplyDAO;
 
 @Service
@@ -27,7 +28,7 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 
 	@Override
-	public List<ReplyVO> listReply(int dno, Criteria cri) throws Exception {
+	public List<ReplyDTO> listReply(int dno, Criteria cri) throws Exception {
 		return dao.list(dno,cri);
 	}
 

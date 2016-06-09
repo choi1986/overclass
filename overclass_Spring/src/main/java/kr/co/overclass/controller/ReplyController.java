@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import kr.co.overclass.domain.Criteria;
 import kr.co.overclass.domain.PageMaker;
 import kr.co.overclass.domain.ReplyVO;
+import kr.co.overclass.dto.ReplyDTO;
 import kr.co.overclass.service.ReplyService;
 
 @RestController
@@ -47,8 +48,9 @@ public class ReplyController {
 			pageMaker.setTotalCount(1);
 			
 			Map<String, Object> map = new HashMap<String, Object>();
-			List<ReplyVO> list = service.listReply(dno,cri);
+			List<ReplyDTO> list = service.listReply(dno,cri);
 			map.put("list", list);
+			map.put("pageMaker", pageMaker);
 			
 			entity = new ResponseEntity<Map<String, Object>>(map,HttpStatus.OK);
 		} catch (Exception e) {
