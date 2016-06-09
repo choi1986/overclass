@@ -1,8 +1,6 @@
 package kr.co.overclass.service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -10,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.overclass.domain.Criteria;
 import kr.co.overclass.domain.DocumentVO;
+import kr.co.overclass.dto.DocumentDTO;
 import kr.co.overclass.persistence.DocumentDAO;
 
 @Service
@@ -32,7 +31,7 @@ public class DocumentServiceImpl implements DocumentService {
 	
 	//메인피드 게시글 조회
 	@Override
-	public List<DocumentVO> mainFeed_list(Criteria cri, String user_id) throws Exception {
+	public List<DocumentDTO> mainFeed_list(Criteria cri, String user_id) throws Exception {
 		return dao.mainFeed_list(cri, user_id);
 	}
 	
@@ -44,7 +43,7 @@ public class DocumentServiceImpl implements DocumentService {
 	
 	//마이피드 게시글 조회
 	@Override
-	public List<DocumentVO> myFeed_list(Criteria cri, String user_id) throws Exception {
+	public List<DocumentDTO> myFeed_list(Criteria cri, String user_id) throws Exception {
 		return dao.myFeed_list(cri, user_id);
 	}
 

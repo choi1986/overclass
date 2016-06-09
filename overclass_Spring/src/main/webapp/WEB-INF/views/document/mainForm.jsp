@@ -87,7 +87,7 @@ $(document).ready(function() {
     			cssClass: 'btn-primary', //알러트 버튼 색바꾸기
     			hotkey:13,
     			action: function(confirm) {
-    				var formObj = $("form[role='form']");
+    				var formObj = $("form[role='form']");    				
     				formObj.submit();
     				confirm.close()
 				}

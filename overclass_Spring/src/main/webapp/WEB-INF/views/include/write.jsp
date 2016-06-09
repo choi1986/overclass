@@ -16,7 +16,7 @@
 
 			<!-- 글쓰기폼-->
 			<div class="form quick-post">
-				<form role="form" class="form-horizontal" action="writeDoc"
+				<form role="form" class="form-horizontal" action="main/writeDoc"
 					method="post">
 					<!-- 타이틀 -->
 					<div class="form-group">
@@ -36,7 +36,7 @@
 					<div class="form-group">
 						<label class="control-label col-lg-2" for="content">태그</label>
 						<div class="col-lg-10">
-							<input name="tag" id="tagsinput" class="tagsinput" value="" />
+							<input name="tag" id="tagsinput" class="tagsinput" />							
 						</div>
 					</div>
 

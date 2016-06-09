@@ -6,6 +6,7 @@
 <%-- 	<%
 		for (int i = 0; i < list.size(); i++) {
 	%> --%>
+	333
 	<c:forEach items="${list }" var="DocumentVO">
 	<div class="row">
 		<div class="col-lg-offset-3 col-lg-5 portlets">
@@ -101,7 +102,6 @@
 								<c:forEach items="list" var="reply">
 									<div class="act-time">
 										<div class="activity-body act-in">
-										
 											<div class="text">
 												<a href="#" class="activity-img"><img class="avatar" src="${reply.user_image }"></a>
 												<p class="attribution">
@@ -204,6 +204,7 @@
 	var result = '${msg}';
 	if (result == 'Write_SUCCESS') {
 		alert("글이 등록되었습니다.");
+		
 	} else if (result == 'Remove_SUCCESS') {
 		alert("글이 삭제되었습니다.")
 	}

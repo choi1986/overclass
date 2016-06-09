@@ -1,8 +1,5 @@
 package kr.co.overclass.persistence;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
