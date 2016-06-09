@@ -49,14 +49,15 @@ public class DocumentController {
 	
 	//메인피드 게시글 조회
 	@RequestMapping(value="/",method=RequestMethod.GET)
-	public void mainFeed_list(Criteria cri, Model model, HttpServletRequest request)throws Exception{
-		logger.info("메인피드..."+ model);
-		model.addAttribute("list", service.mainFeed_list(cri));
-		//String user_id = (String) request.getSession().getAttribute("user_id");
+	public String mainFeed_list(Criteria cri, Model model, HttpServletRequest request)throws Exception{
 		String user_id = "test1";
+		logger.info("메인피드..."+ model);
+		model.addAttribute("list", service.mainFeed_list(cri, user_id));
+		//String user_id = (String) request.getSession().getAttribute("user_id");
 		PageMaker maker = new PageMaker();
 		maker.setCri(cri);
 		maker.setTotalCount(service.mainFeed_count(user_id));
 		model.addAttribute("pageMaker", maker);  
+		return "document/mainForm";
 	}
 }
