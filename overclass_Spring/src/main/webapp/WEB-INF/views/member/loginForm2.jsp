@@ -8,30 +8,30 @@
     <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
     <meta name="author" content="GeeksLabs">
     <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
-    <link rel="shortcut icon" href="img/favicon.png"> <!-- 페이지아이콘 -->
+    <link rel="shortcut icon" href="<%= request.getContextPath() %>/resources/img/favicon.png"> <!-- 페이지아이콘 -->
 
     <title>Welcome to OVERCLASS</title>
 
     <!-- Bootstrap CSS -->    
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="<%= request.getContextPath() %>/resources/css/bootstrap.min.css" rel="stylesheet">
     <!-- bootstrap theme -->
-    <link href="css/bootstrap-theme.css" rel="stylesheet">
+    <link href="<%= request.getContextPath() %>/resources/css/bootstrap-theme.css" rel="stylesheet">
     <!--external css-->
     <!-- font icon -->
-    <link href="css/elegant-icons-style.css" rel="stylesheet" />
-    <link href="css/font-awesome.css" rel="stylesheet" />
+    <link href="<%= request.getContextPath() %>/resources/css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="<%= request.getContextPath() %>/resources/css/font-awesome.css" rel="stylesheet" />
     <!-- Custom styles -->
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/style-responsive.css" rel="stylesheet" />
+    <link href="<%= request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
+    <link href="<%= request.getContextPath() %>/resources/css/style-responsive.css" rel="stylesheet" />
     
 	<!-- <link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css"> -->
-    <link type="text/css" rel="stylesheet" href="css/animate.css">
+    <link type="text/css" rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/animate.css">
     
-   	<script type="text/javascript" src="js/jquery2.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/animation.js"></script>
-    <script src="js/jquery.cookie.js"></script>
-	<script type="text/javascript" src="js/validateCheck.js"></script>
+   	<script type="text/javascript" src="<%= request.getContextPath() %>/resources/js/jquery2.js"></script>
+    <script src="<%= request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
+    <script src="<%= request.getContextPath() %>/resources/js/animation.js"></script>
+    <script src="<%= request.getContextPath() %>/resources/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="<%= request.getContextPath() %>/resources/js/validateCheck.js"></script>
 <script type="text/javascript">
 
 	duplCk=0;

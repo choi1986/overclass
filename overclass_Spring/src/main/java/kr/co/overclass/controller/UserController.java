@@ -19,7 +19,7 @@ public class UserController {
 	@Inject
 	private UserService service;
 
-	@RequestMapping(value="/login")
+	@RequestMapping(value="/")
 	public String login () { // login 페이지로
 		return "/member/loginForm2";
 	}
