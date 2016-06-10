@@ -17,6 +17,10 @@
     <link href="<%= request.getContextPath() %>/resources/css/bootstrap.min.css" rel="stylesheet">
     <!-- bootstrap theme -->
     <link href="<%= request.getContextPath() %>/resources/css/bootstrap-theme.css" rel="stylesheet">
+	<!-- 부트스트랩모달 -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.9/css/bootstrap-dialog.min.css" rel="stylesheet" type="text/css">
+	<!-- 부트스스트랩모달 -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.9/js/bootstrap-dialog.min.js"></script>
     <!--external css-->
     <!-- font icon -->
     <link href="<%= request.getContextPath() %>/resources/css/elegant-icons-style.css" rel="stylesheet" />
@@ -64,7 +68,18 @@
 				}
 				<% String duplID = (String)session.getAttribute("joinDuplCk");%>
 					if ("<%=duplID%>"=="") {
-						alert("중복검사 성공!");
+						//alert("중복검사 성공!");
+						BootstrapDialog.show({
+				    		title: '타이틀', //알러트 타이틀 이름
+				    		message: '중복검사 성공!!!', //알러트 내용
+				    		type: BootstrapDialog.TYPE_DANGER,
+				    		buttons: [{
+				    				label: '닫기',
+				    				action: function(cancel){
+				    					cancel.close();
+				    					}
+				    			}]
+				    	})
 						duplCk=1;
 					}
 					else if("<%=duplID%>"!="null") {
