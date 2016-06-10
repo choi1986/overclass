@@ -62,19 +62,46 @@
 var timer;
 var msgid;
 $(document).ready(function() {
-	//댓글 숨기기 접기
-	$("#reply_div").hide()
-	$("#reply_icon").click(function() {
-		var div = $("#reply_div")
-		var div2 = $("#reply_icon2")
-		div.slideToggle("slow")
-		if(div2.attr("class") == "fa fa-chevron-up"){
-			div2.attr("class","fa fa-chevron-down")
-		} else {
-			div2.attr("class","fa fa-chevron-up")
-		}
-			
-	})
+
+	   //   댓글div 열닫
+	   $(".wminimize").click(function() {
+	      
+	      // dno
+	      var divNum = this.firstChild.nextSibling.firstChild.nodeValue;
+	      var divtemp = '#reply_div'+divNum;
+	      var divtemp2 = '#reply_icon'+divNum+'_2'
+	      
+	      //var div = $("#reply_div")
+	      var div = $(divtemp);
+	      var div2 = $(divtemp2);
+	      div.slideToggle("slow")
+	      // 열고
+	      if(div2.attr("class") == "fa fa-chevron-up"){
+	         div2.attr("class","fa fa-chevron-down")
+	         replyDisplay(divNum,divNum);
+	      } else {
+	         //닫고
+	         div2.attr("class","fa fa-chevron-up")
+	      }
+	   })
+	   // 좋아요클릭
+	   $(".goodclass").click(function() {
+	      
+	      // 이게 dno
+	      var goodtemp = this.firstChild.nextSibling.firstChild.nodeValue;
+	      //var goodtemp = this.firstChild.nextSibling.nextSibling.nextSibling;
+	      var goodtmp = '#good_icon'+goodtemp;
+	      
+	      //var div = $("#reply_div")
+	      var goodspan = $(goodtmp);
+	      if(goodspan.attr("class") == "fa fa-lg fa-thumbs-o-up"){
+	         goodspan.attr("class","fa fa-lg fa-thumbs-up")
+	         // 여기다가 좋아요 했다는 내용 서버전송
+	      } else {
+	         goodspan.attr("class","fa fa-lg fa-thumbs-o-up")
+	         // 여기다가 좋아요 취소했다는 내용 서버전송
+	      }
+	   })
 	//글등록 모달정의
 	$("#docWriteSubmitBt").click(function() {
 		BootstrapDialog.show({

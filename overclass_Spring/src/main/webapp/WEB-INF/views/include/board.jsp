@@ -47,62 +47,75 @@
 								</div>
 
 								<!-- 좋아요 -->
-								<div class="form-group">
-									<p data-toggle="modal" data-target="#good">
-										<a href="" class="control-label col-lg-2">
-											좋아요&nbsp;&nbsp;
-											<span id="good_icon" class="fa fa-lg fa-thumbs-o-up" style="color: blue;"></span>
-										</a>
-									</p>
+                        <div class="form-group">
+                           <div class="goodclass">
+                              <div style="display: none;">${DocumentVO.dno }</div>
+                              <a class="control-label col-lg-2">
+                                 좋아요&nbsp;&nbsp;
+                                 <span id="good_icon${DocumentVO.dno }" class="fa fa-lg fa-thumbs-o-up" style="color: blue;"></span>
+                              </a>
+                           </div>
+                              
+                           <div class="col-lg-8">
+                              <i class="fa fa-lg fa-heart" style="color: red;">
+                                 <span style="color: black;">&nbsp;${DocumentVO.goodcnt }</span>
+                              </i>
+                           </div>
+                        </div>
+                        <!-- 태그 -->
+                        <div class="form-group">
+                           <label class="control-label col-lg-2" for="content">태그</label>
+                           <div class="col-lg-9">
+                              <%-- <%
+                                 if (list.get(i).getTag() != null) {
+                                       String tag[] = list.get(i).getTag().split(",");
+                                       for (int j = 0; j < tag.length; j++) {
+                              %> --%>
+                              <c:if test="${DocumentVO.tag != null }">
+                              <c:set var="tags" value="${fn:split(DocumentVO.tag,',' )}"/>
+                              <c:forEach items="${tags }" var="tag">
+                              <button class="btn btn-info">${tag}<%-- <%=tag[j]%> --%></button>
+                           <%--    <%
+                                 } // for j 끝
+                                    } // if끝
+                              %> --%>
+                              </c:forEach>
+                              </c:if>
+                           </div>
+                        </div>
+                        
+                        <!-- 댓글쓰기 -->
+                        <div class="form-group">
+                           <label class="control-label col-lg-2" for="reply_write">댓글</label>
+                           <div class="col-lg-10">
+                              <input id="reply_write" type="text" class="form-control" size="18" placeholder="댓글을 입력하세요...">
+                           </div>
+                        </div>
+                        
+                        <div class="form-group">
+                        <div class="widget-icons pull-right">
+                           <a id="reply_icon" class="wminimize">
+                              <div style="display: none;">${DocumentVO.dno }</div>
+                              <i id="reply_icon${DocumentVO.dno }_2" class="fa fa-chevron-up">댓글&nbsp;&nbsp;&nbsp;&nbsp;</i>
+                           </a>
+                        </div><br>
+                        <!-- 댓글 -->
+                        <div id="reply_div${DocumentVO.dno }" style="display: none;">
+                        <%-- <c:forEach items="list" var="reply">
+                           <div class="act-time">
+                              <div class="activity-body act-in">
+                                 <div class="text">
+                                    <a href="#" class="activity-img"><img class="avatar" src="${reply.user_image }"></a>
+                                    <p class="attribution">
+                                       <a href="#" style="color: blue;">${reply.replyer }</a>
+                                    <p>${reply.content }</p>
+                                 </div>
+                              </div>
+                           </div>
+                        </c:forEach> --%>
 
-									<div class="col-lg-8">
-										<i class="fa fa-lg fa-heart" style="color: red;">
-											<span style="color: black;">&nbsp;${DocumentDTO.goodcnt }</span>
-										</i>
-									</div>
-								</div>
-								<!-- 태그 -->
-								<div class="form-group">
-									<label class="control-label col-lg-2" for="content">태그</label>
-									<div class="col-lg-9">
-										<c:if test="${DocumentDTO.tag != null }">
-										<c:set var="tags" value="${fn:split(DocumentDTO.tag,',' )}"/>
-										<c:forEach items="${tags }" var="tag">
-										<button class="btn btn-info">${tag}</button>
-										</c:forEach>
-										</c:if>
-									</div>
-								</div>
-								
-								<!-- 댓글쓰기 -->
-								<div class="form-group">
-									<label class="control-label col-lg-2" for="reply_write">댓글</label>
-									<div class="col-lg-10">
-										<input id="reply_write" type="text" class="form-control" size="18" placeholder="댓글을 입력하세요...">
-									</div>
-								</div>
-								
-								<div class="form-group">
-								<div class="widget-icons pull-right">
-									<a id="reply_icon" class="wminimize"><i id="reply_icon2" class="fa fa-chevron-up">댓글&nbsp;&nbsp;&nbsp;&nbsp;</i></a>
-								</div><br>
-								<!-- 댓글 -->
-								<div id="reply_div">
-								<%-- <c:forEach items="list" var="reply"> --%>
-									<div class="act-time">
-										<div class="activity-body act-in">
-											<div class="text">
-												<a href="#" class="activity-img"><img class="avatar" src="<%-- ${reply.user_image } --%>"></a>
-												<p class="attribution">
-													<a href="#" style="color: blue;"><%-- ${reply.replyer } --%></a>
-												<p><%-- ${reply.content } --%></p>
-											</div>
-										</div>
-									</div>
-								<%-- </c:forEach> --%>
-
-								</div>
-							</div>
+                        </div>
+                     </div>
 								
 							</form>
 						</div>
@@ -148,7 +161,24 @@
 	</div>
 	<!--페이징버튼-->
 </footer>
+
+<!-- 댓글처리를 위한 템플릿 -->
+<script id="template" type="text/x-handlebars-template">
+<div class="act-time">
+   <div class="activity-body act-in">
+      <div class="text">
+         <a href="#" class="activity-img"><img class="avatar" src="{{reply.user_image }}"></a>
+         <p class="attribution">
+         <a href="#" style="color: blue;">{{reply.replyer }}</a>
+         <p>{{reply.content }}</p>
+      </div>
+   </div>
+</div>
+</script>
+
 <script>
+var source = $("#template").html();
+var template = Handlebars.compile(source);
 	var result = '${msg}';
 	
 	if (result == 'Write_SUCCESS') {
@@ -182,8 +212,26 @@
     			}]
     	})
 	}
-	
-	$(document).ready(function() {
-		
-	})
+
+	function replyDisplay(dno, divno) {
+		var replydiv = '#reply_div' + divno;
+		$.ajax({
+			url : '/overclass/reply/list/' + dno + '/1',
+			type : 'get',
+			success : function(result) {
+				$(replydiv).html(template(result));
+			}
+		});
+	}
+
+	function replyDisplayPage(dno, page, divno) {
+		var replydiv = '#reply_div' + divno;
+		$.ajax({
+			url : '/overclass/reply/list/' + dno + '/' + page,
+			type : 'get',
+			success : function(result) {
+				$(replydiv).html(template(result));
+			}
+		});
+	}
 </script>

@@ -38,6 +38,8 @@
 	<!-- 애니메이션 -->
 	<script src="/overclass/resources/js/animation.js"></script>
 	<script src="/overclass/resources/js/jquery.cookie.js"></script>
+	 <!-- handlebars (댓글) -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <!-- JS끝 -->
 </head>
 <body>
@@ -176,3 +178,4 @@
 			<!-- 알림 드랍다운 끝-->
 		</div>
 	</header>
+	
