@@ -5,10 +5,12 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -55,13 +57,33 @@ public class DocumentController {
 		String user_id = "test1";
 		//String user_id = (String) request.getSession().getAttribute("user_id");
 		List<DocumentDTO> list = service.mainFeed_list(cri, user_id);
-		logger.info("메인피드...리스트 개수: "+ list.size());
 		
 		model.addAttribute("list", list);
 		PageMaker maker = new PageMaker();
 		maker.setCri(cri);
 		maker.setTotalCount(service.mainFeed_count(user_id));
-		model.addAttribute("pageMaker", maker);  
+		model.addAttribute("pageMaker", maker);
+		
+		logger.info("메인피드...리스트 개수: "+ list.size());
+		
+		return "document/mainForm";
+	}
+	
+	@RequestMapping(value="/mainFeed_Page",method=RequestMethod.GET)
+	public String mainFeed_list(int page, Criteria cri, Model model, HttpServletRequest request)throws Exception{
+		String user_id = "test1";
+		//String user_id = (String) request.getSession().getAttribute("user_id");
+		cri.setPage(page);
+		List<DocumentDTO> list = service.mainFeed_list(cri, user_id);
+		
+		model.addAttribute("list", list);
+		PageMaker maker = new PageMaker();
+		maker.setCri(cri);
+		maker.setTotalCount(service.mainFeed_count(user_id));
+		model.addAttribute("pageMaker", maker);
+		
+		logger.info("메인피드...리스트 개수: "+ list.size());
+		logger.info("메인피드...페이지 : "+ cri.getPage());
 		return "document/mainForm";
 	}
 }
