@@ -11,7 +11,7 @@ public class PageMaker {//게시판 하단의 페이지 넘버에 대한 정보
    private boolean next;//이후페이지
    
    private int displayPageNum=5;//한 화면에 보여질 레코드 수
-   private Criteria cri;//현재페이지, 한 화면 보여질 레코드 수, skip될 레코드
+   private Criteria cri;//현재페이지, 한 화면 보여질 레코드 수, skip될 레코드ㅇ
    
    
    
