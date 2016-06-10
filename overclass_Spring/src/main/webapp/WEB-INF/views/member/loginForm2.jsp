@@ -76,18 +76,19 @@
 			$("#email2").show()
 		}
 		$("#join_join").click(function() { //회원가입폼에서 가입버튼 눌렀을시
-			sessionStorage.setItem("duplFail", 0);
-			sessionStorage.removeItem("dupl");
-			$("#action").val('join');
-			if (duplCk != 1) {
-				alert("먼저 중복체크를 해주세요!");
-				sessionStorage.setItem("duplFail", 1);
-				$("#register_form").removeAttr('action');
-			}
+			//if($("#dupl").val()=='n')
+				//alert("중복체크를 해주세요!");
+			//sessionStorage.setItem("duplFail", 0);
+			//sessionStorage.removeItem("dupl");
+			//$("#action").val('join');
+			//if (duplCk != 1) {
+			//	alert("먼저 중복체크를 해주세요!");
+			//	sessionStorage.setItem("duplFail", 1);
+			//	$("#register_form").removeAttr('action');
+			//}
 		}) //join_join click 
 		$("#dupl").click(function() { //회원가입폼에서 중복검사버튼 눌렀을시
-			$("#action").val('dupl');
-			sessionStorage.setItem("dupl", $("#id").val());
+			$("#register_form").attr('action','/overclass/dupl');
 		}) //dupl click 
 
 		$("#que").click(function() {
@@ -95,7 +96,7 @@
 			$("#queForm").show()
 		})
 		$("#check").click(function() {
-			alert("h")
+			alert("h");
 		})
 		$("#id").click(function() {
 			$("#check").click()
@@ -129,7 +130,6 @@
             
             <div id="change-transitions" class="row">
 				<button type="submit" data data-value="fadeInLeftBig" class="btn btn-primary btn-lg btn-block">로그인</button>
-        		    <p><input type="hidden" name="action" value="login"></p>
    		        <button type="button" data-value="fadeInLeftBig" class="btn btn-info btn-lg btn-block" id="join" >가입하기</button>
 			</div>
         </div>
@@ -155,7 +155,7 @@
                           </header>
                           <div class="panel-body">
                               <div class="form">
-                                  <form class="form-validate form-horizontal " id="register_form" action="/overclass/join" method="post">
+                                  <form class="form-validate form-horizontal " id="register_form" name="register_form" action="/overclass/join" method="post">
                                       <div class="form-group ">
                                           <label for="fullname" class="control-label col-sm-4">아이디<span class="required">*</span></label>
                                           <div class="col-sm-4">
@@ -163,7 +163,7 @@
                                           </div>
                                           
                                           <div class="col-sm-1">
-                                              <button class="btn btn-primary" type="submit" id="dupl" >중복체크</button>
+                                              <button class="btn btn-primary" type="submit" id="dupl">중복체크</button>
                                           </div>
                                       </div>
                                       
@@ -303,8 +303,7 @@
                                        		<div class="col-sm-3"></div>
                                               <div id="change-transitions" class="row">
 											     <button type="summit" data-value="rotateInDownLeft" class="btn btn-primary btn-lg" id="join_join">가입</button>
-        		    						<p><input type="hidden" id="action" name="action" value="join"></p>
-						   		        	     <button type="button" data-value="fadeInDown" class="btn btn-danger btn-lg" id="back">취소</button>
+        		    						<button type="button" data-value="fadeInDown" class="btn btn-danger btn-lg" id="back">취소</button>
 										      </div>
                                           </div>
                                       </div>

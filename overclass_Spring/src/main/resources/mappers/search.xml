@@ -2,15 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="search">
 	<select id="search" resultType="user">
-		select * from oc_user
-		where user_id=#{user_id} or user_name=#{user_name}
+<!-- 		select * from oc_user
+		where user_id=#{user_id} or user_name=#{user_name}-->		
+		select user_birth,user_gender,user_id,user_image,user_loc,user_name,user_tel 
+		from (select user_birth,user_gender,user_id,user_image,user_loc,user_name,user_tel,rownum rn 
+		from oc_user where user_id=#{info} or user_name=#{info} order by rn) 
+		where rn between #{start} and #{end}
 	</select>
 	
 	<select id="searchTag" resultType="document">
-		select dno,writer,content,tag from oc_document
-		WHERE tag LIKE '%'||#{tag}||'%'
+<!-- 		select dno,writer,content,tag from oc_document
+		WHERE tag LIKE '%'||#{tag}||'%' -->
+		select dno,writer,content,tag 
+		from (select dno,writer,content,tag,rownum rn from oc_document where tag LIKE '%'||#{info}||'%' order by rn) 
+		where rn between #{start} and #{end}
+	</select>
+	
+	<select id="count" resultType="int">
+		select count(*) from #{value}
 	</select>
 </mapper>
-
-
-
