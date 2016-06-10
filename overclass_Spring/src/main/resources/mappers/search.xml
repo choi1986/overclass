@@ -18,7 +18,18 @@
 		where rn between #{start} and #{end}
 	</select>
 	
-	<select id="count" resultType="int">
-		select count(*) from #{value}
+	<select id="countName" resultType="int">
+		select count(*) from oc_user
+		where user_name=#{user_name}
+	</select>
+	
+	<select id="countId" resultType="int">
+		select count(*) from oc_user
+		where user_id=#{user_id}
+	</select>
+
+	<select id="countTag" resultType="int">
+		select count(*) from oc_document
+		where tag=#{tag}
 	</select>
 </mapper>

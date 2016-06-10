@@ -52,8 +52,18 @@ public class SearchDAOImpl implements SearchDAO {
 	}
 
 	@Override
-	public int count(String value) throws Exception {
-		return session.selectOne("search.count", value);
+	public int countName(String user_name) throws Exception {
+		return session.selectOne("search.countName", user_name);
+	}
+
+	@Override
+	public int countId(String user_id) throws Exception {
+		return session.selectOne("search.countId", user_id);
+	}
+
+	@Override
+	public int countTag(String tag) throws Exception {
+		return session.selectOne("search.countTag", tag);
 	}
 
 }

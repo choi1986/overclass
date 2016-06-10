@@ -55,8 +55,18 @@ public class SearchServiceImpl implements SearchService {
 	}
 
 	@Override
-	public int countNum(String value) throws Exception {
-		return search.count(value);
+	public int countNameNum(String user_name) throws Exception {
+		return search.countName(user_name);
+	}
+
+	@Override
+	public int countIdNum(String user_id) throws Exception {
+		return search.countId(user_id);
+	}
+
+	@Override
+	public int countTagNum(String tag) throws Exception {
+		return search.countTag(tag);
 	}
 
 }
