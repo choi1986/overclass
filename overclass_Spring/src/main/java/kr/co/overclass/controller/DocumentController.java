@@ -55,9 +55,10 @@ public class DocumentController {
 	@RequestMapping(value="",method=RequestMethod.GET)
 	public String mainFeed_list(Criteria cri, Model model, HttpServletRequest request)throws Exception{
 		String user_id = "test1";
+		
 		//String user_id = (String) request.getSession().getAttribute("user_id");
 		List<DocumentDTO> list = service.mainFeed_list(cri, user_id);
-		
+		model.addAttribute("user",user_id);
 		model.addAttribute("list", list);
 		PageMaker maker = new PageMaker();
 		maker.setCri(cri);
@@ -75,7 +76,6 @@ public class DocumentController {
 		//String user_id = (String) request.getSession().getAttribute("user_id");
 		cri.setPage(page);
 		List<DocumentDTO> list = service.mainFeed_list(cri, user_id);
-		
 		model.addAttribute("list", list);
 		PageMaker maker = new PageMaker();
 		maker.setCri(cri);
