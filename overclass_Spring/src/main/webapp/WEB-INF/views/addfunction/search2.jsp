@@ -28,6 +28,7 @@
 <%=list.get(i).getUser_name()%><br>
 전화:
 <%=list.get(i).getUser_tel()%><br>
+
 <%
 	};
 %>
