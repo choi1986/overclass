@@ -1,3 +1,4 @@
+<%@page import="kr.co.overclass.dto.JoinDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -31,31 +32,48 @@
     <script src="<%= request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
     <script src="<%= request.getContextPath() %>/resources/js/animation.js"></script>
     <script src="<%= request.getContextPath() %>/resources/js/jquery.cookie.js"></script>
-<script type="text/javascript">
+    <script type="text/javascript">
 
-	////duplCk=0;
-	//joinForm JQuery
+		//joinForm JQuery
 		$(document).ready(function(){
-	/*//var duplCheck = "<-%=session.getAttribute("dupl")%>";
-	$("#id").val(sessionStorage.getItem("dupl"));
-	if ((sessionStorage.getItem("dupl") != null)||(sessionStorage.getItem("duplFail")==1)) {
-		if($("#id").val()!=''){
-			if (duplCheck == 'suc') {
-				$("#panel").hide();
-				$("#joinForm").show();
-				//$("#id").val()
-				alert("중복체크 성공!");
-				duplCk = 1;
-			} else if (duplCheck == 'fail') {
-					$("#panel").hide();
-					$("#joinForm").show();
-					alert("중복체크 실패!");
-				duplCk = 0;
-			}
-		}
-	}*///
-		var cnt = 0; //birth 공백으로 바꾸는이벤트 1번만 하기위해 선언
-		// if($("#action").val()
+			var cnt = 0; //birth 공백으로 바꾸는이벤트 1번만 하기위해 선언
+			var duplCk = 0; // 중복검사 성공 or 실패 체크
+			
+			//// 중복검사 후 데이터 되돌리는 코드
+			<% JoinDTO dto = new JoinDTO();
+				if(session.getAttribute("joinDupl")!=null)
+					dto = (JoinDTO)session.getAttribute("joinDupl");%>
+				if("<%=dto.getUser_id()%>"!="null") {
+					$("#panel").hide(); //로그인하는 아이디,비밀번호 감춤
+					$("#joinForm").show(); //회원가입폼 보여줌
+					$("#user_id").val("<%=dto.getUser_id()%>");
+					$("#user_pwd").val("<%=dto.getUser_pwd()%>");
+					$("#user_pwd_confirm").val("<%=dto.getUser_pwd_confirm()%>");
+					$("#user_name").val("<%=dto.getUser_name()%>");
+					$("#user_email").val("<%=dto.getUser_email()%>");
+					$("#user_tel1").val("<%=dto.getUser_tel1()%>");
+					$("#user_tel2").val("<%=dto.getUser_tel2()%>");
+					$("#user_tel3").val("<%=dto.getUser_tel3()%>");
+					$("#user_loc").val("<%=dto.getUser_loc()%>");
+					$("#user_hobby1").val("<%=dto.getUser_hobby1()%>");
+					$("#user_hobby2").val("<%=dto.getUser_hobby2()%>");
+					$("#user_birth").val("<%=dto.getUser_birth()%>"); cnt=1;
+					$("#radio[value='<%=dto.getRadio()%>']").attr("checked","checked");
+					$("#user_pwdq").val("<%=dto.getUser_pwdq()%>");
+					$("#user_pwda").val("<%=dto.getUser_pwda()%>");
+				}
+				<% String duplID = (String)session.getAttribute("joinDuplCk");%>
+					if ("<%=duplID%>"=="") {
+						alert("중복검사 성공!");
+						duplCk=1;
+					}
+					else if("<%=duplID%>"!="null") {
+						alert("중복검사 실패!");
+						duplCk=0;
+					}
+					<% session.removeAttribute("joinDupl");
+					 session.removeAttribute("joinDuplCk");%>
+			
 		$("#join").click(function() { //로그인 화면에서 회원가입버튼 눌렀을시
 			$("#panel").hide(); //로그인하는 아이디,비밀번호 감춤
 			$("#joinForm").show(); //회원가입폼 보여줌
@@ -76,16 +94,10 @@
 			$("#email2").show()
 		}
 		$("#join_join").click(function() { //회원가입폼에서 가입버튼 눌렀을시
-			//if($("#dupl").val()=='n')
-				//alert("중복체크를 해주세요!");
-			//sessionStorage.setItem("duplFail", 0);
-			//sessionStorage.removeItem("dupl");
-			//$("#action").val('join');
-			//if (duplCk != 1) {
-			//	alert("먼저 중복체크를 해주세요!");
-			//	sessionStorage.setItem("duplFail", 1);
-			//	$("#register_form").removeAttr('action');
-			//}
+			if(duplCk==0) { 
+				alert("아직 ID 중복이 검사되지 않았습니다! \n자동으로 중복 검사됩니다.");
+				$("#register_form").attr('action','/overclass/dupl');
+			}
 		}) //join_join click 
 		$("#dupl").click(function() { //회원가입폼에서 중복검사버튼 눌렀을시
 			$("#register_form").attr('action','/overclass/dupl');
@@ -170,28 +182,28 @@
                                       <div class="form-group ">
                                           <label for="password" class="control-label col-sm-4">비밀번호 <span class="required">*</span></label>
                                           <div class="col-sm-4">
-                                              <input class="form-control " id="pwd" name="user_pwd" type="password" onkeyup="allowWS(this)"/>
+                                              <input class="form-control " id="user_pwd" name="user_pwd" type="password" onkeyup="allowWS(this)"/>
                                           </div>
                                       </div>
                                       
                                       <div class="form-group ">
                                           <label for="confirm_password" class="control-label col-sm-4">비밀번호 확인 <span class="required">*</span></label>
                                           <div class="col-sm-4">
-                                              <input class="form-control " id="pwd_check" name="user_pwd_confirm" type="password" onkeyup="allowWS(this)"/>
+                                              <input class="form-control " id="user_pwd_confirm" name="user_pwd_confirm" type="password" onkeyup="allowWS(this)"/>
                                           </div>
                                       </div>
                                       
                                       <div class="form-group ">
                                           <label for="username" class="control-label col-sm-4">이름 <span class="required">*</span></label>
                                           <div class="col-sm-4">
-                                              <input class="form-control " id="name" name="user_name" type="text" placeholder="ex) 홍길동" />
+                                              <input class="form-control " id="user_name" name="user_name" type="text" placeholder="ex) 홍길동" />
                                           </div>
                                       </div>
                                       
                                       <div class="form-group ">
                                           <label for="email" class="control-label col-sm-4">이메일 <span class="required">*</span></label>
                                           <div class="col-sm-4">
-                                              <input class="form-control " id="email" name="user_email" type="email" placeholder="ex) kosta113"/>
+                                              <input class="form-control " id="user_email" name="user_email" type="email" placeholder="ex) kosta113"/>
                                           </div><!--  onkeyup="allowEmail(this)" -->
                                       </div>
                                       
@@ -200,13 +212,13 @@
                                       <div class="col-sm-8">
                                           <div class="row">
                                               <div class="col-sm-3">
-                                                  <input type="text" class="form-control" name="user_tel1" placeholder="010" onkeyup="allowNUM(this)">
+                                                  <input type="text" class="form-control" id="user_tel1" name="user_tel1" placeholder="010" onkeyup="allowNUM(this)">
                                               </div>
                                               <div class="col-sm-3">
-                                                  <input type="text" class="form-control" name="user_tel2" placeholder="1234" onkeyup="allowNUM(this)">
+                                                  <input type="text" class="form-control" id="user_tel2" name="user_tel2" placeholder="1234" onkeyup="allowNUM(this)">
                                               </div>
                                               <div class="col-sm-3">
-                                                  <input type="text" class="form-control" name="user_tel3" placeholder="4567" onkeyup="allowNUM(this)">
+                                                  <input type="text" class="form-control" id="user_tel3" name="user_tel3" placeholder="4567" onkeyup="allowNUM(this)">
                                               </div>
                                           </div>
 
@@ -284,15 +296,15 @@
                                       <div class="form-group ">
                                           <label for="birth" class="control-label col-sm-4">생일 <span class="required">*</span></label>
                                           <div class="col-sm-4">
-                                              <input class=" form-control" id="birth" name="user_birth" type="text" placeholder="ex) 900317" onkeyup="allowNUM(this)" />
+                                              <input class=" form-control" id="user_birth" name="user_birth" type="text" placeholder="ex) 900317" onkeyup="allowNUM(this)" />
                                           </div>
                                       </div>
                                       
                                       <div class="form-group ">
                                           <label for="user_gender" class="control-label col-sm-4">성별 <span class="required">*</span></label>
                                            <div class="control-label col-sm-3" >
-                                                  <input name="radio"  value="남" type="radio" checked /> 남자
-                                                  <input name="radio"  value="여" type="radio" /> 여자
+                                                  <input id="radio" name="radio"  value="남" type="radio" checked /> 남자
+                                                  <input id="radio" name="radio"  value="여" type="radio" /> 여자
                                           </div>
                                       </div>
                                       
