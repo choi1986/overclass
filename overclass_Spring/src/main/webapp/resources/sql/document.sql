@@ -10,3 +10,13 @@ create table oc_document(
 	replycnt number default 0,
 	foreign key (writer) references oc_user (user_id)
 );
+
+drop sequence oc_document_seq;
+create sequence oc_document_seq
+	start with 1
+	increment by 1
+	nocycle
+	nocache;
+
+insert into oc_document (dno, writer, content, tag, image) 
+(select oc_document_seq.nextval, writer, content, tag, image from oc_document);
