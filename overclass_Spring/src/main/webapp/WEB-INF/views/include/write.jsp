@@ -16,7 +16,7 @@
 
 			<!-- 글쓰기폼-->
 			<div class="form quick-post">
-				<form role="form" class="form-horizontal" action="main/writeDoc"
+				<form role="form" class="form-horizontal" action="/overclass/main/writeDoc"
 					method="post">
 					<!-- 타이틀 -->
 					<div class="form-group">

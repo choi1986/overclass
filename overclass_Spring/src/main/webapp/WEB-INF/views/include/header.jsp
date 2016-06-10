@@ -62,23 +62,24 @@
 		<div class="top-nav notification-row">
 			<!-- 알림 드롭다운 -->
 			<ul class="nav pull-right top-menu">
-				<li id="task_notificatoin_bar" class="dropdown"></li>
-
 
 				<!-- 메세지알림 -->
-				<li id="mail_notificatoin_bar" class="dropdown"><a
-					data-toggle="dropdown" class="dropdown-toggle" href="#"> <i
-						class="icon-envelope-l"></i> <span class="badge bg-important"><%-- <%=msg_num%> --%></span>
+				<li id="mail_notificatoin_bar" class="dropdown">
+					<a data-toggle="dropdown" class="dropdown-toggle" href="#"> 
+						<i class="icon-envelope-l"></i> 
+						<span class="badge bg-important">1<%-- <%=msg_num%> --%></span>
 						<!-- 메세지온 개수 -->
-				</a>
+					</a>
 					<ul id="msg4" class="dropdown-menu extended inbox">
 						<div class="notify-arrow notify-arrow-blue"></div>
 						<li>
 							<p class="blue">메시지 0개</p>
 						</li>
-
-						<li><a href="#">모든메시지 보기</a></li>
-					</ul></li>
+						<li>
+							<a href="#">모든메시지 보기</a>
+						</li>
+					</ul>
+				</li>
 				<!-- 메시지알림 끝-->
 
 
@@ -87,7 +88,7 @@
 			<li id="alert_notificatoin_bar" class="dropdown">
 				<a data-toggle="dropdown" class="dropdown-toggle" href="#"> 
 					<i class="icon-bell-l"></i> 
-					<span class="badge bg-important"><%-- <%=f_req_num %> --%></span>
+					<span class="badge bg-important">2<%-- <%=f_req_num %> --%></span>
 				</a>
 					<ul id="notice" class="dropdown-menu extended notification">
 						<div class="notify-arrow notify-arrow-blue"></div>
@@ -101,40 +102,75 @@
 								</span>
 								 홍길동님이 친구 요청 
 								<span class="small italic pull-right">5분 전</span>
-						</a></li>
-						<li><a href="#"> <span class="label label-warning"><i
-									class="icon_pin"></i></span> 땡땡 <span class="small italic pull-right">50분
-									전</span>
-						</a></li>
-						<li><a href="#"> <span class="label label-danger"><i
-									class="icon_book_alt"></i></span> 이순신님이 새글등록 <span
-								class="small italic pull-right">1시간 전</span>
-						</a></li>
-						<li><a href="#"> <span class="label label-success"><i
-									class="icon_like"></i></span> 김주원님 생일 <span
-								class="small italic pull-right"> 오늘</span>
-						</a></li>
-						<li><a href="#">모든 알림 보기</a></li>
-					</ul></li>
+							</a>
+						</li>
+						<li>
+							<a href="#"> 
+								<span class="label label-warning">
+									<i class="icon_pin"></i>
+								</span>
+								 땡땡 
+								<span class="small italic pull-right">50분 전</span>
+							</a>
+						</li>
+						<li>
+							<a href="#"> 
+								<span class="label label-danger">
+									<i class="icon_book_alt"></i>
+								</span> 
+								 이순신님이 새글등록 
+								<span class="small italic pull-right">1시간 전</span>
+							</a>
+						</li>
+						<li>
+							<a href="#"> 
+								<span class="label label-success">
+									<i class="icon_like"></i>
+								</span>
+								 김주원님 생일 
+								<span class="small italic pull-right"> 오늘</span>
+							</a>
+						</li>
+						<li>
+							<a href="#">모든 알림 보기</a>
+						</li>
+					</ul>
+				</li>
 				<!-- 새글알림 끝-->
 
 				<!-- 로그인한 유저정보 시작-->
-				<li class="dropdown"><a data-toggle="dropdown"
-					class="dropdown-toggle" href="#"> <span class="profile-ava">
-							<img src="/overclass/resources/img/헤더아이콘.jpg<%-- <%=user.getId_img_path()%> --%>" width='30'
-							height='30'>
-					</span> <span class="username"><%-- <%=user.getName()%> --%></span> <b class="caret"></b>
-				</a>
+				<li class="dropdown">
+					<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+						<span class="profile-ava">
+							<img src="/overclass/resources/img/헤더아이콘.jpg<%-- <%=user.getId_img_path()%> --%>" width='30' height='30'>
+						</span> 
+						<span class="username"><%-- <%=user.getName()%> --%></span> 
+						<b class="caret"></b>
+					</a>
 					<ul class="dropdown-menu extended logout">
 						<div class="log-arrow-up"></div>
-						<li id="drop_myFeed" class="eborder-top"><a
-							href="feedaction.do?action=myfeed"><i class="icon_profile"></i>
-								마이페이지</a></li>
-						<li><a href="#"><i class="icon_mail_alt"></i> 메세지 함</a></li>
-						<li id="drop_main"><a href="documentaction.do?action=list"><i
-								class="icon_clock_alt"></i> 메인페이지</a></li>
-						<li><a href="logout.do"><i class="icon_key_alt"></i> 로그아웃</a></li>
-					</ul></li>
+						<li id="drop_myFeed" class="eborder-top">
+							<a href="feedaction.do?action=myfeed">
+								<i class="icon_profile"></i> 마이페이지
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<i class="icon_mail_alt"></i> 메세지 함
+							</a>
+						</li>
+						<li id="drop_main">
+							<a href="documentaction.do?action=list">
+								<i class="icon_clock_alt"></i> 메인페이지
+							 </a>
+						</li>
+						<li>
+							<a href="logout.do">
+								<i class="icon_key_alt"></i> 로그아웃
+							</a>
+						</li>
+					</ul>
+					</li>
 				<!-- 로그인한 유저 정보 끝 -->
 			</ul>
 			<!-- 알림 드랍다운 끝-->
