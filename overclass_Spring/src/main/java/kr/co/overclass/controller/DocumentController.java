@@ -84,6 +84,6 @@ public class DocumentController {
 		
 		logger.info("메인피드...리스트 개수: "+ list.size());
 		logger.info("메인피드...페이지 : "+ cri.getPage());
-		return "document/mainForm";
+		return "document/mainForm"; //ㅇㅇ
 	}
 }
