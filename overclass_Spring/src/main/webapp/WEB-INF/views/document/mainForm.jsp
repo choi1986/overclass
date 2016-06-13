@@ -102,7 +102,7 @@ $(document).ready(function() {
 	      // 열고
 	      if(div2.attr("class") == "fa fa-chevron-up"){
 	         div2.attr("class","fa fa-chevron-down")
-	         replyDisplay(divNum,divNum);
+	         replyDisplayPage(divNum,1);
 	      } else {
 	         //닫고
 	         div2.attr("class","fa fa-chevron-up")

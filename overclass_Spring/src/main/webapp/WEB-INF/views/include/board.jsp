@@ -115,6 +115,14 @@
                         </c:forEach> --%>
 
                         </div>
+                        
+                        <div>
+                        	<div style="display: none;">${DocumentDTO.dno }</div>
+                        	<ul class='pagination pagination-sm pull-right'>
+                        	
+                        	</ul>
+                        </div>
+                        
                      </div>
 								
 							</form>
@@ -214,7 +222,7 @@ var template = Handlebars.compile(source);
     	})
 	}
 
-	function replyDisplay(dno, divno) {
+/* 	function replyDisplay(dno, divno) {
 		var replydiv = '#reply_div' + divno;
 		$.ajax({
 			url : '/overclass/reply/list/' + dno + '/1',
@@ -226,24 +234,57 @@ var template = Handlebars.compile(source);
 				}
 				
 				// 페이징추가해야됨.
-				
-				$(replydiv).html(htmlTxt);
+				printPaging(list.pageMaker, dno, htmlTxt);
+				//$(replydiv).html(htmlTxt);
 			}
 		});
-	}
+	} */
+	
+	var replyPage = 1;
 
-	function replyDisplayPage(dno, page, divno) {
-		var replydiv = '#reply_div' + divno;
+	function replyDisplayPage(dno, replyPage) {
+		var replydiv = '#reply_div' + dno;
 		$.ajax({
-			url : '/overclass/reply/list/' + dno + '/' + page,
+			url : '/overclass/reply/list/' + dno + '/' + replyPage,
 			type : 'get',
 			success : function(result) {
 				var htmlTxt='';
 				for(var i=0; i<result.list.length; i++){
 					htmlTxt+=template(result.list[i]);
 				}
-				$(replydiv).html(htmlTxt);
+				
+				// 페이징추가해야됨.
+				printPaging(list.pageMaker, dno, htmlTxt);
+				//$(replydiv).html(htmlTxt);
 			}
 		});
 	}
+	
+	var printPaging = function(pageMaker, dno, htmlTxt){
+		var pageStr = "";
+		
+		if(pageMaker.prev){
+			pageStr += "<li><a href='"+(pageMaker.startPage-1)+"'>«</a></li>"
+		}
+		
+		for (var i = pageMaker.startPage, len = pageMaker.endPage; i <= len; i++) {
+			var strClass = pageMaker.cri.page == i ? 'class=active' : '';
+			str += "<li "+strClass+"><a href='"+i+"'>" + i + "</a></li>";
+		}
+
+		if (pageMaker.next) {
+			str += "<li><a href='" + (pageMaker.endPage + 1)
+					+ "'> >> </a></li>";
+		}
+		
+		htmlTxt += pageStr;
+		$(replydiv).html(htmlTxt);
+	}
+	
+	$(".pagination pagination-sm pull-right").on("click", "li a", function(event){
+		event.preventDefault();
+		replyPage = $(this).attr("href");
+		var dno = this.previousSibling.firstChild.nodeValue;
+		replyDisplayPage(dno, replyPage);
+	})
 </script>
