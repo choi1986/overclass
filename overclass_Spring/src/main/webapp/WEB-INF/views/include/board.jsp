@@ -178,9 +178,10 @@
    <div class="activity-body act-in">
       <div class="text">
          <a href="#" class="activity-img"><img class="avatar" src="{{user_image }}"></a>
+		<a href="javascript:deleteModal({{rno}})" style="float: right;"><span class="fa fa-close"></span></a>
          <p class="attribution">
          <a href="#" style="color: blue;">{{replyer }}</a>
-         <p>{{content }}</p><a href="javascript:"><span class="fa fa-close"></span></a>
+         <p>{{content }}</p>
       </div>
    </div>
 </div>
@@ -284,14 +285,79 @@ var template = Handlebars.compile(source);
 		$(reply_page).html(pageStr);
 	}
 	
-	function deleteReply(){
-		
-	}
+	function deleteModal(rno){
+		BootstrapDialog.show({
+			title : '댓글삭제', //알러트 타이틀 이름
+			message : '댓글을 삭제하시겠습니까?', //알러트 내용
+			buttons : [ { //알러트 버튼 정의
+				id : 'docWriteBt', //알러트 버튼의 아이디
+				icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
+				label : '확인', //알러트 버튼 이름
+				cssClass : 'btn-primary', //알러트 버튼 색바꾸기
+				hotkey : 13,
+				action : function(confirm) {
+					deleteReply(rno);
+					confirm.close();
+					
+				}},{
+    				label: '닫기',
+    				action: function(cancel){
+    					cancel.close();
+    					}
+    			}]
+    	})//BootstrapDialog
+	}//deleteReply
 	
-/* 	$(".pagination pagination-sm pull-right").on("click", "li a", function(event){
-		event.preventDefault();
-		replyPage = $(this).attr("href");
-		var dno = this.previousSibling.firstChild.nodeValue;
-		replyDisplayPage(dno, replyPage);
-	}) */
+	function deleteReply(rno){
+		$.ajax({
+			url:'/overclass/reply/'+rno,
+			type:'delete',
+			success:function(result){
+				if(result=='SUCCESS'){
+					// 성공모달
+					BootstrapDialog.show({
+						title : '', //알러트 타이틀 이름
+						message : '댓글이 삭제되었습니다.', //알러트 내용
+						buttons : [ { //알러트 버튼 정의
+							id : 'docWriteBt', //알러트 버튼의 아이디
+							icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
+							label : '확인', //알러트 버튼 이름
+							cssClass : 'btn-primary', //알러트 버튼 색바꾸기
+							hotkey : 13,
+							action : function(confirm) {
+								confirm.close()
+							}
+						} ]
+					})
+				} else {
+					// 실패모달
+					BootstrapDialog.show({
+						title : '', //알러트 타이틀 이름
+						message : '댓글을 삭제하지 못했습니다.', //알러트 내용
+						buttons : [ { //알러트 버튼 정의
+							id : 'docWriteBt', //알러트 버튼의 아이디
+							icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
+							label : '확인', //알러트 버튼 이름
+							cssClass : 'btn-primary', //알러트 버튼 색바꾸기
+							hotkey : 13,
+							action : function(confirm) {
+								confirm.close()
+							}
+						} ]
+					});
+				}//else
+			},//success:function
+			error:function(status){
+				alert(status);
+				console.log(status);
+			}
+		})//ajax
+	}
+
+	/* 	$(".pagination pagination-sm pull-right").on("click", "li a", function(event){
+	 event.preventDefault();
+	 replyPage = $(this).attr("href");
+	 var dno = this.previousSibling.firstChild.nodeValue;
+	 replyDisplayPage(dno, replyPage);
+	 }) */
 </script>
