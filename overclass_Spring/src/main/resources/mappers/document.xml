@@ -56,13 +56,11 @@
 	
 	<!-- 마이피드 게시글 목록 -->
 	<select id="myFeed_list" resultType="document_dto">
-		select dno, writer, content, tag, writedate, image, goodcnt, replycnt, user_image 
-		from( select dno, writer, content, tag, writedate, image, goodcnt, replycnt, user_image, rownum rn
+		select dno, writer, content, tag, writedate, image, goodcnt, replycnt, user_image
 			from( select dno, writer, content, tag, writedate, image, goodcnt, replycnt, user_image
-				from oc_document
-				where writer = #{writer}
-				ordey by writedate desc ))
-		where rn between #{start} and #{end}
+				from oc_document, oc_user
+				where writer = #{user_id} and oc_document.writer=oc_user.user_id 
+				order by writedate desc )
 	</select>
 	
 	<!-- 마이피드 게시글 개수 -->

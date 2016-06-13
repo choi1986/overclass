@@ -1,21 +1,8 @@
-<%@page import="java.util.List"%>
-<%-- <%@page import="oc.model.beans.ContentDTO"%>
-<%@page import="oc.model.beans.ContentDTO2"%>
-<%@page import="org.apache.struts.taglib.bean.IncludeTag"%>
-<%@page import="oc.model.beans.TmpinfoDTO"%>
-<%@page import="oc.model.beans.MemberDTO"%> --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
-<%-- <%
-	MemberDTO user = (MemberDTO) session.getAttribute("user");
-	TmpinfoDTO tmpinfo = (TmpinfoDTO) session.getAttribute("tmpinfo");
-	List<ContentDTO> list = (List<ContentDTO>) request.getAttribute("list");
-	int msg_num = (int) request.getAttribute("msg_num");
-	int f_req_num = (int) request.getAttribute("f_req_num");
-	List<MemberDTO> friend_list = (List<MemberDTO>) request.getAttribute("friend_list");
-%> --%>
 <!-- 헤더 -->
 <%@include file="../include/header.jsp"%>
 <!-- 헤더끝 -->
@@ -29,18 +16,18 @@
 					<div class="col-lg-2 col-lg-2">
 						<h4><%-- <%=user.getName()%> --%></h4>
 						<div class="follow-ava">
-							<img src="<%-- <%=user.getId_img_path()%> --%>" width='70' height='70'>
+							<img src="${user.user_image }" width='70' height='70'>
 						</div>
-						<h6><%-- <%=user.getUser_id()%> --%></h6>
+						<h4>${user.user_id }</h4>
 					</div>
 					<div class="col-lg-4 col-lg-4 follow-info">
 						<p>
 							<i class="fa fa-lg fa-github-alt">&nbsp;MyPage</i>
 						</p>
-						<i class="fa fa-twitter"><span>&nbsp;</span><%-- <%=user.getBirth().substring(2, 4)%>월
-							<%=user.getBirth().substring(4)%> --%>일</i><br> <i
-							class="fa fa-envelope-o"><span>&nbsp;</span><%-- <%=user.getEmail()%> --%></i><br>
-						<i class="icon_pin_alt"><i><%-- <%=user.getLoc()%> --%></i></i>
+						<i class="fa fa-twitter"><span>&nbsp;</span>${fn:substring(user.user_birth,2,4)}월
+							${fn:substring(user.user_birth,4,6)}일</i><br> <i
+							class="fa fa-envelope-o"><span>&nbsp;</span>${user.user_email }</i><br>
+						<i class="icon_pin_alt"><i>${user.user_loc }</i></i>
 					</div>
 				</div>
 			</div>
@@ -75,7 +62,7 @@
 								<div class="col-lg-offset-3 col-lg-5 portlets">
 
 									<!-- 글쓰기폼 시작 -->
-									<%@include file="../include/write.jsp"%>
+									<%@include file="../include/mywrite.jsp"%>
 									<!-- 글쓰기폼 끝 -->
 
 								</div>
@@ -124,14 +111,6 @@
 													</div>
 												</div>
 											</div>
-											<!-- <div class="bio-row">
-												<div class="form-group">
-													<label class="col-lg-3 control-label">현재 비밀번호</label>
-													<div class="col-lg-3">
-														<input type="text" class="form-control">
-													</div>
-												</div>
-											</div> -->
 											<div class="bio-row">
 												<div class="form-group">
 													<label class="col-lg-3 control-label">이메일</label>
@@ -227,23 +206,6 @@
 													</div>
 												</div>
 											</div>
-											<%-- <div class="bio-row">
-												<div class="form-group">
-													<label class="col-lg-3 control-label">성별</label>
-													<div class="col-lg-3">
-														<input type="text" class="form-control"
-															value="<%=user.getUser_id()%>">
-													</div>
-												</div>
-											</div> --%>
-
-											<!-- <div class="bio-row">
-												<label id="pro_upload" class="col-lg-3 control-label">프로필사진</label>
-												<div class="col-lg-5">
-													<input type="file" class="form-control">
-												</div>
-											</div> -->
-
 											<div class="form-group">
 												<label class="col-lg-12"></label>
 												<div class="col-lg-offset-3 col-lg-3">
@@ -251,7 +213,6 @@
 														<button type="button" id="member_update" class="btn btn-success btn-block">수정</button>
 													</span>
 												</div>
-
 											</div>
 										</div>
 										<div class="col-lg-offset-12">
@@ -337,27 +298,112 @@
 	 }
 	 } */
 	$(document).ready(function() {
+		//사진미리보기
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
+				reader.onload = function(e) {
+					//파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+						$('#photo_div').show()
+						$('#photo').attr('src', e.target.result);
+					
+					//이미지 Tag의 SRC속성에 읽어들인 File내용을 지정
+					//(아래 코드에서 읽어들인 dataURL형식)
+				}
+				reader.readAsDataURL(input.files[0]);
+				//File내용을 읽어 dataURL형식의 문자열로 저장
+			}
+		}//readURL()--
+
+		//file 양식으로 이미지를 선택(값이 변경) 되었을때 처리하는 코드
+		$("#file").change(function() {
+			//alert(this.value); //선택한 이미지 경로 표시
+			if(this.value != "") {
+				readURL(this);
+				$('#photo_div').show()
+			} else {
+				$('#photo_div').hide()
+			}
+		});
+		 //   댓글div 열닫
+		   $(".wminimize").click(function() {
+		      
+		      // dno
+		      var divNum = this.firstChild.nextSibling.firstChild.nodeValue;
+		      var divtemp = '#reply_div'+divNum;
+		      var divtemp2 = '#reply_icon'+divNum+'_2'
+		      
+		      //var div = $("#reply_div")
+		      var div = $(divtemp);
+		      var div2 = $(divtemp2);
+		      div.slideToggle("slow")
+		      // 열고
+		      if(div2.attr("class") == "fa fa-chevron-up"){
+		         div2.attr("class","fa fa-chevron-down")
+		         replyDisplayPage(divNum,1);
+		      } else {
+		         //닫고
+		         div2.attr("class","fa fa-chevron-up")
+		      }
+		   })
+		   // 좋아요클릭
+		   $(".goodclass").click(function() {
+		      
+		      // 이게 dno
+		      var goodtemp = this.firstChild.nextSibling.firstChild.nodeValue;
+		      //var goodtemp = this.firstChild.nextSibling.nextSibling.nextSibling;
+		      var goodtmp = '#good_icon'+goodtemp;
+		      
+		      //var div = $("#reply_div")
+		      var goodspan = $(goodtmp);
+		      if(goodspan.attr("class") == "fa fa-lg fa-thumbs-o-up"){
+		         goodspan.attr("class","fa fa-lg fa-thumbs-up")
+		         // 여기다가 좋아요 했다는 내용 서버전송
+		      } else {
+		         goodspan.attr("class","fa fa-lg fa-thumbs-o-up")
+		         // 여기다가 좋아요 취소했다는 내용 서버전송
+		      }
+		   })
+		   
 		//글등록 모달정의
 		$("#docWriteSubmitBt").click(function() {
-			BootstrapDialog.show({
-	    		title: '', //알러트 타이틀 이름
-	    		message: '글을 등록 하시겠습니까?', //알러트 내용
-	    		buttons: [{ //알러트 버튼 정의
-	    			id: 'btn1', //알러트 버튼의 아이디
-	    			icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
-	    			label: '버튼', //알러트 버튼 이름
-	    			cssClass: 'btn-primary', //알러트 버튼 색바꾸기
-	    			hotkey:13,
-	    			action: function(confirm) {
-	    				confirm.close()
-					}
-	    			},{
-	    				label: '닫기',
-	    				action: function(cancel){
-	    					cancel.close();
-	    					}
+			if($("#content").val().trim() == "") {
+				BootstrapDialog.show({
+		    		title: '', //알러트 타이틀 이름
+		    		message: '글을 입력해주세요', //알러트 내용
+		    		buttons: [{ //알러트 버튼 정의
+		    			icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
+		    			label: '확인', //알러트 버튼 이름
+		    			cssClass: 'btn-primary', //알러트 버튼 색바꾸기
+		    			hotkey:13,
+		    			action: function(confirm) {
+		    				confirm.close()
+						}
 	    			}]
-	    	})
+		    	})
+			} else {
+				BootstrapDialog.show({
+		    		title: '', //알러트 타이틀 이름
+		    		message: '글을 등록 하시겠습니까?', //알러트 내용
+		    		buttons: [{ //알러트 버튼 정의
+		    			id: 'docWriteBt', //알러트 버튼의 아이디
+		    			icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
+		    			label: '버튼', //알러트 버튼 이름
+		    			cssClass: 'btn-primary', //알러트 버튼 색바꾸기
+		    			hotkey:13,
+		    			action: function(confirm) {
+		    				var formObj = $("form[role='form']");    				
+		    				formObj.submit();
+		    				confirm.close()
+						}
+		    			},{
+		    				label: '닫기',
+		    				action: function(cancel){
+		    					cancel.close();
+		    					}
+		    			}]
+		    	})
+			}
 		})
 		
 		//신고모달정의
