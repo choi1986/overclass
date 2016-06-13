@@ -13,7 +13,7 @@ create table oc_user(
 	user_pwdq varchar2(99) not null,
 	user_pwda varchar2(99) not null,
 	user_joindate date default sysdate,
-	user_image varchar2(120) default '/img/profile_default.jpg',
+	user_image varchar2(300) default '/resources/img/profile_default.jpg',
 	user_logincnt number default 0,
 	user_admin number default 0
 );
@@ -25,10 +25,10 @@ drop table oc_document cascade constraints;
 create table oc_document(
 	dno number primary key,
 	writer varchar2(12) not null,
-	content varchar2(210) not null,
+	content varchar2(900) not null,
 	tag varchar2(210),
 	writedate date default sysdate,
-	image varchar2(120),
+	image varchar2(300),
 	goodcnt number default 0,
 	replycnt number default 0,
 	foreign key (writer) references oc_user (user_id)

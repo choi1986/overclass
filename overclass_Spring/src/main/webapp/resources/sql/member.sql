@@ -12,7 +12,7 @@ create table oc_user(
 	user_pwdq number not null,
 	user_pwda varchar2(99) not null,
 	user_joindate date default sysdate,
-	user_image varchar2(120) default '/img/profile_default.jpg',
+	user_image varchar2(300) default '/img/profile_default.jpg',
 	user_logincnt number,
 	user_admin number default 0
 );

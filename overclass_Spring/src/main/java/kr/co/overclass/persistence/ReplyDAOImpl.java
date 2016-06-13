@@ -30,9 +30,7 @@ public class ReplyDAOImpl implements ReplyDAO {
 	public List<ReplyDTO> list(int dno, Criteria cri) throws Exception {
 		RowBounds bounds= new RowBounds(cri.getPageStart(), 
                 cri.getPerPageNum());
-		logger.info(dno+"");
-		logger.info("cri 스타트페이지값 : "+cri.getPageStart());
-		logger.info("cri 페이지넘값 : "+cri.getPerPageNum());
+		logger.info("댓글요청된페이지 : "+dno);
 			//1페이지:(0,10)   2페이지:(10,10)    3페이지:(20,10)
 
 		return session.selectList("reply.read",dno,bounds);
