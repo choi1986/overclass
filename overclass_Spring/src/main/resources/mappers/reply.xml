@@ -20,4 +20,10 @@
 		select count(dno) from oc_reply
 		where dno=#{dno}
 	</select>
+	
+	<select id="selectOne" resultType="reply">
+		select rno, dno, replyer, content, writedate
+		from oc_reply
+		where rno = #{rno}
+	</select>
 </mapper>

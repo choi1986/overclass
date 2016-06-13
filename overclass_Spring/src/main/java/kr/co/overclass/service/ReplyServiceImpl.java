@@ -23,8 +23,13 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 
 	@Override
-	public void removeReply(int rno) throws Exception {
-		dao.delete(rno);
+	public boolean removeReply(int rno, String user_id) throws Exception {
+		user_id="test1";
+		if(dao.reply(rno).getReplyer().equals(user_id)) {
+			dao.delete(rno);
+			return true;
+		}
+		return false;
 	}
 
 	@Override

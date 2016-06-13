@@ -46,4 +46,9 @@ public class ReplyDAOImpl implements ReplyDAO {
 		return session.selectOne("reply.count",dno);
 	}
 
+	@Override
+	public ReplyVO reply(int rno) throws Exception {
+		return session.selectOne("reply.selectOne",rno);
+	}
+
 }

@@ -8,7 +8,7 @@ import kr.co.overclass.dto.ReplyDTO;
 
 public interface ReplyService {
 	public void addReply(ReplyVO vo)throws Exception;
-	public void removeReply(int rno)throws Exception;
+	public boolean removeReply(int rno, String user_id)throws Exception;
 	public List<ReplyDTO> listReply(int dno,Criteria cri)throws Exception;
 	public int countReply(int dno) throws Exception;
 }

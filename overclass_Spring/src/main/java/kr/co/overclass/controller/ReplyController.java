@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import kr.co.overclass.domain.Criteria;
 import kr.co.overclass.domain.PageMaker;
 import kr.co.overclass.domain.ReplyVO;
+import kr.co.overclass.domain.UserVO;
 import kr.co.overclass.dto.ReplyDTO;
 import kr.co.overclass.service.ReplyService;
 
@@ -74,12 +75,17 @@ public class ReplyController {
 	}
 	
 	@RequestMapping(value="/{rno}", method=RequestMethod.DELETE)
-	public ResponseEntity<String> replyRemove(@PathVariable("rno") int rno) {
+	public ResponseEntity<String> replyRemove(@PathVariable("rno") int rno, UserVO vo) {
 		
 		ResponseEntity<String> entity = null;
+		logger.info("삭제요청된 댓글번호 : "+rno);
+		logger.info("로그인된 유저아이디 : "+vo.getUser_id());
 		try {
-			service.removeReply(rno);
-			entity = new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
+			if(service.removeReply(rno,vo.getUser_id())){
+				entity = new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
+			}else {
+				entity = new ResponseEntity<String>("FAIL",HttpStatus.OK);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
