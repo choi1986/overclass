@@ -2,7 +2,9 @@ package kr.co.overclass.controller;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
@@ -87,10 +89,14 @@ public class DocumentController {
 	@RequestMapping(value="",method=RequestMethod.GET)
 	public String mainFeed_list(Criteria cri, Model model, HttpServletRequest request)throws Exception{
 		String user_id = "test1";
-		
+		String user_image = "/overclass/resources/img/feed_default.png";
+		Map<String, Object> map = new HashMap<>();
+		map.put("user_id", user_id);
+		map.put("user_image", user_image);
 		//String user_id = (String) request.getSession().getAttribute("user_id");
+		//String user_image = (String) request.getSession().getAttribute("user_id");
 		List<DocumentDTO> list = service.mainFeed_list(cri, user_id);
-		model.addAttribute("user",user_id);
+		model.addAttribute("user",map);
 		model.addAttribute("list", list);
 		PageMaker maker = new PageMaker();
 		maker.setCri(cri);
@@ -102,6 +108,7 @@ public class DocumentController {
 		return "document/mainForm";
 	}
 	
+	//메인피드 페이징
 	@RequestMapping(value="/mainFeed_Page",method=RequestMethod.GET)
 	public String mainFeed_list(int page, Criteria cri, Model model, HttpServletRequest request)throws Exception{
 		String user_id = "test1";
@@ -118,6 +125,23 @@ public class DocumentController {
 		
 		logger.info("메인피드...리스트 개수: "+ list.size());
 		logger.info("메인피드...페이지 : "+ cri.getPage());
-		return "document/mainForm"; //ㅇㅇ
+		return "document/mainForm";
+	}
+	
+	@RequestMapping(value="/myFeed",method=RequestMethod.GET)
+	public String myFeed(Criteria cri, Model model, HttpServletRequest request) throws Exception{
+		String user_id = "test1";
+		
+		//String user_id = (String) request.getSession().getAttribute("user_id");
+		List<DocumentDTO> list = service.myFeed_list(cri, user_id);
+		model.addAttribute("user",user_id);
+		model.addAttribute("list", list);
+		PageMaker maker = new PageMaker();
+		maker.setCri(cri);
+		maker.setTotalCount(service.myFeed_count(user_id));
+		model.addAttribute("pageMaker", maker);
+		
+		logger.info("메인피드...리스트 개수: "+ list.size());
+		return "document/myFeed";
 	}
 }

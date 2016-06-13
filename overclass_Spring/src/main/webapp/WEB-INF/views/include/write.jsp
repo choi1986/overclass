@@ -47,10 +47,10 @@
 					<!-- 타이틀 -->
 					<div class="form-group">
 						<div class="photo col-lg-2" style="text-align: center;">
-							<img alt="avatar" src="${DocumentDTO.user_image}" width='70' height='70'>
+							<img alt="avatar" src="${user.user_image}" width='70' height='70'>
 							<h4></h4>
 							<p>
-								<b>${user }</b>
+								<b>${user.user_id }</b>
 							</p>
 						</div>
 						<div class="col-lg-10">

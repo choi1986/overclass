@@ -143,16 +143,16 @@
 				<!-- 로그인한 유저정보 시작-->
 				<li class="dropdown">
 					<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-						<span class="profile-ava">
-							<img src="/overclass/resources/img/헤더아이콘.jpg<%-- <%=user.getId_img_path()%> --%>" width='30' height='30'>
+						<span class="avatar">
+							<img src="${user.user_image }" width='30' height='30'>
 						</span> 
-						<span class="username"><%-- <%=user.getName()%> --%></span> 
+						<span class="username">${user.user_id }</span> 
 						<b class="caret"></b>
 					</a>
 					<ul class="dropdown-menu extended logout">
 						<div class="log-arrow-up"></div>
 						<li id="drop_myFeed" class="eborder-top">
-							<a href="feedaction.do?action=myfeed">
+							<a href="/overclass/main/myFeed">
 								<i class="icon_profile"></i> 마이페이지
 							</a>
 						</li>
@@ -162,12 +162,12 @@
 							</a>
 						</li>
 						<li id="drop_main">
-							<a href="documentaction.do?action=list">
+							<a href="/overclass/main">
 								<i class="icon_clock_alt"></i> 메인페이지
 							 </a>
 						</li>
 						<li>
-							<a href="logout.do">
+							<a href="/overclass/main/logout">
 								<i class="icon_key_alt"></i> 로그아웃
 							</a>
 						</li>
