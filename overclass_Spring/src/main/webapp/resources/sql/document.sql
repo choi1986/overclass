@@ -18,5 +18,9 @@ create sequence oc_document_seq
 	nocycle
 	nocache;
 
+	select *from OC_DOCUMENT
+
+insert into oc_document (dno, writer, content, tag, image) values(oc_document_seq.nextval, 'test1', '테스트1이쓴글', '태그1', '');
+	
 insert into oc_document (dno, writer, content, tag, image) 
 (select oc_document_seq.nextval, writer, content, tag, image from oc_document);

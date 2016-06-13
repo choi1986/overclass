@@ -17,7 +17,7 @@
 			<!-- 글쓰기폼-->
 			<div class="form quick-post">
 				<form role="form" class="form-horizontal" action="/overclass/main/writeDoc"
-					method="post">
+					method="post" enctype="multipart/form-data">
 					<!-- 타이틀 -->
 					<div class="form-group">
 						<div class="col-lg-2">
@@ -45,8 +45,17 @@
 						<label for="exampleInputFile"></label> <label
 							class="control-label col-lg-2" for="content">사진올리기</label>
 						<div class="col-lg-10">
-							<input type="file" id="exampleInputFile" name="exampleInputFile">
-							<p class="help-block"></p>
+							<input type="file" id="file" name="image">
+							<p class="help-block"></p>`
+						</div>
+					</div>
+					
+					<!-- 파일 사진올릴시 -->
+					<div class="form-group">
+						<label for="exampleInputFile"></label> 
+						<label class="control-label col-lg-2" for="content"></label>
+						<div class="col-lg-10" id="photo_div" style="display: none;">
+							<img src="" id="photo" width="250px" height="200px">
 						</div>
 					</div>
 
