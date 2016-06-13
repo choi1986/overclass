@@ -208,7 +208,7 @@ public class DocumentController {
 		model.addAttribute("pageMaker", maker);
 		
 		logger.info("메인피드...리스트 개수: "+ list.size());
-		logger.info("메인피드...페이지 : "+ cri.getPage());
+		logger.info("메인피드...페이지 : "+ cri.getPage()); //d
 		return "document/myFeed";
 	}
 }
