@@ -13,29 +13,39 @@
 
     <title>Welcome to OVERCLASS</title>
 
-    <!-- Bootstrap CSS -->    
-    <link href="<%= request.getContextPath() %>/resources/css/bootstrap.min.css" rel="stylesheet">
-    <!-- bootstrap theme -->
-    <link href="<%= request.getContextPath() %>/resources/css/bootstrap-theme.css" rel="stylesheet">
+   <!-- CSS -->
+	<!-- 부트스트랩 -->
+	<link href="/overclass/resources/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/overclass/resources/css/bootstrap-theme.css" rel="stylesheet">
 	<!-- 부트스트랩모달 -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.9/css/bootstrap-dialog.min.css" rel="stylesheet" type="text/css">
+	<!-- 아이콘 -->
+	<link href="/overclass/resources/css/elegant-icons-style.css" rel="stylesheet">
+	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" >
+	<!-- 스타일 -->
+	<link href="/overclass/resources/css/style.css" rel="stylesheet">
+	<link href="/overclass/resources/css/style-responsive.css" rel="stylesheet">
+	<!-- 애니메이션 -->
+	<link href="/overclass/resources/css/animate.css" type="text/css" rel="stylesheet">
+<!-- CSS끝 -->
+
+<!-- JS -->
+	<!-- 제이쿼리 -->
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<!-- 부트스트랩 -->
+	<script src="/overclass/resources/js/bootstrap.min.js"></script>
 	<!-- 부트스스트랩모달 -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.9/js/bootstrap-dialog.min.js"></script>
-    <!--external css-->
-    <!-- font icon -->
-    <link href="<%= request.getContextPath() %>/resources/css/elegant-icons-style.css" rel="stylesheet" />
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" >
-    <!-- Custom styles -->
-    <link href="<%= request.getContextPath() %>/resources/css/style.css" rel="stylesheet">
-    <link href="<%= request.getContextPath() %>/resources/css/style-responsive.css" rel="stylesheet" />
-    
-	<link href="<%= request.getContextPath() %>/resources/css/bootstrap.min.css" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/animate.css">
-    
-   	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="<%= request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
-    <script src="<%= request.getContextPath() %>/resources/js/animation.js"></script>
-    <script src="<%= request.getContextPath() %>/resources/js/jquery.cookie.js"></script>
+	<!-- 제이쿼리ui -->
+	<script src="/overclass/resources/js/jquery-ui-1.9.2.custom.min.js"></script>
+	<script src="/overclass/resources/js/bootstrap-switch.js"></script>
+	<!-- 태그 -->
+	<script src="/overclass/resources/js/jquery.tagsinput.js"></script>
+	<script src="/overclass/resources/js/form-component.js"></script>
+	<!-- 애니메이션 -->
+	<script src="/overclass/resources/js/animation.js"></script>
+	<script src="/overclass/resources/js/jquery.cookie.js"></script>
+<!-- JS끝 -->
     <script type="text/javascript">
 
 		//joinForm JQuery
@@ -68,11 +78,10 @@
 				}
 				<% String duplID = (String)session.getAttribute("joinDuplCk");%>
 					if ("<%=duplID%>"=="") {
-						//alert("중복검사 성공!");
 						BootstrapDialog.show({
-				    		title: '타이틀', //알러트 타이틀 이름
-				    		message: '중복검사 성공!!!', //알러트 내용
-				    		type: BootstrapDialog.TYPE_DANGER,
+				    		title: '', //알러트 타이틀 이름
+				    		message: '중복검사 성공!', //알러트 내용
+				    		type: BootstrapDialog.TYPE_PRIMARY,
 				    		buttons: [{
 				    				label: '닫기',
 				    				action: function(cancel){
@@ -83,7 +92,17 @@
 						duplCk=1;
 					}
 					else if("<%=duplID%>"!="null") {
-						alert("중복검사 실패!");
+						BootstrapDialog.show({
+				    		title: '', //알러트 타이틀 이름
+				    		message: '중복검사 실패!', //알러트 내용
+				    		type: BootstrapDialog.TYPE_DANGER,
+				    		buttons: [{
+				    				label: '닫기',
+				    				action: function(cancel){
+				    					cancel.close();
+				    					}
+				    			}]
+				    	})
 						duplCk=0;
 					}
 					<% session.removeAttribute("joinDupl");
