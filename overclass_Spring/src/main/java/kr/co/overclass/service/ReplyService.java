@@ -10,4 +10,5 @@ public interface ReplyService {
 	public void addReply(ReplyVO vo)throws Exception;
 	public void removeReply(int rno)throws Exception;
 	public List<ReplyDTO> listReply(int dno,Criteria cri)throws Exception;
+	public int countReply(int dno) throws Exception;
 }

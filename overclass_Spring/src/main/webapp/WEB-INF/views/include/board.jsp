@@ -113,15 +113,17 @@
                               </div>
                            </div>
                         </c:forEach> --%>
-
                         </div>
                         
-                        <div>
+                        <div class="text-center">
                         	<div style="display: none;">${DocumentDTO.dno }</div>
-                        	<ul class='pagination pagination-sm pull-right'>
+                        	<div style="display: none;"></div>
+                        	<ul class='pagination pagination-sm' id='reply_div_page_${DocumentDTO.dno }' style="display: none;">
                         	
                         	</ul>
                         </div>
+                        
+                        
                         
                      </div>
 								
@@ -178,7 +180,7 @@
          <a href="#" class="activity-img"><img class="avatar" src="{{user_image }}"></a>
          <p class="attribution">
          <a href="#" style="color: blue;">{{replyer }}</a>
-         <p>{{content }}</p>
+         <p>{{content }}</p><a href="javascript:"><span class="fa fa-close"></span></a>
       </div>
    </div>
 </div>
@@ -244,6 +246,7 @@ var template = Handlebars.compile(source);
 
 	function replyDisplayPage(dno, replyPage) {
 		var replydiv = '#reply_div' + dno;
+		var reply_page = '#reply_div_page_'+dno
 		$.ajax({
 			url : '/overclass/reply/list/' + dno + '/' + replyPage,
 			type : 'get',
@@ -254,13 +257,13 @@ var template = Handlebars.compile(source);
 				}
 				
 				// 페이징추가해야됨.
-				printPaging(list.pageMaker, dno, htmlTxt);
-				//$(replydiv).html(htmlTxt);
+				$(replydiv).html(htmlTxt);
+				printPaging(result.pageMaker, dno, reply_page);
 			}
 		});
 	}
 	
-	var printPaging = function(pageMaker, dno, htmlTxt){
+	var printPaging = function(pageMaker, dno, reply_page){
 		var pageStr = "";
 		
 		if(pageMaker.prev){
@@ -269,22 +272,26 @@ var template = Handlebars.compile(source);
 		
 		for (var i = pageMaker.startPage, len = pageMaker.endPage; i <= len; i++) {
 			var strClass = pageMaker.cri.page == i ? 'class=active' : '';
-			str += "<li "+strClass+"><a href='"+i+"'>" + i + "</a></li>";
+			pageStr += "<li "+strClass+"><a href='javascript:replyDisplayPage("+dno+","+i+")'>" + i + "</a></li>";
 		}
 
 		if (pageMaker.next) {
-			str += "<li><a href='" + (pageMaker.endPage + 1)
+			pageStr += "<li><a href='" + (pageMaker.endPage + 1)
 					+ "'> >> </a></li>";
 		}
 		
-		htmlTxt += pageStr;
-		$(replydiv).html(htmlTxt);
+		$(reply_page).attr("style","display: show;")
+		$(reply_page).html(pageStr);
 	}
 	
-	$(".pagination pagination-sm pull-right").on("click", "li a", function(event){
+	function deleteReply(){
+		
+	}
+	
+/* 	$(".pagination pagination-sm pull-right").on("click", "li a", function(event){
 		event.preventDefault();
 		replyPage = $(this).attr("href");
 		var dno = this.previousSibling.firstChild.nodeValue;
 		replyDisplayPage(dno, replyPage);
-	})
+	}) */
 </script>

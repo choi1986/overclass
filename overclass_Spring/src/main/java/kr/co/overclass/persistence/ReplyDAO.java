@@ -11,4 +11,5 @@ public interface ReplyDAO {
 	public void create(ReplyVO vo) throws Exception;
 	public List<ReplyDTO> list(int dno, Criteria cri) throws Exception;
 	public void delete(int rno) throws Exception;
+	public int count(int dno) throws Exception;
 }

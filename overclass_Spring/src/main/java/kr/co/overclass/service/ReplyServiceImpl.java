@@ -32,4 +32,9 @@ public class ReplyServiceImpl implements ReplyService {
 		return dao.list(dno,cri);
 	}
 
+	@Override
+	public int countReply(int dno) throws Exception {
+		return dao.count(dno);
+	}
+
 }

@@ -42,7 +42,8 @@ public class ReplyController {
 			
 			PageMaker pageMaker = new PageMaker();
 			pageMaker.setCri(cri);
-			pageMaker.setTotalCount(1);
+			//pageMaker.setTotalCount(1);
+			pageMaker.setTotalCount(service.countReply(dno));
 			
 			Map<String, Object> map = new HashMap<String, Object>();
 			List<ReplyDTO> list = service.listReply(dno,cri);
