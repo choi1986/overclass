@@ -1,18 +1,24 @@
 package kr.co.overclass.controller;
 
+import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.overclass.domain.Criteria;
@@ -30,10 +36,21 @@ public class DocumentController {
 	
 	@Inject
 	private DocumentService service;
+	String uploadPath;
+	
+	private String uploadFile(String originName, byte[] fileData) throws Exception {
+		String savedName = originName;
+		File target = new File(uploadPath, savedName);
+		FileCopyUtils.copy(fileData, target); //실제 파일 업로드
+		return savedName;
+	}
 	
 	//메인피드에서 글쓰기
 	@RequestMapping(value="/writeDoc",method=RequestMethod.POST)
-	public String create(DocumentVO vo, RedirectAttributes attr) throws Exception {
+	public String create(DocumentVO vo, RedirectAttributes attr, MultipartFile file, HttpSession session) throws Exception {
+		uploadPath = session.getServletContext().getRealPath("/resources/upload");
+		
+		uploadFile(file.getOriginalFilename(), file.getBytes());///
 		logger.info("글쓰기...[" + vo + "]");	
 		service.create(vo);
 		attr.addFlashAttribute("msg", "Write_SUCCESS");
