@@ -50,7 +50,7 @@ public class DocumentController {
 	public String create(DocumentVO vo, RedirectAttributes attr, MultipartFile file, HttpSession session) throws Exception {
 		uploadPath = session.getServletContext().getRealPath("/resources/upload");
 		
-		uploadFile(file.getOriginalFilename(), file.getBytes());
+		uploadFile(file.getOriginalFilename(), file.getBytes());///
 		logger.info("±Û¾²±â...[" + vo + "]");	
 		service.create(vo);
 		attr.addFlashAttribute("msg", "Write_SUCCESS");
