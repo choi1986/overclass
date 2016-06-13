@@ -69,8 +69,8 @@ $(document).ready(function() {
 			var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
 			reader.onload = function(e) {
 				//파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
-				$('#photo_div').show()
-				$('#photo').attr('src', e.target.result);
+					$('#photo_div').show()
+					$('#photo').attr('src', e.target.result);
 				
 				//이미지 Tag의 SRC속성에 읽어들인 File내용을 지정
 				//(아래 코드에서 읽어들인 dataURL형식)
@@ -83,8 +83,38 @@ $(document).ready(function() {
 	//file 양식으로 이미지를 선택(값이 변경) 되었을때 처리하는 코드
 	$("#file").change(function() {
 		//alert(this.value); //선택한 이미지 경로 표시
-		readURL(this);
+		if(this.value != "") {
+			readURL(this);
+			$('#photo_div').show()
+		} else {
+			$('#photo_div').hide()
+		}
 	});
+	
+	//게시글삭제
+	$("#boardDel").click(function() {
+		BootstrapDialog.show({
+    		title: '', //알러트 타이틀 이름
+    		message: '글을 삭제 하시겠습니까?', //알러트 내용
+    		buttons: [{ //알러트 버튼 정의
+    			id: 'docWriteBt', //알러트 버튼의 아이디
+    			icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
+    			label: '버튼', //알러트 버튼 이름
+    			cssClass: 'btn-primary', //알러트 버튼 색바꾸기
+    			hotkey:13,
+    			action: function(confirm) {
+    				var formObj = $("form[role='form']");    				
+    				formObj.submit();
+    				confirm.close()
+				}
+    			},{
+    				label: '닫기',
+    				action: function(cancel){
+    					cancel.close();
+    					}
+    			}]
+    	})
+	})
 
 
 	   //   댓글div 열닫
@@ -128,27 +158,43 @@ $(document).ready(function() {
 	   })
 	//글등록 모달정의
 	$("#docWriteSubmitBt").click(function() {
-		BootstrapDialog.show({
-    		title: '', //알러트 타이틀 이름
-    		message: '글을 등록 하시겠습니까?', //알러트 내용
-    		buttons: [{ //알러트 버튼 정의
-    			id: 'docWriteBt', //알러트 버튼의 아이디
-    			icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
-    			label: '버튼', //알러트 버튼 이름
-    			cssClass: 'btn-primary', //알러트 버튼 색바꾸기
-    			hotkey:13,
-    			action: function(confirm) {
-    				var formObj = $("form[role='form']");    				
-    				formObj.submit();
-    				confirm.close()
-				}
-    			},{
-    				label: '닫기',
-    				action: function(cancel){
-    					cancel.close();
-    					}
+		if($("#content").val().trim() == "") {
+			BootstrapDialog.show({
+	    		title: '', //알러트 타이틀 이름
+	    		message: '글을 입력해주세요', //알러트 내용
+	    		buttons: [{ //알러트 버튼 정의
+	    			icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
+	    			label: '확인', //알러트 버튼 이름
+	    			cssClass: 'btn-primary', //알러트 버튼 색바꾸기
+	    			hotkey:13,
+	    			action: function(confirm) {
+	    				confirm.close()
+					}
     			}]
-    	})
+	    	})
+		} else {
+			BootstrapDialog.show({
+	    		title: '', //알러트 타이틀 이름
+	    		message: '글을 등록 하시겠습니까?', //알러트 내용
+	    		buttons: [{ //알러트 버튼 정의
+	    			id: 'docWriteBt', //알러트 버튼의 아이디
+	    			icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
+	    			label: '버튼', //알러트 버튼 이름
+	    			cssClass: 'btn-primary', //알러트 버튼 색바꾸기
+	    			hotkey:13,
+	    			action: function(confirm) {
+	    				var formObj = $("form[role='form']");    				
+	    				formObj.submit();
+	    				confirm.close()
+					}
+	    			},{
+	    				label: '닫기',
+	    				action: function(cancel){
+	    					cancel.close();
+	    					}
+	    			}]
+	    	})
+		}
 	})
 	
 	//신고모달정의
