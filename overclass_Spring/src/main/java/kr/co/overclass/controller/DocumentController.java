@@ -167,6 +167,10 @@ public class DocumentController {
 		String loc ="경기도";
 		String name = "홍길동";
 		String tel = "010-9767-9783";
+		String hobby1 = "음악 감상";
+		String hobby2 = "여행";
+		String pwedq = "나의 고향은?";
+		String pweda = "평택";
 		Map<String, Object> map = new HashMap<>();
 		map.put("user_id", user_id);
 		map.put("user_image", user_image);
@@ -175,6 +179,10 @@ public class DocumentController {
 		map.put("user_loc", loc);
 		map.put("user_name", name);
 		map.put("user_tel", tel);
+		map.put("user_hobby1", hobby1);
+		map.put("user_hobby2", hobby2);
+		map.put("user_pwedq", pwedq);
+		map.put("user_pweda", pweda);
 		//String user_id = (String) request.getSession().getAttribute("user_id");
 		//String user_image = (String) request.getSession().getAttribute("user_id");
 		List<DocumentDTO> list = service.myFeed_list(cri, user_id);
@@ -208,7 +216,13 @@ public class DocumentController {
 		model.addAttribute("pageMaker", maker);
 		
 		logger.info("메인피드...리스트 개수: "+ list.size());
-		logger.info("메인피드...페이지 : "+ cri.getPage()); //d
+		logger.info("메인피드...페이지 : "+ cri.getPage());
+		return "document/myFeed";
+	}
+	
+	@RequestMapping(value="/modifyUser",method=RequestMethod.POST)
+	public String user_update() {
+		
 		return "document/myFeed";
 	}
 }

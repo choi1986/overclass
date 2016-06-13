@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.overclass.domain.Criteria;
 import kr.co.overclass.domain.DocumentVO;
+import kr.co.overclass.domain.UserVO;
 import kr.co.overclass.dto.DocumentDTO;
 import kr.co.overclass.persistence.DocumentDAO;
 
@@ -51,5 +52,10 @@ public class DocumentServiceImpl implements DocumentService {
 	@Override
 	public int myFeed_count(String user_id) throws Exception {
 		return dao.myFeed_count(user_id);
+	}
+	
+	@Override
+	public void updateUser(UserVO user) throws Exception {
+		dao.updateUser(user);
 	}
 }

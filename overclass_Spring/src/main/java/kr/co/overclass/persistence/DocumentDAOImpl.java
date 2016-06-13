@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.overclass.domain.Criteria;
 import kr.co.overclass.domain.DocumentVO;
+import kr.co.overclass.domain.UserVO;
 import kr.co.overclass.dto.DocumentDTO;
 
 @Repository
@@ -48,5 +49,10 @@ public class DocumentDAOImpl implements DocumentDAO{
 	@Override
 	public int myFeed_count(String user_id) throws Exception { //마이피드 게시글 개수
 		return session.selectOne("document.mainFeed_count", user_id);
+	}
+	
+	@Override
+	public void updateUser(UserVO user) throws Exception {
+		session.update("user.updateUser", user);
 	}
 }
