@@ -61,11 +61,16 @@ public class ReplyController {
 	}
 	
 	@RequestMapping(value="/", method=RequestMethod.POST)
-	public ResponseEntity<String> replyWrite(@RequestBody ReplyVO vo) {
+	public ResponseEntity<String> replyWrite(@RequestBody ReplyVO vo, UserVO uvo) {
 		
 		ResponseEntity<String> entity = null;
 		try {
+			//vo.setReplyer(uvo.getUser_id());
+			vo.setReplyer("test1");
+			vo.setRno(0);
 			service.addReply(vo);
+			logger.info("댓글등록자 : "+vo.getReplyer());
+			logger.info("댓글등록내용 : "+vo.getContent());
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

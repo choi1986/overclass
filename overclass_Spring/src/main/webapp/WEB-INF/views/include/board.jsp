@@ -88,7 +88,7 @@
 								<div class="form-group">
 									<label class="control-label col-lg-2" for="reply_write">댓글</label>
 									<div class="col-lg-10">
-										<input id="reply_write" type="text" class="form-control" size="18" placeholder="댓글을 입력하세요...">
+										<input id="reply_write${DocumentDTO.dno }" type="text" class="form-control" size="18" placeholder="댓글을 입력하세요..." onkeydown="return writeReply(event,${DocumentDTO.dno})">
 									</div>
 								</div>
 								
@@ -178,7 +178,7 @@
    <div class="activity-body act-in">
       <div class="text">
          <a href="#" class="activity-img"><img class="avatar" src="{{user_image }}"></a>
-		<a href="javascript:deleteModal({{rno}})" style="float: right;"><span class="fa fa-close"></span></a>
+		<a href="javascript:deleteModal({{rno}},{{dno}})" style="float: right;"><span class="fa fa-close"></span></a>
          <p class="attribution">
          <a href="#" style="color: blue;">{{replyer }}</a>
          <p>{{content }}</p>
@@ -285,18 +285,19 @@ var template = Handlebars.compile(source);
 		$(reply_page).html(pageStr);
 	}
 	
-	function deleteModal(rno){
+	function deleteModal(rno,dno){
 		BootstrapDialog.show({
-			title : '댓글삭제', //알러트 타이틀 이름
+			title : '', //알러트 타이틀 이름
 			message : '댓글을 삭제하시겠습니까?', //알러트 내용
+			type: BootstrapDialog.TYPE_DANGER,
 			buttons : [ { //알러트 버튼 정의
 				id : 'docWriteBt', //알러트 버튼의 아이디
 				icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
 				label : '확인', //알러트 버튼 이름
-				cssClass : 'btn-primary', //알러트 버튼 색바꾸기
+				cssClass : 'btn-danger', //알러트 버튼 색바꾸기
 				hotkey : 13,
 				action : function(confirm) {
-					deleteReply(rno);
+					deleteReply(rno,dno);
 					confirm.close();
 					
 				}},{
@@ -308,7 +309,7 @@ var template = Handlebars.compile(source);
     	})//BootstrapDialog
 	}//deleteReply
 	
-	function deleteReply(rno){
+	function deleteReply(rno,dno){
 		$.ajax({
 			url:'/overclass/reply/'+rno,
 			type:'delete',
@@ -325,6 +326,8 @@ var template = Handlebars.compile(source);
 							cssClass : 'btn-primary', //알러트 버튼 색바꾸기
 							hotkey : 13,
 							action : function(confirm) {
+								//댓글목록갱신
+								replyDisplayPage(dno,1);
 								confirm.close()
 							}
 						} ]
@@ -352,6 +355,65 @@ var template = Handlebars.compile(source);
 				console.log(status);
 			}
 		})//ajax
+	}
+	
+	function writeReply(event,dno){
+		var replyWriteTxt = '#reply_write'+dno;
+		if(event.keyCode == 13){
+			$.ajax({
+				url:"/overclass/reply/",
+				type:'post',
+				headers:{
+					"Content-Type":"application/json",
+					"X-HTTP-Method-Override":"POST"
+				},
+				data:JSON.stringify({
+					dno:dno,
+					content:$(replyWriteTxt).val()
+				}),
+				success:function(result){
+					if(result=='SUCCESS'){
+						BootstrapDialog.show({
+							title : '', //알러트 타이틀 이름
+							message : '댓글이 등록되었습니다.', //알러트 내용
+							buttons : [ { //알러트 버튼 정의
+								id : 'docWriteBt', //알러트 버튼의 아이디
+								icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
+								label : '확인', //알러트 버튼 이름
+								cssClass : 'btn-primary', //알러트 버튼 색바꾸기
+								hotkey : 13,
+								action : function(confirm) {
+									// 댓글목록 갱신
+									replyDisplayPage(dno,1);
+									confirm.close()
+								}
+							} ]
+						})
+					$(replyWriteTxt).val("");
+					}else{
+						BootstrapDialog.show({
+							title : '', //알러트 타이틀 이름
+							message : '댓글등록이 실패했습니다.', //알러트 내용
+							type: BootstrapDialog.TYPE_DANGER,
+							buttons : [ { //알러트 버튼 정의
+								id : 'docWriteBt', //알러트 버튼의 아이디
+								icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
+								label : '확인', //알러트 버튼 이름
+								cssClass : 'btn-danger', //알러트 버튼 색바꾸기
+								hotkey : 13,
+								action : function(confirm) {
+									confirm.close()
+								}
+							} ]
+						})
+					}//esle
+				},
+				error:function(xhr){
+					alert('에러'+xhr.status);
+				}
+			})
+			return false;
+		}
 	}
 
 	/* 	$(".pagination pagination-sm pull-right").on("click", "li a", function(event){

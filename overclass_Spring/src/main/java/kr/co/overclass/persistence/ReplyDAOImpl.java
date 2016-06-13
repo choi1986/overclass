@@ -23,6 +23,10 @@ public class ReplyDAOImpl implements ReplyDAO {
 
 	@Override
 	public void create(ReplyVO vo) throws Exception {
+		logger.info(vo.getRno()+"");
+		logger.info(vo.getDno()+"");
+		logger.info(vo.getReplyer());
+		logger.info(vo.getContent());
 		session.insert("reply.create",vo);
 	}
 
