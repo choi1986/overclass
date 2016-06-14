@@ -88,7 +88,7 @@
 								<div class="form-group">
 									<label class="control-label col-lg-2" for="reply_write">댓글</label>
 									<div class="col-lg-10">
-										<input id="reply_write" type="text" class="form-control" size="18" placeholder="댓글을 입력하세요...">
+										<input id="reply_write${DocumentDTO.dno }" type="text" class="form-control" size="18" placeholder="댓글을 입력하세요..." onkeydown="return writeReply(event,${DocumentDTO.dno})">
 									</div>
 								</div>
 								
@@ -125,8 +125,7 @@
                         
                         
                         
-                     </div>
-								
+                     </div>	
 							</form>
 						</div>
 					</div>
@@ -363,8 +362,8 @@ var template = Handlebars.compile(source);
 	
 	function writeReply(event,dno){
 		var replyWriteTxt = '#reply_write'+dno;
-		if($(replyWriteTxt).length != 0){
-			if(event.keyCode == 13){
+		if(event.keyCode == 13){
+			if($(replyWriteTxt).val() != '') { 
 				$.ajax({
 					url:"/overclass/reply/",
 					type:'post',
@@ -386,7 +385,6 @@ var template = Handlebars.compile(source);
 									icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
 									label : '확인', //알러트 버튼 이름
 									cssClass : 'btn-primary', //알러트 버튼 색바꾸기
-									hotkey : 13,
 									action : function(confirm) {
 										// 댓글목록 갱신
 										replyDisplayPage(dno,1);
@@ -411,14 +409,14 @@ var template = Handlebars.compile(source);
 									}
 								} ]
 							})
-						}//esle
+						}//else
 					},
 					error:function(xhr){
 						alert('에러'+xhr.status);
 					}
 				})
-				return false;
-			} // keycode if
-		}// length if
+			}// != if
+			return false;
+		} // keycode if
 	}
 </script>

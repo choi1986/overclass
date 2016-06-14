@@ -372,10 +372,12 @@
 		      var divNum = this.firstChild.nextSibling.firstChild.nodeValue;
 		      var divtemp = '#reply_div'+divNum;
 		      var divtemp2 = '#reply_icon'+divNum+'_2'
+		      var divtemp3 = '#reply_div_page_'+divNum
 		      
 		      //var div = $("#reply_div")
 		      var div = $(divtemp);
 		      var div2 = $(divtemp2);
+		      var div3 = $(divtemp3);
 		      div.slideToggle("slow")
 		      // 열고
 		      if(div2.attr("class") == "fa fa-chevron-up"){
@@ -384,6 +386,7 @@
 		      } else {
 		         //닫고
 		         div2.attr("class","fa fa-chevron-up")
+				div3.attr("style","display: none;")
 		      }
 		   })
 		   // 좋아요클릭
