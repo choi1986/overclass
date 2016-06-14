@@ -354,62 +354,61 @@ var template = Handlebars.compile(source);
 	
 	function writeReply(event,dno){
 		var replyWriteTxt = '#reply_write'+dno;
-		if($(replyWriteTxt).length != 0){
 			if(event.keyCode == 13){
-				$.ajax({
-					url:"/overclass/reply/",
-					type:'post',
-					headers:{
-						"Content-Type":"application/json",
-						"X-HTTP-Method-Override":"POST"
-					},
-					data:JSON.stringify({
-						dno:dno,
-						content:$(replyWriteTxt).val()
-					}),
-					success:function(result){
-						if(result=='SUCCESS'){
-							BootstrapDialog.show({
-								title : '', //알러트 타이틀 이름
-								message : '댓글이 등록되었습니다.', //알러트 내용
-								buttons : [ { //알러트 버튼 정의
-									id : 'docWriteBt', //알러트 버튼의 아이디
-									icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
-									label : '확인', //알러트 버튼 이름
-									cssClass : 'btn-primary', //알러트 버튼 색바꾸기
-									hotkey : 13,
-									action : function(confirm) {
-										// 댓글목록 갱신
-										replyDisplayPage(dno,1);
-										confirm.close()
-									}
-								} ]
-							})
-						$(replyWriteTxt).val("");
-						}else{
-							BootstrapDialog.show({
-								title : '', //알러트 타이틀 이름
-								message : '댓글등록이 실패했습니다.', //알러트 내용
-								type: BootstrapDialog.TYPE_DANGER,
-								buttons : [ { //알러트 버튼 정의
-									id : 'docWriteBt', //알러트 버튼의 아이디
-									icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
-									label : '확인', //알러트 버튼 이름
-									cssClass : 'btn-danger', //알러트 버튼 색바꾸기
-									hotkey : 13,
-									action : function(confirm) {
-										confirm.close()
-									}
-								} ]
-							})
-						}//esle
-					},
-					error:function(xhr){
-						alert('에러'+xhr.status);
-					}
-				})
+				if($(replyWriteTxt).val() != '') { 
+					$.ajax({
+						url:"/overclass/reply/",
+						type:'post',
+						headers:{
+							"Content-Type":"application/json",
+							"X-HTTP-Method-Override":"POST"
+						},
+						data:JSON.stringify({
+							dno:dno,
+							content:$(replyWriteTxt).val()
+						}),
+						success:function(result){
+							if(result=='SUCCESS'){
+								BootstrapDialog.show({
+									title : '', //알러트 타이틀 이름
+									message : '댓글이 등록되었습니다.', //알러트 내용
+									buttons : [ { //알러트 버튼 정의
+										id : 'docWriteBt', //알러트 버튼의 아이디
+										icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
+										label : '확인', //알러트 버튼 이름
+										cssClass : 'btn-primary', //알러트 버튼 색바꾸기
+										action : function(confirm) {
+											// 댓글목록 갱신
+											replyDisplayPage(dno,1);
+											confirm.close()
+										}
+									} ]
+								})
+							$(replyWriteTxt).val("");
+							}else{
+								BootstrapDialog.show({
+									title : '', //알러트 타이틀 이름
+									message : '댓글등록이 실패했습니다.', //알러트 내용
+									type: BootstrapDialog.TYPE_DANGER,
+									buttons : [ { //알러트 버튼 정의
+										id : 'docWriteBt', //알러트 버튼의 아이디
+										icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
+										label : '확인', //알러트 버튼 이름
+										cssClass : 'btn-danger', //알러트 버튼 색바꾸기
+										hotkey : 13,
+										action : function(confirm) {
+											confirm.close()
+										}
+									} ]
+								})
+							}//else
+						},
+						error:function(xhr){
+							alert('에러'+xhr.status);
+						}
+					})
+				}// != if
 				return false;
 			} // keycode if
-		}// length if
 	}
 </script>
