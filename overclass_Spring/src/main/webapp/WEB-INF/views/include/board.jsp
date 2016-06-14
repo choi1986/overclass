@@ -456,11 +456,11 @@ var template = Handlebars.compile(source);
 											var divtemp2 = '#reply_icon'+dno+'_2'
 											 var div = $(divtemp);
 										      var div2 = $(divtemp2);
+										   // 댓글목록 갱신
+												replyDisplayPage(dno,1);
 										    if(div2.attr("class") == "fa fa-chevron-up"){
-										    	div.slideToggle("slow")
-											     div2.attr("class","fa fa-chevron-down")
-											  // 댓글목록 갱신
-													replyDisplayPage(dno,1);
+										    	div.slideToggle("slow");
+											     div2.attr("class","fa fa-chevron-down");
 											} 
 											confirm.close();
 										}
