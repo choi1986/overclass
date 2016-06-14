@@ -43,7 +43,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 	    	    }	    	
 	    	}	    	
 	    	
-	    	response.sendRedirect("/member/loginForm2");
+	    	response.sendRedirect("/overclass");
 	    	//로그인하지 않았을때 로그인페이지로 이동
 	    	
 	    	return false;//컨트롤러를 거치지 않음!!
