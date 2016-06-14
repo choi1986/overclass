@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="amdin">
+	<insert id="ban">
+		insert into oc_ban (ban_id, ban_content) 
+		values(#{ban_id}, #{ban_content})
+	</insert>
+		
+		
+		
+	<select id="">
+	
+	</select>
+</mapper>

@@ -13,12 +13,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import kr.co.overclass.domain.Criteria;
 import kr.co.overclass.domain.PageMaker;
 import kr.co.overclass.dto.DocumentDTO;
 
-@Controller
+@RestController
 @RequestMapping("/admin")
 public class AdminController {
 	private static final Logger logger
