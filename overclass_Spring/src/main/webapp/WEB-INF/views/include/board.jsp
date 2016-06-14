@@ -20,7 +20,7 @@
 									<li><a href="#" onclick="delDoc(${DocumentDTO.dno })" style="color: black;" class="fa fa-bitbucket"> 게시글 삭제</a></li>
 								</c:if>
 								
-								<li><a href="#" onclick="reportDoc(${DocumentDTO.dno },${DocumentDTO.writer },${DocumentDTO.content },${DocumentDTO.tag },${DocumentDTO.image })" style="color: red;" class="fa fa-exclamation-circle"> 게시글 신고하기</a></li>
+								<li><a href="#" onclick="reportDoc()" style="color: red;" class="fa fa-exclamation-circle"> 게시글 신고하기</a></li>
 							</ul>
 						</div>
 					</div>
@@ -342,7 +342,7 @@ var template = Handlebars.compile(source);
 					+ "'> >> </a></li>";
 		}
 		
-		$(reply_page).attr("style","display: show;")
+		$(reply_page).attr("style","display: show;");
 		$(reply_page).html(pageStr);
 	}
 	
@@ -479,7 +479,7 @@ var template = Handlebars.compile(source);
 										cssClass : 'btn-danger', //알러트 버튼 색바꾸기
 										hotkey : 13,
 										action : function(confirm) {
-											confirm.close()
+											confirm.close();
 										}
 									} ]
 								})
