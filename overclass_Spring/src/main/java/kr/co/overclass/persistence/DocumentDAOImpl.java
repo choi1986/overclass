@@ -50,9 +50,4 @@ public class DocumentDAOImpl implements DocumentDAO{
 	public int myFeed_count(String user_id) throws Exception { //마이피드 게시글 개수
 		return session.selectOne("document.mainFeed_count", user_id);
 	}
-	
-	@Override
-	public void updateUser(UserVO user) throws Exception {
-		session.update("user.updateUser", user);
-	}
 }

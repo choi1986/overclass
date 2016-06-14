@@ -1,17 +1,7 @@
 <%@page import="java.util.List"%>
-<%-- <%@page import="oc.model.beans.ContentDTO2"%>
-<%@page import="oc.model.beans.TmpinfoDTO"%>
-<%@page import="oc.model.beans.MemberDTO"%> --%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%-- <%
-	MemberDTO user = (MemberDTO) session.getAttribute("user");
-	TmpinfoDTO tmpinfo = (TmpinfoDTO) session.getAttribute("tmpinfo");
-	List<ContentDTO2> list = (List<ContentDTO2>) request.getAttribute("list");
-	int msg_num = (int) request.getAttribute("msg_num");
-	int f_req_num = (int) request.getAttribute("f_req_num");
-%> --%>
 
 <!-- 헤더 -->
 <%@include file="../include/header.jsp"%>

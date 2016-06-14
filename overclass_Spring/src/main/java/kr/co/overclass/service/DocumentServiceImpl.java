@@ -53,9 +53,4 @@ public class DocumentServiceImpl implements DocumentService {
 	public int myFeed_count(String user_id) throws Exception {
 		return dao.myFeed_count(user_id);
 	}
-	
-	@Override
-	public void updateUser(UserVO user) throws Exception {
-		dao.updateUser(user);
-	}
 }

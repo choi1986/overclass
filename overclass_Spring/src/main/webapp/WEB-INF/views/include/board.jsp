@@ -14,8 +14,8 @@
 								<i class="fa fa-align-justify"></i> 
 							</a>
 							<ul class="dropdown-menu" role="menu">
-								<c:if test="${DocumentDTO.writer == user}">
-									<li><a href="#" style="color: black;" class="fa fa-bitbucket"> 게시글 삭제</a></li>
+								<c:if test="${DocumentDTO.writer == user.user_id}">
+									<li><a href="/overclass/main/removeDoc" style="color: black;" class="fa fa-bitbucket"> 게시글 삭제</a></li>
 								</c:if>
 								
 								<li><a href="#" style="color: red;" class="fa fa-exclamation-circle"> 게시글 신고하기</a></li>
@@ -66,19 +66,10 @@
                         <div class="form-group">
                            <label class="control-label col-lg-2" for="content">태그</label>
                            <div class="col-lg-9">
-                              <%-- <%
-                                 if (list.get(i).getTag() != null) {
-                                       String tag[] = list.get(i).getTag().split(",");
-                                       for (int j = 0; j < tag.length; j++) {
-                              %> --%>
                               <c:if test="${DocumentDTO.tag != null }">
                               <c:set var="tags" value="${fn:split(DocumentDTO.tag,',' )}"/>
                               <c:forEach items="${tags }" var="tag">
-                              <button class="btn btn-info">${tag}<%-- <%=tag[j]%> --%></button>
-                           <%--    <%
-                                 } // for j 끝
-                                    } // if끝
-                              %> --%>
+                              <button class="btn btn-info">${tag}</button>
                               </c:forEach>
                               </c:if>
                            </div>

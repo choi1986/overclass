@@ -272,8 +272,7 @@
 										<div class="activity-body act-in">
 											<span class="arrow"></span>
 											<div class="text">
-												<a
-													href="friendfeed.do?action=friendfeed&friend=<%-- <%=friend_list.get(i).getUser_id()%> --%>"
+												<a href="friendfeed.do?action=friendfeed&friend=<%-- <%=friend_list.get(i).getUser_id()%> --%>"
 													class="activity-img"><img class="avatar"
 													src="<%-- <%=friend_list.get(i).getId_img_path()%> --%>" alt="">
 												</a>
