@@ -296,9 +296,13 @@
                                             <div class="col-sm-4">                               
                                                 <select class="form-control" id="user_hobby1" name="user_hobby1">
                                                   <option>-- 선택 --</option>
-                                                  <option>음악 감상</option>
+                                                  <option>스포츠</option>
                                                   <option>독서</option>
-                                                  <option>수정예정</option>
+                                                  <option>음악</option>
+                                                  <option>쇼핑</option>
+                                                  <option>게임</option>
+                                                  <option>여행</option>
+                                                  <option>요리</option>
                                                 </select>  
                                             </div>
                                           </div>
@@ -308,9 +312,13 @@
                                             <div class="col-sm-4">                               
                                                 <select class="form-control" id="user_hobby2" name="user_hobby2">
                                                   <option>-- 선택 --</option>
-                                                  <option>영화 감상</option>
+                                                  <option>스포츠</option>
+                                                  <option>독서</option>
+                                                  <option>음악</option>
+                                                  <option>쇼핑</option>
+                                                  <option>게임</option>
                                                   <option>여행</option>
-                                                  <option>수정예정</option>
+                                                  <option>요리</option>
                                                 </select>  
                                             </div>
                                           </div>
@@ -325,7 +333,7 @@
                                                 	<option>나의 별명은?</option>  
                                                 	<option>나의 출신학교는?</option>  
                                                 	<option>부모님의 성함은?</option>  
-                                                	<option>보물제1호</option>  
+                                                	<option>보물 제1호</option>  
                                                 </select>  
                                             </div>
                                           </div>  
