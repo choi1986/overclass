@@ -123,8 +123,16 @@
 			$("#searchIDForm").show();
 			$("#searchPwdForm").show();
 		})
+		$("#searchID_post").click(function() {
+			//
+		})
+		$("#searchPwd_post").click(function() {
+			//
+		})
 		$("#back").click(function() {
 			$("#joinForm").hide(); //회원가입폼 감춤
+			$("#searchIDForm").hide(); //아이디 찾기 폼 감춤
+			$("#searchPwdForm").hide(); //비밀번호 찾기 폼 감춤
 			$("#panel").show();
 		})
 		var email_op = $("email_op").val()
@@ -186,7 +194,7 @@
             </div>
             <label class="checkbox">
                 <input type="checkbox" name="useCookie"> 아이디 저장
-                <span class="pull-right"> <a id="searchID" href="javascript:document.test.submit()"> 문제가있나요?</a></span><!--  <a href="#"> -->
+                <span class="pull-right"> <a id="searchID" href="javascript:document.test.submit()">문제가 있나요?</a></span><!--  <a href="#"> -->
             </label>
             
             <div id="change-transitions" class="row">
@@ -422,8 +430,7 @@
                                           <div class="col-sm-offset-2 col-sm-10">
                                        		<div class="col-sm-3"></div>
                                               <div id="change-transitions" class="row">
-											     <button type="summit" data-value="rotateInDownLeft" class="btn btn-primary btn-lg" id="join_join">제출</button>
-        		    						<button type="button" data-value="fadeInDown" class="btn btn-danger btn-lg" id="back">취소</button>
+											     <button type="summit" data-value="rotateInDownLeft" class="btn btn-primary btn-lg" id="searchID_post">제출</button>
 										      </div>
                                           </div>
                                       </div>
@@ -495,7 +502,7 @@
                                           <div class="col-sm-offset-2 col-sm-10">
                                        		<div class="col-sm-3"></div>
                                               <div id="change-transitions" class="row">
-											     <button type="summit" data-value="rotateInDownLeft" class="btn btn-primary btn-lg" id="join_join">제출</button>
+											     <button type="summit" data-value="rotateInDownLeft" class="btn btn-primary btn-lg" id="searchPwd_post">제출</button>
         		    						<button type="button" data-value="fadeInDown" class="btn btn-danger btn-lg" id="back">취소</button>
 										      </div>
                                           </div>
