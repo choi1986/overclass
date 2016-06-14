@@ -13,6 +13,16 @@
 		where dno = #{dno}
 	</delete>
 	
+	<delete id="reply_delete">
+		delete from oc_reply
+		where dno = #{dno}
+	</delete>
+	
+	<select id="reply_count" resultType="int">
+		select count(*) cnt from oc_reply
+		where dno = #{dno}
+	</select>		
+	
 	<!-- 메인피드 게시글 목록 -->
 	<select id="mainFeed_list" resultType="document_dto">
 			select dno, writer, content, tag, writedate, image, goodcnt, replycnt, user_image

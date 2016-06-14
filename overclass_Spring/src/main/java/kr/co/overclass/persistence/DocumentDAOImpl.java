@@ -26,7 +26,13 @@ public class DocumentDAOImpl implements DocumentDAO{
 	
 	@Override
 	public void delete(int dno) throws Exception { //특정 게시글 삭제
-		session.delete("document.delete", dno);
+		int t = session.selectOne("reply_count",dno);
+		if( t != 0) {
+			session.delete("document.reply_delete",dno);
+			session.delete("document.delete", dno);
+		} else {
+			session.delete("document.delete", dno);
+		}
 	}
 
 	@Override

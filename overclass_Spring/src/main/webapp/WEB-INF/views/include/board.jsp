@@ -15,7 +15,7 @@
 							</a>
 							<ul class="dropdown-menu" role="menu">
 								<c:if test="${DocumentDTO.writer == user.user_id}">
-									<li><a href="/overclass/main/removeDoc" style="color: black;" class="fa fa-bitbucket"> 게시글 삭제</a></li>
+									<li><a href="/overclass/main/removeDoc?dno=${DocumentDTO.dno }" style="color: black;" class="fa fa-bitbucket"> 게시글 삭제</a></li>
 								</c:if>
 								
 								<li><a href="#" style="color: red;" class="fa fa-exclamation-circle"> 게시글 신고하기</a></li>

@@ -11,12 +11,16 @@ import kr.co.overclass.domain.DocumentVO;
 import kr.co.overclass.domain.UserVO;
 import kr.co.overclass.dto.DocumentDTO;
 import kr.co.overclass.persistence.DocumentDAO;
+import kr.co.overclass.persistence.ReplyDAO;
 
 @Service
 public class DocumentServiceImpl implements DocumentService {
 	
 	@Inject
 	private DocumentDAO dao;
+	
+	@Inject
+	private ReplyDAO reply_dao;
 	
 	//±Û¾²±â
 	@Override
