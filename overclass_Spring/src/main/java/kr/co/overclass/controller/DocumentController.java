@@ -102,7 +102,7 @@ public class DocumentController {
 		return savedName;
 	}
 	
-	//특정 게시글글 삭제
+	//메인피드 글 삭제
 	@RequestMapping(value="/removeDoc",method=RequestMethod.GET)
 	public String delete(int dno, RedirectAttributes attr) throws Exception {
 		logger.info("게시물 삭제...["+ dno +"]");
@@ -112,7 +112,17 @@ public class DocumentController {
 		return "redirect:/main";
 	}
 	
-	//메인피드 게시글 조회
+	//메인피드 글 삭제
+	@RequestMapping(value="/myFeed/removeDoc",method=RequestMethod.GET)
+	public String mydelete(int dno, RedirectAttributes attr) throws Exception {
+		logger.info("게시물 삭제...["+ dno +"]");
+		service.delete(dno);
+		attr.addFlashAttribute("msg", "Remove_SUCCESS");
+		
+		return "redirect:/main/myFeed";
+	}
+	
+	//메인피드 글 조회
 	@RequestMapping(value="",method=RequestMethod.GET)
 	public String mainFeed_page(Criteria cri, Model model, HttpServletRequest request)throws Exception{
 		String user_id = "test1";
@@ -159,6 +169,7 @@ public class DocumentController {
 		return "document/mainForm";
 	}
 	
+	//마이피드 글조회
 	@RequestMapping(value="/myFeed",method=RequestMethod.GET)
 	public String myFeed(Criteria cri, Model model, HttpServletRequest request) throws Exception{
 		String user_id = "test1";
@@ -198,6 +209,7 @@ public class DocumentController {
 		return "document/myFeed";
 	}
 	
+	//마이피드 페이징
 	@RequestMapping(value="/myFeed_Page",method=RequestMethod.GET)
 	public String myFeed_page(int page, Criteria cri, Model model, HttpServletRequest request)throws Exception {
 		String user_id = "test1";
