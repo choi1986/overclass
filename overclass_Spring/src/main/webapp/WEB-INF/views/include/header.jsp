@@ -22,8 +22,6 @@
 	<link href="/overclass/resources/css/style-responsive.css" rel="stylesheet">
 	<!-- 애니메이션 -->
 	<link href="/overclass/resources/css/animate.css" type="text/css" rel="stylesheet">
-	<!-- LightBox 사진 다이얼로그 -->
-	<link href="/overclass/resources/css/bootstrap-lightbox.css" type="text/css" rel="stylesheet">
 <!-- CSS끝 -->
 
 <!-- JS -->
@@ -44,8 +42,6 @@
 	<script src="/overclass/resources/js/jquery.cookie.js"></script>
 	<!-- handlebars (댓글) -->
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
-	<!-- LightBox 사진 다이얼로그 -->
-	<script src="/overclass/resources/js/bootstrap-lightbox.js"></script>
 <!-- JS끝 -->
 </head>
 <body>

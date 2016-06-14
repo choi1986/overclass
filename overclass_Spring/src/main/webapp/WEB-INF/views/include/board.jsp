@@ -52,7 +52,7 @@
 										<div class="filebox col-lg-10">
 											<div class="col-lg-12" id="photo_div">
 											<c:if test="${DocumentDTO.image != '' }">
-											<a href="${DocumentDTO.image }" data-lightbox="image-1" data-title="사진">
+											<a href="${DocumentDTO.image }" data-lightbox="image-${DocmentDTO.dno }" data-title="사진">
 												<img src="${DocumentDTO.image }" width="500px" height="350px">
 											</a>
 											 </c:if>
