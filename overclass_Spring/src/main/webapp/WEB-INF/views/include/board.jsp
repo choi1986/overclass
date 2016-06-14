@@ -46,7 +46,21 @@
 									</div>
 								</div>
 
-								<!-- 좋아요 -->
+									<div class="form-group">
+										<div class="control-label col-lg-2">
+										</div>
+										<div class="filebox col-lg-10">
+											<div class="col-lg-12" id="photo_div">
+											<a href="/overclass/resources/img/imgtest.jpg" data-lightbox="image-1" data-title="사진">
+												<img src="/overclass/resources/img/imgtest.jpg" width="500px" height="350px">
+											</a>
+											</div>
+										</div>
+									</div>
+									
+									
+
+									<!-- 좋아요 -->
                         <div class="form-group">
                            <div class="goodclass">
                               <div style="display: none;">${DocumentDTO.dno }</div>
@@ -92,18 +106,6 @@
 								</div><br>
                         <!-- 댓글 -->
                         <div id="reply_div${DocumentDTO.dno }" style="display: none;">
-                        <%-- <c:forEach items="list" var="reply">
-                           <div class="act-time">
-                              <div class="activity-body act-in">
-                                 <div class="text">
-                                    <a href="#" class="activity-img"><img class="avatar" src="${reply.user_image }"></a>
-                                    <p class="attribution">
-                                       <a href="#" style="color: blue;">${reply.replyer }</a>
-                                    <p>${reply.content }</p>
-                                 </div>
-                              </div>
-                           </div>
-                        </c:forEach> --%>
                         </div>
                         
                         <div class="text-center">
@@ -113,11 +115,7 @@
                         	
                         	</ul>
                         </div>
-                        
-                        
-                        
                      </div>
-								
 							</form>
 						</div>
 					</div>
@@ -180,6 +178,8 @@
 
 
 <script>
+
+//글삭제
 function delDoc(dno) {
 	BootstrapDialog.show({
 		title: '', //알러트 타이틀 이름

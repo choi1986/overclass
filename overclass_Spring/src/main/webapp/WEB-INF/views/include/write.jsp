@@ -71,7 +71,6 @@
 					<!-- 파일 -->
 					<div class="form-group">
 						<div class="filebox control-label col-lg-2">
-						<!-- <label class="control-label col-lg-2" for="content">사진올리기</label> -->
 							<label for="file" class="btn btn-primary"><span class="fa fa-camera-retro" style="color: #007aff;"></span> 사진올리기</label>
 							<input type="file" id="file" name="file" accept="image/gif, image/jpeg, image/png">
 						</div>

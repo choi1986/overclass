@@ -45,7 +45,8 @@
 	</div>
 </section>
 
-
+<!-- 라이트박스 스크립트 -->
+<script src="/overclass/resources/js/lightbox.js"></script>
 </body>
 <script type="text/javascript">
 

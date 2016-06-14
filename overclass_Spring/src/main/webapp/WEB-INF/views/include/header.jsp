@@ -10,6 +10,8 @@
 	<!-- 부트스트랩 -->
 	<link href="/overclass/resources/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/overclass/resources/css/bootstrap-theme.css" rel="stylesheet">
+	<!-- 라이트박스 -->
+	<link rel="stylesheet" href="/overclass/resources/css/lightbox.css">
 	<!-- 부트스트랩모달 -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.9/css/bootstrap-dialog.min.css" rel="stylesheet" type="text/css">
 	<!-- 아이콘 -->
@@ -20,6 +22,8 @@
 	<link href="/overclass/resources/css/style-responsive.css" rel="stylesheet">
 	<!-- 애니메이션 -->
 	<link href="/overclass/resources/css/animate.css" type="text/css" rel="stylesheet">
+	<!-- LightBox 사진 다이얼로그 -->
+	<link href="/overclass/resources/css/bootstrap-lightbox.css" type="text/css" rel="stylesheet">
 <!-- CSS끝 -->
 
 <!-- JS -->
@@ -38,8 +42,10 @@
 	<!-- 애니메이션 -->
 	<script src="/overclass/resources/js/animation.js"></script>
 	<script src="/overclass/resources/js/jquery.cookie.js"></script>
-	 <!-- handlebars (댓글) -->
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+	<!-- handlebars (댓글) -->
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+	<!-- LightBox 사진 다이얼로그 -->
+	<script src="/overclass/resources/js/bootstrap-lightbox.js"></script>
 <!-- JS끝 -->
 </head>
 <body>
