@@ -98,3 +98,6 @@ create table oc_msg(
 	writedate date default sysdate
 );
 
+alter table oc_user add column sessionkey varchar2(50) not null default 'none';
+alter table oc_user add column sessionlimit timestamp;
+
