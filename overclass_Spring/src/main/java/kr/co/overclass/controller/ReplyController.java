@@ -61,12 +61,10 @@ public class ReplyController {
 	}
 	
 	@RequestMapping(value="/", method=RequestMethod.POST)
-	public ResponseEntity<String> replyWrite(@RequestBody ReplyVO vo, UserVO uvo) {
+	public ResponseEntity<String> replyWrite(@RequestBody ReplyVO vo) {
 		
 		ResponseEntity<String> entity = null;
 		try {
-			//vo.setReplyer(uvo.getUser_id());
-			vo.setReplyer("test1");
 			vo.setRno(0);
 			service.addReply(vo);
 			logger.info("댓글등록자 : "+vo.getReplyer());
@@ -80,13 +78,13 @@ public class ReplyController {
 	}
 	
 	@RequestMapping(value="/{rno}", method=RequestMethod.DELETE)
-	public ResponseEntity<String> replyRemove(@PathVariable("rno") int rno, UserVO vo) {
+	public ResponseEntity<String> replyRemove(@PathVariable("rno") int rno, String user_id) {
 		
 		ResponseEntity<String> entity = null;
 		logger.info("삭제요청된 댓글번호 : "+rno);
-		logger.info("로그인된 유저아이디 : "+vo.getUser_id());
+		logger.info("로그인된 유저아이디 : "+user_id);
 		try {
-			if(service.removeReply(rno,vo.getUser_id())){
+			if(service.removeReply(rno,user_id)){
 				entity = new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
 			}else {
 				entity = new ResponseEntity<String>("FAIL",HttpStatus.OK);

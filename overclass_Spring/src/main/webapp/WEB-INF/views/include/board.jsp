@@ -1,7 +1,9 @@
+<%@page import="kr.co.overclass.domain.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<% UserVO user = (UserVO)session.getAttribute("login"); %>
 <c:forEach items="${list }" var="DocumentDTO">
 <div id="main_Board">
 	<div class="row">
@@ -321,6 +323,13 @@ var template = Handlebars.compile(source);
 		$.ajax({
 			url:'/overclass/reply/'+rno,
 			type:'delete',
+			headers:{
+				"Content-Type":"application/json",
+				"X-HTTP-Method-Override":"POST"
+			},
+			data:JSON.stringify({
+				user_id:'<%=user.getUser_id()%>'
+			}),
 			success:function(result){
 				if(result=='SUCCESS'){
 					// 성공모달
@@ -378,7 +387,8 @@ var template = Handlebars.compile(source);
 						},
 						data:JSON.stringify({
 							dno:dno,
-							content:$(replyWriteTxt).val()
+							content:$(replyWriteTxt).val(),
+							replyer:'<%=user.getUser_id()%>'
 						}),
 						success:function(result){
 							if(result=='SUCCESS'){
