@@ -47,6 +47,13 @@
 
 <!-- 라이트박스 스크립트 -->
 <script src="/overclass/resources/js/lightbox.js"></script>
+<script>
+lightbox.option({
+    'disableScrolling' : true,
+    'showImageNumberLabel' : false,
+    'fadeDuration' : 700
+})
+</script>
 </body>
 <script type="text/javascript">
 

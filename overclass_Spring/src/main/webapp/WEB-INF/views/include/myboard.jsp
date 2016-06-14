@@ -45,8 +45,25 @@
 										</div>
 									</div>
 								</div>
+									
+									<!-- 사진 -->
+									<div class="form-group">
+										<div class="control-label col-lg-2">
+										</div>
+										<div class="filebox col-lg-10">
+											<div class="col-lg-12" id="photo_div">
+											<c:if test="${DocumentDTO.image != '' }">
+											<a href="${DocumentDTO.image }" data-lightbox="image-${DocmentDTO.dno }" data-title="사진">
+												<img src="${DocumentDTO.image }" width="500px" height="350px">
+											</a>
+											 </c:if>
+											</div>
+										</div>
+									</div>
+									
+									
 
-								<!-- 좋아요 -->
+									<!-- 좋아요 -->
                         <div class="form-group">
                            <div class="goodclass">
                               <div style="display: none;">${DocumentDTO.dno }</div>
@@ -66,19 +83,10 @@
                         <div class="form-group">
                            <label class="control-label col-lg-2" for="content">태그</label>
                            <div class="col-lg-9">
-                              <%-- <%
-                                 if (list.get(i).getTag() != null) {
-                                       String tag[] = list.get(i).getTag().split(",");
-                                       for (int j = 0; j < tag.length; j++) {
-                              %> --%>
                               <c:if test="${DocumentDTO.tag != null }">
                               <c:set var="tags" value="${fn:split(DocumentDTO.tag,',' )}"/>
                               <c:forEach items="${tags }" var="tag">
-                              <button class="btn btn-info">${tag}<%-- <%=tag[j]%> --%></button>
-                           <%--    <%
-                                 } // for j 끝
-                                    } // if끝
-                              %> --%>
+                              <button class="btn btn-info">${tag}</button>
                               </c:forEach>
                               </c:if>
                            </div>
@@ -101,18 +109,6 @@
 								</div><br>
                         <!-- 댓글 -->
                         <div id="reply_div${DocumentDTO.dno }" style="display: none;">
-                        <%-- <c:forEach items="list" var="reply">
-                           <div class="act-time">
-                              <div class="activity-body act-in">
-                                 <div class="text">
-                                    <a href="#" class="activity-img"><img class="avatar" src="${reply.user_image }"></a>
-                                    <p class="attribution">
-                                       <a href="#" style="color: blue;">${reply.replyer }</a>
-                                    <p>${reply.content }</p>
-                                 </div>
-                              </div>
-                           </div>
-                        </c:forEach> --%>
                         </div>
                         
                         <div class="text-center">
@@ -122,10 +118,7 @@
                         	
                         	</ul>
                         </div>
-                        
-                        
-                        
-                     </div>	
+                     </div>
 							</form>
 						</div>
 					</div>
