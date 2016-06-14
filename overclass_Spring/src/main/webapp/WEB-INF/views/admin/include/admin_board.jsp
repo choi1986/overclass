@@ -26,17 +26,17 @@
 							<!-- 타이틀 -->
 							<div class="form-group">
 								<div class="photo col-lg-2" style="text-align: center;">
-									<img alt="avatar" src='<%-- <%=user.getId_img_path()%> --%>' width='70'
+									<img alt="avatar" src='${user.user_image }' width='70'
 										height='70'>
 									<h4></h4>
 									<p>
-										<b><%-- <%=user.getName()%> --%></b>
+										<b>${user.user_name } <i>홍길동</i></b>
 									</p>
 								</div>
 								<div class="col-lg-10">
 									<div class="panel-content"
 										style="width: 100%; height: 100px; overflow: hidden; word-break: break-all;">
-										<%-- <%=list.get(i).getContent()%> --%>
+										${DocumentDTO.content }
 									</div>
 								</div>
 							</div>
@@ -49,7 +49,7 @@
 												String tag[] = list.get(i).getTag().split(",");
 												for (int j = 0; j < tag.length; j++) {
 									%> --%>
-									<button class="btn btn-info">임시태그<%-- <%=tag[j]%> --%></button>
+									<button class="btn btn-info"> <i>태그</i></button>
 									<%-- <%
 										} // for j 끝
 											} // if끝
@@ -61,9 +61,8 @@
 							<div class="form-group">
 								<label class="control-label col-lg-2" for="content">신고사유</label>
 								<div class="col-lg-9">
-									<div class="panel-content"
-										style="width: 100%; height: 100px; overflow: hidden; word-break: break-all;">
-										신고사유~~
+									<div class="panel-content" style="width: 100%; height: 100px; overflow: hidden; word-break: break-all;">
+										${Report.content }
 									</div>
 								</div>
 							</div>

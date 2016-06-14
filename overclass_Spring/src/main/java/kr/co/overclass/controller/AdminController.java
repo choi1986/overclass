@@ -29,19 +29,21 @@ public class AdminController {
 	public String admin(Criteria cri, Model model, HttpServletRequest request)throws Exception{
 		String user_id = "admin";
 		String user_image = "/overclass/resources/img/profile_default.png";
+		String user_name = "°ü¸®ÀÚ";
 		Map<String, Object> map = new HashMap<>();
 		map.put("user_id", user_id);
 		map.put("user_image", user_image);
+		map.put("user_name", user_name);
+		model.addAttribute("user",map);
 		//String user_id = (String) request.getSession().getAttribute("user_id");
 		//String user_image = (String) request.getSession().getAttribute("user_id");
 		/*List<DocumentDTO> list = service.mainFeed_list(cri, user_id);
-		model.addAttribute("user",map);
 		model.addAttribute("list", list);
 		PageMaker maker = new PageMaker();
 		maker.setCri(cri);
 		maker.setTotalCount(service.mainFeed_count(user_id));*/
 /*		model.addAttribute("pageMaker", maker);*/
 		
-		return "document/mainForm";
+		return "admin/adminFeed";
 	}
 }

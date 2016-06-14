@@ -48,7 +48,7 @@ public class DocumentController {
 		String downloadPath = "/overclass/resources/upload/";
 		
 		//이미지 안올렸을때 처리
-		if(imageName.trim().equals("")){
+		if(imageName.equals("")){
 			service.create(vo);
 		} else {
 			vo.setImage(downloadPath+savedName);
