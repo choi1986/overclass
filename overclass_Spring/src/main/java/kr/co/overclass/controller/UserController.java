@@ -34,7 +34,6 @@ public class UserController {
 	
 	@RequestMapping(value="/dupl", method=RequestMethod.POST) // 로그인 버튼 눌린 후
 	public String duplicate (JoinDTO dto, HttpSession session, Model model) throws Exception { // 로그인 정보 전송
-		System.out.println("컨트롤러 듀플"+dto.getUser_id());
 		UserVO vo = service.searchUser(dto.getUser_id());
 		if (vo!=null) session.setAttribute("joinDuplCk", vo.getUser_id());
 		else  session.setAttribute("joinDuplCk", "");

@@ -1,5 +1,6 @@
 package kr.co.overclass.interceptor;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -41,10 +42,20 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		if (userVO != null){
 			logger.info("로그인 성공!");
 			session.setAttribute(LOGIN, userVO); // 로그인 성공하면 객체를 세션에 저장
+
+			 if(request.getParameter("useCookie") != null){
+				   //체크박스가 체크되었다면
+				 logger.info("로그인상태 유지");
+				 Cookie loginCookie = new Cookie("loginCookie", session.getId());
+				   loginCookie.setPath("/");
+				   loginCookie.setMaxAge(60*60*24*7);//7일간 유효
+				   response.addCookie(loginCookie);
+			   }
+			
 			//response.sendRedirect("/"); // 메인 화면으로
 			Object dest = session.getAttribute("dest");
 			
-			response.sendRedirect(dest != null ? (String)dest : "/");
+			response.sendRedirect(dest != null ? (String)dest : "/overclass/main");
 		}
 	}
 }
