@@ -75,7 +75,7 @@ public class DocumentController {
 		String savedName = uploadFile(file.getOriginalFilename(), file.getBytes());
 		logger.info("파일이름: "+imageName);
 		uploadPath = session.getServletContext().getRealPath("/resources/upload");
-		String downloadPath = "/overclass/resources/upload/";
+		String downloadPath = "/overclass/resources/";
 
 		//이미지 안올렸을때 처리
 		if(imageName.trim().equals("")){

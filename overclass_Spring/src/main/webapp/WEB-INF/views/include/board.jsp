@@ -51,9 +51,11 @@
 										</div>
 										<div class="filebox col-lg-10">
 											<div class="col-lg-12" id="photo_div">
-											<a href="/overclass/resources/img/imgtest.jpg" data-lightbox="image-1" data-title="사진">
-												<img src="/overclass/resources/img/imgtest.jpg" width="500px" height="350px">
+											<c:if test="${DocumentDTO.image != '' }">
+											<a href="${DocumentDTO.image }" data-lightbox="image-1" data-title="사진">
+												<img src="${DocumentDTO.image }" width="500px" height="350px">
 											</a>
+											 </c:if>
 											</div>
 										</div>
 									</div>
