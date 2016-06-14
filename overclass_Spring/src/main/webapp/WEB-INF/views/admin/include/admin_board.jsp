@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <div class="row">
 <%-- 	<%
 		for (int i = 0; i < list.size(); i++) {
@@ -7,16 +9,16 @@
 	<div class="col-lg-offset-3 col-lg-5 portlets">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<div class="pull-left">
-					<h4>
-						<i class="fa fa-4x fa-list-alt"></i>
-					</h4>
-				</div>
-				<div class="widget-icons pull-right">
-					<a id="content_repot" class="wclose"><i style="color: red;"
-						class="fa fa-warning" data-toggle="modal" data-target="#repot"></i></a>
-				</div>
-				<div class="clearfix"></div>
+				<div class="pull-right">
+						<div class="btn-group">
+							 <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+								<i class="fa fa-align-justify"></i> 
+							</a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="#" style="color: red;" class="fa fa-exclamation-circle"> 제재하기</a></li>
+							</ul>
+						</div>
+					</div>
 			</div>
 			<div class="panel-body">
 				<div class="padd">
@@ -26,20 +28,38 @@
 							<!-- 타이틀 -->
 							<div class="form-group">
 								<div class="photo col-lg-2" style="text-align: center;">
-									<img alt="avatar" src='<%-- <%=user.getId_img_path()%> --%>' width='70'
+									<img alt="avatar" src='${report.report_image }' width='70'
 										height='70'>
 									<h4></h4>
 									<p>
-										<b><%-- <%=user.getName()%> --%></b>
+										<b>${report.report_id } </b>
 									</p>
 								</div>
 								<div class="col-lg-10">
 									<div class="panel-content"
 										style="width: 100%; height: 100px; overflow: hidden; word-break: break-all;">
-										<%-- <%=list.get(i).getContent()%> --%>
+										${DocumentDTO.content }
 									</div>
 								</div>
 							</div>
+							
+							<!-- 사진 -->
+							<div class="form-group">
+								<div class="control-label col-lg-2">
+								</div>
+								<div class="filebox col-lg-10">
+									<div class="col-lg-12" id="photo_div">
+									<c:if test="${DocumentDTO.image != '' }">
+									<a href="${DocumentDTO.image }" data-lightbox="image-${DocumentDTO.dno }" data-title="사진">
+										<img src="${DocumentDTO.image }" width="500px" height="350px">
+									</a>
+									 </c:if>
+									</div>
+								</div>
+							</div>
+							
+							
+							
 							<!-- 태그 -->
 							<div class="form-group">
 								<label class="control-label col-lg-2" for="content">태그</label>
@@ -49,7 +69,7 @@
 												String tag[] = list.get(i).getTag().split(",");
 												for (int j = 0; j < tag.length; j++) {
 									%> --%>
-									<button class="btn btn-info">임시태그<%-- <%=tag[j]%> --%></button>
+									<button class="btn btn-info"> <i>태그</i></button>
 									<%-- <%
 										} // for j 끝
 											} // if끝
@@ -61,9 +81,8 @@
 							<div class="form-group">
 								<label class="control-label col-lg-2" for="content">신고사유</label>
 								<div class="col-lg-9">
-									<div class="panel-content"
-										style="width: 100%; height: 100px; overflow: hidden; word-break: break-all;">
-										신고사유~~
+									<div class="panel-content" style="width: 100%; height: 100px; overflow: hidden; word-break: break-all;">
+										${Report.content }
 									</div>
 								</div>
 							</div>

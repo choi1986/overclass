@@ -118,12 +118,21 @@
 				}
 			});
 		}) //join click 
-		$("#searchId").click(function() {
+		$("#searchID").click(function() {
 			$("#panel").hide(); //회원가입폼 감춤
 			$("#searchIDForm").show();
+			$("#searchPwdForm").show();
+		})
+		$("#searchID_post").click(function() {
+			//
+		})
+		$("#searchPwd_post").click(function() {
+			//
 		})
 		$("#back").click(function() {
 			$("#joinForm").hide(); //회원가입폼 감춤
+			$("#searchIDForm").hide(); //아이디 찾기 폼 감춤
+			$("#searchPwdForm").hide(); //비밀번호 찾기 폼 감춤
 			$("#panel").show();
 		})
 		var email_op = $("email_op").val()
@@ -185,13 +194,12 @@
             </div>
             <label class="checkbox">
                 <input type="checkbox" name="useCookie"> 아이디 저장
-                <span class="pull-right"> <a href="#"> 문제가있나요?</a></span>
+                <span class="pull-right"> <a id="searchID" href="javascript:document.test.submit()">문제가 있나요?</a></span><!--  <a href="#"> -->
             </label>
             
             <div id="change-transitions" class="row">
 				<button type="submit" data data-value="fadeInLeftBig" class="btn btn-primary btn-lg btn-block">로그인</button>
    		        <button type="button" data-value="fadeInLeftBig" class="btn btn-info btn-lg btn-block" id="join" >가입하기</button>
-   		        <button type="button" data-value="fadeInLeftBig" class="btn btn-info btn-lg btn-block" id="searchID" >아이디 찾기</button>
 			</div>
         </div>
       </form>
@@ -385,7 +393,7 @@
             </div>
 <!-- --------------------------아이디 찾기 페이지---------------------------------------------- -->
     <div id="searchIDForm" style="display: none;">
-              <div class="row" style="margin-top:50px; margin-left: 0px; margin-right: 0px;">
+              <div class="row" style="margin-top:50px; margin-left: 0px;, margin-right: 0px">
                   <div class="col-sm-4">
                   </div>
                   <div class="col-sm-4">
@@ -422,8 +430,7 @@
                                           <div class="col-sm-offset-2 col-sm-10">
                                        		<div class="col-sm-3"></div>
                                               <div id="change-transitions" class="row">
-											     <button type="summit" data-value="rotateInDownLeft" class="btn btn-primary btn-lg" id="join_join">제출</button>
-        		    						<button type="button" data-value="fadeInDown" class="btn btn-danger btn-lg" id="back">취소</button>
+											     <button type="summit" data-value="rotateInDownLeft" class="btn btn-primary btn-lg" id="searchID_post">제출</button>
 										      </div>
                                           </div>
                                       </div>
@@ -435,6 +442,78 @@
               </div>
             </div>
 <!-- --------------------------비밀번호 찾기 페이지---------------------------------------------- -->
+    <div id="searchPwdForm" style="display: none;">
+              <div class="row" style="margin-top:50px; margin-left: 0px;, margin-right: 0px">
+                  <div class="col-sm-4">
+                  </div>
+                  <div class="col-sm-4">
+                      <section class="panel">
+                          <header class="panel-heading">
+                             	비밀번호 찾기
+                          </header>
+                          <div class="panel-body">
+                              <div class="form">
+                                  <form class="form-validate form-horizontal " id="register_form" name="register_form" action="/overclass/searchPwd" method="post">
+                                  
+                                  <div class="form-group ">
+                                          <label for="fullname" class="control-label col-sm-4">아이디<span class="required">*</span></label>
+                                          <div class="col-sm-4">
+                                              <input class=" form-control" id="user_id" name="user_id" type="text" />
+                                          </div>
+                                      </div>
+                                          
+                                           <div class="form-group">
+                                            <label class="control-label col-sm-4">비밀번호찾기 질문<span class="required">*</span></label>
+                                            <div class="col-sm-4">                               
+                                                <select class="form-control" id="user_pwdq" name="user_pwdq">
+                                                	<option>-- 선택 --</option>  
+                                                	<option>나의 고향은?</option>  
+                                                	<option>나의 친한 친구 이름은?</option>  
+                                                	<option>나의 별명은?</option>  
+                                                	<option>나의 출신학교는?</option>  
+                                                	<option>부모님의 성함은?</option>  
+                                                	<option>보물 제1호</option>  
+                                                </select>  
+                                            </div>
+                                          </div>  
+                                          
+                                      <div class="form-group ">
+                                          <label for="birth" class="control-label col-sm-4">비밀번호찾기 답변<span class="required">*</span></label>
+                                          <div class="col-sm-4">
+                                              <input class=" form-control" id="user_pwda" name="user_pwda" type="text" placeholder="ex) 코딩하기" />
+                                          </div>
+                                      </div>
+                                      
+                                      <div class="form-group ">
+                                          <label for="password" class="control-label col-sm-4">변경할 비밀번호 <span class="required">*</span></label>
+                                          <div class="col-sm-4">
+                                              <input class="form-control " id="user_pwd" name="user_pwd" type="password" onkeyup="allowWS(this)"/>
+                                          </div>
+                                      </div>
+                                      
+                                      <div class="form-group ">
+                                          <label for="confirm_password" class="control-label col-sm-4">비밀번호 확인 <span class="required">*</span></label>
+                                          <div class="col-sm-4">
+                                              <input class="form-control " id="user_pwd_confirm" name="user_pwd_confirm" type="password" onkeyup="allowWS(this)"/>
+                                          </div>
+                                      </div>
+                                      
+                                      <div class="form-group">
+                                          <div class="col-sm-offset-2 col-sm-10">
+                                       		<div class="col-sm-3"></div>
+                                              <div id="change-transitions" class="row">
+											     <button type="summit" data-value="rotateInDownLeft" class="btn btn-primary btn-lg" id="searchPwd_post">제출</button>
+        		    						<button type="button" data-value="fadeInDown" class="btn btn-danger btn-lg" id="back">취소</button>
+										      </div>
+                                          </div>
+                                      </div>
+                                  </form>
+                              </div>
+                          </div>
+                      </section>
+                  </div>
+              </div>
+            </div>
     
     <!-- alert정의 -->
     <div class="modal hide fade" id="myModal">
