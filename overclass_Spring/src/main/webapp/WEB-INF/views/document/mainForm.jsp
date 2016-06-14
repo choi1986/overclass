@@ -194,7 +194,7 @@ $(document).ready(function() {
 		BootstrapDialog.show({
     		title: '', //알러트 타이틀 이름
     		message: '이 글을 신고 하시겠습니까?', //알러트 내용
-    		type: BootstrapDialog.TYPE_DANGER,
+    		type: BootstrapDialog.TYPE_DANGER, //타이틀 색바꾸기
     		buttons: [{ //알러트 버튼 정의
     			id: 'btn1', //알러트 버튼의 아이디
     			icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
