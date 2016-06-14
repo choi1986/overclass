@@ -308,7 +308,7 @@
 
 
 </section>
-
+<script src="/overclass/resources/js/lightbox.js"></script>
 </body>
 <script type="text/javascript">
 	/* 	document.onkeydown = cancelkey;

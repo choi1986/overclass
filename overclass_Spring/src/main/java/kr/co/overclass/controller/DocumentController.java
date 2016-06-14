@@ -75,7 +75,7 @@ public class DocumentController {
 		String savedName = uploadFile(file.getOriginalFilename(), file.getBytes());
 		logger.info("파일이름: "+imageName);
 		uploadPath = session.getServletContext().getRealPath("/resources/upload");
-		String downloadPath = "/overclass/resources/";
+		String downloadPath = "/overclass/resources/upload/";
 
 		//이미지 안올렸을때 처리
 		if(imageName.trim().equals("")){
@@ -126,7 +126,7 @@ public class DocumentController {
 	@RequestMapping(value="",method=RequestMethod.GET)
 	public String mainFeed_page(Criteria cri, Model model, HttpServletRequest request)throws Exception{
 		String user_id = "test1";
-		String user_image = "/overclass/resources/img/feed_default.png";
+		String user_image = "/overclass/resources/img/profile_default.png";
 		Map<String, Object> map = new HashMap<>();
 		map.put("user_id", user_id);
 		map.put("user_image", user_image);
@@ -149,7 +149,7 @@ public class DocumentController {
 	@RequestMapping(value="/mainFeed_Page",method=RequestMethod.GET)
 	public String mainFeed_list(int page, Criteria cri, Model model, HttpServletRequest request)throws Exception{
 		String user_id = "test1";
-		String user_image = "/overclass/resources/img/feed_default.png";
+		String user_image = "/overclass/resources/img/profile_default.png";
 		Map<String, Object> map = new HashMap<>();
 		map.put("user_id", user_id);
 		map.put("user_image", user_image);
@@ -173,7 +173,7 @@ public class DocumentController {
 	@RequestMapping(value="/myFeed",method=RequestMethod.GET)
 	public String myFeed(Criteria cri, Model model, HttpServletRequest request) throws Exception{
 		String user_id = "test1";
-		String user_image = "/overclass/resources/img/feed_default.png";
+		String user_image = "/overclass/resources/img/profile_default.png";
 		String birth = "900317";
 		String email = "charminguk2@naver.com";
 		String loc ="경기도";
@@ -213,7 +213,7 @@ public class DocumentController {
 	@RequestMapping(value="/myFeed_Page",method=RequestMethod.GET)
 	public String myFeed_page(int page, Criteria cri, Model model, HttpServletRequest request)throws Exception {
 		String user_id = "test1";
-		String user_image = "/overclass/resources/img/feed_default.png";
+		String user_image = "/overclass/resources/img/profile_default.png";
 		String birth = "900317";
 		String email = "charminguk2@naver.com";
 		String loc ="경기도";
