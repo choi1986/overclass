@@ -15,7 +15,7 @@
 							</a>
 							<ul class="dropdown-menu" role="menu">
 								<c:if test="${DocumentDTO.writer == user.user_id}">
-									<li><a href="/overclass/main/removeDoc?dno=${DocumentDTO.dno }" style="color: black;" class="fa fa-bitbucket"> 게시글 삭제</a></li>
+									<li><a href="#" onclick="delDoc(${DocumentDTO.dno })" style="color: black;" class="fa fa-bitbucket"> 게시글 삭제</a></li>
 								</c:if>
 								
 								<li><a href="#" style="color: red;" class="fa fa-exclamation-circle"> 게시글 신고하기</a></li>
@@ -180,6 +180,28 @@
 
 
 <script>
+function delDoc(dno) {
+	BootstrapDialog.show({
+		title: '', //알러트 타이틀 이름
+		message: '글을 삭제 하시겠습니까?', //알러트 내용
+		type: BootstrapDialog.TYPE_DANGER,
+		buttons: [{ //알러트 버튼 정의
+			icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
+			label: '삭제', //알러트 버튼 이름
+			cssClass: 'btn-danger', //알러트 버튼 색바꾸기
+			hotkey:13,
+			action: function(confirm) {
+				location.href="/overclass/main/removeDoc?dno="+dno;
+				confirm.close()
+			}
+			},{
+				label: '닫기',
+				action: function(cancel){
+					cancel.close();
+					}
+			}]
+	})
+}
 var source = $("#template").html();
 var template = Handlebars.compile(source);
 	var result = '${msg}';
