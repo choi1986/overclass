@@ -12,6 +12,7 @@ public class DocumentDTO {
 	private int goodcnt;
 	private int replycnt;
 	private String user_image;
+	private int good;
 
 	public DocumentDTO() {
 		image = "";
@@ -28,6 +29,7 @@ public class DocumentDTO {
 				", 좋아요개수: "+goodcnt+
 				", 댓글개수: "+replycnt+
 				", 프로필사진: "+user_image+
+				", 굿여부: "+good+
 				"]";
 	}
 
@@ -102,4 +104,13 @@ public class DocumentDTO {
 	public void setUser_image(String user_image) {
 		this.user_image = user_image;
 	}
+
+	public int getGood() {
+		return good;
+	}
+
+	public void setGood(int good) {
+		this.good = good;
+	}
+	
 }
