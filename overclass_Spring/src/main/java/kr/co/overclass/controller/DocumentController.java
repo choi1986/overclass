@@ -1,18 +1,15 @@
 package kr.co.overclass.controller;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.imageio.ImageIO;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.imgscalr.Scalr;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -26,7 +23,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import kr.co.overclass.domain.Criteria;
 import kr.co.overclass.domain.DocumentVO;
 import kr.co.overclass.domain.PageMaker;
-import kr.co.overclass.domain.UserVO;
 import kr.co.overclass.dto.DocumentDTO;
 import kr.co.overclass.service.DocumentService;
 
