@@ -3,22 +3,22 @@
 
 insert into oc_user values('test1','1234','테스트1','test1@test.com','010-1111-5678',
 '서울특별시','스포츠','독서','900101','남','1','인천',
-sysdate,'/img/profile_default.jpg',0,0);
+sysdate,'/overclass/resources/img/profile_default.png',0,0);
 insert into oc_user values('test2','1234','테스트2','test2@test.com','010-5641-2135',
 '인천광역시','음악','요리','950525','여','2','테스트3',
-sysdate,'/img/profile_default.jpg',0,0);
+sysdate,'/overclass/resources/img/profile_default.png',0,0);
 insert into oc_user values('test3','1234','테스트3','test3@test.com','010-9786-4561',
 '경기도','쇼핑','스포츠','930606','남','3','테스터',
-sysdate,'/img/profile_default.jpg',0,0);
+sysdate,'/overclass/resources/img/profile_default.png',0,0);
 insert into oc_user values('test4','1234','테스트4','test4@test.com','010-6425-1632',
 '대구광역시','독서','게임','000229','여','4','뉴욕주립대',
-sysdate,'/img/profile_default.jpg',0,0);
+sysdate,'/overclass/resources/img/profile_default.png',0,0);
 insert into oc_user values('test5','1234','테스트5','test5@test.com','010-1475-6759',
 '광주광역시','게임','여행','911225','남','5','성유리',
-sysdate,'/img/profile_default.jpg',0,0);
+sysdate,'/overclass/resources/img/profile_default.png',0,0);
 insert into oc_user values('admin','admin','나관리','admin@overclass.co.kr','010-7777-7777',
 '제주도','여행','요리','880505','남','6','스프링',
-sysdate,'/img/profile_default.jpg',0,1);
+sysdate,'/overclass/resources/img/profile_default.png',0,1);
 
 
 insert into oc_document (dno,writer,content,tag) values (oc_document_seq.nextval,'test1','첫번째글','등수놀이');

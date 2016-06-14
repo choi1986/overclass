@@ -382,6 +382,9 @@ var template = Handlebars.compile(source);
 										action : function(confirm) {
 											// 댓글목록 갱신
 											replyDisplayPage(dno,1);
+											// 페이지버튼 감추기
+											var divtemp3 = '#reply_div_page_'+dno;
+											$(divtemp3).attr("style","display: none;");
 											confirm.close()
 										}
 									} ]
