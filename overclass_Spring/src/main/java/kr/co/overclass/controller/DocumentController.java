@@ -92,9 +92,13 @@ public class DocumentController {
 	//파일업로드
 	private String uploadFile(String originName, byte[] fileData) throws Exception {
 		UUID uid = UUID.randomUUID();
-		String savedName = uid.toString() + "_" + originName;
-		File target = new File(uploadPath, savedName);
-		FileCopyUtils.copy(fileData, target); //실제 파일 업로드
+		String savedName = "";
+		if(!originName.equals("")){
+			savedName = uid.toString() + "_" + originName;
+			File target = new File(uploadPath, savedName);
+			FileCopyUtils.copy(fileData, target); //실제 파일 업로드
+		} 
+		System.out.println("확인:"+originName); //
 		return savedName;
 	}
 	

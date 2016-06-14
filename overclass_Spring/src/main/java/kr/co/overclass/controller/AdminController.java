@@ -30,11 +30,19 @@ public class AdminController {
 		String user_id = "admin";
 		String user_image = "/overclass/resources/img/profile_default.png";
 		String user_name = "°ü¸®ÀÚ";
+		String report_id = "test1";
+		String report_image = "/overclass/resources/img/juwon.PNG";
 		Map<String, Object> map = new HashMap<>();
 		map.put("user_id", user_id);
 		map.put("user_image", user_image);
 		map.put("user_name", user_name);
+		
+		Map<String, Object> map2 = new HashMap<>();
+		map2.put("report_id", report_id);
+		map2.put("report_image", report_image);
+		
 		model.addAttribute("user",map);
+		model.addAttribute("report",map2);
 		//String user_id = (String) request.getSession().getAttribute("user_id");
 		//String user_image = (String) request.getSession().getAttribute("user_id");
 		/*List<DocumentDTO> list = service.mainFeed_list(cri, user_id);
