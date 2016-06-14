@@ -46,7 +46,7 @@
 							href="#recent-activity"><span class="fa fa-comment-o">&nbsp;&nbsp;신고</span>
 						</a></li>
 						<li class=""><a id="dropdown_3" data-toggle="tab"
-							href="#edit-profile"> <span class="fa fa-users">&nbsp;&nbsp;제제목록</span>
+							href="#edit-profile"> <span class="fa fa-users">&nbsp;&nbsp;제재목록</span>
 						</a></li>
 					</ul>
 				</header>
