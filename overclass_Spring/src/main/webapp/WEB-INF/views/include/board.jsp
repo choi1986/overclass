@@ -216,24 +216,6 @@ var template = Handlebars.compile(source);
     	})
 	}
 
-/* 	function replyDisplay(dno, divno) {
-		var replydiv = '#reply_div' + divno;
-		$.ajax({
-			url : '/overclass/reply/list/' + dno + '/1',
-			type : 'get',
-			success : function(result) {
-				var htmlTxt='';
-				for(var i=0; i<result.list.length; i++){
-					htmlTxt+=template(result.list[i]);
-				}
-				
-				// 페이징추가해야됨.
-				printPaging(list.pageMaker, dno, htmlTxt);
-				//$(replydiv).html(htmlTxt);
-			}
-		});
-	} */
-	
 	var replyPage = 1;
 
 	function replyDisplayPage(dno, replyPage) {
@@ -406,11 +388,4 @@ var template = Handlebars.compile(source);
 			return false;
 		}
 	}
-
-	/* 	$(".pagination pagination-sm pull-right").on("click", "li a", function(event){
-	 event.preventDefault();
-	 replyPage = $(this).attr("href");
-	 var dno = this.previousSibling.firstChild.nodeValue;
-	 replyDisplayPage(dno, replyPage);
-	 }) */
 </script>
