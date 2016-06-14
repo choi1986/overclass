@@ -14,8 +14,8 @@
 								<i class="fa fa-align-justify"></i> 
 							</a>
 							<ul class="dropdown-menu" role="menu">
-								<c:if test="${DocumentDTO.writer == user}">
-									<li><a href="#" style="color: black;" class="fa fa-bitbucket"> 게시글 삭제</a></li>
+								<c:if test="${DocumentDTO.writer == user.user_id}">
+									<li><a href="#" onclick="delDoc(${DocumentDTO.dno })" style="color: black;" class="fa fa-bitbucket"> 게시글 삭제</a></li>
 								</c:if>
 								
 								<li><a href="#" style="color: red;" class="fa fa-exclamation-circle"> 게시글 신고하기</a></li>
@@ -178,9 +178,10 @@
    <div class="activity-body act-in">
       <div class="text">
          <a href="#" class="activity-img"><img class="avatar" src="{{user_image }}"></a>
+		<a href="javascript:deleteModal({{rno}},{{dno}})" style="float: right;"><span class="fa fa-close"></span></a>
          <p class="attribution">
          <a href="#" style="color: blue;">{{replyer }}</a>
-         <p>{{content }}</p><a href="javascript:"><span class="fa fa-close"></span></a>
+         <p>{{content }}</p>
       </div>
    </div>
 </div>
@@ -188,6 +189,28 @@
 
 
 <script>
+function delDoc(dno) {
+	BootstrapDialog.show({
+		title: '', //알러트 타이틀 이름
+		message: '글을 삭제 하시겠습니까?', //알러트 내용
+		type: BootstrapDialog.TYPE_DANGER,
+		buttons: [{ //알러트 버튼 정의
+			icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
+			label: '삭제', //알러트 버튼 이름
+			cssClass: 'btn-danger', //알러트 버튼 색바꾸기
+			hotkey:13,
+			action: function(confirm) {
+				location.href="/overclass/main/myFeed/removeDoc?dno="+dno;
+				confirm.close()
+			}
+			},{
+				label: '닫기',
+				action: function(cancel){
+					cancel.close();
+					}
+			}]
+	})
+}
 var source = $("#template").html();
 var template = Handlebars.compile(source);
 	var result = '${msg}';
@@ -224,24 +247,6 @@ var template = Handlebars.compile(source);
     	})
 	}
 
-/* 	function replyDisplay(dno, divno) {
-		var replydiv = '#reply_div' + divno;
-		$.ajax({
-			url : '/overclass/reply/list/' + dno + '/1',
-			type : 'get',
-			success : function(result) {
-				var htmlTxt='';
-				for(var i=0; i<result.list.length; i++){
-					htmlTxt+=template(result.list[i]);
-				}
-				
-				// 페이징추가해야됨.
-				printPaging(list.pageMaker, dno, htmlTxt);
-				//$(replydiv).html(htmlTxt);
-			}
-		});
-	} */
-	
 	var replyPage = 1;
 
 	function replyDisplayPage(dno, replyPage) {
@@ -284,14 +289,136 @@ var template = Handlebars.compile(source);
 		$(reply_page).html(pageStr);
 	}
 	
-	function deleteReply(){
-		
+	function deleteModal(rno,dno){
+		BootstrapDialog.show({
+			title : '', //알러트 타이틀 이름
+			message : '댓글을 삭제하시겠습니까?', //알러트 내용
+			type: BootstrapDialog.TYPE_DANGER,
+			buttons : [ { //알러트 버튼 정의
+				id : 'docWriteBt', //알러트 버튼의 아이디
+				icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
+				label : '확인', //알러트 버튼 이름
+				cssClass : 'btn-danger', //알러트 버튼 색바꾸기
+				hotkey : 13,
+				action : function(confirm) {
+					deleteReply(rno,dno);
+					confirm.close();
+					
+				}},{
+    				label: '닫기',
+    				action: function(cancel){
+    					cancel.close();
+    					}
+    			}]
+    	})//BootstrapDialog
+	}//deleteReply
+	
+	function deleteReply(rno,dno){
+		$.ajax({
+			url:'/overclass/reply/'+rno,
+			type:'delete',
+			success:function(result){
+				if(result=='SUCCESS'){
+					// 성공모달
+					BootstrapDialog.show({
+						title : '', //알러트 타이틀 이름
+						message : '댓글이 삭제되었습니다.', //알러트 내용
+						buttons : [ { //알러트 버튼 정의
+							id : 'docWriteBt', //알러트 버튼의 아이디
+							icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
+							label : '확인', //알러트 버튼 이름
+							cssClass : 'btn-primary', //알러트 버튼 색바꾸기
+							hotkey : 13,
+							action : function(confirm) {
+								//댓글목록갱신
+								replyDisplayPage(dno,1);
+								confirm.close()
+							}
+						} ]
+					})
+				} else {
+					// 실패모달
+					BootstrapDialog.show({
+						title : '', //알러트 타이틀 이름
+						message : '댓글을 삭제하지 못했습니다.', //알러트 내용
+						buttons : [ { //알러트 버튼 정의
+							id : 'docWriteBt', //알러트 버튼의 아이디
+							icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
+							label : '확인', //알러트 버튼 이름
+							cssClass : 'btn-primary', //알러트 버튼 색바꾸기
+							hotkey : 13,
+							action : function(confirm) {
+								confirm.close()
+							}
+						} ]
+					});
+				}//else
+			},//success:function
+			error:function(status){
+				alert(status);
+				console.log(status);
+			}
+		})//ajax
 	}
 	
-/* 	$(".pagination pagination-sm pull-right").on("click", "li a", function(event){
-		event.preventDefault();
-		replyPage = $(this).attr("href");
-		var dno = this.previousSibling.firstChild.nodeValue;
-		replyDisplayPage(dno, replyPage);
-	}) */
+	function writeReply(event,dno){
+		var replyWriteTxt = '#reply_write'+dno;
+		if($(replyWriteTxt).length != 0){
+			if(event.keyCode == 13){
+				$.ajax({
+					url:"/overclass/reply/",
+					type:'post',
+					headers:{
+						"Content-Type":"application/json",
+						"X-HTTP-Method-Override":"POST"
+					},
+					data:JSON.stringify({
+						dno:dno,
+						content:$(replyWriteTxt).val()
+					}),
+					success:function(result){
+						if(result=='SUCCESS'){
+							BootstrapDialog.show({
+								title : '', //알러트 타이틀 이름
+								message : '댓글이 등록되었습니다.', //알러트 내용
+								buttons : [ { //알러트 버튼 정의
+									id : 'docWriteBt', //알러트 버튼의 아이디
+									icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
+									label : '확인', //알러트 버튼 이름
+									cssClass : 'btn-primary', //알러트 버튼 색바꾸기
+									hotkey : 13,
+									action : function(confirm) {
+										// 댓글목록 갱신
+										replyDisplayPage(dno,1);
+										confirm.close()
+									}
+								} ]
+							})
+						$(replyWriteTxt).val("");
+						}else{
+							BootstrapDialog.show({
+								title : '', //알러트 타이틀 이름
+								message : '댓글등록이 실패했습니다.', //알러트 내용
+								type: BootstrapDialog.TYPE_DANGER,
+								buttons : [ { //알러트 버튼 정의
+									id : 'docWriteBt', //알러트 버튼의 아이디
+									icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
+									label : '확인', //알러트 버튼 이름
+									cssClass : 'btn-danger', //알러트 버튼 색바꾸기
+									hotkey : 13,
+									action : function(confirm) {
+										confirm.close()
+									}
+								} ]
+							})
+						}//esle
+					},
+					error:function(xhr){
+						alert('에러'+xhr.status);
+					}
+				})
+				return false;
+			} // keycode if
+		}// length if
+	}
 </script>
