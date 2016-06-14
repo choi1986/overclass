@@ -14,7 +14,7 @@
 			<div class="profile-widget profile-widget-info">
 				<div class="panel-body">
 					<div class="col-lg-2 col-lg-2">
-						<h4><%-- <%=user.getName()%> --%></h4>
+						<h4>${user.user_name }</h4>
 						<div class="follow-ava">
 							<img src="${user.user_image }" width='70' height='70'>
 						</div>
