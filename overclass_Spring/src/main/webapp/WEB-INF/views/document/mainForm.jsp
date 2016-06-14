@@ -172,7 +172,7 @@ $(document).ready(function() {
 	    		buttons: [{ //알러트 버튼 정의
 	    			id: 'docWriteBt', //알러트 버튼의 아이디
 	    			icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
-	    			label: '버튼', //알러트 버튼 이름
+	    			label: '등록', //알러트 버튼 이름
 	    			cssClass: 'btn-primary', //알러트 버튼 색바꾸기
 	    			hotkey:13,
 	    			action: function(confirm) {
@@ -181,7 +181,7 @@ $(document).ready(function() {
 	    				confirm.close()
 					}
 	    			},{
-	    				label: '닫기',
+	    				label: '취소',
 	    				action: function(cancel){
 	    					cancel.close();
 	    					}
@@ -239,35 +239,8 @@ $(document).ready(function() {
 		}
 	})
 	
-	// 글쓰기
-	/* $("#docWriteBt").click(function() {
-		var formObj = $("form[role='form']");
-		formObj.submit();
-		//$("#temp_content").attr("content", $("#content").val());
-		//$("#temp_user_id").attr("user_id", "<-%=user.getUser_id()%>");
-		//$("#temp_tag").attr("tag", $("#tagsinput").val());
-		//$("#temp_doc_img_path").attr("doc_img_path", $("#exampleInputFile").val());
-
-		//var doc_content = {
-		//		content : $("#content").val(),
-		//		user_id : '<-%=user.getUser_id()%>',
-		//		tag : $("#tagsinput").val(),
-		//		doc_img_path : $("#exampleInputFile").val()
-		//}
-		//sessionStorage.setItem("doc_content", $("#content").val());
-		//sessionStorage.setItem("doc_user_id", '<-%=user.getUser_id()%>');
-		//sessionStorage.setItem("doc_tag", $("#tagsinput").val());
-		//sessionStorage.setItem("doc_doc_img_path", $("#exampleInputFile").val());
-
-		//sessionStorage.setItem("doc_content", doc_content);
-
-		//localStorage.doc_content = JSON.stringify(doc_content);
-		//alert(sessionStorage.getItem("doc_content").content);
-		//alert(JSON.parse(localStorage.doc_content).content);
-		//location.href="feedaction.do?action=contentInsert";
-	}) */
-
-	$("#mail_notificatoin_bar").click(function() { // 알림바 메시지 클릭 이벤트
+	// 알림바 메시지 클릭 이벤트
+	$("#mail_notificatoin_bar").click(function() { 
 		$.ajax({
 			url : "addfunctionaction.do?action=msg_list4",
 			success : function(success) {
@@ -294,22 +267,8 @@ $(document).ready(function() {
 	$("#dropdown_alr").click(function() {
 		$("#dropdown_alr").slideToggle("slow")
 	})
-
-	//var timer = setTimeout("msg_open(msgidnum)", 3000);
-	//clearTimeout(timer);
-
 }); //ready
 
-/* function msg_request(msgidnum){
-	msgid = msgidnum;
-	if(timer == null) {
-	msg_open(msgid);
-	timer = setTimeout("msg_open(msgid)", 3000);
-	}else{
-		clearTimeout(timer);
-		timer = setTimeout("msg_open(msgid)",3000);
-	}
-} */
 
 function msg_open(msgidnum) {
 	var msg = document.getElementById(msgidnum);
@@ -354,51 +313,6 @@ function enterKey(e) {
 		return false;
 	} else
 		return true;
-}
-
-function friend_process(friend_id) {
-	$.ajax({
-		url : "addfunctionaction.do?action=friend_accept&friend_id="
-				+ friend_id,
-		success : function(result) {
-			alert(friend_id + '님과 친구가 되었습니다.')
-		},
-		error : function(xhr) {
-			alert(friend_id + '님과 친구가 되었습니다.')
-		}
-	})
-}
-
-function search(event) {
-	if (event.keyCode == 13) {
-		$.ajax({
-			url : "addfunctionaction.do?action=search",
-			data : {
-				s_keyword : $("#search_form").val()
-			},
-			success : function(result) {
-				$("#my_page").html(result);
-			},
-			error : function(xhr) {
-				alert('에러' + xhr.status)
-			}
-		})
-		return false;
-	}
-}
-
-function friend_request(friend_id) {
-	$.ajax({
-		url : 'addfunctionaction.do?action=friend_req_insert&friend_id='
-				+ friend_id,
-		success : function(result) {
-			alert('친구요청이 완료되었습니다.')
-		},
-		error : function(xhr) {
-			alert('친구요청이 완료되었습니다.')
-		}
-	})
-
 }
 </script>
 </html>
