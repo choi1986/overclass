@@ -24,4 +24,12 @@
 	<select id="login"  resultType="user">
 		select * from oc_user where user_id=#{user_id} and user_pwd=#{user_pwd}
 	</select>
+	<update id="keepLogin">
+     	update oc_user set sessionkey=#{session_id}, sessionlimit=#{next}
+     	where user_id=#{user_id}
+     </update>
+     <select id="checkUserWithSessionKey" resultType="user">
+     	select * from oc_user
+     	where sessionkey = #{value}
+     </select>
 </mapper>

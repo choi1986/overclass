@@ -1,5 +1,7 @@
 package kr.co.overclass.interceptor;
 
+import javax.inject.Inject;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -7,10 +9,17 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.util.WebUtils;
+
+import kr.co.overclass.domain.UserVO;
+import kr.co.overclass.service.UserService;
 
 public class AuthInterceptor extends HandlerInterceptorAdapter{
 	
 	private static final Logger logger = LoggerFactory.getLogger(AuthInterceptor.class);
+	
+	@Inject
+	private UserService service;
 
 	//로그인하지 않은 사용자를 로그인 페이지로 이동
 	@Override
@@ -22,6 +31,18 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 	    if(session.getAttribute("login")==null){
 	    	logger.info("현재 사용자는 로그인하지 않았습니다!!");
 	    	saveDest(request);
+	    	
+	    	Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+	    	if(loginCookie != null){//기록된 쿠키를 찾았다면
+	    		UserVO uservo = service.checkLoginBefore(loginCookie.getValue());
+		    	logger.info("USERVO : "+uservo);
+	    	    if(uservo != null){
+	    	    	//기록된 쿠키와 DB의 저장된 쿠키가 일치하는 행을 찾았다면
+	    	      session.setAttribute("login", uservo);
+	    	      return true;
+	    	    }	    	
+	    	}	    	
+	    	
 	    	response.sendRedirect("/member/loginForm2");
 	    	//로그인하지 않았을때 로그인페이지로 이동
 	    	

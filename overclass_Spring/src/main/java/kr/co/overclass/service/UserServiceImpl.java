@@ -1,5 +1,7 @@
 package kr.co.overclass.service;
 
+import java.util.Date;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -42,6 +44,16 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserVO login(LoginDTO dto) throws Exception {
 		return userDAO.login(dto);
+	}
+
+	@Override
+	public void keepLogin(String user_id, String session_id, Date next) throws Exception {
+		userDAO.keepLogin(user_id, session_id, next);		
+	}
+
+	@Override
+	public UserVO checkLoginBefore(String value) throws Exception {		
+		return userDAO.checkUserWithSessionKey(value);
 	}
 
 }

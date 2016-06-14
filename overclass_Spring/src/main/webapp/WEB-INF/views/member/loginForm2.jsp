@@ -180,7 +180,7 @@
                 <input type="password" name="user_pwd" class="form-control" placeholder="패스워드">
             </div>
             <label class="checkbox">
-                <input type="checkbox" value="remember-me"> 아이디 저장
+                <input type="checkbox" value="useCookie"> 아이디 저장
                 <span class="pull-right"> <a href="#"> 문제가있나요?</a></span>
             </label>
             

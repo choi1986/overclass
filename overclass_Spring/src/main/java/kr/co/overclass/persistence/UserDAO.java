@@ -1,5 +1,7 @@
 package kr.co.overclass.persistence;
 
+import java.util.Date;
+
 import kr.co.overclass.domain.UserVO;
 import kr.co.overclass.dto.LoginDTO;
 
@@ -16,4 +18,8 @@ public interface UserDAO {
 	public void deleteUser (String user_id) throws Exception;
 	// 로그인
 	public UserVO login (LoginDTO dto) throws Exception;
+	// 로그인한 사용자의 sessionKey, sessionLimit 저장
+	public void keepLogin(String user_id, String session_id, Date next) throws Exception;
+	// loginCookie에 기록된 값으로 가용자의 정보 조회
+	public UserVO checkUserWithSessionKey (String value) throws Exception;
 }
