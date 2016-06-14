@@ -20,7 +20,7 @@
 									<li><a href="#" onclick="delDoc(${DocumentDTO.dno })" style="color: black;" class="fa fa-bitbucket"> 게시글 삭제</a></li>
 								</c:if>
 								
-								<li><a href="#" style="color: red;" class="fa fa-exclamation-circle"> 게시글 신고하기</a></li>
+								<li><a href="#" onclick="reportDoc(${DocumentDTO.dno },${DocumentDTO.writer },${DocumentDTO.content },${DocumentDTO.tag },${DocumentDTO.image })" style="color: red;" class="fa fa-exclamation-circle"> 게시글 신고하기</a></li>
 							</ul>
 						</div>
 					</div>
@@ -207,6 +207,57 @@ function delDoc(dno) {
 			action: function(confirm) {
 				location.href="/overclass/main/removeDoc?dno="+dno;
 				
+				confirm.close()
+			}
+			},{
+				label: '닫기',
+				action: function(cancel){
+					cancel.close();
+					}
+			}]
+	})
+}
+function reportDoc(dno,writer,content,tag,image) {
+	BootstrapDialog.show({
+		title: '', //알러트 타이틀 이름
+		message: '이 글을 신고 하시겠습니까?', //알러트 내용
+		type: BootstrapDialog.TYPE_DANGER,
+		buttons: [{ //알러트 버튼 정의
+			icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
+			label: '신고', //알러트 버튼 이름
+			cssClass: 'btn-danger', //알러트 버튼 색바꾸기
+			action: function(confirm) {
+				$.ajax({
+					url:"/overclass/amdin/reportDoc",
+					type:'POST',
+					headers:{
+						"Content-Type":"application/json",
+						"X-HTTP-Method-Override":"POST"
+					},
+					data:JSON.stringify({
+						dno:dno,
+						writer:writer,
+						content:content,
+						tag:tag,
+						image:image
+					}),success:function(result){
+						BootstrapDialog.show({
+				    		title: '', //알러트 타이틀 이름
+				    		message: '신고접수가 완료 되었습니다.', //알러트 내용
+				    		type: BootstrapDialog.TYPE_DANGER,
+				    		buttons: [{ //알러트 버튼 정의
+				    				icon: 'fa fa-check',
+				    				label: '확인',
+				    				cssClass: 'btn-danger',
+				    				hotkey:13,
+				    				action: function(cancel){
+				    					cancel.close();
+				   					}
+				    			}]
+				    	})
+					}
+					
+				}),
 				confirm.close()
 			}
 			},{
