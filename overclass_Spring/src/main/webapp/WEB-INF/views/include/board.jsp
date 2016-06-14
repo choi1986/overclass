@@ -53,11 +53,7 @@
 										<div class="filebox col-lg-10">
 											<div class="col-lg-12" id="photo_div">
 											<c:if test="${DocumentDTO.image != '' }">
-<<<<<<< HEAD
-											<a href="${DocumentDTO.image }" data-lightbox="image-1" data-title="사진">
-=======
 											<a href="${DocumentDTO.image }" data-lightbox="image-${DocumentDTO.dno }" data-title="사진">
->>>>>>> branch 'master' of https://github.com/choi1986/overclass.git
 												<img src="${DocumentDTO.image }" width="500px" height="350px">
 											</a>
 											 </c:if>
@@ -388,11 +384,16 @@ var template = Handlebars.compile(source);
 										label : '확인', //알러트 버튼 이름
 										cssClass : 'btn-primary', //알러트 버튼 색바꾸기
 										action : function(confirm) {
-											// 댓글목록 갱신
-											replyDisplayPage(dno,1);
-											// 페이지버튼 감추기
-											var divtemp3 = '#reply_div_page_'+dno;
-											$(divtemp3).attr("style","display: none;");
+											var divtemp = '#reply_div'+dno;
+											var divtemp2 = '#reply_icon'+dno+'_2'
+											 var div = $(divtemp);
+										      var div2 = $(divtemp2);
+										    if(div2.attr("class") == "fa fa-chevron-up"){
+										    	div.slideToggle("slow")
+											     div2.attr("class","fa fa-chevron-down")
+											  // 댓글목록 갱신
+													replyDisplayPage(dno,1);
+											} 
 											confirm.close();
 										}
 									} ]
@@ -421,6 +422,10 @@ var template = Handlebars.compile(source);
 						}
 					})
 				}// != if
+/* 				// 페이지버튼 감추기
+				var divtemp3 = '#reply_div_page_'+dno;
+				console.log($(divtemp3).attr("style"));
+				$(divtemp3).attr("style","display: none;"); */
 				return false;
 			} // keycode if
 	}
