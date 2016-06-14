@@ -44,7 +44,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			//response.sendRedirect("/"); // 메인 화면으로
 			Object dest = session.getAttribute("dest");
 			
-			response.sendRedirect(dest != null ? (String)dest : "/");
+			response.sendRedirect(dest != null ? (String)dest : "/overclass/main");
 		}
 	}
 }

@@ -129,7 +129,17 @@
 		}
 		$("#join_join").click(function() { //회원가입폼에서 가입버튼 눌렀을시
 			if(duplCk==0) { 
-				alert("아직 ID 중복이 검사되지 않았습니다! \n자동으로 중복 검사됩니다.");
+				BootstrapDialog.show({
+		    		title: '', //알러트 타이틀 이름
+		    		message: '아직 ID 중복이 검사되지 않았습니다! \n자동으로 중복 검사됩니다.', //알러트 내용
+		    		type: BootstrapDialog.TYPE_DANGER,
+		    		buttons: [{
+		    				label: '닫기',
+		    				action: function(cancel){
+		    					cancel.close();
+		    					}
+		    			}]
+		    	})
 				$("#register_form").attr('action','/overclass/dupl');
 			}
 		}) //join_join click 
