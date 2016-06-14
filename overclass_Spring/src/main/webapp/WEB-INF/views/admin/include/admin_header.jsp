@@ -8,37 +8,40 @@
 <title>OVERCLASS</title>
 <!-- CSS -->
 	<!-- 부트스트랩 -->
-	
-	<link href="${initParam.root}css/bootstrap.min.css" rel="stylesheet">
-	<link href="${initParam.root}css/bootstrap-theme.css" rel="stylesheet">
+	<link href="/overclass/resources/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/overclass/resources/css/bootstrap-theme.css" rel="stylesheet">
+	<!-- 라이트박스 -->
+	<link rel="stylesheet" href="/overclass/resources/css/lightbox.css">
 	<!-- 부트스트랩모달 -->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.9/css/bootstrap-dialog.min.css" rel="stylesheet" type="text/css" />
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.9/css/bootstrap-dialog.min.css" rel="stylesheet" type="text/css">
 	<!-- 아이콘 -->
-	<link href="${initParam.root}css/elegant-icons-style.css" rel="stylesheet" />
+	<link href="/overclass/resources/css/elegant-icons-style.css" rel="stylesheet">
 	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" >
 	<!-- 스타일 -->
-	<link href="${initParam.root}css/style.css" rel="stylesheet">
-	<link href="${initParam.root}css/style-responsive.css" rel="stylesheet" />
+	<link href="/overclass/resources/css/style.css" rel="stylesheet">
+	<link href="/overclass/resources/css/style-responsive.css" rel="stylesheet">
 	<!-- 애니메이션 -->
-	<link type="text/css" rel="stylesheet" href="${initParam.root}css/animate.css">
+	<link href="/overclass/resources/css/animate.css" type="text/css" rel="stylesheet">
 <!-- CSS끝 -->
 
 <!-- JS -->
 	<!-- 제이쿼리 -->
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 	<!-- 부트스트랩 -->
-	<script src="js/js2/bootstrap.min.js"></script>
+	<script src="/overclass/resources/js/bootstrap.min.js"></script>
 	<!-- 부트스스트랩모달 -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.9/js/bootstrap-dialog.min.js"></script>
 	<!-- 제이쿼리ui -->
-	<script src="${initParam.root}js/js2/jquery-ui-1.9.2.custom.min.js"></script>
-	<script src="${initParam.root}js/js2/bootstrap-switch.js"></script>
+	<script src="/overclass/resources/js/jquery-ui-1.9.2.custom.min.js"></script>
+	<script src="/overclass/resources/js/bootstrap-switch.js"></script>
 	<!-- 태그 -->
-	<script src="${initParam.root}js/js2/jquery.tagsinput.js"></script>
-	<script src="${initParam.root}js/js2/form-component.js"></script>
+	<script src="/overclass/resources/js/jquery.tagsinput.js"></script>
+	<script src="/overclass/resources/js/form-component.js"></script>
 	<!-- 애니메이션 -->
-	<script src="${initParam.root}js/animation.js"></script>
-	<script src="${initParam.root}js/jquery.cookie.js"></script>
+	<script src="/overclass/resources/js/animation.js"></script>
+	<script src="/overclass/resources/js/jquery.cookie.js"></script>
+	<!-- handlebars (댓글) -->
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <!-- JS끝 -->
 </head>
 <body>
