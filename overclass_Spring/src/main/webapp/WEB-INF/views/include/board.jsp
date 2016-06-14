@@ -35,7 +35,7 @@
 										<img alt="avatar" src="${DocumentDTO.user_image}" width='70' height='70'>
 										<h4></h4>
 										<p>
-											<b>${DocumentDTO.writer }</b>
+											<b>${DocumentDTO.writer } </b>
 										</p>
 									</div>
 									<!-- 글내용 -->
@@ -45,14 +45,15 @@
 										</div>
 									</div>
 								</div>
-
+									
+									<!-- 사진 -->
 									<div class="form-group">
 										<div class="control-label col-lg-2">
 										</div>
 										<div class="filebox col-lg-10">
 											<div class="col-lg-12" id="photo_div">
 											<c:if test="${DocumentDTO.image != '' }">
-											<a href="${DocumentDTO.image }" data-lightbox="image-${DocmentDTO.dno }" data-title="사진">
+											<a href="${DocumentDTO.image }" data-lightbox="image-1" data-title="사진">
 												<img src="${DocumentDTO.image }" width="500px" height="350px">
 											</a>
 											 </c:if>
@@ -181,6 +182,8 @@
 
 <script>
 
+
+
 //글삭제
 function delDoc(dno) {
 	BootstrapDialog.show({
@@ -194,6 +197,7 @@ function delDoc(dno) {
 			hotkey:13,
 			action: function(confirm) {
 				location.href="/overclass/main/removeDoc?dno="+dno;
+				
 				confirm.close()
 			}
 			},{
@@ -221,7 +225,7 @@ var template = Handlebars.compile(source);
     					cancel.close();
    					}
     			}]
-    	})
+    	}) 
 		
 	} else if (result == 'Remove_SUCCESS') {
 		BootstrapDialog.show({
@@ -385,7 +389,7 @@ var template = Handlebars.compile(source);
 											// 페이지버튼 감추기
 											var divtemp3 = '#reply_div_page_'+dno;
 											$(divtemp3).attr("style","display: none;");
-											confirm.close()
+											confirm.close();
 										}
 									} ]
 								})
