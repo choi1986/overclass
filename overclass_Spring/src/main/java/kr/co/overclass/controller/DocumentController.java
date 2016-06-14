@@ -98,7 +98,7 @@ public class DocumentController {
 			File target = new File(uploadPath, savedName);
 			FileCopyUtils.copy(fileData, target); //실제 파일 업로드
 		} 
-		System.out.println("확인:"+originName);
+		System.out.println("확인:"+originName); //
 		return savedName;
 	}
 	
