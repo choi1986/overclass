@@ -69,7 +69,14 @@
                               <div style="display: none;">${DocumentDTO.dno }</div>
                               <a class="control-label col-lg-2">
                                  좋아요&nbsp;&nbsp;
-                                 <span id="good_icon${DocumentDTO.dno }" class="fa fa-lg fa-thumbs-o-up" style="color: blue;"></span>
+                               <c:choose>
+                               	<c:when test="${DocumentDTO.good == 0 }">
+                               		<span id="good_icon${DocumentDTO.dno }" class="fa fa-lg fa-thumbs-o-up" style="color: blue;"></span>
+                               	</c:when>
+                               	<c:otherwise>
+                               		<span id="good_icon${DocumentDTO.dno }" class="fa fa-lg fa-thumbs-up" style="color: blue;"></span>
+                               	</c:otherwise>
+                               </c:choose>
                               </a>
                            </div>
                               
