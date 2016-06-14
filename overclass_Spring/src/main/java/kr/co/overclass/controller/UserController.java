@@ -17,6 +17,8 @@ import org.springframework.web.util.WebUtils;
 import kr.co.overclass.domain.UserVO;
 import kr.co.overclass.dto.JoinDTO;
 import kr.co.overclass.dto.LoginDTO;
+import kr.co.overclass.dto.SearchIDDTO;
+import kr.co.overclass.dto.SearchPwdDTO;
 import kr.co.overclass.service.UserService;
 
 @Controller
@@ -41,7 +43,11 @@ public class UserController {
 			int amount=60*60*24*7; //초단위
 			Date sessionlimit = new Date(System.currentTimeMillis()+(1000*amount));
 			service.keepLogin(vo.getUser_id(), session.getId() , sessionlimit);
+			System.out.println(vo.getUser_id());
+			System.out.println(session.getId());
+			System.out.println(sessionlimit);
 		}
+		System.out.println(dto.isUseCookie());
 		
 		return "/member/loginForm2"; // 해당 유저가 없다면 로그인 화면으로 리턴, 있다면 세션에 로그인 정보 저장하고 메인으로.
 	}
@@ -97,7 +103,26 @@ public class UserController {
 				response.addCookie(loginCookie);
 				service.keepLogin(vo.getUser_id(), session.getId(), new Date());
 			}
-			
 		}
+	}
+	
+	@RequestMapping(value="/searchID") // 아이디 찾기 버튼 눌린 후
+	public String searchID (SearchIDDTO dto, HttpSession session, Model model) throws Exception { // 회원 가입 화면으로
+		System.out.println(dto.toString());
+		System.out.println("-----------------------");
+		String user_id = service.searchID(dto);
+		System.out.println(user_id);
+		return "/member/loginForm2";
+	}
+	
+	@RequestMapping(value="/searchPwd") // 아이디 찾기 버튼 눌린 후
+	public String searchPwd (SearchPwdDTO dto, HttpSession session, Model model) throws Exception { // 회원 가입 화면으로
+		System.out.println(dto.toString());
+		System.out.println("-----------------------");
+		if (service.searchPwd(dto))
+			System.out.println("성공!");
+		else
+			System.out.println("실패..");
+		return "/member/loginForm2";
 	}
 }

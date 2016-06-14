@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.overclass.domain.UserVO;
 import kr.co.overclass.dto.LoginDTO;
+import kr.co.overclass.dto.SearchIDDTO;
+import kr.co.overclass.dto.SearchPwdDTO;
 
 @Repository
 public class UserDAOImpl implements UserDAO {
@@ -55,7 +57,7 @@ public class UserDAOImpl implements UserDAO {
 	public void keepLogin(String user_id, String session_id, Date next) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		   map.put("user_id", user_id);
-		   map.put("session_Id", session_id);
+		   map.put("session_id", session_id);
 		   map.put("next", next);
 		session.update("user.keepLogin", map);	
 	}
@@ -63,6 +65,18 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public UserVO checkUserWithSessionKey(String value) throws Exception {
 		return session.selectOne("user.checkUserWithSessionKey", value);
+	}
+	
+	@Override
+	public String searchID(SearchIDDTO dto) throws Exception {
+		return session.selectOne("user.searchID", dto);
+	}
+	
+	@Override
+	public boolean searchPwd(SearchPwdDTO dto) throws Exception {
+		//if (session.update("user.searchPwd", dto))
+		System.out.println(session.update("user.searchPwd", dto));
+		return true;
 	}
 
 }
