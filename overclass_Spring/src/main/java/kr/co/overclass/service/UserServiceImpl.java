@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import kr.co.overclass.domain.UserVO;
 import kr.co.overclass.dto.LoginDTO;
+import kr.co.overclass.dto.SearchIDDTO;
+import kr.co.overclass.dto.SearchPwdDTO;
 import kr.co.overclass.persistence.UserDAO;
 
 @Service
@@ -54,6 +56,16 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserVO checkLoginBefore(String value) throws Exception {		
 		return userDAO.checkUserWithSessionKey(value);
+	}
+	
+	@Override
+	public String searchID(SearchIDDTO dto) throws Exception {
+		return userDAO.searchID(dto);
+	}
+	
+	@Override
+	public boolean searchPwd(SearchPwdDTO dto) throws Exception {
+		return userDAO.searchPwd(dto);
 	}
 
 }

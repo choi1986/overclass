@@ -32,4 +32,12 @@
      	select * from oc_user
      	where sessionkey = #{value}
      </select>
+	<select id="searchID" resultType="string">
+		select user_id from oc_user
+		where user_name=#{user_name}, user_email=#{user_email}, user_birth=#{user_birth}
+	</select>
+	<update id="searchPwd">
+		update oc_user set user_pwd=#{user_pwd}
+		where user_id=#{user_id}, user_pwdq=#{user_pwdq}, user_pwda=#{user_pwda}
+	</update>
 </mapper>
