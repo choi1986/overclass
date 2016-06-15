@@ -15,8 +15,7 @@ create table oc_user(
 	user_joindate date default sysdate,
 	user_image varchar2(300) default '/resources/img/profile_default.jpg',
 	user_logincnt number default 0,
-	user_admin number default 0
+	user_admin number default 0,
+	sessionkey varchar2(50) not null default 'none',
+	sessionlimit timestamp
 );
-
-alter table oc_user add column sessionkey varchar2(50) not null default 'none';
-alter table oc_user add column sessionlimit timestamp;

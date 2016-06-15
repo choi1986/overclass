@@ -343,26 +343,34 @@
 		//사진미리보기
 		function readURL(input) {
 			if (input.files && input.files[0]) {
-				var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
+				var file = input.files[0].name;
+				var img_format = "\.(bmp|gif|jpg|jpeg|png)$"; 
+				
+			    if(!(new RegExp(img_format, "i")).test(file)){
+			    alert("이미지 파일만 첨부하실 수 있습니다.");
+				    $('#photo_div').hide();
+			        $('#file').val('');
+			    	return;
+			    }
+			    
+				var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성d
 				reader.onload = function(e) {
 					//파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
-						$('#photo_div').show()
-						$('#photo').attr('src', e.target.result);
-					
+					$('#photo').attr('src', e.target.result);
+					$('#photo_div').show()
 					//이미지 Tag의 SRC속성에 읽어들인 File내용을 지정
 					//(아래 코드에서 읽어들인 dataURL형식)
 				}
-				reader.readAsDataURL(input.files[0]);
+					reader.readAsDataURL(input.files[0]);
 				//File내용을 읽어 dataURL형식의 문자열로 저장
 			}
-		}//readURL()--
+		}//readURL()
 
 		//file 양식으로 이미지를 선택(값이 변경) 되었을때 처리하는 코드
 		$("#file").change(function() {
 			//alert(this.value); //선택한 이미지 경로 표시
 			if(this.value != "") {
 				readURL(this);
-				$('#photo_div').show()
 			} else {
 				$('#photo_div').hide()
 			}

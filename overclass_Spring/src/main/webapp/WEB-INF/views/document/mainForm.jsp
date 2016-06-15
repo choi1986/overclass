@@ -56,35 +56,61 @@ lightbox.option({
 })
 </script>
 </body>
+
+<!-- 쪽지 리스트처리를 위한 템플릿 -->
+<script id="msgtemp" type="text/x-handlebars-template">
+
+<%-- <% for(int i=0;i<list.size();i++) { %> --%>
+<li>
+	<a href=''>
+		<span class="photo">
+			<img alt="avatar" width='30' height='30' src='<%-- <%=list.get(i).getId_img_path()%> --%>'></span> <!-- 프사 -->
+		<span class="subject">
+			<span id="msgid<%-- <%=i%> --%>" class="from"><%-- <%=list.get(i).getUser_id() %> --%></span> <!-- 이름 -->
+			<span class="time"><%-- <%= list.get(i).getWrite_date() %> --%>전</span> <!-- 시간 -->
+		</span>
+		<span class="subject"><%-- <%=list.get(i).getContent() %> --%></span> <!-- 메시지 -->
+	</a>
+</li>
+</script>
+
 <script type="text/javascript">
 
 var timer;
 var msgid;
 $(document).ready(function() {
-		
+	
 	//사진미리보기
 	function readURL(input) {
 		if (input.files && input.files[0]) {
+			var file = input.files[0].name;
+			var img_format = "\.(bmp|gif|jpg|jpeg|png)$"; 
+			
+		    if(!(new RegExp(img_format, "i")).test(file)){
+		    alert("이미지 파일만 첨부하실 수 있습니다.");
+			    $('#photo_div').hide();
+		        $('#file').val('');
+		    	return;
+		    }
+		    
 			var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
 			reader.onload = function(e) {
 				//파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
-					$('#photo_div').show()
-					$('#photo').attr('src', e.target.result);
-				
+				$('#photo').attr('src', e.target.result);
+				$('#photo_div').show()
 				//이미지 Tag의 SRC속성에 읽어들인 File내용을 지정
 				//(아래 코드에서 읽어들인 dataURL형식)
 			}
-			reader.readAsDataURL(input.files[0]);
+				reader.readAsDataURL(input.files[0]);
 			//File내용을 읽어 dataURL형식의 문자열로 저장
 		}
-	}//readURL()--
+	}//readURL()
 
 	//file 양식으로 이미지를 선택(값이 변경) 되었을때 처리하는 코드
 	$("#file").change(function() {
 		//alert(this.value); //선택한 이미지 경로 표시
 		if(this.value != "") {
 			readURL(this);
-			$('#photo_div').show()
 		} else {
 			$('#photo_div').hide()
 		}
@@ -279,6 +305,9 @@ $(document).ready(function() {
 		}
 	})
 	
+	
+	
+	
 	// 알림바 메시지 클릭 이벤트
 	$("#mail_notificatoin_bar").click(function() { 
 		$.ajax({
@@ -295,6 +324,11 @@ $(document).ready(function() {
 		});
 	});
 
+	
+	
+	
+	
+	
 	$("#alert_notificatoin_bar").click(function() { // 알림바 알림 클릭 이벤트
 		$.ajax({
 			url : "addfunctionaction.do?action=notice",

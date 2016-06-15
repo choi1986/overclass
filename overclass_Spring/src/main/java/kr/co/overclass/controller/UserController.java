@@ -43,11 +43,7 @@ public class UserController {
 			int amount=60*60*24*7; //초단위
 			Date sessionlimit = new Date(System.currentTimeMillis()+(1000*amount));
 			service.keepLogin(vo.getUser_id(), session.getId() , sessionlimit);
-			System.out.println(vo.getUser_id());
-			System.out.println(session.getId());
-			System.out.println(sessionlimit);
 		}
-		System.out.println(dto.isUseCookie());
 		
 		return "/member/loginForm2"; // 해당 유저가 없다면 로그인 화면으로 리턴, 있다면 세션에 로그인 정보 저장하고 메인으로.
 	}
@@ -63,13 +59,13 @@ public class UserController {
 	
 	@RequestMapping(value="/join") // 회원 가입 버튼 눌린 후
 	public String join (JoinDTO dto, HttpSession session, Model model) throws Exception { // 회원 가입 화면으로
-		System.out.println(dto.toString());
-		System.out.println("-----------------------");
 		UserVO vo = new UserVO();
 		vo.setUser_id(dto.getUser_id());
 		vo.setUser_pwd(dto.getUser_pwd());
-		if(!dto.getUser_pwd().equals(dto.getUser_pwd_confirm()))
+		if(!dto.getUser_pwd().equals(dto.getUser_pwd_confirm())) {
 			vo.setUser_pwd("0");
+			return "/member/loginForm2";
+		}
 		vo.setUser_name(dto.getUser_name());
 		vo.setUser_email(dto.getUser_email());
 		vo.setUser_tel(dto.getUser_tel1()+"-"+dto.getUser_tel2()+"-"+dto.getUser_tel3());
@@ -80,7 +76,6 @@ public class UserController {
 		vo.setUser_gender(dto.getRadio());
 		vo.setUser_pwdq(dto.getUser_pwdq());
 		vo.setUser_pwda(dto.getUser_pwda());
-		System.out.println(vo.toString());
 		service.createUser(vo);
 		return "/member/loginForm2";
 	}
@@ -108,21 +103,22 @@ public class UserController {
 	
 	@RequestMapping(value="/searchID") // 아이디 찾기 버튼 눌린 후
 	public String searchID (SearchIDDTO dto, HttpSession session, Model model) throws Exception { // 회원 가입 화면으로
-		System.out.println(dto.toString());
-		System.out.println("-----------------------");
-		String user_id = service.searchID(dto);
-		System.out.println(user_id);
+		String user_id = service.searchID(dto); // 해당 아이디가 있다면 찾아옴
+		//유저아이디 있다면 아래 문장, 없다면 세션에 같은 이름으로 다른 값 넣어서 로그인 폼에서 체크 후 메시지 띄우기
+		if (user_id==null) session.setAttribute("searchID", "0");
+		else session.setAttribute("searchID", user_id);
+		
 		return "/member/loginForm2";
 	}
 	
-	@RequestMapping(value="/searchPwd") // 아이디 찾기 버튼 눌린 후
+	@RequestMapping(value="/searchPwd") // 비번 찾기 버튼 눌린 후
 	public String searchPwd (SearchPwdDTO dto, HttpSession session, Model model) throws Exception { // 회원 가입 화면으로
-		System.out.println(dto.toString());
-		System.out.println("-----------------------");
 		if (service.searchPwd(dto))
-			System.out.println("성공!");
+			session.setAttribute("searchPwd", "suc");
+		else if (!dto.getUser_pwd().equals(dto.getUser_pwd_confirm()))
+			session.setAttribute("searchPwd", "pwdFail");
 		else
-			System.out.println("실패..");
+			session.setAttribute("searchPwd", "fail");
 		return "/member/loginForm2";
 	}
 }
