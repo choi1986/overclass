@@ -18,6 +18,9 @@
   	select * from oc_friend_rel
   	where sender = #{sender}
   	and receiver = #{receiver}
+  	or
+  	where sender = #{receiver}
+  	and receiver = #{sender}
   </select>
   
   <!-- 친구 요청 입력 -->
@@ -33,9 +36,14 @@
   </delete>
   
   <!-- 받은친구요청 검색 -->
-  <select id="select_req" resultType="friend">
+  <select id="select_req_recieve" resultType="friend">
+  	select * from oc_friend_req
+  	where receiver = #{receiver}
+  </select>
+
+  <!-- 보낸친구요청 검색 -->
+  <select id="select_req_send" resultType="friend">
   	select * from oc_friend_req
   	where sender = #{sender}
-  	and receiver = #{receiver}
   </select>
 </mapper>

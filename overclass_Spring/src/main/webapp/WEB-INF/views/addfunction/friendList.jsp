@@ -3,13 +3,30 @@
 <%@page import="kr.co.overclass.domain.FriendVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
 <meta charset="UTF-8">
-<title>친구 목록 페이지</title>
-</head>
-<body>
+친구 목록 페이지<br>
 
-</body>
-</html>
+<%
+if(request.getAttribute("list")==null){
+	%>결과없음.....<%
+}else{
+	List<FriendVO> list = (List<FriendVO>)request.getAttribute("list");
+	for(int i=0;i<list.size();i++){%>
+	요청아이디: <%=list.get(i).getSender() %><br>
+	대상아이디: <%=list.get(i).getReceiver() %><br>
+<%
+	};
+};
+%> 
+ 
+<%-- <%
+if(request.getAttribute("result").equals("success")){
+%>	
+	요청성공!!
+<%
+}else{%>
+	요청실패!!
+<%
+}
+%>
+ --%>

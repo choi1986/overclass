@@ -1,5 +1,7 @@
 package kr.co.overclass.persistence;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -18,32 +20,47 @@ public class FriendDAOImpl implements FriendDAO {
 	private SqlSession session;
 	
 	@Override
-	public void oc_insert_rel(FriendVO vo) throws Exception {
-		session.insert("friend.insert_rel",vo);
+	public int oc_insert_rel(FriendVO vo) throws Exception {
+		return session.insert("friend.insert_rel",vo);
+		//입력된 행 개수 리턴
 	}
 
 	@Override
-	public void oc_delete_rel(FriendVO vo) throws Exception {
-		session.delete("friend.delete_rel",vo);
+	public int oc_delete_rel(FriendVO vo) throws Exception {
+		return session.delete("friend.delete_rel",vo);
+		//삭제된 행 개수 리턴
 	}
 
 	@Override
-	public void oc_select_rel(FriendVO vo) throws Exception {
-		session.selectList("friend.select_rel", vo);
+	public List<FriendVO> oc_select_rel(FriendVO vo) throws Exception {
+		return session.selectList("friend.select_rel", vo);
+		//검색된 결과 리스트로 리턴
 	}
 
 	@Override
-	public void oc_insert_req(FriendVO vo) throws Exception {
-		session.insert("friend.insert_req",vo);
+	public int oc_insert_req(FriendVO vo) throws Exception {
+		return session.insert("friend.insert_req",vo);
+		//입력된 행 개수 리턴
 	}
 
 	@Override
-	public void oc_delete_req(FriendVO vo) throws Exception {
-		session.delete("friend.delete_req",vo);
+	public int oc_delete_req(FriendVO vo) throws Exception {
+		return session.delete("friend.delete_req",vo);
+		//삭제된 행 개수 리턴
 	}
 
 	@Override
-	public void oc_select_req(FriendVO vo) throws Exception {
-		session.selectList("friend.select_req",vo);
+	public FriendVO oc_select_req_all(FriendVO vo) throws Exception {
+		return null;
+	}
+
+	@Override
+	public List<FriendVO> oc_select_req_send(FriendVO vo) throws Exception {
+		return session.selectList("friend.select_req_send", vo);
+	}
+
+	@Override
+	public List<FriendVO> oc_select_req_receive(FriendVO vo) throws Exception {
+		return session.selectList("friend.select_req_recieve", vo);
 	}
 }

@@ -1,19 +1,32 @@
-<%@page import="com.sun.org.apache.xpath.internal.operations.Variable"%>
+<%@page import="kr.co.overclass.domain.UserVO"%>
+<%@page import="kr.co.overclass.domain.FriendVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>친구 추가 페이지</title>
-<%
-	String result = (String)session.getAttribute("result");
-	if(result.equals("success_rel_insert")){
-		//result키값으로 success_rel_insert 전달됬을 경우 친구 추가 성공 메시지 보여주기
-	}
-%>
-</head>
-<body>
 
-</body>
-</html>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#bt1").click(function() {
+			$.ajax({
+				type:'GET',
+				url:'/overclass/friend/SelectReq?info='+$("#t1").val(),
+				success:function(data){
+					$('div').html(data);
+				}
+				
+			});
+		});
+	});
+</script>
+
+친구요청페이지<br>
+
+대상아이디: <input type="text" id="t1"><br>
+<input type="button" value="요청" id="bt1"><br>
+<div></div>
+<%
+UserVO vo = new UserVO();
+vo.setUser_id("test1");
+session.setAttribute("userVO", vo);
+System.out.print(vo.getUser_id());%>

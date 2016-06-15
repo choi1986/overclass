@@ -10,6 +10,10 @@ public class FriendVO {
 		this.receiver = receiver;
 	}
 
+	public FriendVO() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	@Override
 	public String toString() {
 		return "[보내는 사람: "+ sender + ", 받는 사람: "+ receiver + "]";
