@@ -19,12 +19,7 @@
 								<c:if test="${DocumentDTO.writer == user.user_id}">
 									<li><a href="#" onclick="delDoc(${DocumentDTO.dno })" style="color: black;" class="fa fa-bitbucket"> 게시글 삭제</a></li>
 								</c:if>
-								
-<<<<<<< HEAD
 								<li><a href="#" onclick="reportDoc(${DocumentDTO.dno })" style="color: red;" class="fa fa-exclamation-circle"> 게시글 신고하기</a></li>
-=======
-								<li><a href="#" onclick="reportDoc()" style="color: red;" class="fa fa-exclamation-circle"> 게시글 신고하기</a></li>
->>>>>>> branch 'master' of https://github.com/choi1986/overclass.git
 							</ul>
 						</div>
 					</div>
