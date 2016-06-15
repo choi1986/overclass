@@ -7,7 +7,7 @@
 <c:forEach items="${list }" var="DocumentDTO">
 <div id="main_Board">
 	<div class="row">
-		<div class="col-lg-offset-3 col-lg-5 portlets">
+		<div class="col-xs-offset-3 col-xs-5 portlets">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<div class="pull-right">
@@ -32,7 +32,7 @@
 							<form class="form-horizontal">
 								<!-- 타이틀 -->
 								<div class="form-group">
-									<div class="photo col-lg-2" style="text-align: center;">
+									<div class="photo col-xs-2" style="text-align: center;">
 										<img alt="avatar" src="${DocumentDTO.user_image}" width='70' height='70'>
 										<h4></h4>
 										<p>
@@ -40,7 +40,7 @@
 										</p>
 									</div>
 									<!-- 글내용 -->
-									<div class="col-lg-10">
+									<div class="col-xs-10">
 										<div class="panel-content" style="width: 100%; height: 100px; overflow: hidden; word-break: break-all;">
 											${DocumentDTO.content }
 										</div>
@@ -49,10 +49,10 @@
 									
 									<!-- 사진 -->
 									<div class="form-group">
-										<div class="control-label col-lg-2">
+										<div class="control-label col-xs-2">
 										</div>
-										<div class="filebox col-lg-10">
-											<div class="col-lg-12" id="photo_div">
+										<div class="filebox col-xs-10">
+											<div class="col-xs-12" id="photo_div">
 											<c:if test="${DocumentDTO.image != '' }">
 											<a href="${DocumentDTO.image }" data-lightbox="image-${DocumentDTO.dno }" data-title="사진">
 												<img src="${DocumentDTO.image }" width="500px" height="350px">
@@ -68,7 +68,7 @@
                         <div class="form-group">
                            <div class="goodclass">
                               <div style="display: none;">${DocumentDTO.dno }</div>
-                              <a class="control-label col-lg-2">
+                              <a class="control-label col-xs-2">
                                  좋아요&nbsp;&nbsp;
                                <c:choose>
                                	<c:when test="${DocumentDTO.good == 0 }">
@@ -81,7 +81,7 @@
                               </a>
                            </div>
                               
-                           <div class="col-lg-8">
+                           <div class="col-xs-8">
                               <i class="fa fa-lg fa-heart" style="color: red;">
                                  <span style="color: black;">&nbsp;${DocumentDTO.goodcnt }</span>
                               </i>
@@ -89,8 +89,8 @@
                         </div>
                         <!-- 태그 -->
                         <div class="form-group">
-                           <label class="control-label col-lg-2" for="content">태그</label>
-                           <div class="col-lg-9">
+                           <label class="control-label col-xs-2" for="content">태그</label>
+                           <div class="col-xs-9">
                               <c:if test="${DocumentDTO.tag != null }">
                               <c:set var="tags" value="${fn:split(DocumentDTO.tag,',' )}"/>
                               <c:forEach items="${tags }" var="tag">
@@ -102,8 +102,8 @@
                         
                         <!-- 댓글쓰기 -->
 								<div class="form-group">
-									<label class="control-label col-lg-2" for="reply_write">댓글</label>
-									<div class="col-lg-10">
+									<label class="control-label col-xs-2" for="reply_write">댓글</label>
+									<div class="col-xs-10">
 										<input id="reply_write${DocumentDTO.dno }" type="text" class="form-control" size="18" placeholder="댓글을 입력하세요..." onkeydown="return writeReply(event,${DocumentDTO.dno})">
 									</div>
 								</div>
@@ -141,8 +141,8 @@
 </c:forEach>
 <footer>
 	<!-- 페이징버튼 -->
-	<div id="page_div" class="col-lg-offset-4 col-lg-4">
-		<div class="col-lg-offset-1 col-lg-8">
+	<div id="page_div" class="col-xs-offset-4 col-xs-4">
+		<div class="col-xs-offset-1 col-xs-8">
 			<div class="btn-toolbar">
 				<div class="btn-group">
 					<c:if test="${pageMaker.prev }">

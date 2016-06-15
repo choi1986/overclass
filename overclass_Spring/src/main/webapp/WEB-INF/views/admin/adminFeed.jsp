@@ -7,19 +7,19 @@
 <!-- 헤더끝 -->
 <section id="my_page" class="wrapper">
 	<div class="row">
-		<div class="col-lg-12">
+		<div class="col-xs-12">
 		
 			<!-- 마이페이지메인 폼  -->
 			<div class="profile-widget profile-widget-info">
 				<div class="panel-body">
-					<div class="col-lg-2 col-lg-2">
+					<div class="col-xs-2 col-xs-2">
 						<h4>${user.user_name } </h4>
 						<div class="follow-ava">
 							<img src="${user.user_image }" width='70' height='70'>
 						</div>
 						<h4>${user.user_id } </h4>
 					</div>
-					<div class="col-lg-4 col-lg-4 follow-info">
+					<div class="col-xs-4 col-xs-4 follow-info">
 						<p>
 							<i class="fa fa-lg fa-github-alt">&nbsp;AdminPage</i>
 						</p>
@@ -36,7 +36,7 @@
 	</div>
 
 	<div class="row">
-		<div class="col-lg-12">
+		<div class="col-xs-12">
 			<section class="panel">
 			
 				<!-- 마이페이지메뉴폼 -->
@@ -56,10 +56,10 @@
 					<div class="tab-content">
 						<div id="recent-activity" class="tab-pane active">
 							<div class="profile-activity">
-								<div class="col-lg-offset-3 col-lg-5 portlets">
+								<div class="col-xs-offset-3 col-xs-5 portlets">
 
 								</div>
-								<div class="col-lg-4">
+								<div class="col-xs-4">
 									<div class="row">
 										<div class="col-md-offset-7 col-md-2 portlets">
 

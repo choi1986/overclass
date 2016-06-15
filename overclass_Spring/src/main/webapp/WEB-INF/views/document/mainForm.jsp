@@ -10,12 +10,12 @@
 <section id="my_page" class="wrapper">
 
 	<div class="row">
-		<div class="col-lg-12">
+		<div class="col-xs-12">
 			<section class="panel">
 				<div class="panel-body">
 					<div id="recent-activity" class="tab-pane active">
 						<div class="profile-activity">
-							<div class="col-lg-offset-3 col-lg-5 portlets">
+							<div class="col-xs-offset-3 col-xs-5 portlets">
 							
 								<!-- 글쓰기폼 시작 -->
 								<%@include file="../include/write.jsp"%>
@@ -23,7 +23,7 @@
 								
 							</div>
 
-							<div class="col-lg-4">
+							<div class="col-xs-4">
 								<div class="row">
 									<div class="col-md-offset-7 col-md-2 portlets">
 									<!-- 메세지폼 -->

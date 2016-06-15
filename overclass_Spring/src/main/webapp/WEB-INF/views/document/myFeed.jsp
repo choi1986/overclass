@@ -8,19 +8,19 @@
 <!-- 헤더끝 -->
 <section id="my_page" class="wrapper">
 	<div class="row">
-		<div class="col-lg-12">
+		<div class="col-xs-12">
 		
 			<!-- 마이페이지메인 폼  -->
 			<div class="profile-widget profile-widget-info">
 				<div class="panel-body">
-					<div class="col-lg-2 col-lg-2">
+					<div class="col-xs-2 col-xs-2">
 						<h4>${user.user_name }</h4>
 						<div class="follow-ava">
 							<img src="${user.user_image }" width='70' height='70'>
 						</div>
 						<h4>${user.user_id }</h4>
 					</div>
-					<div class="col-lg-4 col-lg-4 follow-info">
+					<div class="col-xs-4 col-xs-4 follow-info">
 						<p>
 							<i class="fa fa-lg fa-github-alt">&nbsp;MyPage</i>
 						</p>
@@ -37,7 +37,7 @@
 	</div>
 
 	<div class="row">
-		<div class="col-lg-12">
+		<div class="col-xs-12">
 			<section class="panel">
 			
 				<!-- 마이페이지메뉴폼 -->
@@ -59,14 +59,14 @@
 					<div class="tab-content">
 						<div id="recent-activity" class="tab-pane active">
 							<div class="profile-activity">
-								<div class="col-lg-offset-3 col-lg-5 portlets">
+								<div class="col-xs-offset-3 col-xs-5 portlets">
 
 									<!-- 글쓰기폼 시작 -->
 									<%@include file="../include/mywrite.jsp"%>
 									<!-- 글쓰기폼 끝 -->
 
 								</div>
-								<div class="col-lg-4">
+								<div class="col-xs-4">
 									<div class="row">
 										<div class="col-md-offset-7 col-md-2 portlets">
 
@@ -91,13 +91,13 @@
 								<!-- 마이페이지 수정폼끝 -->
 								<div class="panel-body bio-graph-info">
 								<form id="modify" method="post" action="/overclass/main/modifyUser">
-									<div class="col-lg-10">
+									<div class="col-xs-10">
 										<h1>프로필 수정</h1>
 										<div class="row">
 											<div class="bio-row">
 												<div class="form-group">
-													<label class="col-lg-3 control-label">아이디</label>
-													<div class="col-lg-3">
+													<label class="col-xs-3 control-label">아이디</label>
+													<div class="col-xs-3">
 														<input type="text" id="id" name="user_id" class="form-control" readonly
 															value="${user.user_id }">
 													</div>
@@ -105,8 +105,8 @@
 											</div>
 											<div class="bio-row">
 												<div class="form-group">
-													<label class="col-lg-3 control-label">이름</label>
-													<div class="col-lg-3">
+													<label class="col-xs-3 control-label">이름</label>
+													<div class="col-xs-3">
 														<input type="text" id="name" name="user_name" class="form-control" readonly
 															value="${user.user_name }">
 													</div>
@@ -114,8 +114,8 @@
 											</div>
 											<div class="bio-row">
 												<div class="form-group">
-													<label class="col-lg-3 control-label">이메일</label>
-													<div class="col-lg-4">
+													<label class="col-xs-3 control-label">이메일</label>
+													<div class="col-xs-4">
 														<input type="text" id="email" name="user_email" class="form-control"
 															value="${user.user_email }">
 													</div>
@@ -123,23 +123,23 @@
 											</div>
 											<div class="bio-row">
 												<div class="form-group">
-													<label class="col-lg-3 control-label">새 비밀번호</label>
-													<div class="col-lg-3">
+													<label class="col-xs-3 control-label">새 비밀번호</label>
+													<div class="col-xs-3">
 														<input type="text" id="pwd" name="user_pwd" class="form-control">
 													</div>
 												</div>
 											</div>
 											<div class="bio-row">
 												<div class="form-group">
-													<label class="col-lg-3 control-label">전화번호</label>
-													<div class="col-lg-2">
+													<label class="col-xs-3 control-label">전화번호</label>
+													<div class="col-xs-2">
 														<input type="text" id="tel1" name="user_tel1" class="form-control" value="${fn:substring(user.user_tel, 0, 3)}">
 													</div>
-													<div class="col-lg-2">
+													<div class="col-xs-2">
 														<input type="text" id="tel2" name="user_tel2" class="form-control" value="${fn:substring(user.user_tel, 4, 8)}">
 														
 													</div>
-													<div class="col-lg-2">
+													<div class="col-xs-2">
 														<input type="text" id="tel3" name="user_tel3" class="form-control" value="${fn:substring(user.user_tel, 9, 13)}">
 														
 													</div>
@@ -147,16 +147,16 @@
 											</div>
 											<div class="bio-row">
 												<div class="form-group">
-													<label class="col-lg-3 control-label">새 비밀번호 다시입력</label>
-													<div class="col-lg-3">
+													<label class="col-xs-3 control-label">새 비밀번호 다시입력</label>
+													<div class="col-xs-3">
 														<input type="text" id="pwd_confirm" name="user_pwd_confirm" class="form-control">
 													</div>
 												</div>
 											</div>
 											<div class="bio-row">
 												<div class="form-group">
-													<label class="col-lg-3 control-label">주소</label>
-													<div class="col-lg-3">
+													<label class="col-xs-3 control-label">주소</label>
+													<div class="col-xs-3">
 														<select class="form-control" id="loc" name="user_loc" onchange="" >
 															<option>-- 선택 --</option>
 															<option>경기도</option>
@@ -178,8 +178,8 @@
 											</div>
 											<div class="bio-row">
 												<div class="form-group">
-													<label class="col-lg-3 control-label">비밀번호찾기 질문</label>
-													<div class="col-lg-3">
+													<label class="col-xs-3 control-label">비밀번호찾기 질문</label>
+													<div class="col-xs-3">
 														<select class="form-control" id="pwedq" name="pwd_q">
 															<option>-- 선택 --</option>
 															<option>나의 고향은?</option>
@@ -194,8 +194,8 @@
 											</div>
 											<div class="bio-row">
 												<div class="form-group">
-													<label class="col-lg-3 control-label">생일</label>
-													<div class="col-lg-3">
+													<label class="col-xs-3 control-label">생일</label>
+													<div class="col-xs-3">
 														<input type="text" class="form-control"
 															value="${user.user_birth }" readonly>
 													</div>
@@ -203,16 +203,16 @@
 											</div>
 											<div class="bio-row">
 												<div class="form-group">
-													<label class="col-lg-3 control-label">비밀번호찾기 답변</label>
-													<div class="col-lg-3">
+													<label class="col-xs-3 control-label">비밀번호찾기 답변</label>
+													<div class="col-xs-3">
 														<input type="text" class="form-control" value="${user.user_pweda }">
 													</div>
 												</div>
 											</div>
 											<div class="bio-row">
 												<div class="form-group">
-													<label id="test" class="col-lg-3 control-label">첫번째 취미</label>
-													<div class="col-lg-3">
+													<label id="test" class="col-xs-3 control-label">첫번째 취미</label>
+													<div class="col-xs-3">
 														<select class="form-control" id="hobby1">
 															<option>-- 선택 --</option>
 															<option>음악 감상</option>
@@ -224,8 +224,8 @@
 											</div>
 											<div class="bio-row">
 												<div class="form-group">
-													<label id="test" class="col-lg-3 control-label">두번째 취미</label>
-													<div class="col-lg-3">
+													<label id="test" class="col-xs-3 control-label">두번째 취미</label>
+													<div class="col-xs-3">
 														<select class="form-control" id="hobby2">
 															<option>-- 선택 --</option>
 															<option>영화 감상</option>
@@ -236,15 +236,15 @@
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-lg-12"></label>
-												<div class="col-lg-offset-3 col-lg-3">
+												<label class="col-xs-12"></label>
+												<div class="col-xs-offset-3 col-xs-3">
 													<span data-toggle="modal" data-target="#update">
 														<button type="button" id="member_update" class="btn btn-success btn-block">수정</button>
 													</span>
 												</div>
 											</div>
 										</div>
-										<div class="col-lg-offset-12">
+										<div class="col-xs-offset-12">
 											<a href="#" id="member_leave" style="color: red;" class="fa fa-ban">
 												회원탈퇴
 											</a>
