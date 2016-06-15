@@ -1,5 +1,4 @@
 <%@page import="kr.co.overclass.dto.JoinDTO"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -52,7 +51,62 @@
 		//joinForm JQuery
 		$(document).ready(function(){
 			var cnt = 0; //birth 공백으로 바꾸는이벤트 1번만 하기위해 선언
-			duplCk = 0; // 중복검사 성공 or 실패 체크
+			var duplCk = 0; // 중복검사 성공 or 실패 체크
+			
+			//// 중복검사 후 데이터 되돌리는 코드
+			<% JoinDTO dto = new JoinDTO();
+				if(session.getAttribute("joinDupl")!=null)
+					dto = (JoinDTO)session.getAttribute("joinDupl");%>
+				if("<%=dto.getUser_id()%>"!="null") {
+					$("#panel").hide(); //로그인하는 아이디,비밀번호 감춤
+					$("#joinForm").show(); //회원가입폼 보여줌
+					$("#user_id").val("<%=dto.getUser_id()%>");
+					$("#user_pwd").val("<%=dto.getUser_pwd()%>");
+					$("#user_pwd_confirm").val("<%=dto.getUser_pwd_confirm()%>");
+					$("#user_name").val("<%=dto.getUser_name()%>");
+					$("#user_email").val("<%=dto.getUser_email()%>");
+					$("#user_tel1").val("<%=dto.getUser_tel1()%>");
+					$("#user_tel2").val("<%=dto.getUser_tel2()%>");
+					$("#user_tel3").val("<%=dto.getUser_tel3()%>");
+					$("#user_loc").val("<%=dto.getUser_loc()%>");
+					$("#user_hobby1").val("<%=dto.getUser_hobby1()%>");
+					$("#user_hobby2").val("<%=dto.getUser_hobby2()%>");
+					$("#user_birth").val("<%=dto.getUser_birth()%>"); cnt=1;
+					$("#radio[value='<%=dto.getRadio()%>']").attr("checked","checked");
+					$("#user_pwdq").val("<%=dto.getUser_pwdq()%>");
+					$("#user_pwda").val("<%=dto.getUser_pwda()%>");
+				}
+				<% String duplID = (String)session.getAttribute("joinDuplCk");%>
+					if ("<%=duplID%>"=="") {
+						BootstrapDialog.show({
+				    		title: '', //알러트 타이틀 이름
+				    		message: '중복검사 성공!', //알러트 내용
+				    		type: BootstrapDialog.TYPE_PRIMARY,
+				    		buttons: [{
+				    				label: '닫기',
+				    				action: function(cancel){
+				    					cancel.close();
+				    					}
+				    			}]
+				    	})
+						duplCk=1;
+					}
+					else if("<%=duplID%>"!="null") {
+						BootstrapDialog.show({
+				    		title: '', //알러트 타이틀 이름
+				    		message: '중복검사 실패!', //알러트 내용
+				    		type: BootstrapDialog.TYPE_DANGER,
+				    		buttons: [{
+				    				label: '닫기',
+				    				action: function(cancel){
+				    					cancel.close();
+				    					}
+				    			}]
+				    	})
+						duplCk=0;
+					}
+					<% session.removeAttribute("joinDupl");
+					 session.removeAttribute("joinDuplCk");%>
 			
 		$("#join").click(function() { //로그인 화면에서 회원가입버튼 눌렀을시
 			$("#panel").hide(); //로그인하는 아이디,비밀번호 감춤
@@ -96,15 +150,10 @@
 		    				label: '닫기',
 		    				action: function(cancel){
 		    					cancel.close();
-		    			    	$("#register_form").attr('action','/overclass/dupl');
-		    			    	$("#dupl").click();
 		    					}
 		    			}]
 		    	})
-			}
-			else {
-		    	$("#register_form").attr('action','/overclass/join');
-		    	$("#register_form").submit();
+				$("#register_form").attr('action','/overclass/dupl');
 			}
 		}) //join_join click 
 		$("#dupl").click(function() { //회원가입폼에서 중복검사버튼 눌렀을시
@@ -127,156 +176,7 @@
 
 
 <body class="login-img3-body">
-
-	<c:if test="${sessionScope.joinDupl.user_id!=null}"> <!-- 중복 검사 후 페이지에 기존의 데이터 뿌려주는 부분 -->
-		<script type="text/javascript">
-			$(document).ready(function(){
-				$("#panel").hide(); //로그인하는 아이디,비밀번호 감춤
-				$("#joinForm").show(); //회원가입폼 보여줌
-			
-				$("#user_id").val("${sessionScope.joinDupl.user_id}");
-				$("#user_pwd").val("${sessionScope.joinDupl.user_pwd}");
-				$("#user_pwd_confirm").val("${sessionScope.joinDupl.user_pwd_confirm}");
-				$("#user_name").val("${sessionScope.joinDupl.user_name}");
-				$("#user_email").val("${sessionScope.joinDupl.user_email}");
-				$("#user_tel1").val("${sessionScope.joinDupl.user_tel1}");
-				$("#user_tel2").val("${sessionScope.joinDupl.user_tel2}");
-				$("#user_tel3").val("${sessionScope.joinDupl.user_tel3}");
-				$("#user_loc").val("${sessionScope.joinDupl.user_loc}");
-				$("#user_hobby1").val("${sessionScope.joinDupl.user_hobby1}");
-				$("#user_hobby2").val("${sessionScope.joinDupl.user_hobby2}");
-				$("#user_birth").val("${sessionScope.joinDupl.user_birth}"); cnt=1;
-				$("#radio[value='${sessionScope.joinDupl.radio}']").attr("checked","checked");
-				$("#user_pwdq").val("${sessionScope.joinDupl.user_pwdq}");
-				$("#user_pwda").val("${sessionScope.joinDupl.user_pwda}");
-			})
-		</script>
-	</c:if>
-	
-	<c:choose>
-		<c:when test="${sessionScope.joinDuplCk==''}"> <!-- 중복 검사 성공 모달 -->
-			<script type="text/javascript">
-				$(document).ready(function(){
-					BootstrapDialog.show({
-    					title: '', //알러트 타이틀 이름
-    					message: '중복검사 성공!', //알러트 내용
-    					type: BootstrapDialog.TYPE_PRIMARY,
-    					buttons: [{
-    							label: '닫기',
-    							action: function(cancel){
-    								cancel.close();
-    								}
-    						}]
-    				})
-					duplCk=1;
-				})
-			</script>
-		</c:when>
-		<c:when test="${sessionScope.joinDuplCk!=null}"> <!-- 중복 검사 실패 모달 -->
-			<script type="text/javascript">
-				$(document).ready(function(){
-					BootstrapDialog.show({
-	    				title: '', //알러트 타이틀 이름
-	    				message: '중복검사 실패!', //알러트 내용
-	    				type: BootstrapDialog.TYPE_DANGER,
-	    				buttons: [{
-	    						label: '닫기',
-	    						action: function(cancel){
-	    							cancel.close();
-	    							}
-	    					}]
-	    			})
-					duplCk=0;
-				})
-				</script>
-		</c:when>
-	</c:choose>
-	<c:remove var="joinDupl" scope="session" /> <!-- 중복에 쓰인 세션들 닫기 -->
-	<c:remove var="joinDuplCk" scope="session" />
-	
-	<c:choose>
-		<c:when test="${sessionScope.searchID=='0'}"> <!-- 아이디 찾기에서 정보가 틀렸을때 -->
-			<script type="text/javascript">
-				BootstrapDialog.show({
-					title : '', //알러트 타이틀 이름
-					message : '해당하는 아이디를 찾을 수 없습니다!', //알러트 내용
-					type : BootstrapDialog.TYPE_DANGER,
-					buttons : [ {
-						label : '닫기',
-						action : function(cancel) {
-							cancel.close();
-						}
-					} ]
-				})
-			</script>
-		</c:when>
-		<c:when test="${sessionScope.searchID!=null}"> <!-- 아이디 찾기 성공했을 때 -->
-			<script type="text/javascript">
-				BootstrapDialog.show({
-					title : '', //알러트 타이틀 이름
-					message : '아이디는 [${sessionScope.searchID}] 입니다!', //알러트 내용
-					type : BootstrapDialog.TYPE_PRIMARY,
-					buttons : [ {
-						label : '닫기',
-						action : function(cancel) {
-							cancel.close();
-						}
-					} ]
-				})
-			</script>
-		</c:when>
-	</c:choose>
-	<c:remove var="searchID" scope="session" /> <!-- 아이디 찾기 세션 종료 -->
-	
-	<c:choose>
-		<c:when test="${sessionScope.searchPwd=='suc'}"> <!-- 비밀번호 찾기 성공 -->
-			<script type="text/javascript">
-				BootstrapDialog.show({
-					title : '', //알러트 타이틀 이름
-					message : '비밀번호를 정상적으로 변경하였습니다!', //알러트 내용
-					type : BootstrapDialog.TYPE_PRIMARY,
-					buttons : [ {
-						label : '닫기',
-						action : function(cancel) {
-							cancel.close();
-						}
-					} ]
-				})
-			</script>
-		</c:when>
-		<c:when test="${sessionScope.searchPwd=='fail'}"> <!-- 비밀번호 찾기에서 정보가 틀렸을때 -->
-			<script type="text/javascript">
-				BootstrapDialog.show({
-					title : '', //알러트 타이틀 이름
-					message : '입력 정보를 다시 확인해주세요!', //알러트 내용
-					type : BootstrapDialog.TYPE_DANGER,
-					buttons : [ {
-						label : '닫기',
-						action : function(cancel) {
-							cancel.close();
-						}
-					} ]
-				})
-			</script>
-		</c:when>
-		<c:when test="${sessionScope.searchPwd=='pwdFail'}"> <!-- 비밀번호 찾기에서 비밀번호와 확인 비밀번호가 같지 않을때 -->
-			<script type="text/javascript">
-				BootstrapDialog.show({
-					title : '', //알러트 타이틀 이름
-					message : '비밀번호와 확인 비밀번호가 같지 않습니다!', //알러트 내용
-					type : BootstrapDialog.TYPE_DANGER,
-					buttons : [ {
-						label : '닫기',
-						action : function(cancel) {
-							cancel.close();
-						}
-					} ]
-				})
-			</script>
-		</c:when>
-	</c:choose>
-	<c:remove var="searchPwd" scope="session" /> <!-- 비밀번호 찾기 세션 종료 -->
-
+  
 <!-- --------------------------로그인화면---------------------------------------------- -->
 <div id="loginForm" style="display: ">
   <div id="panel" style="display:">
@@ -479,7 +379,7 @@
                                           <div class="col-sm-offset-2 col-sm-10">
                                        		<div class="col-sm-3"></div>
                                               <div id="change-transitions" class="row">
-											     <button type="button" data-value="rotateInDownLeft" class="btn btn-primary btn-lg" id="join_join">가입</button>
+											     <button type="summit" data-value="rotateInDownLeft" class="btn btn-primary btn-lg" id="join_join">가입</button>
         		    						<button type="button" data-value="fadeInDown" class="btn btn-danger btn-lg" id="back">취소</button>
 										      </div>
                                           </div>

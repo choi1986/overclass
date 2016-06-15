@@ -74,8 +74,9 @@ public class UserDAOImpl implements UserDAO {
 	
 	@Override
 	public boolean searchPwd(SearchPwdDTO dto) throws Exception {
-		if (session.update("user.searchPwd", dto)==1) return true;
-		else return false;
+		//if (session.update("user.searchPwd", dto))
+		System.out.println(session.update("user.searchPwd", dto));
+		return true;
 	}
 
 }
