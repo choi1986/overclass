@@ -140,7 +140,7 @@
 </div>
 </c:forEach>
 <footer>
-	<!-- 페이징버튼 -->
+	<!-- 페이징버튼1 -->
 	<div id="page_div" class="col-xs-offset-4 col-xs-4">
 		<div class="col-xs-offset-1 col-xs-8">
 			<div class="btn-toolbar">
