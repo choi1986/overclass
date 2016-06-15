@@ -1,14 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="amdin">
+<mapper namespace="admin">
 	<insert id="ban">
 		insert into oc_ban (ban_id, ban_content) 
 		values(#{ban_id}, #{ban_content})
 	</insert>
-		
+	
+	<insert id="report">
+		insert into oc_report (reportno, reporter, dno, content)
+		values (oc_reprot_seq.nextval, #{reporter}, #{dno}, #{content})
+	</insert>
 		
 		
 	<select id="">
-	
+		select dno, writer, content, tag, writedate, image, goodcnt, replycnt, user_image
+			from(select dno, writer, content, tag, writedate, image, goodcnt, replycnt, user_image
+				from oc_document, oc_user
+					where writer IN 
+						(select sender 
+						from oc_friend_rel 
+						where receiver = #{user_id}
+						union
+						select receiver 
+						from oc_friend_rel
+						where sender = #{user_id}
+						union
+						select user_id
+						from oc_user
+						where user_id = #{user_id}
+						) and oc_document.writer=oc_user.user_id
+			order by writedate desc)
 	</select>
 </mapper>

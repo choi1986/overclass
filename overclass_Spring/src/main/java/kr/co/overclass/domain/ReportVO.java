@@ -1,4 +1,4 @@
-package kr.co.overclass.dto;
+package kr.co.overclass.domain;
 
 import java.util.Date;
 

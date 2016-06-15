@@ -18,7 +18,7 @@
 									<li><a href="#" onclick="delDoc(${DocumentDTO.dno })" style="color: black;" class="fa fa-bitbucket"> 게시글 삭제</a></li>
 								</c:if>
 								
-								<li><a href="#" onclick="reportDoc(${DocumentDTO.dno },${DocumentDTO.writer },${DocumentDTO.content },${DocumentDTO.tag },${DocumentDTO.image })" style="color: red;" class="fa fa-exclamation-circle"> 게시글 신고하기</a></li>
+								<li><a href="#" onclick="reportDoc(${DocumentDTO.dno })" style="color: red;" class="fa fa-exclamation-circle"> 게시글 신고하기</a></li>
 							</ul>
 						</div>
 					</div>
@@ -215,7 +215,7 @@ function delDoc(dno) {
 			}]
 	})
 }
-function reportDoc(dno,writer,content,tag,image) {
+function reportDoc(dno) {
 	BootstrapDialog.show({
 		title: '', //알러트 타이틀 이름
 		message: '이 글을 신고 하시겠습니까?', //알러트 내용
@@ -233,11 +233,7 @@ function reportDoc(dno,writer,content,tag,image) {
 						"X-HTTP-Method-Override":"POST"
 					},
 					data:JSON.stringify({
-						dno:dno,
-						writer:writer,
-						content:content,
-						tag:tag,
-						image:image
+						dno:dno
 					}),success:function(result){
 						BootstrapDialog.show({
 				    		title: '', //알러트 타이틀 이름
