@@ -16,20 +16,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.overclass.domain.Criteria;
 import kr.co.overclass.domain.PageMaker;
+import kr.co.overclass.domain.ReportVO;
 import kr.co.overclass.dto.DocumentDTO;
+import kr.co.overclass.persistence.adminDAO;
+import kr.co.overclass.service.AdminService;
 import kr.co.overclass.service.DocumentService;
 
-@RestController
+@Controller
 @RequestMapping("/admin")
 public class AdminController {
 	private static final Logger logger
     = LoggerFactory.getLogger(AdminController.class);
 	
 	@Inject
-	private DocumentService service;
+	private AdminService service;
 	
 	@RequestMapping(value="",method=RequestMethod.GET)
 	public String admin(Criteria cri, Model model, HttpServletRequest request)throws Exception{
@@ -61,11 +65,11 @@ public class AdminController {
 		return "admin/adminFeed";
 	}
 	
-	@RequestMapping(value="/reportDoc/{dno}",method=RequestMethod.POST)
-	public ResponseEntity<String> report(@PathVariable("dno")int dno) {
-		ResponseEntity<String> entity = null;
+	@RequestMapping(value="/reportDoc",method=RequestMethod.POST)
+	public String report(ReportVO vo, RedirectAttributes attr) throws Exception {
+		service.report(vo);
+		attr.addFlashAttribute("msg", "Write_SUCCESS");
 		
-		
-		return entity;
+		return "redirect:/main/myFeed";
 	}
 }

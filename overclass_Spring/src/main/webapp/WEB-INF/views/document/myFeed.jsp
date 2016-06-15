@@ -1,3 +1,4 @@
+<%@page import="kr.co.overclass.domain.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -6,6 +7,7 @@
 <!-- 헤더 -->
 <%@include file="../include/header.jsp"%>
 <!-- 헤더끝 -->
+<% UserVO user = (UserVO)session.getAttribute("login"); %>
 <section id="my_page" class="wrapper">
 	<div class="row">
 		<div class="col-lg-12">
@@ -91,7 +93,7 @@
 								<!-- 마이페이지 수정폼끝 -->
 								<div class="panel-body bio-graph-info">
 								<form id="modify" method="post" action="/overclass/main/modifyUser">
-									<div class="form-group col-lg-10">
+									<div class="col-lg-10">
 										<h1>프로필 수정</h1>
 										<div class="row">
 											<div class="bio-row">
@@ -205,7 +207,7 @@
 												<div class="form-group">
 													<label class="col-lg-3 control-label">비밀번호찾기 답변</label>
 													<div class="col-lg-3">
-														<input type="text" class="form-control" value="${user.user_pweda }">
+														<input type="text" class="form-control" value="${user.user_pwda }">
 													</div>
 												</div>
 											</div>
@@ -337,7 +339,7 @@
 		$("#hobby2").val("${user.user_hobby2}");
 		
 		//프로필수정에서 비밀번호질문 selected
-		$("#pwedq").val("${user.user_pwedq}");
+		$("#pwedq").val("${user.user_pwdq}");
 		//사진미리보기
 		function readURL(input) {
 			if (input.files && input.files[0]) {
@@ -389,23 +391,54 @@
 				div3.attr("style","display: none;")
 		      }
 		   })
-		   // 좋아요클릭
 		   $(".goodclass").click(function() {
-		      
-		      // 이게 dno
-		      var goodtemp = this.firstChild.nextSibling.firstChild.nodeValue;
-		      //var goodtemp = this.firstChild.nextSibling.nextSibling.nextSibling;
-		      var goodtmp = '#good_icon'+goodtemp;
-		      
-		      //var div = $("#reply_div")
-		      var goodspan = $(goodtmp);
-		      if(goodspan.attr("class") == "fa fa-lg fa-thumbs-o-up"){
-		         goodspan.attr("class","fa fa-lg fa-thumbs-up")
-		         // 여기다가 좋아요 했다는 내용 서버전송
-		      } else {
-		         goodspan.attr("class","fa fa-lg fa-thumbs-o-up")
-		         // 여기다가 좋아요 취소했다는 내용 서버전송
-		      }
+	      
+	      // 이게 dno
+	      var goodtemp = this.firstChild.nextSibling.firstChild.nodeValue;
+	      //var goodtemp = this.firstChild.nextSibling.nextSibling.nextSibling;
+	      var goodtmp = '#good_icon'+goodtemp;
+	      var goodcount = '#good_count'+goodtemp;
+	      
+	      //var div = $("#reply_div")
+	      var goodspan = $(goodtmp);
+	      if(goodspan.attr("class") == "fa fa-lg fa-thumbs-o-up"){
+	    	// 여기가 좋아요
+	         $.ajax({
+	        	 url:'/overclass/good/',
+	        	 type:'post',
+				headers:{
+						"Content-Type":"application/json",
+						"X-HTTP-Method-Override":"POST"
+				},
+				data:JSON.stringify({
+					good_user:'<%=user.getUser_id()%>',
+					dno:goodtemp
+				}),
+				success:function(result){
+					//$(goodcount).val(result);
+					$(goodcount).html('&nbsp'+result);
+			        goodspan.attr("class","fa fa-lg fa-thumbs-up");
+				}
+	         });
+	      } else {
+	         // 여기가 좋아요 취소
+	         $.ajax({
+	        	 url:'/overclass/good/delete',
+	        	 type:'post',
+				headers:{
+						"Content-Type":"application/json",
+						"X-HTTP-Method-Override":"POST"
+				},
+				data:JSON.stringify({
+					good_user:'<%=user.getUser_id()%>',
+					dno:goodtemp
+				}),
+				success:function(result){
+					$(goodcount).html('&nbsp'+result);
+					goodspan.attr("class","fa fa-lg fa-thumbs-o-up");
+				}
+	         });
+	      }
 		   })
 		   
 		//글등록 모달정의
@@ -435,7 +468,7 @@
 		    			cssClass: 'btn-primary', //알러트 버튼 색바꾸기
 		    			hotkey:13,
 		    			action: function(confirm) {
-		    				var formObj = $("form[role='form']");    				
+		    				var formObj = $("#writeDoc");    				
 		    				formObj.submit();
 		    				confirm.close()
 						}

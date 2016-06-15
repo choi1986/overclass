@@ -52,7 +52,6 @@ public class DocumentServiceImpl implements DocumentService {
 		// dao에서 리스트 가져오기
 		List<DocumentDTO> list = dao.mainFeed_list(cri, user_id);
 		
-		logger.info(list.size()+"");
 		// 좋아요 가져오기 위한 map생성
 		Map<String, Object> map = new HashMap<>();
 		map.put("good_user", user_id);

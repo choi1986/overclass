@@ -216,7 +216,7 @@ $(document).ready(function() {
 	    			label: '등록', //알러트 버튼 이름
 	    			cssClass: 'btn-primary', //알러트 버튼 색바꾸기
 	    			action: function(confirm) {
-	    				var formObj = $("form[role='form']");    				
+	    				var formObj = $("#writeDoc");    				
 	    				formObj.submit();
 	    				confirm.close()
 					}
