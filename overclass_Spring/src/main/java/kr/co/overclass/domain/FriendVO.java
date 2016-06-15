@@ -4,6 +4,12 @@ public class FriendVO {
 	private String sender;//보내는 사람
 	private String receiver;//받는 사람
 	
+	public FriendVO(String sender, String receiver) {
+		super();
+		this.sender = sender;
+		this.receiver = receiver;
+	}
+
 	@Override
 	public String toString() {
 		return "[보내는 사람: "+ sender + ", 받는 사람: "+ receiver + "]";
