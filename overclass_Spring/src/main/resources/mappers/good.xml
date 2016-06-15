@@ -20,4 +20,14 @@
 		delete from oc_good
 		where good_user = #{good_user} and dno = #{dno}
 	</delete>
+	
+	<select id="count" resultType="int">
+		select dno, count(good_user)
+		from oc_good
+		where dno IN
+		 <foreach collection="dnonum" item="item" open="(" separator="," close=")">
+                    #{item}
+         </foreach>
+         group by dno
+	</select>
 </mapper>
