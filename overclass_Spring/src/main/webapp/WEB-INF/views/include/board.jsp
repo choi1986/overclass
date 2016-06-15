@@ -1,7 +1,9 @@
+<%@page import="kr.co.overclass.domain.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<% UserVO user = (UserVO)session.getAttribute("login"); %>
 <c:forEach items="${list }" var="DocumentDTO">
 <div id="main_Board">
 	<div class="row">
@@ -18,7 +20,11 @@
 									<li><a href="#" onclick="delDoc(${DocumentDTO.dno })" style="color: black;" class="fa fa-bitbucket"> 게시글 삭제</a></li>
 								</c:if>
 								
+<<<<<<< HEAD
 								<li><a href="#" onclick="reportDoc(${DocumentDTO.dno })" style="color: red;" class="fa fa-exclamation-circle"> 게시글 신고하기</a></li>
+=======
+								<li><a href="#" onclick="reportDoc()" style="color: red;" class="fa fa-exclamation-circle"> 게시글 신고하기</a></li>
+>>>>>>> branch 'master' of https://github.com/choi1986/overclass.git
 							</ul>
 						</div>
 					</div>
@@ -336,7 +342,7 @@ var template = Handlebars.compile(source);
 					+ "'> >> </a></li>";
 		}
 		
-		$(reply_page).attr("style","display: show;")
+		$(reply_page).attr("style","display: show;");
 		$(reply_page).html(pageStr);
 	}
 	
@@ -368,6 +374,13 @@ var template = Handlebars.compile(source);
 		$.ajax({
 			url:'/overclass/reply/'+rno,
 			type:'delete',
+			headers:{
+				"Content-Type":"application/json",
+				"X-HTTP-Method-Override":"POST"
+			},
+			data:JSON.stringify({
+				user_id:'<%=user.getUser_id()%>'
+			}),
 			success:function(result){
 				if(result=='SUCCESS'){
 					// 성공모달
@@ -425,7 +438,8 @@ var template = Handlebars.compile(source);
 						},
 						data:JSON.stringify({
 							dno:dno,
-							content:$(replyWriteTxt).val()
+							content:$(replyWriteTxt).val(),
+							replyer:'<%=user.getUser_id()%>'
 						}),
 						success:function(result){
 							if(result=='SUCCESS'){
@@ -442,11 +456,11 @@ var template = Handlebars.compile(source);
 											var divtemp2 = '#reply_icon'+dno+'_2'
 											 var div = $(divtemp);
 										      var div2 = $(divtemp2);
+										   // 댓글목록 갱신
+												replyDisplayPage(dno,1);
 										    if(div2.attr("class") == "fa fa-chevron-up"){
-										    	div.slideToggle("slow")
-											     div2.attr("class","fa fa-chevron-down")
-											  // 댓글목록 갱신
-													replyDisplayPage(dno,1);
+										    	div.slideToggle("slow");
+											     div2.attr("class","fa fa-chevron-down");
 											} 
 											confirm.close();
 										}
@@ -465,7 +479,7 @@ var template = Handlebars.compile(source);
 										cssClass : 'btn-danger', //알러트 버튼 색바꾸기
 										hotkey : 13,
 										action : function(confirm) {
-											confirm.close()
+											confirm.close();
 										}
 									} ]
 								})
