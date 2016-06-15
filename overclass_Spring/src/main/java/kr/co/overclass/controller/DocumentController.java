@@ -40,7 +40,7 @@ public class DocumentController {
 	
 	//메인피드에서 글쓰기
 	@RequestMapping(value="/writeDoc", method=RequestMethod.POST)
-	public String create(DocumentVO vo, RedirectAttributes attr, MultipartFile file, HttpSession session) throws Exception {
+	public String create(String url, DocumentVO vo, RedirectAttributes attr, MultipartFile file, HttpSession session) throws Exception {
 		String imageName = file.getOriginalFilename();
 		String formatName = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")+1);
 		String savedName = uploadFile(file.getOriginalFilename(), file.getBytes());
@@ -61,33 +61,11 @@ public class DocumentController {
 		logger.info("사진: [파일이름: "+file.getOriginalFilename()+
 				", "+"파일크기: "+ Math.floor(((float)file.getSize()/1048576)*100f)/100f +"MB"+
 				", "+"파일타입: "+file.getContentType()+"]");
-		return "redirect:/main";
-	}
-	
-	//마이피드에서 글쓰기
-	@RequestMapping(value="/myFeed/writeDoc",method=RequestMethod.POST)
-	public String mycreate(DocumentVO vo, RedirectAttributes attr, MultipartFile file, HttpSession session) throws Exception {
-		String imageName = file.getOriginalFilename();
-		String formatName = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")+1);
-		String savedName = uploadFile(file.getOriginalFilename(), file.getBytes());
-		logger.info("파일이름: "+imageName);
-		uploadPath = session.getServletContext().getRealPath("/resources/upload");
-		String downloadPath = "/overclass/resources/upload/";
-
-		//이미지 안올렸을때 처리
-		if(imageName.trim().equals("")){
-			service.create(vo);
+		if( url.equals("my") ) {
+			return "redirect:/main/myFeed";
 		} else {
-			vo.setImage(downloadPath+savedName);
-			service.create(vo);
+			return "redirect:/main";
 		}
-		attr.addFlashAttribute("msg", "Write_SUCCESS");
-		
-		logger.info("글쓰기...[" + vo + "]");	
-		logger.info("사진: [파일이름: "+file.getOriginalFilename()+
-				", "+"파일크기: "+ Math.floor(((float)file.getSize()/1048576)*100f)/100f +"MB"+
-				", "+"파일타입: "+file.getContentType()+"]");
-		return "redirect:/main/myFeed";
 	}
 	
 	//파일업로드
@@ -102,24 +80,18 @@ public class DocumentController {
 		return savedName;
 	}
 	
-	//메인피드 글 삭제
+	//메인피드, 마이피드 글 삭제
 	@RequestMapping(value="/removeDoc",method=RequestMethod.GET)
-	public String delete(int dno, RedirectAttributes attr) throws Exception {
+	public String mydelete(int dno, RedirectAttributes attr, String url) throws Exception {
 		service.delete(dno);
 		attr.addFlashAttribute("msg", "Remove_SUCCESS");
 		
 		logger.info("게시물 삭제: ["+ dno +"]");
-		return "redirect:/main";
-	}
-	
-	//마이피드 글 삭제
-	@RequestMapping(value="/myFeed/removeDoc",method=RequestMethod.GET)
-	public String mydelete(int dno, RedirectAttributes attr) throws Exception {
-		service.delete(dno);
-		attr.addFlashAttribute("msg", "Remove_SUCCESS");
-		
-		logger.info("게시물 삭제: ["+ dno +"]");
-		return "redirect:/main/myFeed";
+		if(url.equals("my")) {
+			return "redirect:/main/myFeed";
+		} else {
+			return "redirect:/main";
+		}
 	}
 	
 	//메인피드 글 조회

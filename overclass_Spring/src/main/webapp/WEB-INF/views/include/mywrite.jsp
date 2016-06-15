@@ -42,7 +42,7 @@
 
 			<!-- 글쓰기폼-->
 			<div class="form quick-post">
-				<form role="form" class="form-horizontal" action="/overclass/main/myFeed/writeDoc"
+				<form role="form" id="writeDoc" class="form-horizontal" action="/overclass/main/writeDoc?url=my"
 					method="post" enctype="multipart/form-data">
 					<!-- 타이틀 -->
 					<div class="form-group">

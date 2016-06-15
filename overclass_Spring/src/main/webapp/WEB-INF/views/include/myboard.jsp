@@ -230,7 +230,7 @@
 				cssClass: 'btn-danger', //알러트 버튼 색바꾸기
 				hotkey:13,
 				action: function(confirm) {
-					location.href="/overclass/main/myFeed/removeDoc?dno="+dno;
+					location.href="/overclass/main/removeDoc?dno="+dno+"&url=my";
 					confirm.close()
 				}
 				},{
