@@ -14,7 +14,7 @@
   </delete>
   
   <!-- 친구 관계 검색(1명) -->
-  <select id="select_rel" resultType="FriendVO">
+  <select id="select_rel" resultType="friend">
   	select * from oc_friend_rel
   	where sender = #{sender}
   	and receiver = #{receiver}
@@ -33,7 +33,7 @@
   </delete>
   
   <!-- 받은친구요청 검색 -->
-  <select id="select_req" resultType="FriendVO">
+  <select id="select_req" resultType="friend">
   	select * from oc_friend_req
   	where sender = #{sender}
   	and receiver = #{receiver}
