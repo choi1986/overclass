@@ -42,7 +42,6 @@ public class DocumentController {
 	@RequestMapping(value="/writeDoc", method=RequestMethod.POST)
 	public String create(String url, DocumentVO vo, RedirectAttributes attr, MultipartFile file, HttpSession session) throws Exception {
 		String imageName = file.getOriginalFilename();
-		String formatName = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")+1);
 		String savedName = uploadFile(file.getOriginalFilename(), file.getBytes());
 		logger.info("파일이름: "+imageName);
 		uploadPath = session.getServletContext().getRealPath("/resources/upload");
@@ -94,21 +93,27 @@ public class DocumentController {
 		}
 	}
 	
-	//메인피드, 마이피드 글 조회
-	@RequestMapping(value={"","/myFeed"},method=RequestMethod.GET)
-	public String mainFeed_page(Criteria cri, Model model, HttpServletRequest request)throws Exception{
+	//메인피드, 마이피드 글 조회 + 페이징
+	@RequestMapping(value={"","/myFeed","/mainFeed_Page","/myFeed_Page"},method=RequestMethod.GET)
+	public String mainFeed_page(String page, Model model, HttpServletRequest request)throws Exception{
 		String url = request.getServletPath();
 		UserVO vo = (UserVO) request.getSession().getAttribute("login");
 		String user_id = vo.getUser_id();
+		Criteria cri = new Criteria();
+		
+		if ( page != null) {
+			cri.setPage(Integer.parseInt(page));
+		}
 		PageMaker maker = new PageMaker();
-		String value = "";
+		String value = null;
 		maker.setCri(cri);
 		List<DocumentDTO> list = null;
-		if( url.equals("/main/myFeed")) {
+		if( url.equals("/main/myFeed") || url.equals("/main/myFeed_Page") ) {
 			list = service.myFeed_list(cri, user_id);
 			maker.setTotalCount(service.myFeed_count(user_id));
 			value = "document/myFeed";
-		} else {
+		} else if( url.equals("/main") || url.equals("/main/mainFeed_Page")) {
+			logger.info("\""+user_id+"\"로 접속, "+vo.toString());
 			maker.setTotalCount(service.mainFeed_count(user_id));
 			list = service.mainFeed_list(cri, user_id);
 			value = "document/mainForm";
@@ -117,36 +122,6 @@ public class DocumentController {
 		model.addAttribute("list", list);
 		model.addAttribute("pageMaker", maker);
 		
-		logger.info("\""+user_id+"\"로 접속, "+vo.toString());
-		return value;
-	}
-	
-	//메인피드, 마이피드 페이징
-	@RequestMapping(value={"/mainFeed_Page","/myFeed_Page"},method=RequestMethod.GET)
-	public String mainFeed_list(int page, Criteria cri, Model model, HttpServletRequest request)throws Exception{
-		UserVO vo = (UserVO) request.getSession().getAttribute("login");
-		String user_id = vo.getUser_id();
-		PageMaker maker = new PageMaker();
-		String url = request.getServletPath();
-		String value = "";
-		List<DocumentDTO> list = null;
-		maker.setCri(cri);
-		if ( url.equals("/myFeed_Page") ) {
-			list = service.myFeed_list(cri, user_id);
-			maker.setTotalCount(service.myFeed_count(user_id));
-			cri.setPage(page);
-			value = "document/myFeed";
-		} else {
-			list = service.mainFeed_list(cri, user_id);
-			maker.setTotalCount(service.mainFeed_count(user_id));
-			cri.setPage(page);
-			value = "document/mainForm";
-		}
-		model.addAttribute("list", list);
-		model.addAttribute("user", vo);
-		model.addAttribute("pageMaker", maker);
-		
-		logger.info("페이지 : "+ cri.getPage());
 		return value;
 	}
 }

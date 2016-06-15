@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 	
@@ -34,7 +35,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception { // /loginPost 호출 후 실행하는 인터셉터
 																			// 컨트롤러에서 모델 객체에 저장한 유저 정보를 로그인 성공 후 세션에 저장 
-		
 		HttpSession session = request.getSession();
 		ModelMap modelMap = modelAndView.getModelMap();
 		Object userVO = modelMap.get("userVO"); // 모델에서 객체 얻어옴

@@ -3,6 +3,7 @@ package kr.co.overclass.dto;
 public class SearchPwdDTO {
 	private String user_id;
 	private String user_pwd;
+	private String user_pwd_confirm;
 	private String user_pwdq;
 	private String user_pwda;
 
@@ -32,6 +33,14 @@ public class SearchPwdDTO {
 	}
 
 	public void setUser_pwd(String user_pwd) {
+		this.user_pwd = user_pwd;
+	}
+
+	public String getUser_pwd_confirm() {
+		return user_pwd;
+	}
+
+	public void setUser_pwd_confirm(String user_pwd) {
 		this.user_pwd = user_pwd;
 	}
 
