@@ -140,7 +140,7 @@
 </div>
 </c:forEach>
 <footer>
-	<!-- 페이징버튼1 -->
+	<!-- 페이징버튼 -->
 	<div id="page_div" class="col-xs-offset-4 col-xs-4">
 		<div class="col-xs-offset-1 col-xs-8">
 			<div class="btn-toolbar">
@@ -267,37 +267,39 @@ var source = $("#template").html();
 var template = Handlebars.compile(source);
 	var result = '${msg}';
 	
-	if (result == 'Write_SUCCESS') {
-		BootstrapDialog.show({
-    		title: '', //알러트 타이틀 이름
-    		message: '글이 등록 되었습니다.', //알러트 내용
-    		buttons: [{ //알러트 버튼 정의
-    				icon: 'fa fa-check',
-    				label: '확인',
-    				cssClass: 'btn-primary',
-    				hotkey:13,
-    				action: function(cancel){
-    					cancel.close();
-   					}
-    			}]
-    	}) 
-		
-	} else if (result == 'Remove_SUCCESS') {
-		BootstrapDialog.show({
-    		title: '', //알러트 타이틀 이름
-    		message: '글이 삭제 되었습니다.', //알러트 내용
-    		type: BootstrapDialog.TYPE_DANGER,
-    		buttons: [{ //알러트 버튼 정의
-    				icon: 'fa fa-check',
-    				label: '확인',
-    				cssClass: 'btn-danger',
-    				hotkey:13,
-    				action: function(cancel){
-    					cancel.close();
-   					}
-    			}]
-    	})
-	}
+	$(document).ready(function() {
+		if (result == 'Write_SUCCESS') {
+			BootstrapDialog.show({
+	    		title: '', //알러트 타이틀 이름
+	    		message: '글이 등록 되었습니다.', //알러트 내용
+	    		buttons: [{ //알러트 버튼 정의
+	    				icon: 'fa fa-check',
+	    				label: '확인',
+	    				cssClass: 'btn-primary',
+	    				hotkey:13,
+	    				action: function(cancel){
+	    					cancel.close();
+	   					}
+	    			}]
+	    	}) 
+			
+		} else if (result == 'Remove_SUCCESS') {
+			BootstrapDialog.show({
+	    		title: '', //알러트 타이틀 이름
+	    		message: '글이 삭제 되었습니다.', //알러트 내용
+	    		type: BootstrapDialog.TYPE_DANGER,
+	    		buttons: [{ //알러트 버튼 정의
+	    				icon: 'fa fa-check',
+	    				label: '확인',
+	    				cssClass: 'btn-danger',
+	    				hotkey:13,
+	    				action: function(cancel){
+	    					cancel.close();
+	   					}
+	    			}]
+	    	})
+		}
+	})
 
 	var replyPage = 1;
 
