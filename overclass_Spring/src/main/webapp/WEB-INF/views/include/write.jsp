@@ -81,7 +81,7 @@
 						</div>
 					</div>
 
-					<!-- 등록버튼d -->
+					<!-- 등록버튼 -->
 					<div class="form-group">
 						<div class="col-lg-offset-4 col-lg-4">
 							<button type="button" id="docWriteSubmitBt" class="btn btn-primary btn-block">등록</button>
