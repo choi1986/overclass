@@ -34,16 +34,16 @@ public class FriendDAOImpl implements FriendDAO {
 
 	@Override
 	public void oc_insert_req(FriendVO vo) throws Exception {
-		session.insert("friend.insert_rel",vo);
+		session.insert("friend.insert_req",vo);
 	}
 
 	@Override
 	public void oc_delete_req(FriendVO vo) throws Exception {
-		session.delete("friend.delete_rel",vo);
+		session.delete("friend.delete_req",vo);
 	}
 
 	@Override
 	public void oc_select_req(FriendVO vo) throws Exception {
-		session.selectList("friend.select_rel",vo);
+		session.selectList("friend.select_req",vo);
 	}
 }
