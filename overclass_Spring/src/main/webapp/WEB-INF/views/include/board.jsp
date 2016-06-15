@@ -3,7 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<% UserVO user = (UserVO)session.getAttribute("login"); %>
+<% UserVO user2 = (UserVO)session.getAttribute("login"); %>
 <c:forEach items="${list }" var="DocumentDTO">
 <div id="main_Board">
 	<div class="row">
@@ -19,6 +19,7 @@
 								<c:if test="${DocumentDTO.writer == user.user_id}">
 									<li><a href="#" onclick="delDoc(${DocumentDTO.dno })" style="color: black;" class="fa fa-bitbucket"> 게시글 삭제</a></li>
 								</c:if>
+								
 								<li><a href="#" onclick="reportDoc(${DocumentDTO.dno })" style="color: red;" class="fa fa-exclamation-circle"> 게시글 신고하기</a></li>
 							</ul>
 						</div>
@@ -51,7 +52,7 @@
 									<div class="form-group">
 										<div class="control-label col-lg-2">
 										</div>
-										<div class="filebox col-lg-10">
+										<div class="filebox col-lg-8">
 											<div class="col-lg-12" id="photo_div">
 											<c:if test="${DocumentDTO.image != '' }">
 											<a href="${DocumentDTO.image }" data-lightbox="image-${DocumentDTO.dno }" data-title="사진">
@@ -83,7 +84,7 @@
                               
                            <div class="col-lg-8">
                               <i class="fa fa-lg fa-heart" style="color: red;">
-                                 <span style="color: black;">&nbsp;${DocumentDTO.goodcnt }</span>
+                                 <span id="good_count${DocumentDTO.dno }" style="color: black;">&nbsp;${DocumentDTO.goodcnt }</span>
                               </i>
                            </div>
                         </div>
@@ -234,7 +235,7 @@ function reportDoc(dno) {
 						"X-HTTP-Method-Override":"POST"
 					},
 					data:JSON.stringify({
-						dno:dno
+						dno:dno,
 					}),success:function(result){
 						BootstrapDialog.show({
 				    		title: '', //알러트 타이틀 이름
@@ -337,7 +338,7 @@ var template = Handlebars.compile(source);
 					+ "'> >> </a></li>";
 		}
 		
-		$(reply_page).attr("style","display: show;");
+		$(reply_page).attr("style","display: show;")
 		$(reply_page).html(pageStr);
 	}
 	
@@ -374,7 +375,7 @@ var template = Handlebars.compile(source);
 				"X-HTTP-Method-Override":"POST"
 			},
 			data:JSON.stringify({
-				user_id:'<%=user.getUser_id()%>'
+				user_id:'<%=user2.getUser_id()%>'
 			}),
 			success:function(result){
 				if(result=='SUCCESS'){
@@ -434,7 +435,7 @@ var template = Handlebars.compile(source);
 						data:JSON.stringify({
 							dno:dno,
 							content:$(replyWriteTxt).val(),
-							replyer:'<%=user.getUser_id()%>'
+							replyer:'<%=user2.getUser_id()%>'
 						}),
 						success:function(result){
 							if(result=='SUCCESS'){
@@ -451,11 +452,11 @@ var template = Handlebars.compile(source);
 											var divtemp2 = '#reply_icon'+dno+'_2'
 											 var div = $(divtemp);
 										      var div2 = $(divtemp2);
-										   // 댓글목록 갱신
-												replyDisplayPage(dno,1);
 										    if(div2.attr("class") == "fa fa-chevron-up"){
-										    	div.slideToggle("slow");
-											     div2.attr("class","fa fa-chevron-down");
+										    	div.slideToggle("slow")
+											     div2.attr("class","fa fa-chevron-down")
+											  // 댓글목록 갱신
+												replyDisplayPage(dno,1);
 											} 
 											confirm.close();
 										}
@@ -474,7 +475,7 @@ var template = Handlebars.compile(source);
 										cssClass : 'btn-danger', //알러트 버튼 색바꾸기
 										hotkey : 13,
 										action : function(confirm) {
-											confirm.close();
+											confirm.close()
 										}
 									} ]
 								})

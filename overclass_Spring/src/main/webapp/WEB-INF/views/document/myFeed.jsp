@@ -91,7 +91,7 @@
 								<!-- 마이페이지 수정폼끝 -->
 								<div class="panel-body bio-graph-info">
 								<form id="modify" method="post" action="/overclass/main/modifyUser">
-									<div class="col-lg-10">
+									<div class="form-group col-lg-10">
 										<h1>프로필 수정</h1>
 										<div class="row">
 											<div class="bio-row">

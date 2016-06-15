@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <div style="position: fixed;">
-	<div class="col-lg-offset-12">
+	<div class="col-xs-offset-12">
 		<a href="#"><img id="msg_icon" src="/overclass/resources/img/메세지.png" style="position: fixed;"></a>
 	</div>
 	<div class="panel panel-default" id="msg_bar">

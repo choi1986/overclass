@@ -34,4 +34,14 @@ public class GoodDAOImpl implements GoodDAO {
 		session.delete("good.delete",map);
 	}
 
+	@Override
+	public List<GoodDTO> count(Map<String, Object> map) throws Exception {
+		// 게시글 조회할때 굿카운트 가져옴
+		return session.selectList("good.count",map);
+	}
+
+	@Override
+	public int good_count(int dno) throws Exception {
+		return session.selectOne("good.good_count",dno);
+	}
 }

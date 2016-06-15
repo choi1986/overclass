@@ -1,4 +1,5 @@
 <%@page import="java.util.List"%>
+<%@page import="kr.co.overclass.domain.UserVO"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -6,7 +7,7 @@
 <!-- 헤더 -->
 <%@include file="../include/header.jsp"%>
 <!-- 헤더끝 -->
-
+<% UserVO user = (UserVO)session.getAttribute("login"); %>
 <section id="my_page" class="wrapper">
 
 	<div class="row">
@@ -146,15 +147,47 @@ $(document).ready(function() {
 	      var goodtemp = this.firstChild.nextSibling.firstChild.nodeValue;
 	      //var goodtemp = this.firstChild.nextSibling.nextSibling.nextSibling;
 	      var goodtmp = '#good_icon'+goodtemp;
+	      var goodcount = '#good_count'+goodtemp;
 	      
 	      //var div = $("#reply_div")
 	      var goodspan = $(goodtmp);
 	      if(goodspan.attr("class") == "fa fa-lg fa-thumbs-o-up"){
-	         goodspan.attr("class","fa fa-lg fa-thumbs-up")
-	         // 여기다가 좋아요 했다는 내용 서버전송
+	    	// 여기가 좋아요
+	         $.ajax({
+	        	 url:'/overclass/good/',
+	        	 type:'post',
+				headers:{
+						"Content-Type":"application/json",
+						"X-HTTP-Method-Override":"POST"
+				},
+				data:JSON.stringify({
+					good_user:'<%=user.getUser_id()%>',
+					dno:goodtemp
+				}),
+				success:function(result){
+					//$(goodcount).val(result);
+					$(goodcount).html('&nbsp'+result);
+			        goodspan.attr("class","fa fa-lg fa-thumbs-up");
+				}
+	         });
 	      } else {
-	         goodspan.attr("class","fa fa-lg fa-thumbs-o-up")
-	         // 여기다가 좋아요 취소했다는 내용 서버전송
+	         // 여기가 좋아요 취소
+	         $.ajax({
+	        	 url:'/overclass/good/delete',
+	        	 type:'post',
+				headers:{
+						"Content-Type":"application/json",
+						"X-HTTP-Method-Override":"POST"
+				},
+				data:JSON.stringify({
+					good_user:'<%=user.getUser_id()%>',
+					dno:goodtemp
+				}),
+				success:function(result){
+					$(goodcount).html('&nbsp'+result);
+					goodspan.attr("class","fa fa-lg fa-thumbs-o-up");
+				}
+	         });
 	      }
 	   })
 	//글등록 모달정의
