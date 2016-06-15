@@ -84,7 +84,7 @@
                               
                            <div class="col-lg-8">
                               <i class="fa fa-lg fa-heart" style="color: red;">
-                                 <span style="color: black;">&nbsp;${DocumentDTO.goodcnt }</span>
+                                 <span id="good_count${DocumentDTO.dno }" style="color: black;">&nbsp;${DocumentDTO.goodcnt }</span>
                               </i>
                            </div>
                         </div>

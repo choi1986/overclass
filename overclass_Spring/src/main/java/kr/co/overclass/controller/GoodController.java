@@ -27,6 +27,7 @@ public class GoodController {
 	
 	@RequestMapping(value="/", method=RequestMethod.POST)
 	public ResponseEntity<String> goodInsert(@RequestBody GoodVO vo){
+		// 좋아요를 해주면서, 반환값으로 현재 그 게시물의 좋아요 갯수를 넘김
 		ResponseEntity<String> entity = null;
 		
 		try {
@@ -35,7 +36,10 @@ public class GoodController {
 			map.put("good_user", vo.getGood_user());
 			service.insert(map);
 			logger.info("좋아요 글번호 : "+vo.getDno());
-			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+			
+			int good_count = service.count(vo.getDno());
+			logger.info(vo.getDno()+"번 글의 좋아요 갯수 : "+good_count);
+			entity = new ResponseEntity<String>(good_count+"", HttpStatus.OK);
 		} catch (Exception e) {
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
@@ -44,6 +48,7 @@ public class GoodController {
 	
 	@RequestMapping(value="/delete", method=RequestMethod.POST)
 	public ResponseEntity<String> goodDelete(@RequestBody GoodVO vo){
+		// 좋아요를 취소 해주면서, 반환값으로 현재 그 게시물의 좋아요 갯수를 넘김
 		ResponseEntity<String> entity = null;
 		
 		try {
@@ -52,7 +57,10 @@ public class GoodController {
 			map.put("good_user", vo.getGood_user());
 			service.delete(map);
 			logger.info("좋아요해제 글번호 : "+vo.getDno());
-			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+			
+			int good_count = service.count(vo.getDno());
+			logger.info(vo.getDno()+"번 글의 좋아요 갯수 : "+good_count);
+			entity = new ResponseEntity<String>(good_count+"", HttpStatus.OK);
 		} catch (Exception e) {
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}

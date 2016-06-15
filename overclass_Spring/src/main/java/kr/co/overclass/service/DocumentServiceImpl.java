@@ -66,13 +66,26 @@ public class DocumentServiceImpl implements DocumentService {
 		
 		// DB에서 굿을 했는지 리스트를 받아옴
 		List<GoodDTO> goodlist = good_dao.search(map);
+		// DB에서 굿 카운트 받아옴
+		List<GoodDTO> goodcount = good_dao.count(map);
+		for(int i =0 ; i<goodcount.size();i++){
+		logger.info("글번호("+i+"번) : "+goodcount.get(i).getDno()+" 좋아요갯수 : "+goodcount.get(i).getGood());
+		}
+		
 		
 		for(int i = 0; i<list.size() ; i++) {
 			list.get(i).setGood(0);
+			list.get(i).setGoodcnt(0);
 			for(int j = 0; j<goodlist.size();j++) {
 				// 받아온 리스트의 글번호와, 조회된 리스트의 글번호가 일치하는지를 검사 (일치 = 굿을 했다는뜻)
 				if(list.get(i).getDno() == goodlist.get(j).getDno()) {
 					list.get(i).setGood(1);
+				}
+			}
+			for(int j = 0; j<goodcount.size();j++){
+				// 굿이 몇개되었는지 카운트해서 일치하는 dno에 입력
+				if(list.get(i).getDno() == goodcount.get(j).getDno()) {
+					list.get(i).setGoodcnt(goodcount.get(j).getGood());
 				}
 			}
 		}
