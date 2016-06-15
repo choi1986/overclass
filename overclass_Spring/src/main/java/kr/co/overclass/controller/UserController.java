@@ -43,11 +43,7 @@ public class UserController {
 			int amount=60*60*24*7; //초단위
 			Date sessionlimit = new Date(System.currentTimeMillis()+(1000*amount));
 			service.keepLogin(vo.getUser_id(), session.getId() , sessionlimit);
-			System.out.println(vo.getUser_id());
-			System.out.println(session.getId());
-			System.out.println(sessionlimit);
 		}
-		System.out.println(dto.isUseCookie());
 		
 		return "/member/loginForm2"; // 해당 유저가 없다면 로그인 화면으로 리턴, 있다면 세션에 로그인 정보 저장하고 메인으로.
 	}
@@ -63,8 +59,6 @@ public class UserController {
 	
 	@RequestMapping(value="/join") // 회원 가입 버튼 눌린 후
 	public String join (JoinDTO dto, HttpSession session, Model model) throws Exception { // 회원 가입 화면으로
-		System.out.println(dto.toString());
-		System.out.println("-----------------------");
 		UserVO vo = new UserVO();
 		vo.setUser_id(dto.getUser_id());
 		vo.setUser_pwd(dto.getUser_pwd());
@@ -82,7 +76,6 @@ public class UserController {
 		vo.setUser_gender(dto.getRadio());
 		vo.setUser_pwdq(dto.getUser_pwdq());
 		vo.setUser_pwda(dto.getUser_pwda());
-		System.out.println(vo.toString());
 		service.createUser(vo);
 		return "/member/loginForm2";
 	}
