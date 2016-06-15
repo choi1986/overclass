@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="friend">
+  <!-- 친구 관계 입력 --> 	
+  <insert id="oc_insert_rel">
+  	insert into oc_friend_rel values(#sender,#receiver)
+  </insert>
+  
+  <!-- 친구 관계 삭제 -->
+  <delete id="oc_delete_rel">
+  	delete from oc_friend_rel
+  	where sender = #sender
+  	and receiver = #receiver
+  </delete>
+  
+  <!-- 친구 관계 검색(1명) -->
+  <select id="oc_select_rel">
+  	select * from oc_friend_rel
+  	where sender = #sender
+  	and receiver = #receiver
+  </select>
+  
+  <!-- 친구 요청 입력 -->
+  <insert id="oc_insert_req">
+  	insert into oc_friend_req values(#sender,#receiver)
+  </insert>
+  
+  <!-- 친구 요청 삭제 -->
+  <delete id="oc_delete_req">
+  	delete from oc_friend_req
+  	where sender = #sender
+  	and receiver = #receiver
+  </delete>
+  
+  <!-- 받은친구요청 검색 -->
+  <select id="oc_select_req">
+  	select * from oc_friend_req
+  	where sender = #sender
+  	and receiver = #receiver
+  </select>
+</mapper>
