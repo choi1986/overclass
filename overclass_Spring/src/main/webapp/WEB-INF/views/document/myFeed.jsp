@@ -353,7 +353,7 @@
 			    	return;
 			    }
 			    
-				var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
+				var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성d
 				reader.onload = function(e) {
 					//파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
 					$('#photo').attr('src', e.target.result);
