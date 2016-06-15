@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="msg">
+	<select id="read" resultType="msg">
+		select * from oc_msg
+		where receiver = #{receiver}
+		order by writedate desc
+	</select>
+	<insert id="write">
+		insert into oc_msg
+		values(#{sender},#{receiver},#{content},sysdate,#{read})
+	</insert>
+	<select id="count" resultType="int">
+		select count(read)
+		from oc_msg
+		where receiver = #{receiver} and read = 0
+	</select>
+</mapper>

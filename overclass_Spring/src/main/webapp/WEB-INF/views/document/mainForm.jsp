@@ -56,6 +56,8 @@ lightbox.option({
 })
 </script>
 </body>
+
+
 <script type="text/javascript">
 
 var timer;
@@ -287,6 +289,9 @@ $(document).ready(function() {
 		}
 	})
 	
+	
+	
+	
 	// 알림바 메시지 클릭 이벤트
 	$("#mail_notificatoin_bar").click(function() { 
 		$.ajax({
@@ -303,6 +308,11 @@ $(document).ready(function() {
 		});
 	});
 
+	
+	
+	
+	
+	
 	$("#alert_notificatoin_bar").click(function() { // 알림바 알림 클릭 이벤트
 		$.ajax({
 			url : "addfunctionaction.do?action=notice",

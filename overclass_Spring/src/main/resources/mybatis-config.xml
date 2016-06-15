@@ -6,6 +6,7 @@
 		<typeAlias type="kr.co.overclass.dto.ReplyDTO" alias="reply_dto"/>
 		<typeAlias type="kr.co.overclass.domain.UserVO" alias="user"/>
 		<typeAlias type="kr.co.overclass.dto.GoodDTO" alias="good"/>
+		<typeAlias type="kr.co.overclass.dto.MsgVO" alias="msg"/>
 		<typeAlias type="kr.co.overclass.domain.DocumentVO" alias="document"/>
 		<typeAlias type="kr.co.overclass.dto.DocumentDTO" alias="document_dto"/>
 		<!-- <package name="com.kosta.domain"/> -->
