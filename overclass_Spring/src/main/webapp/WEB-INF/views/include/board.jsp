@@ -1,13 +1,11 @@
-<%@page import="kr.co.overclass.domain.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<% UserVO user = (UserVO)session.getAttribute("login"); %>
 <c:forEach items="${list }" var="DocumentDTO">
 <div id="main_Board">
 	<div class="row">
-		<div class="col-xs-offset-3 col-xs-5 portlets">
+		<div class="col-lg-offset-3 col-lg-5 portlets">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<div class="pull-right">
@@ -19,6 +17,7 @@
 								<c:if test="${DocumentDTO.writer == user.user_id}">
 									<li><a href="#" onclick="delDoc(${DocumentDTO.dno })" style="color: black;" class="fa fa-bitbucket"> 게시글 삭제</a></li>
 								</c:if>
+								
 								<li><a href="#" onclick="reportDoc(${DocumentDTO.dno })" style="color: red;" class="fa fa-exclamation-circle"> 게시글 신고하기</a></li>
 							</ul>
 						</div>
@@ -32,7 +31,7 @@
 							<form class="form-horizontal">
 								<!-- 타이틀 -->
 								<div class="form-group">
-									<div class="photo col-xs-2" style="text-align: center;">
+									<div class="photo col-lg-2" style="text-align: center;">
 										<img alt="avatar" src="${DocumentDTO.user_image}" width='70' height='70'>
 										<h4></h4>
 										<p>
@@ -40,7 +39,7 @@
 										</p>
 									</div>
 									<!-- 글내용 -->
-									<div class="col-xs-10">
+									<div class="col-lg-10">
 										<div class="panel-content" style="width: 100%; height: 100px; overflow: hidden; word-break: break-all;">
 											${DocumentDTO.content }
 										</div>
@@ -49,10 +48,10 @@
 									
 									<!-- 사진 -->
 									<div class="form-group">
-										<div class="control-label col-xs-2">
+										<div class="control-label col-lg-2">
 										</div>
-										<div class="filebox col-xs-10">
-											<div class="col-xs-12" id="photo_div">
+										<div class="filebox col-lg-10">
+											<div class="col-lg-12" id="photo_div">
 											<c:if test="${DocumentDTO.image != '' }">
 											<a href="${DocumentDTO.image }" data-lightbox="image-${DocumentDTO.dno }" data-title="사진">
 												<img src="${DocumentDTO.image }" width="500px" height="350px">
@@ -68,7 +67,7 @@
                         <div class="form-group">
                            <div class="goodclass">
                               <div style="display: none;">${DocumentDTO.dno }</div>
-                              <a class="control-label col-xs-2">
+                              <a class="control-label col-lg-2">
                                  좋아요&nbsp;&nbsp;
                                <c:choose>
                                	<c:when test="${DocumentDTO.good == 0 }">
@@ -81,7 +80,7 @@
                               </a>
                            </div>
                               
-                           <div class="col-xs-8">
+                           <div class="col-lg-8">
                               <i class="fa fa-lg fa-heart" style="color: red;">
                                  <span style="color: black;">&nbsp;${DocumentDTO.goodcnt }</span>
                               </i>
@@ -89,8 +88,8 @@
                         </div>
                         <!-- 태그 -->
                         <div class="form-group">
-                           <label class="control-label col-xs-2" for="content">태그</label>
-                           <div class="col-xs-9">
+                           <label class="control-label col-lg-2" for="content">태그</label>
+                           <div class="col-lg-9">
                               <c:if test="${DocumentDTO.tag != null }">
                               <c:set var="tags" value="${fn:split(DocumentDTO.tag,',' )}"/>
                               <c:forEach items="${tags }" var="tag">
@@ -102,8 +101,8 @@
                         
                         <!-- 댓글쓰기 -->
 								<div class="form-group">
-									<label class="control-label col-xs-2" for="reply_write">댓글</label>
-									<div class="col-xs-10">
+									<label class="control-label col-lg-2" for="reply_write">댓글</label>
+									<div class="col-lg-10">
 										<input id="reply_write${DocumentDTO.dno }" type="text" class="form-control" size="18" placeholder="댓글을 입력하세요..." onkeydown="return writeReply(event,${DocumentDTO.dno})">
 									</div>
 								</div>
@@ -141,8 +140,8 @@
 </c:forEach>
 <footer>
 	<!-- 페이징버튼 -->
-	<div id="page_div" class="col-xs-offset-4 col-xs-4">
-		<div class="col-xs-offset-1 col-xs-8">
+	<div id="page_div" class="col-lg-offset-4 col-lg-4">
+		<div class="col-lg-offset-1 col-lg-8">
 			<div class="btn-toolbar">
 				<div class="btn-group">
 					<c:if test="${pageMaker.prev }">
@@ -234,7 +233,7 @@ function reportDoc(dno) {
 						"X-HTTP-Method-Override":"POST"
 					},
 					data:JSON.stringify({
-						dno:dno
+						dno:dno,
 					}),success:function(result){
 						BootstrapDialog.show({
 				    		title: '', //알러트 타이틀 이름
@@ -267,39 +266,37 @@ var source = $("#template").html();
 var template = Handlebars.compile(source);
 	var result = '${msg}';
 	
-	$(document).ready(function() {
-		if (result == 'Write_SUCCESS') {
-			BootstrapDialog.show({
-	    		title: '', //알러트 타이틀 이름
-	    		message: '글이 등록 되었습니다.', //알러트 내용
-	    		buttons: [{ //알러트 버튼 정의
-	    				icon: 'fa fa-check',
-	    				label: '확인',
-	    				cssClass: 'btn-primary',
-	    				hotkey:13,
-	    				action: function(cancel){
-	    					cancel.close();
-	   					}
-	    			}]
-	    	}) 
-			
-		} else if (result == 'Remove_SUCCESS') {
-			BootstrapDialog.show({
-	    		title: '', //알러트 타이틀 이름
-	    		message: '글이 삭제 되었습니다.', //알러트 내용
-	    		type: BootstrapDialog.TYPE_DANGER,
-	    		buttons: [{ //알러트 버튼 정의
-	    				icon: 'fa fa-check',
-	    				label: '확인',
-	    				cssClass: 'btn-danger',
-	    				hotkey:13,
-	    				action: function(cancel){
-	    					cancel.close();
-	   					}
-	    			}]
-	    	})
-		}
-	})
+	if (result == 'Write_SUCCESS') {
+		BootstrapDialog.show({
+    		title: '', //알러트 타이틀 이름
+    		message: '글이 등록 되었습니다.', //알러트 내용
+    		buttons: [{ //알러트 버튼 정의
+    				icon: 'fa fa-check',
+    				label: '확인',
+    				cssClass: 'btn-primary',
+    				hotkey:13,
+    				action: function(cancel){
+    					cancel.close();
+   					}
+    			}]
+    	}) 
+		
+	} else if (result == 'Remove_SUCCESS') {
+		BootstrapDialog.show({
+    		title: '', //알러트 타이틀 이름
+    		message: '글이 삭제 되었습니다.', //알러트 내용
+    		type: BootstrapDialog.TYPE_DANGER,
+    		buttons: [{ //알러트 버튼 정의
+    				icon: 'fa fa-check',
+    				label: '확인',
+    				cssClass: 'btn-danger',
+    				hotkey:13,
+    				action: function(cancel){
+    					cancel.close();
+   					}
+    			}]
+    	})
+	}
 
 	var replyPage = 1;
 
@@ -339,7 +336,7 @@ var template = Handlebars.compile(source);
 					+ "'> >> </a></li>";
 		}
 		
-		$(reply_page).attr("style","display: show;");
+		$(reply_page).attr("style","display: show;")
 		$(reply_page).html(pageStr);
 	}
 	
@@ -371,13 +368,6 @@ var template = Handlebars.compile(source);
 		$.ajax({
 			url:'/overclass/reply/'+rno,
 			type:'delete',
-			headers:{
-				"Content-Type":"application/json",
-				"X-HTTP-Method-Override":"POST"
-			},
-			data:JSON.stringify({
-				user_id:'<%=user.getUser_id()%>'
-			}),
 			success:function(result){
 				if(result=='SUCCESS'){
 					// 성공모달
@@ -435,8 +425,7 @@ var template = Handlebars.compile(source);
 						},
 						data:JSON.stringify({
 							dno:dno,
-							content:$(replyWriteTxt).val(),
-							replyer:'<%=user.getUser_id()%>'
+							content:$(replyWriteTxt).val()
 						}),
 						success:function(result){
 							if(result=='SUCCESS'){
@@ -453,11 +442,11 @@ var template = Handlebars.compile(source);
 											var divtemp2 = '#reply_icon'+dno+'_2'
 											 var div = $(divtemp);
 										      var div2 = $(divtemp2);
-										   // 댓글목록 갱신
-												replyDisplayPage(dno,1);
 										    if(div2.attr("class") == "fa fa-chevron-up"){
-										    	div.slideToggle("slow");
-											     div2.attr("class","fa fa-chevron-down");
+										    	div.slideToggle("slow")
+											     div2.attr("class","fa fa-chevron-down")
+											  // 댓글목록 갱신
+													replyDisplayPage(dno,1);
 											} 
 											confirm.close();
 										}
@@ -476,7 +465,7 @@ var template = Handlebars.compile(source);
 										cssClass : 'btn-danger', //알러트 버튼 색바꾸기
 										hotkey : 13,
 										action : function(confirm) {
-											confirm.close();
+											confirm.close()
 										}
 									} ]
 								})

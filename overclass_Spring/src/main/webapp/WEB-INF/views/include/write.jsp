@@ -46,14 +46,14 @@
 					method="post" enctype="multipart/form-data">
 					<!-- 타이틀 -->
 					<div class="form-group">
-						<div class="photo col-xs-2" style="text-align: center;">
+						<div class="photo col-lg-2" style="text-align: center;">
 							<img alt="avatar" src="${user.user_image}" width='70' height='70'>
 							<h4></h4>
 							<p>
 								<b>${user.user_id }</b>
 							</p>
 						</div>
-						<div class="col-xs-10">
+						<div class="col-lg-10">
 							<input type="hidden" id="action" name="action" value="contentInsert"> 
 								<input type="hidden" id="writer" name="writer" value="test1"<%-- <%=user.getUser_id()%> --%>>
 							<textarea class="form-control" name="content" id="content" rows="5"></textarea>
@@ -62,20 +62,20 @@
 
 					<!-- 태그 -->
 					<div class="form-group">
-						<label class="control-label col-xs-2" for="content">태그</label>
-						<div class="col-xs-10">
+						<label class="control-label col-lg-2" for="content">태그</label>
+						<div class="col-lg-10">
 							<input name="tag" id="tagsinput" class="tagsinput" />							
 						</div>
 					</div>
 
 					<!-- 파일 -->
 					<div class="form-group">
-						<div class="filebox control-label col-xs-2">
+						<div class="filebox control-label col-lg-2">
 							<label for="file" class="btn btn-primary"><span class="fa fa-camera-retro" style="color: #007aff;"></span> 사진올리기</label>
 							<input type="file" id="file" name="file" accept="image/gif, image/jpeg, image/png">
 						</div>
-						<div class="filebox col-xs-10">
-						<div class="col-xs-12" id="photo_div" style="display: none;">
+						<div class="filebox col-lg-10">
+						<div class="col-lg-12" id="photo_div" style="display: none;">
 							<img src="" id="photo" width="250px" height="200px">
 						</div>
 						</div>
@@ -83,7 +83,7 @@
 
 					<!-- 등록버튼 -->
 					<div class="form-group">
-						<div class="col-xs-offset-4 col-xs-4">
+						<div class="col-lg-offset-4 col-lg-4">
 							<button type="button" id="docWriteSubmitBt" class="btn btn-primary btn-block">등록</button>
 						</div>
 					</div>

@@ -6,7 +6,7 @@
 <%-- 	<%
 		for (int i = 0; i < list.size(); i++) {
 	%> --%>
-	<div class="col-xs-offset-3 col-xs-5 portlets">
+	<div class="col-lg-offset-3 col-lg-5 portlets">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="pull-right">
@@ -27,7 +27,7 @@
 						<form class="form-horizontal">
 							<!-- 타이틀 -->
 							<div class="form-group">
-								<div class="photo col-xs-2" style="text-align: center;">
+								<div class="photo col-lg-2" style="text-align: center;">
 									<img alt="avatar" src='${report.report_image }' width='70'
 										height='70'>
 									<h4></h4>
@@ -35,7 +35,7 @@
 										<b>${report.report_id } </b>
 									</p>
 								</div>
-								<div class="col-xs-10">
+								<div class="col-lg-10">
 									<div class="panel-content"
 										style="width: 100%; height: 100px; overflow: hidden; word-break: break-all;">
 										${DocumentDTO.content }
@@ -45,10 +45,10 @@
 							
 							<!-- 사진 -->
 							<div class="form-group">
-								<div class="control-label col-xs-2">
+								<div class="control-label col-lg-2">
 								</div>
-								<div class="filebox col-xs-10">
-									<div class="col-xs-12" id="photo_div">
+								<div class="filebox col-lg-10">
+									<div class="col-lg-12" id="photo_div">
 									<c:if test="${DocumentDTO.image != '' }">
 									<a href="${DocumentDTO.image }" data-lightbox="image-${DocumentDTO.dno }" data-title="사진">
 										<img src="${DocumentDTO.image }" width="500px" height="350px">
@@ -62,8 +62,8 @@
 							
 							<!-- 태그 -->
 							<div class="form-group">
-								<label class="control-label col-xs-2" for="content">태그</label>
-								<div class="col-xs-9">
+								<label class="control-label col-lg-2" for="content">태그</label>
+								<div class="col-lg-9">
 									<%-- <%
 										if (list.get(i).getTag() != null) {
 												String tag[] = list.get(i).getTag().split(",");
@@ -79,8 +79,8 @@
 							
 							<!-- 신고사유 -->
 							<div class="form-group">
-								<label class="control-label col-xs-2" for="content">신고사유</label>
-								<div class="col-xs-9">
+								<label class="control-label col-lg-2" for="content">신고사유</label>
+								<div class="col-lg-9">
 									<div class="panel-content" style="width: 100%; height: 100px; overflow: hidden; word-break: break-all;">
 										${Report.content }
 									</div>
@@ -89,15 +89,15 @@
 							
 							<!-- 신고누적 회수 -->
 							<div class="form-group">
-								<label class="control-label col-xs-2" for="content">신고누적회수</label>
-								<div class="col-xs-9">
+								<label class="control-label col-lg-2" for="content">신고누적회수</label>
+								<div class="col-lg-9">
 									<i class="fa fa-check">1회</i>
 								</div>
 							</div>
 
 							<div class="form-group">
 								<!-- Buttons -->
-								<div class="col-xs-offset-4 col-xs-4">
+								<div class="col-lg-offset-4 col-lg-4">
 									<button type="submit" id="s" class="btn btn-danger">제제</button>&nbsp;
 									<button type="submit" id="s" class="btn btn-default">취소</button>
 								</div>
@@ -116,7 +116,7 @@
 
 <footer>
 	<!-- 페이징버튼 -->
-	<div id="page_div" class="col-xs-offset-5 col-xs-5">
+	<div id="page_div" class="col-lg-offset-5 col-lg-5">
 		<%-- <%
 			int totalPage = (int) request.getAttribute("totalPage");
 			int currentPage = (int) request.getAttribute("currentPage");
