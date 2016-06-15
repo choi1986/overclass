@@ -77,7 +77,7 @@
 						</div>
 						<div class="filebox col-lg-10">
 						<div class="col-lg-12" id="photo_div" style="display: none;">
-							<img src="" id="photo" width="250px" height="200px">
+							<img class="img-responsive img-thumbnail" src="" id="photo" width="250px" height="200px">
 						</div>
 						</div>
 					</div>
