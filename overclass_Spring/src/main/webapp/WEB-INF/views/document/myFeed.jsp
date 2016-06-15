@@ -91,7 +91,7 @@
 								<!-- 마이페이지 수정폼끝 -->
 								<div class="panel-body bio-graph-info">
 								<form id="modify" method="post" action="/overclass/main/modifyUser">
-									<div class="form-group col-lg-10">
+									<div class="col-lg-10">
 										<h1>프로필 수정</h1>
 										<div class="row">
 											<div class="bio-row">
@@ -205,7 +205,7 @@
 												<div class="form-group">
 													<label class="col-lg-3 control-label">비밀번호찾기 답변</label>
 													<div class="col-lg-3">
-														<input type="text" class="form-control" value="${user.user_pweda }">
+														<input type="text" class="form-control" value="${user.user_pwda }">
 													</div>
 												</div>
 											</div>
@@ -337,7 +337,7 @@
 		$("#hobby2").val("${user.user_hobby2}");
 		
 		//프로필수정에서 비밀번호질문 selected
-		$("#pwedq").val("${user.user_pwedq}");
+		$("#pwedq").val("${user.user_pwdq}");
 		//사진미리보기
 		function readURL(input) {
 			if (input.files && input.files[0]) {

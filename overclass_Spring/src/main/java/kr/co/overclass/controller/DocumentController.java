@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import kr.co.overclass.domain.Criteria;
 import kr.co.overclass.domain.DocumentVO;
 import kr.co.overclass.domain.PageMaker;
+import kr.co.overclass.domain.UserVO;
 import kr.co.overclass.dto.DocumentDTO;
 import kr.co.overclass.service.DocumentService;
 
@@ -54,12 +55,12 @@ public class DocumentController {
 			vo.setImage(downloadPath+savedName);
 			service.create(vo);
 		}
+		attr.addFlashAttribute("msg", "Write_SUCCESS");
+		
 		logger.info("글쓰기...[" + vo + "]");	
 		logger.info("사진: [파일이름: "+file.getOriginalFilename()+
 				", "+"파일크기: "+ Math.floor(((float)file.getSize()/1048576)*100f)/100f +"MB"+
 				", "+"파일타입: "+file.getContentType()+"]");
-		attr.addFlashAttribute("msg", "Write_SUCCESS");
-		
 		return "redirect:/main";
 	}
 	
@@ -80,12 +81,12 @@ public class DocumentController {
 			vo.setImage(downloadPath+savedName);
 			service.create(vo);
 		}
+		attr.addFlashAttribute("msg", "Write_SUCCESS");
+		
 		logger.info("글쓰기...[" + vo + "]");	
 		logger.info("사진: [파일이름: "+file.getOriginalFilename()+
 				", "+"파일크기: "+ Math.floor(((float)file.getSize()/1048576)*100f)/100f +"MB"+
 				", "+"파일타입: "+file.getContentType()+"]");
-		attr.addFlashAttribute("msg", "Write_SUCCESS");
-
 		return "redirect:/main/myFeed";
 	}
 	
@@ -98,156 +99,97 @@ public class DocumentController {
 			File target = new File(uploadPath, savedName);
 			FileCopyUtils.copy(fileData, target); //실제 파일 업로드
 		} 
-		System.out.println("확인:"+originName); //
 		return savedName;
 	}
 	
 	//메인피드 글 삭제
 	@RequestMapping(value="/removeDoc",method=RequestMethod.GET)
 	public String delete(int dno, RedirectAttributes attr) throws Exception {
-		logger.info("게시물 삭제...["+ dno +"]");
 		service.delete(dno);
 		attr.addFlashAttribute("msg", "Remove_SUCCESS");
 		
+		logger.info("게시물 삭제: ["+ dno +"]");
 		return "redirect:/main";
 	}
 	
-	//메인피드 글 삭제
+	//마이피드 글 삭제
 	@RequestMapping(value="/myFeed/removeDoc",method=RequestMethod.GET)
 	public String mydelete(int dno, RedirectAttributes attr) throws Exception {
-		logger.info("게시물 삭제...["+ dno +"]");
 		service.delete(dno);
 		attr.addFlashAttribute("msg", "Remove_SUCCESS");
 		
+		logger.info("게시물 삭제: ["+ dno +"]");
 		return "redirect:/main/myFeed";
 	}
 	
 	//메인피드 글 조회
 	@RequestMapping(value="",method=RequestMethod.GET)
-	public String mainFeed_page(Criteria cri, Model model, HttpServletRequest request)throws Exception{
-		String user_id = "test1";
-		String user_image = "/overclass/resources/img/profile_default.png";
-		Map<String, Object> map = new HashMap<>();
-		map.put("user_id", user_id);
-		map.put("user_image", user_image);
-		//String user_id = (String) request.getSession().getAttribute("user_id");
-		//String user_image = (String) request.getSession().getAttribute("user_id");
+	public String mainFeed_page(Criteria cri, Model model, HttpSession session)throws Exception{
+		UserVO vo = (UserVO) session.getAttribute("login");
+		String user_id = vo.getUser_id();
 		List<DocumentDTO> list = service.mainFeed_list(cri, user_id);
-		model.addAttribute("user",map);
+		model.addAttribute("user",vo);
 		model.addAttribute("list", list);
 		PageMaker maker = new PageMaker();
 		maker.setCri(cri);
 		maker.setTotalCount(service.mainFeed_count(user_id));
 		model.addAttribute("pageMaker", maker);
 		
-		logger.info("메인피드...리스트 개수: "+ list.size());
-		
+		logger.info("\""+user_id+"\"로 접속, "+vo.toString());
+		logger.info("●메인페이지 접근");
 		return "document/mainForm";
 	}
 	
 	//메인피드 페이징
 	@RequestMapping(value="/mainFeed_Page",method=RequestMethod.GET)
-	public String mainFeed_list(int page, Criteria cri, Model model, HttpServletRequest request)throws Exception{
-		String user_id = "test1";
-		String user_image = "/overclass/resources/img/profile_default.png";
-		Map<String, Object> map = new HashMap<>();
-		map.put("user_id", user_id);
-		map.put("user_image", user_image);
-		//String user_id = (String) request.getSession().getAttribute("user_id");
-		//String user_image = (String) request.getSession().getAttribute("user_id");
+	public String mainFeed_list(int page, Criteria cri, Model model, HttpSession session)throws Exception{
+		UserVO vo = (UserVO) session.getAttribute("login");
+		String user_id = vo.getUser_id();
 		cri.setPage(page);
 		List<DocumentDTO> list = service.mainFeed_list(cri, user_id);
 		model.addAttribute("list", list);
 		PageMaker maker = new PageMaker();
 		maker.setCri(cri);
 		maker.setTotalCount(service.mainFeed_count(user_id));
-		model.addAttribute("user", map);
+		model.addAttribute("user", vo);
 		model.addAttribute("pageMaker", maker);
 		
-		logger.info("메인피드...리스트 개수: "+ list.size());
-		logger.info("메인피드...페이지 : "+ cri.getPage());
+		logger.info("메인피드 페이지 : "+ cri.getPage());
 		return "document/mainForm";
 	}
 	
 	//마이피드 글조회
 	@RequestMapping(value="/myFeed",method=RequestMethod.GET)
-	public String myFeed(Criteria cri, Model model, HttpServletRequest request) throws Exception{
-		String user_id = "test1";
-		String user_image = "/overclass/resources/img/profile_default.png";
-		String birth = "900317";
-		String email = "charminguk2@naver.com";
-		String loc ="경기도";
-		String name = "홍길동";
-		String tel = "010-9767-9783";
-		String hobby1 = "음악 감상";
-		String hobby2 = "여행";
-		String pwedq = "나의 고향은?";
-		String pweda = "평택";
-		Map<String, Object> map = new HashMap<>();
-		map.put("user_id", user_id);
-		map.put("user_image", user_image);
-		map.put("user_birth", birth);
-		map.put("user_email", email);
-		map.put("user_loc", loc);
-		map.put("user_name", name);
-		map.put("user_tel", tel);
-		map.put("user_hobby1", hobby1);
-		map.put("user_hobby2", hobby2);
-		map.put("user_pwedq", pwedq);
-		map.put("user_pweda", pweda);
-		//String user_id = (String) request.getSession().getAttribute("user_id");
-		//String user_image = (String) request.getSession().getAttribute("user_id");
+	public String myFeed(Criteria cri, Model model, HttpSession session) throws Exception{
+		UserVO vo = (UserVO) session.getAttribute("login");
+		String user_id = vo.getUser_id();
 		List<DocumentDTO> list = service.myFeed_list(cri, user_id);
-		model.addAttribute("user", map);
+		model.addAttribute("user", vo);
 		model.addAttribute("list", list);
 		PageMaker maker = new PageMaker();
 		maker.setCri(cri);
 		maker.setTotalCount(service.myFeed_count(user_id));
 		model.addAttribute("pageMaker", maker);
 		
-		logger.info("마이피드...리스트 개수: "+ list.size());
+		logger.info("★마이피드페이지 접근");
 		return "document/myFeed";
 	}
 	
 	//마이피드 페이징
 	@RequestMapping(value="/myFeed_Page",method=RequestMethod.GET)
-	public String myFeed_page(int page, Criteria cri, Model model, HttpServletRequest request)throws Exception {
-		String user_id = "test1";
-		String user_image = "/overclass/resources/img/profile_default.png";
-		String birth = "900317";
-		String email = "charminguk2@naver.com";
-		String loc ="경기도";
-		String name = "홍길동";
-		String tel = "010-9767-9783";
-		String hobby1 = "음악 감상";
-		String hobby2 = "여행";
-		String pwedq = "나의 고향은?";
-		String pweda = "평택";
-		Map<String, Object> map = new HashMap<>();
-		map.put("user_id", user_id);
-		map.put("user_image", user_image);
-		map.put("user_birth", birth);
-		map.put("user_email", email);
-		map.put("user_loc", loc);
-		map.put("user_name", name);
-		map.put("user_tel", tel);
-		map.put("user_hobby1", hobby1);
-		map.put("user_hobby2", hobby2);
-		map.put("user_pwedq", pwedq);
-		map.put("user_pweda", pweda);
-		//String user_id = (String) request.getSession().getAttribute("user_id");
-		//String user_image = (String) request.getSession().getAttribute("user_id");
+	public String myFeed_page(int page, Criteria cri, Model model, HttpSession session)throws Exception {
+		UserVO vo = (UserVO) session.getAttribute("login");
+		String user_id = vo.getUser_id();		
 		cri.setPage(page);
 		List<DocumentDTO> list = service.mainFeed_list(cri, user_id);
 		model.addAttribute("list", list);
 		PageMaker maker = new PageMaker();
 		maker.setCri(cri);
 		maker.setTotalCount(service.mainFeed_count(user_id));
-		model.addAttribute("user",map);
+		model.addAttribute("user",vo);
 		model.addAttribute("pageMaker", maker);
 		
-		logger.info("메인피드...리스트 개수: "+ list.size());
-		logger.info("메인피드...페이지 : "+ cri.getPage());
+		logger.info("★마이피드 페이지 : "+ cri.getPage());
 		return "document/myFeed";
 	}
 }

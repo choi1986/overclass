@@ -56,7 +56,7 @@
 						<div class="col-lg-10">
 							<input type="hidden" id="action" name="action" value="contentInsert"> 
 								<input type="hidden" id="writer" name="writer" value="test1"<%-- <%=user.getUser_id()%> --%>>
-							<textarea class="form-control" name="content" id="content" rows="5"></textarea>
+							<textarea class="form-control" name="content" id="content" rows="5" required></textarea>
 						</div>
 					</div>
 
