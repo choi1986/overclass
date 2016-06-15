@@ -147,6 +147,7 @@ $(document).ready(function() {
 	      var goodtemp = this.firstChild.nextSibling.firstChild.nodeValue;
 	      //var goodtemp = this.firstChild.nextSibling.nextSibling.nextSibling;
 	      var goodtmp = '#good_icon'+goodtemp;
+	      var goodcount = '#good_count'+goodtemp;
 	      
 	      //var div = $("#reply_div")
 	      var goodspan = $(goodtmp);
@@ -164,6 +165,8 @@ $(document).ready(function() {
 					dno:goodtemp
 				}),
 				success:function(result){
+					//$(goodcount).val(result);
+					$(goodcount).html('&nbsp'+result);
 			        goodspan.attr("class","fa fa-lg fa-thumbs-up");
 				}
 	         });
@@ -181,6 +184,7 @@ $(document).ready(function() {
 					dno:goodtemp
 				}),
 				success:function(result){
+					$(goodcount).html('&nbsp'+result);
 					goodspan.attr("class","fa fa-lg fa-thumbs-o-up");
 				}
 	         });
@@ -212,7 +216,7 @@ $(document).ready(function() {
 	    			label: '등록', //알러트 버튼 이름
 	    			cssClass: 'btn-primary', //알러트 버튼 색바꾸기
 	    			action: function(confirm) {
-	    				var formObj = $("form[role='form']");    				
+	    				var formObj = $("#writeDoc");    				
 	    				formObj.submit();
 	    				confirm.close()
 					}

@@ -84,7 +84,7 @@
                               
                            <div class="col-lg-8">
                               <i class="fa fa-lg fa-heart" style="color: red;">
-                                 <span style="color: black;">&nbsp;${DocumentDTO.goodcnt }</span>
+                                 <span id="good_count${DocumentDTO.dno }" style="color: black;">&nbsp;${DocumentDTO.goodcnt }</span>
                               </i>
                            </div>
                         </div>
@@ -205,7 +205,7 @@ function delDoc(dno) {
 			cssClass: 'btn-danger', //알러트 버튼 색바꾸기
 			hotkey:13,
 			action: function(confirm) {
-				location.href="/overclass/main/removeDoc?dno="+dno;
+				location.href="/overclass/main/removeDoc?dno="+dno+"&url=main";
 				
 				confirm.close()
 			}
@@ -227,33 +227,7 @@ function reportDoc(dno) {
 			label: '신고', //알러트 버튼 이름
 			cssClass: 'btn-danger', //알러트 버튼 색바꾸기
 			action: function(confirm) {
-				$.ajax({
-					url:"/overclass/amdin/reportDoc",
-					type:'POST',
-					headers:{
-						"Content-Type":"application/json",
-						"X-HTTP-Method-Override":"POST"
-					},
-					data:JSON.stringify({
-						dno:dno,
-					}),success:function(result){
-						BootstrapDialog.show({
-				    		title: '', //알러트 타이틀 이름
-				    		message: '신고접수가 완료 되었습니다.', //알러트 내용
-				    		type: BootstrapDialog.TYPE_DANGER,
-				    		buttons: [{ //알러트 버튼 정의
-				    				icon: 'fa fa-check',
-				    				label: '확인',
-				    				cssClass: 'btn-danger',
-				    				hotkey:13,
-				    				action: function(cancel){
-				    					cancel.close();
-				   					}
-				    			}]
-				    	})
-					}
-					
-				}),
+				location.href="/overclass/admin/reportDoc?dno="+dno;
 				confirm.close()
 			}
 			},{

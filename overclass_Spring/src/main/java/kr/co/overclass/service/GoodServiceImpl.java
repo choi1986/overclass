@@ -26,4 +26,9 @@ public class GoodServiceImpl implements GoodService {
 		dao.delete(map);
 	}
 
+	@Override
+	public int count(int dno) throws Exception {
+		return dao.good_count(dno);
+	}
+
 }

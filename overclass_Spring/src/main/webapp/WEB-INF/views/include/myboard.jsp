@@ -1,7 +1,9 @@
+<%@page import="kr.co.overclass.domain.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<% UserVO user2 = (UserVO)session.getAttribute("login"); %>
 <c:forEach items="${list }" var="DocumentDTO">
 <div id="main_Board">
 	<div class="row">
@@ -32,7 +34,7 @@
 								<!-- 타이틀 -->
 								<div class="form-group">
 									<div class="photo col-lg-2" style="text-align: center;">
-										<img alt="avatar" src="${DocumentDTO.user_image}" width='70' height='70'>
+										<img class="img-circle" alt="avatar" src="${DocumentDTO.user_image}" width='70' height='70'>
 										<h4></h4>
 										<p>
 											<b>${DocumentDTO.writer }</b>
@@ -69,17 +71,23 @@
                               <div style="display: none;">${DocumentDTO.dno }</div>
                               <a class="control-label col-lg-2">
                                  좋아요&nbsp;&nbsp;
-                                 <span id="good_icon${DocumentDTO.dno }" class="fa fa-lg fa-thumbs-o-up" style="color: blue;"></span>
+                               <c:choose>
+                               	<c:when test="${DocumentDTO.good == 0 }">
+                               		<span id="good_icon${DocumentDTO.dno }" class="fa fa-lg fa-thumbs-o-up" style="color: blue;"></span>
+                               	</c:when>
+                               	<c:otherwise>
+                               		<span id="good_icon${DocumentDTO.dno }" class="fa fa-lg fa-thumbs-up" style="color: blue;"></span>
+                               	</c:otherwise>
+                               </c:choose>
                               </a>
                            </div>
                               
                            <div class="col-lg-8">
                               <i class="fa fa-lg fa-heart" style="color: red;">
-                                 <span style="color: black;">&nbsp;${DocumentDTO.goodcnt }</span>
+                                 <span id="good_count${DocumentDTO.dno }" style="color: black;">&nbsp;${DocumentDTO.goodcnt }</span>
                               </i>
                            </div>
                         </div>
-                        <!-- 태그 -->
                         <div class="form-group">
                            <label class="control-label col-lg-2" for="content">태그</label>
                            <div class="col-lg-9">
@@ -230,7 +238,7 @@
 				cssClass: 'btn-danger', //알러트 버튼 색바꾸기
 				hotkey:13,
 				action: function(confirm) {
-					location.href="/overclass/main/myFeed/removeDoc?dno="+dno;
+					location.href="/overclass/main/removeDoc?dno="+dno+"&url=my";
 					confirm.close()
 				}
 				},{
@@ -311,6 +319,13 @@
 		$.ajax({
 			url:'/overclass/reply/'+rno,
 			type:'delete',
+			headers:{
+				"Content-Type":"application/json",
+				"X-HTTP-Method-Override":"POST"
+			},
+			data:JSON.stringify({
+				user_id:'<%=user2.getUser_id()%>'
+			}),
 			success:function(result){
 				if(result=='SUCCESS'){
 					// 성공모달
@@ -357,69 +372,74 @@
 	
 	function writeReply(event,dno){
 		var replyWriteTxt = '#reply_write'+dno;
-		if(event.keyCode == 13){
-			if($(replyWriteTxt).val() != '') { 
-				$.ajax({
-					url:"/overclass/reply/",
-					type:'post',
-					headers:{
-						"Content-Type":"application/json",
-						"X-HTTP-Method-Override":"POST"
-					},
-					data:JSON.stringify({
-						dno:dno,
-						content:$(replyWriteTxt).val()
-					}),
-					success:function(result){
-						if(result=='SUCCESS'){
-							BootstrapDialog.show({
-								title : '', //알러트 타이틀 이름
-								message : '댓글이 등록되었습니다.', //알러트 내용
-								buttons : [ { //알러트 버튼 정의
-									id : 'docWriteBt', //알러트 버튼의 아이디
-									icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
-									label : '확인', //알러트 버튼 이름
-									cssClass : 'btn-primary', //알러트 버튼 색바꾸기
-									action : function(confirm) {
-										var divtemp = '#reply_div'+dno;
-										var divtemp2 = '#reply_icon'+dno+'_2'
-										 var div = $(divtemp);
-									      var div2 = $(divtemp2);
-									    if(div2.attr("class") == "fa fa-chevron-up"){
-									    	div.slideToggle("slow")
-										     div2.attr("class","fa fa-chevron-down")
-										  // 댓글목록 갱신
+			if(event.keyCode == 13){
+				if($(replyWriteTxt).val() != '') { 
+					$.ajax({
+						url:"/overclass/reply/",
+						type:'post',
+						headers:{
+							"Content-Type":"application/json",
+							"X-HTTP-Method-Override":"POST"
+						},
+						data:JSON.stringify({
+							dno:dno,
+							content:$(replyWriteTxt).val(),
+							replyer:'<%=user2.getUser_id()%>'
+						}),
+						success:function(result){
+							if(result=='SUCCESS'){
+								BootstrapDialog.show({
+									title : '', //알러트 타이틀 이름
+									message : '댓글이 등록되었습니다.', //알러트 내용
+									buttons : [ { //알러트 버튼 정의
+										id : 'docWriteBt', //알러트 버튼의 아이디
+										icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
+										label : '확인', //알러트 버튼 이름
+										cssClass : 'btn-primary', //알러트 버튼 색바꾸기
+										action : function(confirm) {
+											var divtemp = '#reply_div'+dno;
+											var divtemp2 = '#reply_icon'+dno+'_2'
+											 var div = $(divtemp);
+										      var div2 = $(divtemp2);
+										    if(div2.attr("class") == "fa fa-chevron-up"){
+										    	div.slideToggle("slow")
+											     div2.attr("class","fa fa-chevron-down")
+											  // 댓글목록 갱신
 												replyDisplayPage(dno,1);
-										} 
-										confirm.close();
-									}
-								} ]
-							})
-						$(replyWriteTxt).val("");
-						}else{
-							BootstrapDialog.show({
-								title : '', //알러트 타이틀 이름
-								message : '댓글등록이 실패했습니다.', //알러트 내용
-								type: BootstrapDialog.TYPE_DANGER,
-								buttons : [ { //알러트 버튼 정의
-									id : 'docWriteBt', //알러트 버튼의 아이디
-									icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
-									label : '확인', //알러트 버튼 이름
-									cssClass : 'btn-danger', //알러트 버튼 색바꾸기
-									hotkey : 13,
-									action : function(confirm) {
-										confirm.close()
-									}
-								} ]
-							})
-						}//else
-					},
-					error:function(xhr){
-						alert('에러'+xhr.status);
-					}
-				})
-			}// != if
-			return false;
-		} // keycode if
+											} 
+											confirm.close();
+										}
+									} ]
+								})
+							$(replyWriteTxt).val("");
+							}else{
+								BootstrapDialog.show({
+									title : '', //알러트 타이틀 이름
+									message : '댓글등록이 실패했습니다.', //알러트 내용
+									type: BootstrapDialog.TYPE_DANGER,
+									buttons : [ { //알러트 버튼 정의
+										id : 'docWriteBt', //알러트 버튼의 아이디
+										icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
+										label : '확인', //알러트 버튼 이름
+										cssClass : 'btn-danger', //알러트 버튼 색바꾸기
+										hotkey : 13,
+										action : function(confirm) {
+											confirm.close()
+										}
+									} ]
+								})
+							}//else
+						},
+						error:function(xhr){
+							alert('에러'+xhr.status);
+						}
+					})
+				}// != if
+/* 				// 페이지버튼 감추기
+				var divtemp3 = '#reply_div_page_'+dno;
+				console.log($(divtemp3).attr("style"));
+				$(divtemp3).attr("style","display: none;"); */
+				return false;
+			} // keycode if
 	}
 </script>

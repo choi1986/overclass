@@ -21,8 +21,8 @@
 		where good_user = #{good_user} and dno = #{dno}
 	</delete>
 	
-	<select id="count" resultType="int">
-		select dno, count(good_user)
+	<select id="count" resultType="good">
+		select dno, count(good_user) good
 		from oc_good
 		where dno IN
 		 <foreach collection="dnonum" item="item" open="(" separator="," close=")">
@@ -30,4 +30,11 @@
          </foreach>
          group by dno
 	</select>
+	
+	<select id="good_count" resultType="int">
+		select count(dno)
+		from oc_good
+		where dno = #{dno}
+	</select>
+	
 </mapper>
