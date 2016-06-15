@@ -4,4 +4,5 @@ create table oc_msg(
 	receiver varchar2(12) not null,
 	content varchar2(210) not null,
 	writedate date default sysdate
+	read number default 0 not null,
 );

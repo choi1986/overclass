@@ -16,6 +16,8 @@ create table oc_user(
 	user_image varchar2(300) default '/resources/img/profile_default.jpg',
 	user_logincnt number default 0,
 	user_admin number default 0
+	sessionkey varchar2(50) not null default 'none',
+	sessionlimit timestamp
 );
 
 -- 비밀번호 질문
@@ -74,6 +76,7 @@ create table oc_reply(
 	replyer varchar2(12) not null,
 	content varchar2(150) not null,
 	writedate date default sysdate,
+	read number default 0 not null,
 	foreign key (replyer) references oc_user (user_id),
 	foreign key (dno) references oc_document (dno)
 );
