@@ -3,39 +3,39 @@
 <mapper namespace="friend">
   <!-- 친구 관계 입력 --> 	
   <insert id="oc_insert_rel">
-  	insert into oc_friend_rel values(#sender,#receiver)
+  	insert into oc_friend_rel values(#{sender},#{receiver})
   </insert>
   
   <!-- 친구 관계 삭제 -->
   <delete id="oc_delete_rel">
   	delete from oc_friend_rel
-  	where sender = #sender
-  	and receiver = #receiver
+  	where sender = #{sender}
+  	and receiver = #{receiver}
   </delete>
   
   <!-- 친구 관계 검색(1명) -->
-  <select id="oc_select_rel">
+  <select id="oc_select_rel" resultType="FriendVO">
   	select * from oc_friend_rel
-  	where sender = #sender
-  	and receiver = #receiver
+  	where sender = #{sender}
+  	and receiver = #{receiver}
   </select>
   
   <!-- 친구 요청 입력 -->
   <insert id="oc_insert_req">
-  	insert into oc_friend_req values(#sender,#receiver)
+  	insert into oc_friend_req values(#{sender},#{receiver})
   </insert>
   
   <!-- 친구 요청 삭제 -->
   <delete id="oc_delete_req">
   	delete from oc_friend_req
-  	where sender = #sender
-  	and receiver = #receiver
+  	where sender = #{sender}
+  	and receiver = #{receiver}
   </delete>
   
   <!-- 받은친구요청 검색 -->
-  <select id="oc_select_req">
+  <select id="oc_select_req" resultType="FriendVO">
   	select * from oc_friend_req
-  	where sender = #sender
-  	and receiver = #receiver
+  	where sender = #{sender}
+  	and receiver = #{receiver}
   </select>
 </mapper>
