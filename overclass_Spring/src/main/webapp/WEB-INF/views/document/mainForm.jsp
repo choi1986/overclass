@@ -57,6 +57,22 @@ lightbox.option({
 </script>
 </body>
 
+<!-- 쪽지 리스트처리를 위한 템플릿 -->
+<script id="msgtemp" type="text/x-handlebars-template">
+
+<%-- <% for(int i=0;i<list.size();i++) { %> --%>
+<li>
+	<a href=''>
+		<span class="photo">
+			<img alt="avatar" width='30' height='30' src='<%-- <%=list.get(i).getId_img_path()%> --%>'></span> <!-- 프사 -->
+		<span class="subject">
+			<span id="msgid<%-- <%=i%> --%>" class="from"><%-- <%=list.get(i).getUser_id() %> --%></span> <!-- 이름 -->
+			<span class="time"><%-- <%= list.get(i).getWrite_date() %> --%>전</span> <!-- 시간 -->
+		</span>
+		<span class="subject"><%-- <%=list.get(i).getContent() %> --%></span> <!-- 메시지 -->
+	</a>
+</li>
+</script>
 
 <script type="text/javascript">
 
