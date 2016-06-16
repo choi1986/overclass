@@ -11,6 +11,11 @@ public class ReportVO {
 	
 	public ReportVO() {
 	}
+	
+	@Override
+	public String toString() {
+		return "[신고번호: "+reportno+", 신고자: "+reporter+", 글번호: "+dno+", 신고내용: "+content+", 신고처리일자: "+reportdate+"]";
+	}
 
 	public int getReportno() {
 		return reportno;

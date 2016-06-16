@@ -7,3 +7,10 @@ create table oc_report(
 	reportdate date,	-- 신고처리일자
 	foreign key (dno) references oc_document (dno)
 );
+
+drop sequence oc_report_seq;
+create sequence oc_report_seq
+	start with 1
+	increment by 1
+	nocycle
+	nocache;

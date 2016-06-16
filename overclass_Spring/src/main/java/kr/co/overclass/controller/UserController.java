@@ -62,10 +62,6 @@ public class UserController {
 		UserVO vo = new UserVO();
 		vo.setUser_id(dto.getUser_id());
 		vo.setUser_pwd(dto.getUser_pwd());
-		if(!dto.getUser_pwd().equals(dto.getUser_pwd_confirm())) {
-			vo.setUser_pwd("0");
-			return "/member/loginForm2";
-		}
 		vo.setUser_name(dto.getUser_name());
 		vo.setUser_email(dto.getUser_email());
 		vo.setUser_tel(dto.getUser_tel1()+"-"+dto.getUser_tel2()+"-"+dto.getUser_tel3());
@@ -81,7 +77,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
-	public void logout (HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
+	public String logout (HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 		Object obj = session.getAttribute("login");
 		
 		if (obj!=null) {
@@ -99,6 +95,7 @@ public class UserController {
 				service.keepLogin(vo.getUser_id(), session.getId(), new Date());
 			}
 		}
+		return "/member/loginForm2";
 	}
 	
 	@RequestMapping(value="/searchID") // 아이디 찾기 버튼 눌린 후

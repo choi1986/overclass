@@ -173,7 +173,7 @@
 	<!--페이징버튼-->
 </footer>
 
-<!-- 댓글처리를 위한 템플릿 -->
+<!-- 댓글처리를 위한 템플릿. -->
 <script id="template" type="text/x-handlebars-template">
 <div class="act-time">
    <div class="activity-body act-in">
@@ -217,6 +217,8 @@ function delDoc(dno) {
 			}]
 	})
 }
+
+//신고
 function reportDoc(dno) {
 	BootstrapDialog.show({
 		title: '', //알러트 타이틀 이름

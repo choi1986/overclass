@@ -76,6 +76,6 @@
 	<!-- 마이피드 게시글 개수 -->
 	<select id="myFeed_count" resultType="int">
 		select count(*) cnt from oc_document
-		where wirter = #{user_id}
+		where writer = #{user_id}
 	</select>
 </mapper>
