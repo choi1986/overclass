@@ -105,23 +105,23 @@ public class DocumentController {
 			cri.setPage(Integer.parseInt(page));
 		}
 		PageMaker maker = new PageMaker();
-		String value = null;
+		String forward = null;
 		maker.setCri(cri);
 		List<DocumentDTO> list = null;
 		if( url.equals("/main/myFeed") || url.equals("/main/myFeed_Page") ) {
 			list = service.myFeed_list(cri, user_id);
 			maker.setTotalCount(service.myFeed_count(user_id));
-			value = "document/myFeed";
+			forward = "document/myFeed";
 		} else if( url.equals("/main") || url.equals("/main/mainFeed_Page")) {
 			logger.info("\""+user_id+"\"·Î Á¢¼Ó, "+vo.toString());
 			maker.setTotalCount(service.mainFeed_count(user_id));
 			list = service.mainFeed_list(cri, user_id);
-			value = "document/mainForm";
+			forward = "document/mainForm";
 		}
 		model.addAttribute("user",vo);
 		model.addAttribute("list", list);
 		model.addAttribute("pageMaker", maker);
 		
-		return value;
+		return forward;
 	}
 }

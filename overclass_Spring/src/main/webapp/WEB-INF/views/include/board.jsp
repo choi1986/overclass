@@ -217,6 +217,8 @@ function delDoc(dno) {
 			}]
 	})
 }
+
+//신고
 function reportDoc(dno) {
 	BootstrapDialog.show({
 		title: '', //알러트 타이틀 이름

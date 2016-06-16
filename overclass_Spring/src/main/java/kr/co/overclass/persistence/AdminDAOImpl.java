@@ -10,9 +10,10 @@ import org.springframework.stereotype.Repository;
 import kr.co.overclass.domain.BanVO;
 import kr.co.overclass.domain.Criteria;
 import kr.co.overclass.domain.ReportVO;
+import kr.co.overclass.dto.ReportDTO;
 
 @Repository
-public class adminDAOImpl implements adminDAO{
+public class AdminDAOImpl implements AdminDAO{
 	
 	@Inject
 	private SqlSession session;
@@ -23,17 +24,17 @@ public class adminDAOImpl implements adminDAO{
 	}
 
 	@Override
-	public List<ReportVO> list(Criteria cri, String writer) throws Exception {
-		return null;
+	public List<ReportDTO> list(Criteria cri) throws Exception { //신고글 출력
+		return session.selectList("admin.list");
 	}
 
 	@Override
-	public int report_count(String writer) throws Exception {
-		return 0;
+	public int report_count() throws Exception { //신고글 개수
+		return session.selectOne("admin.report_count");
 	}
 
 	@Override
-	public void report(ReportVO vo) throws Exception {
+	public void report(ReportVO vo) throws Exception { //신고하기
 		session.insert("admin.report", vo);
 	}
 }
