@@ -53,6 +53,8 @@
 		$(document).ready(function(){
 			var cnt = 0; //birth 공백으로 바꾸는이벤트 1번만 하기위해 선언
 			duplCk = 0; // 중복검사 성공 or 실패 체크
+			duplID = ""; // 중복검사 아이디 임시 저장
+			joinError = 0; // 회원가입 메시지용 변수
 			
 		$("#join").click(function() { //로그인 화면에서 회원가입버튼 눌렀을시
 			$("#panel").hide(); //로그인하는 아이디,비밀번호 감춤
@@ -87,7 +89,23 @@
 			$("#email2").show()
 		}
 		$("#join_join").click(function() { //회원가입폼에서 가입버튼 눌렀을시
-			if(duplCk==0) { 
+			if (duplID!=$("#user_id").val()&&duplCk==1) { 
+				BootstrapDialog.show({
+		    		title: '', //알러트 타이틀 이름
+		    		message: '중복검사된 아이디가 변경되었습니다! 다시 중복검사합니다.', //알러트 내용
+		    		type: BootstrapDialog.TYPE_DANGER,
+		    		buttons: [{
+		    				label: '닫기',
+		    				action: function(cancel){
+		    					cancel.close();
+		    			    	$("#register_form").attr('action','/overclass/dupl');
+		    			    	$("#dupl").click();
+		    					}
+		    			}]
+		    	})
+		    	duplCk==0;
+			}
+			else if(duplCk==0) { 
 				BootstrapDialog.show({
 		    		title: '', //알러트 타이틀 이름
 		    		message: '아직 ID 중복이 검사되지 않았습니다! \n자동으로 중복 검사됩니다.', //알러트 내용
@@ -122,6 +140,81 @@
 			$("#check").click()
 		})
 	});
+	function regCk(num, data) { // 유효성 검사
+		var msg="";
+		$(".joinSpan").css("color","red");
+		$(".joinSpan").css("font-size","11px");
+		
+		switch (num) { // 회원가입
+		case 1: // 아이디
+			if(data.value.length<5) {
+				msg='5자리 이상 입력해주세요.';
+				joinError++;
+			}
+			else joinError--;
+			$("#span1").text(msg);
+			break;
+		case 2: // 비밀번호
+			if(data.value.length<3) {
+				msg='3자리 이상 입력해주세요.';
+				joinError++;
+			}
+			else joinError--;
+			$("#span2").text(msg);
+			break;
+		case 3: // 비밀번호 확인
+			if(data.value!=$("#user_pwd").val()) {
+				msg='확인 비밀번호가 같지 않습니다!';
+				joinError++;
+			}
+			else joinError--;
+			$("#span3").text(msg);
+			break;
+		case 4: // 이름
+			if(data.value.length<2) {
+				msg='2자리 이상 입력해주세요.';
+				joinError++;
+			}
+			else joinError--;
+			$("#span4").text(msg);
+			break;
+		case 5: // 이메일
+			if(!data.value.match(/^[A-Z0-9+_.-]+@[A-Z0-9.-]+$/i)) {
+				msg='메일을 다시 확인해주세요.';
+				joinError++;
+			}
+			else joinError--;
+			$("#span5").text(msg);
+			break;
+		case 6: // 전화번호_1
+			if(data.value.length<2||data.value.length>4||isNaN(data.value)) {
+				msg='전화번호를 다시 확인 해주세요.';
+				joinError++;
+			}
+			else joinError--;
+			$("#span6").text(msg);
+			break;
+		case 7: // 전화번호_2
+			if(data.value.length<3||data.value.length>5||isNaN(data.value)) {
+				msg='전화번호를 다시 확인 해주세요.';
+				joinError++;
+			}
+			else joinError--;
+			$("#span6").text(msg);
+			break;
+		case 8: // 전화번호_3
+			if(data.value.length<2||data.value.length>4||isNaN(data.value)) {
+				msg='전화번호를 다시 확인 해주세요.';
+				joinError++;
+			}
+			else joinError--;
+			$("#span6").text(msg);
+			break;
+
+		default:
+			break;
+		}
+	}
 </script>
 </head>
 
@@ -135,6 +228,7 @@
 				$("#joinForm").show(); //회원가입폼 보여줌
 			
 				$("#user_id").val("${sessionScope.joinDupl.user_id}");
+				duplID=$("#user_id").val();
 				$("#user_pwd").val("${sessionScope.joinDupl.user_pwd}");
 				$("#user_pwd_confirm").val("${sessionScope.joinDupl.user_pwd_confirm}");
 				$("#user_name").val("${sessionScope.joinDupl.user_name}");
@@ -328,7 +422,8 @@
                                       <div class="form-group ">
                                           <label for="fullname" class="control-label col-sm-4">아이디<span class="required">*</span></label>
                                           <div class="col-sm-4">
-                                              <input class=" form-control" id="user_id" name="user_id" type="text" />
+                                              <input class=" form-control" id="user_id" name="user_id" type="text" onblur="regCk(1, this)" />
+                                              <span id="span1" class="joinSpan"></span>
                                           </div>
                                           
                                           <div class="col-sm-1">
@@ -339,29 +434,33 @@
                                       <div class="form-group ">
                                           <label for="password" class="control-label col-sm-4">비밀번호 <span class="required">*</span></label>
                                           <div class="col-sm-4">
-                                              <input class="form-control " id="user_pwd" name="user_pwd" type="password" onkeyup="allowWS(this)"/>
+                                              <input class="form-control " id="user_pwd" name="user_pwd" type="password" onblur="regCk(2, this)"/>
+                                              <span id="span2" class="joinSpan"></span>
                                           </div>
                                       </div>
                                       
                                       <div class="form-group ">
                                           <label for="confirm_password" class="control-label col-sm-4">비밀번호 확인 <span class="required">*</span></label>
                                           <div class="col-sm-4">
-                                              <input class="form-control " id="user_pwd_confirm" name="user_pwd_confirm" type="password" onkeyup="allowWS(this)"/>
+                                              <input class="form-control " id="user_pwd_confirm" name="user_pwd_confirm" type="password" onblur="regCk(3, this)"/>
+                                              <span id="span3" class="joinSpan"></span>
                                           </div>
                                       </div>
                                       
                                       <div class="form-group ">
                                           <label for="username" class="control-label col-sm-4">이름 <span class="required">*</span></label>
                                           <div class="col-sm-4">
-                                              <input class="form-control " id="user_name" name="user_name" type="text" placeholder="ex) 홍길동" />
+                                              <input class="form-control " id="user_name" name="user_name" type="text" placeholder="ex) 홍길동"  onblur="regCk(4, this)"/>
+                                              <span id="span4" class="joinSpan"></span>
                                           </div>
                                       </div>
                                       
                                       <div class="form-group ">
                                           <label for="email" class="control-label col-sm-4">이메일 <span class="required">*</span></label>
                                           <div class="col-sm-4">
-                                              <input class="form-control " id="user_email" name="user_email" type="email" placeholder="ex) kosta113"/>
-                                          </div><!--  onkeyup="allowEmail(this)" -->
+                                              <input class="form-control " id="user_email" name="user_email" type="email" placeholder="ex) kosta113" onblur="regCk(5, this)"/>
+                                              <span id="span5" class="joinSpan"></span>
+                                          </div>
                                       </div>
                                       
                                       <div class="form-group">
@@ -369,15 +468,16 @@
                                       <div class="col-sm-8">
                                           <div class="row">
                                               <div class="col-sm-3">
-                                                  <input type="text" class="form-control" id="user_tel1" name="user_tel1" placeholder="010" onkeyup="allowNUM(this)">
+                                                  <input type="text" class="form-control" id="user_tel1" name="user_tel1" placeholder="010" onblur="regCk(6, this)">
                                               </div>
                                               <div class="col-sm-3">
-                                                  <input type="text" class="form-control" id="user_tel2" name="user_tel2" placeholder="1234" onkeyup="allowNUM(this)">
+                                                  <input type="text" class="form-control" id="user_tel2" name="user_tel2" placeholder="1234" onblur="regCk(7, this)">
                                               </div>
                                               <div class="col-sm-3">
-                                                  <input type="text" class="form-control" id="user_tel3" name="user_tel3" placeholder="4567" onkeyup="allowNUM(this)">
+                                                  <input type="text" class="form-control" id="user_tel3" name="user_tel3" placeholder="4567" onblur="regCk(8, this)">
                                               </div>
                                           </div>
+                                          <span id="span6" class="joinSpan"></span>
 
                                       </div>
                                   </div>
@@ -461,7 +561,7 @@
                                       <div class="form-group ">
                                           <label for="birth" class="control-label col-sm-4">생일 <span class="required">*</span></label>
                                           <div class="col-sm-4">
-                                              <input class=" form-control" id="user_birth" name="user_birth" type="text" placeholder="ex) 900317" onkeyup="allowNUM(this)" />
+                                              <input class=" form-control" id="user_birth" name="user_birth" type="text" placeholder="ex) 900317"/>
                                           </div>
                                       </div>
                                       
@@ -522,7 +622,7 @@
                                       <div class="form-group ">
                                           <label for="birth" class="control-label col-sm-4">생일 <span class="required">*</span></label>
                                           <div class="col-sm-4">
-                                              <input class=" form-control" id="user_birth" name="user_birth" type="text" placeholder="ex) 900317" onkeyup="allowNUM(this)" />
+                                              <input class=" form-control" id="user_birth" name="user_birth" type="text" placeholder="ex) 900317"/>
                                           </div>
                                       </div>
                                       
@@ -587,14 +687,14 @@
                                       <div class="form-group ">
                                           <label for="password" class="control-label col-sm-4">변경할 비밀번호 <span class="required">*</span></label>
                                           <div class="col-sm-4">
-                                              <input class="form-control " id="user_pwd" name="user_pwd" type="password" onkeyup="allowWS(this)"/>
+                                              <input class="form-control " id="user_pwd" name="user_pwd" type="password"/>
                                           </div>
                                       </div>
                                       
                                       <div class="form-group ">
                                           <label for="confirm_password" class="control-label col-sm-4">비밀번호 확인 <span class="required">*</span></label>
                                           <div class="col-sm-4">
-                                              <input class="form-control " id="user_pwd_confirm" name="user_pwd_confirm" type="password" onkeyup="allowWS(this)"/>
+                                              <input class="form-control " id="user_pwd_confirm" name="user_pwd_confirm" type="password"/>
                                           </div>
                                       </div>
                                       
