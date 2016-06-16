@@ -16,14 +16,24 @@
 		where rno=#{rno}
 	</delete>
 	
-	<select id="count" resultType="int">
-		select count(dno) from oc_reply
-		where dno=#{dno}
+	<select id="count" resultType="reply_c_dto">
+		select dno, count(dno) count
+		from oc_reply
+		where dno IN <foreach collection="dnonum" item="item" open="(" separator="," close=")">
+                    #{item}
+         </foreach>
+		group by dno
 	</select>
 	
 	<select id="selectOne" resultType="reply">
 		select rno, dno, replyer, content, writedate
 		from oc_reply
 		where rno = #{rno}
+	</select>
+	
+	<select id="replycount" resultType="int">
+		select count(dno)
+		from oc_reply
+		where dno = #{dno}
 	</select>
 </mapper>

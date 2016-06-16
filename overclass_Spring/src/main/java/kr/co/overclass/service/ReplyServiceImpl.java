@@ -1,6 +1,7 @@
 package kr.co.overclass.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.overclass.domain.Criteria;
 import kr.co.overclass.domain.ReplyVO;
+import kr.co.overclass.dto.ReplyCountDTO;
 import kr.co.overclass.dto.ReplyDTO;
 import kr.co.overclass.persistence.ReplyDAO;
 
@@ -38,8 +40,13 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 
 	@Override
-	public int countReply(int dno) throws Exception {
-		return dao.count(dno);
+	public List<ReplyCountDTO> countReply(Map<String, Object> map) throws Exception {
+		return dao.count(map);
+	}
+
+	@Override
+	public int count(int dno) throws Exception {
+		return dao.replycount(dno);
 	}
 
 }

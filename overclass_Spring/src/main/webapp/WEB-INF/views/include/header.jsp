@@ -47,7 +47,7 @@
 <body>
 	<header class="header dark-bg">
 		<!--로고 시작-->
-		<a href="documentaction.do?action=list" class="logo">OVER <span
+		<a href="/overclass/main" class="logo">OVER <span
 			class="lite">CLASS</span></a>
 		<!-- 로고 끝-->
 		<div class="nav search-row" id="top_menu">

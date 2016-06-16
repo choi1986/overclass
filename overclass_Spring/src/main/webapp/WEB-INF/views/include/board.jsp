@@ -113,7 +113,7 @@
 								<div class="widget-icons pull-right">
 									<a id="reply_icon" class="wminimize">
 										<div style="display: none;">${DocumentDTO.dno }</div>
-										<i id="reply_icon${DocumentDTO.dno }_2" class="fa fa-chevron-up">댓글&nbsp;&nbsp;&nbsp;&nbsp;</i>
+										<i id="reply_icon${DocumentDTO.dno }_2" class="fa fa-chevron-up">댓글[${DocumentDTO.replycnt }]&nbsp;&nbsp;&nbsp;&nbsp;</i>
 									</a>
 								</div><br>
                         <!-- 댓글 -->
@@ -220,25 +220,37 @@ function delDoc(dno) {
 
 //신고
 function reportDoc(dno) {
-	BootstrapDialog.show({
-		title: '', //알러트 타이틀 이름
-		message: '이 글을 신고 하시겠습니까?', //알러트 내용
-		type: BootstrapDialog.TYPE_DANGER,
-		buttons: [{ //알러트 버튼 정의
-			icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
-			label: '신고', //알러트 버튼 이름
-			cssClass: 'btn-danger', //알러트 버튼 색바꾸기
-			action: function(confirm) {
-				location.href="/overclass/admin/reportDoc?dno="+dno;
-				confirm.close()
-			}
-			},{
-				label: '닫기',
-				action: function(cancel){
-					cancel.close();
-					}
-			}]
-	})
+   BootstrapDialog.show({
+      title: '', //알러트 타이틀 이름
+      message: '신고사유: <input name="content" id="content" type="text" class="form-control">', //알러트 내용
+      type: BootstrapDialog.TYPE_DANGER,
+      buttons: [{ //알러트 버튼 정의
+         icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
+         label: '신고', //알러트 버튼 이름
+         cssClass: 'btn-danger', //알러트 버튼 색바꾸기
+         action: function(confirm) {
+            var content = confirm.getModalBody().find('#content').val();
+            $.ajax({
+               url: "/overclass/admin/reportDoc",
+               type: "post",
+               data: {
+                  reporter:'<%= user2.getUser_id() %>',
+                  dno:dno,
+                  content:content,
+               },
+               success: function(result) {
+                  alert("신고접수!")
+               }
+            }),
+            confirm.close()
+         }
+         },{
+            label: '닫기',
+            action: function(cancel){
+               cancel.close();
+               }
+         }]
+   })
 }
 var source = $("#template").html();
 var template = Handlebars.compile(source);
@@ -281,6 +293,7 @@ var template = Handlebars.compile(source);
 	function replyDisplayPage(dno, replyPage) {
 		var replydiv = '#reply_div' + dno;
 		var reply_page = '#reply_div_page_'+dno
+		var reply_icon = '#reply_icon'+dno+'_2';
 		$.ajax({
 			url : '/overclass/reply/list/' + dno + '/' + replyPage,
 			type : 'get',
@@ -288,6 +301,7 @@ var template = Handlebars.compile(source);
 				var htmlTxt='';
 				for(var i=0; i<result.list.length; i++){
 					htmlTxt+=template(result.list[i]);
+					$(reply_icon).html('댓글['+result.count+']&nbsp;&nbsp;&nbsp;&nbsp;')
 				}
 				// 페이징추가해야됨.
 				$(replydiv).html(htmlTxt);

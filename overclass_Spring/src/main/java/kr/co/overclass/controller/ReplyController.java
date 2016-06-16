@@ -44,12 +44,14 @@ public class ReplyController {
 			PageMaker pageMaker = new PageMaker();
 			pageMaker.setCri(cri);
 			//pageMaker.setTotalCount(1);
-			pageMaker.setTotalCount(service.countReply(dno));
+			int count = service.count(dno);
+			pageMaker.setTotalCount(count);
 			
 			Map<String, Object> map = new HashMap<String, Object>();
 			List<ReplyDTO> list = service.listReply(dno,cri);
 			map.put("list", list);
 			map.put("pageMaker", pageMaker);
+			map.put("count", count);
 			
 			entity = new ResponseEntity<Map<String, Object>>(map,HttpStatus.OK);
 		} catch (Exception e) {

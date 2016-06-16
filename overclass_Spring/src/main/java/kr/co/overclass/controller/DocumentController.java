@@ -116,6 +116,7 @@ public class DocumentController {
 			logger.info("\""+user_id+"\"로 접속, "+vo.toString());
 			maker.setTotalCount(service.mainFeed_count(user_id));
 			list = service.mainFeed_list(cri, user_id);
+			logger.info("목록첫번째글 리플카운트 : "+list.get(0).getReplycnt());
 			forward = "document/mainForm";
 		}
 		model.addAttribute("user",vo);
