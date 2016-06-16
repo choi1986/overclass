@@ -38,7 +38,6 @@ public class DocumentServiceImpl implements DocumentService {
 	@Override
 	public void create(DocumentVO vo) throws Exception {
 		dao.create(vo);
-		System.out.println("여기는 service: "+vo.getWriter());
 	}
 	
 	//특정 게시글 삭제
@@ -69,10 +68,6 @@ public class DocumentServiceImpl implements DocumentService {
 		List<GoodDTO> goodlist = good_dao.search(map);
 		// DB에서 굿 카운트 받아옴
 		List<GoodDTO> goodcount = good_dao.count(map);
-		for(int i =0 ; i<goodcount.size();i++){
-		logger.info("글번호("+i+"번) : "+goodcount.get(i).getDno()+" 좋아요갯수 : "+goodcount.get(i).getGood());
-		}
-		
 		
 		for(int i = 0; i<list.size() ; i++) {
 			list.get(i).setGood(0);
