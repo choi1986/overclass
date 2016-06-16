@@ -166,7 +166,7 @@
 							 </a>
 						</li>
 						<li>
-							<a href="/overclass/main/logout">
+							<a href="/overclass/logout">
 								<i class="icon_key_alt"></i> 로그아웃
 							</a>
 						</li>
