@@ -29,7 +29,7 @@ public class AdminDAOImpl implements AdminDAO{
 	}
 
 	@Override
-	public int report_count() throws Exception { //신고글 개수d
+	public int report_count() throws Exception { //신고글 개수
 		return session.selectOne("admin.report_count");
 	}
 
