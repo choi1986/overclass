@@ -22,6 +22,7 @@ public class JoinDTO {
 	private String user_image;
 	private int user_logincnt;
 	private int user_admin;
+	private boolean joinErrorCk;
 
 	public JoinDTO() {
 		// TODO Auto-generated constructor stub
@@ -200,5 +201,14 @@ public class JoinDTO {
 	public void setUser_admin(int user_admin) {
 		this.user_admin = user_admin;
 	}
+
+	public boolean isJoinErrorCk() {
+		return joinErrorCk;
+	}
+
+	public void setJoinErrorCk(boolean joinErrorCk) {
+		this.joinErrorCk = joinErrorCk;
+	}
+	
 	
 }
