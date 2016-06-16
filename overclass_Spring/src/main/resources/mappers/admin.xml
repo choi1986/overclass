@@ -21,6 +21,5 @@
 	<select id="report_count" resultType="int">
 		select count(*) cnt
 		from oc_report
-		where 
 	</select>
 </mapper>

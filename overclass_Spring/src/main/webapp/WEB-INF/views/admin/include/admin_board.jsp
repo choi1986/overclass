@@ -101,7 +101,7 @@
 							<div class="form-group">
 								<label class="control-label col-lg-2" for="content">신고누적회수</label>
 								<div class="col-lg-9">
-									<i class="fa fa-check">1회</i>
+									<i class="fa fa-check" style="color: red;">1회</i>
 								</div>
 							</div>
 
