@@ -38,6 +38,7 @@ public class DocumentServiceImpl implements DocumentService {
 	@Override
 	public void create(DocumentVO vo) throws Exception {
 		dao.create(vo);
+		System.out.println("여기는 service: "+vo.getWriter());
 	}
 	
 	//특정 게시글 삭제

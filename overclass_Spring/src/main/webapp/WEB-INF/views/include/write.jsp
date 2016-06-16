@@ -50,12 +50,14 @@
 							<img alt="avatar" src="${user.user_image}" width='70' height='70'>
 							<h4></h4>
 							<p>
-								<b>${user.user_id }</b>
+								<b>
+									<input type="hidden" id="writer" name="writer" value="${user.user_id }">
+									${user.user_id }
+								</b>
 							</p>
 						</div>
 						<div class="col-lg-10">
 							<input type="hidden" id="action" name="action" value="contentInsert"> 
-								<input type="hidden" id="writer" name="writer" value="test1"<%-- <%=user.getUser_id()%> --%>>
 							<textarea class="form-control" name="content" id="content" rows="5"></textarea>
 						</div>
 					</div>
@@ -76,7 +78,7 @@
 						</div>
 						<div class="filebox col-lg-10">
 						<div class="col-lg-12" id="photo_div" style="display: none;">
-							<img src="" id="photo" width="250px" height="200px">
+							<img class="img-responsive img-thumbnail" src="" id="photo" width="250px" height="200px">
 						</div>
 						</div>
 					</div>

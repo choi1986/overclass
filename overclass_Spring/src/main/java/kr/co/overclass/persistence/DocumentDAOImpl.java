@@ -22,6 +22,7 @@ public class DocumentDAOImpl implements DocumentDAO{
 	@Override
 	public void create(DocumentVO vo) throws Exception { //글쓰기
 		session.insert("document.insert", vo);
+		System.out.println("여기는 dao: "+vo.getWriter());
 	}
 	
 	@Override

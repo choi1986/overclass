@@ -347,7 +347,19 @@
 				var img_format = "\.(bmp|gif|jpg|jpeg|png)$"; 
 				
 			    if(!(new RegExp(img_format, "i")).test(file)){
-			    alert("이미지 파일만 첨부하실 수 있습니다.");
+			    	BootstrapDialog.show({
+			    		title: '', //알러트 타이틀 이름
+			    		message: '이미지 파일만 첨부 가능합니다..', //알러트 내용
+			    		type: BootstrapDialog.TYPE_DANGER,
+			    		buttons: [{ //알러트 버튼 정의
+			    				icon: 'fa fa-check',
+			    				label: '확인',
+			    				cssClass: 'btn-danger',
+			    				action: function(cancel){
+			    					cancel.close();
+			   					}
+			    			}]
+			    	})
 				    $('#photo_div').hide();
 			        $('#file').val('');
 			    	return;
