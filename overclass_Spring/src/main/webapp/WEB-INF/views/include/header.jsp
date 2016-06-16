@@ -71,16 +71,13 @@
 				<li id="mail_notificatoin_bar" class="dropdown">
 					<a data-toggle="dropdown" class="dropdown-toggle" href="#"> 
 						<i class="icon-envelope-l"></i> 
-						<span class="badge bg-important">1<%-- <%=msg_num%> --%></span>
+						<span id='sitebarMsgCount' class="badge bg-important">0</span>
 						<!-- 메세지온 개수 -->
 					</a>
 					<ul id="msg4" class="dropdown-menu extended inbox">
 						<div class="notify-arrow notify-arrow-blue"></div>
 						<li>
 							<p class="blue">메시지 0개</p>
-						</li>
-						<li>
-							<a href="#">모든메시지 보기</a>
 						</li>
 					</ul>
 				</li>

@@ -59,26 +59,45 @@ lightbox.option({
 
 <!-- 쪽지 리스트처리를 위한 템플릿 -->
 <script id="msgtemp" type="text/x-handlebars-template">
-
-<%-- <% for(int i=0;i<list.size();i++) { %> --%>
 <li>
 	<a href=''>
 		<span class="photo">
-			<img alt="avatar" width='30' height='30' src='<%-- <%=list.get(i).getId_img_path()%> --%>'></span> <!-- 프사 -->
+			<img alt="avatar" width='30' height='30' src='{{user_image}}'></span>
 		<span class="subject">
-			<span id="msgid<%-- <%=i%> --%>" class="from"><%-- <%=list.get(i).getUser_id() %> --%></span> <!-- 이름 -->
-			<span class="time"><%-- <%= list.get(i).getWrite_date() %> --%>전</span> <!-- 시간 -->
+			<span class="from">{{sender}}</span>
+			<span class="time">{{writedate}}전</span>
 		</span>
-		<span class="subject"><%-- <%=list.get(i).getContent() %> --%></span> <!-- 메시지 -->
+		<span class="subject">{{content}}</span>
 	</a>
 </li>
 </script>
+<script id="msgtoptemp" type="text/x-handlebars-template">
+<div class="notify-arrow notify-arrow-blue"></div>
+						<li>
+							<p class="blue">새로운 쪽지 {{count}}개</p>
+						</li>
+</script>
 
 <script type="text/javascript">
+var msg_source = $("#msgtemp").html();
+var msg_template = Handlebars.compile(msg_source);
+var msgtop_source = $("#msgtoptemp").html();
+var msgtop_template = Handlebars.compile(msgtop_source);
 
 var timer;
 var msgid;
 $(document).ready(function() {
+	
+	$.ajax({
+		url : "/overclass/msg/sitebarCount",
+		type:'POST',
+		data:{
+			user_id:'<%=user.getUser_id()%>'
+		},
+		success : function(success) {
+			$("#sitebarMsgCount").html(success);
+		}
+	});
 	
 	//사진미리보기
 	function readURL(input) {
@@ -319,19 +338,20 @@ $(document).ready(function() {
 	
 	
 	
-	
-	// 알림바 메시지 클릭 이벤트
+	// 사이트바 쪽지 클릭 이벤트
 	$("#mail_notificatoin_bar").click(function() { 
 		$.ajax({
-			url : "addfunctionaction.do?action=msg_list4",
+			url : "/overclass/msg/sitebar",
+			type:'POST',
+			data:{
+				user_id:'<%=user.getUser_id()%>'
+			},
 			success : function(success) {
-				$("#msg4").html(success);
-			}
-		});
-		$.ajax({
-			url : "addfunctionaction.do?action=msg_num",
-			success : function(success) {
-				$("#msg4num").html(success);
+				var htmlTxt = msgtop_template(success);
+				for(var i=0; i<success.list.length; i++){
+					htmlTxt+=msg_template(success.list[i]);
+				}
+				$("#msg4").html(htmlTxt);
 			}
 		});
 	});

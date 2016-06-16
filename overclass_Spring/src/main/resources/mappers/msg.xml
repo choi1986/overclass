@@ -2,9 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="msg">
 	<select id="read" resultType="msg">
-		select * from oc_msg
-		where receiver = #{receiver}
+		select sender, receiver, content, TO_CHAR(writedate,'yyyymmddhh24miss') writedate, user_image
+		from oc_msg, oc_user
+		where receiver = #{receiver} and oc_msg.sender = oc_user.user_id
 		order by writedate desc
+	</select>
+	<select id="read4" resultType="msg">
+		select sender, content, TO_CHAR(writedate,'yyyymmddhh24miss') writedate, user_image 
+		from oc_msg, oc_user
+		where (sender, writedate) IN (select sender, max(writedate)
+										from oc_msg
+										where receiver = #{receiver}
+										group by sender)
+			and oc_msg.sender = oc_user.user_id
 	</select>
 	<insert id="write">
 		insert into oc_msg
