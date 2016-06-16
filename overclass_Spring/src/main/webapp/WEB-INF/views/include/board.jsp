@@ -173,7 +173,7 @@
 	<!--페이징버튼-->
 </footer>
 
-<!-- 댓글처리를 위한 템플릿 -->
+<!-- 댓글처리를 위한 템플릿. -->
 <script id="template" type="text/x-handlebars-template">
 <div class="act-time">
    <div class="activity-body act-in">
