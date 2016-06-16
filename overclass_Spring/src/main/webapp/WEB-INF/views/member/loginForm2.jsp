@@ -147,68 +147,74 @@
 		
 		switch (num) { // 회원가입
 		case 1: // 아이디
-			if(data.value.length<5) {
-				msg='5자리 이상 입력해주세요.';
-				joinError++;
-			}
+			if(data.value.length<5) { msg='아이디를 5자리 이상 입력해주세요.'; joinError++; }
 			else joinError--;
 			$("#span1").text(msg);
 			break;
 		case 2: // 비밀번호
-			if(data.value.length<3) {
-				msg='3자리 이상 입력해주세요.';
-				joinError++;
-			}
+			if(data.value.length<3) { msg='비밀번호를 3자리 이상 입력해주세요.'; joinError++; }
 			else joinError--;
 			$("#span2").text(msg);
 			break;
 		case 3: // 비밀번호 확인
-			if(data.value!=$("#user_pwd").val()) {
-				msg='확인 비밀번호가 같지 않습니다!';
-				joinError++;
-			}
+			if(data.value!=$("#user_pwd").val()) { msg='확인 비밀번호가 같지 않습니다!'; joinError++; }
 			else joinError--;
 			$("#span3").text(msg);
 			break;
 		case 4: // 이름
-			if(data.value.length<2) {
-				msg='2자리 이상 입력해주세요.';
-				joinError++;
-			}
+			if(data.value.length<2) { msg='이름을 2자리 이상 입력해주세요.'; joinError++; }
 			else joinError--;
 			$("#span4").text(msg);
 			break;
 		case 5: // 이메일
-			if(!data.value.match(/^[A-Z0-9+_.-]+@[A-Z0-9.-]+$/i)) {
-				msg='메일을 다시 확인해주세요.';
-				joinError++;
-			}
+			if(!data.value.match(/^[A-Z0-9+_.-]+@[A-Z0-9.-]+$/i)) { msg='메일을 다시 확인해주세요.'; joinError++; }
 			else joinError--;
 			$("#span5").text(msg);
 			break;
 		case 6: // 전화번호_1
-			if(data.value.length<2||data.value.length>4||isNaN(data.value)) {
-				msg='전화번호를 다시 확인 해주세요.';
-				joinError++;
-			}
+			if(data.value.length<2||data.value.length>4||isNaN(data.value)) { msg='전화번호를 다시 확인 해주세요.'; joinError++; }
 			else joinError--;
 			$("#span6").text(msg);
 			break;
 		case 7: // 전화번호_2
-			if(data.value.length<3||data.value.length>5||isNaN(data.value)) {
-				msg='전화번호를 다시 확인 해주세요.';
-				joinError++;
-			}
+			if(data.value.length<3||data.value.length>5||isNaN(data.value)) { msg='전화번호를 다시 확인 해주세요.'; joinError++; }
 			else joinError--;
 			$("#span6").text(msg);
 			break;
 		case 8: // 전화번호_3
-			if(data.value.length<2||data.value.length>4||isNaN(data.value)) {
-				msg='전화번호를 다시 확인 해주세요.';
-				joinError++;
-			}
+			if(data.value.length<2||data.value.length>4||isNaN(data.value)) { msg='전화번호를 다시 확인 해주세요.'; joinError++; }
 			else joinError--;
 			$("#span6").text(msg);
+			break;
+		case 9: // 주소
+			if(data.value=="-- 선택 --") { msg='주소를 입력해주세요.'; joinError++; }
+			else joinError--;
+			$("#span7").text(msg);
+			break;
+		case 10: // 취미1
+			if(data.value=="-- 선택 --") { msg='취미를 선택해주세요.'; joinError++; }
+			else joinError--;
+			$("#span8").text(msg);
+			break;
+		case 11: // 취미2
+			if(data.value=="-- 선택 --") { msg='취미를 선택해주세요.'; joinError++; }
+			else joinError--;
+			$("#span9").text(msg);
+			break;
+		case 12: // 비밀번호 찾기 질문
+			if(data.value=="-- 선택 --") { msg='질문을 입력해주세요.'; joinError++; }
+			else joinError--;
+			$("#span10").text(msg);
+			break;
+		case 13: // 비밀번호 찾기 답변
+			if(data.value.length<1) { msg='답변을 입력해주세요.'; joinError++; }
+			else joinError--;
+			$("#span11").text(msg);
+			break;
+		case 14: // 생일
+			if(data.value.length!=6||isNaN(data.value)) { msg='생일을 6자리 숫자로 입력해주세요.'; joinError++; }
+			else joinError--;
+			$("#span12").text(msg);
 			break;
 
 		default:
@@ -435,32 +441,32 @@
                                           <label for="password" class="control-label col-sm-4">비밀번호 <span class="required">*</span></label>
                                           <div class="col-sm-4">
                                               <input class="form-control " id="user_pwd" name="user_pwd" type="password" onblur="regCk(2, this)"/>
-                                              <span id="span2" class="joinSpan"></span>
                                           </div>
+                                          <span id="span2" class="joinSpan"></span>
                                       </div>
                                       
                                       <div class="form-group ">
                                           <label for="confirm_password" class="control-label col-sm-4">비밀번호 확인 <span class="required">*</span></label>
                                           <div class="col-sm-4">
                                               <input class="form-control " id="user_pwd_confirm" name="user_pwd_confirm" type="password" onblur="regCk(3, this)"/>
-                                              <span id="span3" class="joinSpan"></span>
                                           </div>
+                                          <span id="span3" class="joinSpan"></span>
                                       </div>
                                       
                                       <div class="form-group ">
                                           <label for="username" class="control-label col-sm-4">이름 <span class="required">*</span></label>
                                           <div class="col-sm-4">
                                               <input class="form-control " id="user_name" name="user_name" type="text" placeholder="ex) 홍길동"  onblur="regCk(4, this)"/>
-                                              <span id="span4" class="joinSpan"></span>
                                           </div>
+                                          <span id="span4" class="joinSpan"></span>
                                       </div>
                                       
                                       <div class="form-group ">
                                           <label for="email" class="control-label col-sm-4">이메일 <span class="required">*</span></label>
                                           <div class="col-sm-4">
                                               <input class="form-control " id="user_email" name="user_email" type="email" placeholder="ex) kosta113" onblur="regCk(5, this)"/>
-                                              <span id="span5" class="joinSpan"></span>
                                           </div>
+                                          <span id="span5" class="joinSpan"></span>
                                       </div>
                                       
                                       <div class="form-group">
@@ -485,7 +491,7 @@
                                       <div class="form-group">
                                             <label class="control-label col-sm-4">주소<span class="required">*</span></label>
                                             <div class="col-sm-4">                               
-                                                <select class="form-control" id="user_loc" name="user_loc">
+                                                <select class="form-control" id="user_loc" name="user_loc" onblur="regCk(9, this)">
                                                   <option>-- 선택 --</option>
                                                   <option>경기도</option>
                                                   <option>서울특별시</option>
@@ -502,12 +508,13 @@
                                                   <option>제주도</option>
                                                 </select>  
                                             </div>
+                                                <span id="span7" class="joinSpan"></span>
                                           </div>
                                           
                                       <div class="form-group">
                                             <label class="control-label col-sm-4">첫번째 취미<span class="required">*</span></label>
                                             <div class="col-sm-4">                               
-                                                <select class="form-control" id="user_hobby1" name="user_hobby1">
+                                                <select class="form-control" id="user_hobby1" name="user_hobby1" onblur="regCk(10, this)">
                                                   <option>-- 선택 --</option>
                                                   <option>스포츠</option>
                                                   <option>독서</option>
@@ -518,12 +525,13 @@
                                                   <option>요리</option>
                                                 </select>  
                                             </div>
+                                                <span id="span8" class="joinSpan"></span>
                                           </div>
                                           
                                       <div class="form-group">
                                             <label class="control-label col-sm-4">두번째 취미<span class="required">*</span></label>
                                             <div class="col-sm-4">                               
-                                                <select class="form-control" id="user_hobby2" name="user_hobby2">
+                                                <select class="form-control" id="user_hobby2" name="user_hobby2" onblur="regCk(11, this)">
                                                   <option>-- 선택 --</option>
                                                   <option>스포츠</option>
                                                   <option>독서</option>
@@ -534,12 +542,13 @@
                                                   <option>요리</option>
                                                 </select>  
                                             </div>
+                                                <span id="span9" class="joinSpan"></span>
                                           </div>
                                           
                                            <div class="form-group">
                                             <label class="control-label col-sm-4">비밀번호찾기 질문<span class="required">*</span></label>
                                             <div class="col-sm-4">                               
-                                                <select class="form-control" id="user_pwdq" name="user_pwdq">
+                                                <select class="form-control" id="user_pwdq" name="user_pwdq" onblur="regCk(12, this)">
                                                 	<option>-- 선택 --</option>  
                                                 	<option>나의 고향은?</option>  
                                                 	<option>나의 친한 친구 이름은?</option>  
@@ -549,20 +558,23 @@
                                                 	<option>보물 제1호</option>  
                                                 </select>  
                                             </div>
+                                                <span id="span10" class="joinSpan"></span>
                                           </div>  
                                           
                                       <div class="form-group ">
                                           <label for="birth" class="control-label col-sm-4">비밀번호찾기 답변<span class="required">*</span></label>
                                           <div class="col-sm-4">
-                                              <input class=" form-control" id="user_pwda" name="user_pwda" type="text" placeholder="ex) 코딩하기" />
+                                              <input class=" form-control" id="user_pwda" name="user_pwda" type="text" placeholder="ex) 코딩하기"  onblur="regCk(13, this)"/>
                                           </div>
+                                          <span id="span11" class="joinSpan"></span>
                                       </div>
                                           
                                       <div class="form-group ">
                                           <label for="birth" class="control-label col-sm-4">생일 <span class="required">*</span></label>
                                           <div class="col-sm-4">
-                                              <input class=" form-control" id="user_birth" name="user_birth" type="text" placeholder="ex) 900317"/>
+                                              <input class=" form-control" id="user_birth" name="user_birth" type="text" placeholder="ex) 900317" onblur="regCk(14, this)"/>
                                           </div>
+                                          <span id="span12" class="joinSpan"></span>
                                       </div>
                                       
                                       <div class="form-group ">
