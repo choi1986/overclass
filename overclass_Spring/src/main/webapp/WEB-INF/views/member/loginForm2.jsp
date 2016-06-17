@@ -54,7 +54,22 @@
 			var cnt = 0; //birth 공백으로 바꾸는이벤트 1번만 하기위해 선언
 			duplCk = 0; // 중복검사 성공 or 실패 체크
 			duplID = ""; // 중복검사 아이디 임시 저장
-			joinError = 0; // 회원가입 메시지용 변수
+			joinError = { // 회원가입 메시지용 변수
+					user_idCk : true,
+					user_pwdCk : true,
+					user_pwd_confirmCk : true,
+					user_nameCk : true,
+					user_emailCk : true,
+					user_tel1Ck : true,
+					user_tel2Ck : true,
+					user_tel3Ck : true,
+					user_locCk : true,
+					user_hobby1Ck : true,
+					user_hobby2Ck : true,
+					user_pwdqCk : true,
+					user_pwdaCk : true,
+					user_birthCk : true
+			};
 			
 		$("#join").click(function() { //로그인 화면에서 회원가입버튼 눌렀을시
 			$("#panel").hide(); //로그인하는 아이디,비밀번호 감춤
@@ -89,6 +104,20 @@
 			$("#email2").show()
 		}
 		$("#join_join").click(function() { //회원가입폼에서 가입버튼 눌렀을시
+			if($("#joinErrorCk").val()=="true") {
+				BootstrapDialog.show({
+		    		title: '', //알러트 타이틀 이름
+		    		message: '부적합한 회원가입 항목을 다시 확인해주세요.', //알러트 내용
+		    		type: BootstrapDialog.TYPE_DANGER,
+		    		buttons: [{
+		    				label: '닫기',
+		    				action: function(cancel){
+		    					cancel.close();
+		    					}
+		    			}]
+		    	})
+		    	return;
+			}
 			if (duplID!=$("#user_id").val()&&duplCk==1) { 
 				BootstrapDialog.show({
 		    		title: '', //알러트 타이틀 이름
@@ -147,79 +176,84 @@
 		
 		switch (num) { // 회원가입
 		case 1: // 아이디
-			if(data.value.length<5) { msg='아이디를 5자리 이상 입력해주세요.'; joinError++; }
-			else joinError--;
+			if(data.value.length<5) { msg='아이디를 5자리 이상 입력해주세요.'; joinError.user_idCk=true; }
+			else joinError.user_idCk=false;
 			$("#span1").text(msg);
 			break;
 		case 2: // 비밀번호
-			if(data.value.length<3) { msg='비밀번호를 3자리 이상 입력해주세요.'; joinError++; }
-			else joinError--;
+			if(data.value.length<3) { msg='비밀번호를 3자리 이상 입력해주세요.'; joinError.user_pwdCk=true; }
+			else joinError.user_pwdCk=false;
 			$("#span2").text(msg);
 			break;
 		case 3: // 비밀번호 확인
-			if(data.value!=$("#user_pwd").val()) { msg='확인 비밀번호가 같지 않습니다!'; joinError++; }
-			else joinError--;
+			if(data.value!=$("#user_pwd").val()) { msg='확인 비밀번호가 같지 않습니다!'; joinError.user_pwd_confirmCk=true; }
+			else joinError.user_pwd_confirmCk=false;
 			$("#span3").text(msg);
 			break;
 		case 4: // 이름
-			if(data.value.length<2) { msg='이름을 2자리 이상 입력해주세요.'; joinError++; }
-			else joinError--;
+			if(data.value.length<2) { msg='이름을 2자리 이상 입력해주세요.'; joinError.user_nameCk=true; }
+			else joinError.user_nameCk=false;
 			$("#span4").text(msg);
 			break;
 		case 5: // 이메일
-			if(!data.value.match(/^[A-Z0-9+_.-]+@[A-Z0-9.-]+$/i)) { msg='메일을 다시 확인해주세요.'; joinError++; }
-			else joinError--;
+			if(!data.value.match(/^[A-Z0-9+_.-]+@[A-Z0-9.-]+$/i)) { msg='메일을 다시 확인해주세요.'; joinError.user_emailCk=true; }
+			else joinError.user_emailCk=false;
 			$("#span5").text(msg);
 			break;
 		case 6: // 전화번호_1
-			if(data.value.length<2||data.value.length>4||isNaN(data.value)) { msg='전화번호를 다시 확인 해주세요.'; joinError++; }
-			else joinError--;
+			if(data.value.length<2||data.value.length>4||isNaN(data.value)) { msg='전화번호를 다시 확인 해주세요.'; joinError.user_tel1Ck=true; }
+			else joinError.user_tel1Ck=false;
 			$("#span6").text(msg);
 			break;
 		case 7: // 전화번호_2
-			if(data.value.length<3||data.value.length>5||isNaN(data.value)) { msg='전화번호를 다시 확인 해주세요.'; joinError++; }
-			else joinError--;
+			if(data.value.length<3||data.value.length>5||isNaN(data.value)) { msg='전화번호를 다시 확인 해주세요.'; joinError.user_tel2Ck=true; }
+			else joinError.user_tel2Ck=false;
 			$("#span6").text(msg);
 			break;
 		case 8: // 전화번호_3
-			if(data.value.length<2||data.value.length>4||isNaN(data.value)) { msg='전화번호를 다시 확인 해주세요.'; joinError++; }
-			else joinError--;
+			if(data.value.length<2||data.value.length>4||isNaN(data.value)) { msg='전화번호를 다시 확인 해주세요.'; joinError.user_tel3Ck=true; }
+			else joinError.user_tel3Ck=false;
 			$("#span6").text(msg);
 			break;
 		case 9: // 주소
-			if(data.value=="-- 선택 --") { msg='주소를 입력해주세요.'; joinError++; }
-			else joinError--;
+			if(data.value=="-- 선택 --") { msg='주소를 입력해주세요.'; joinError.user_locCk; }
+			else joinError.user_locCk=false;
 			$("#span7").text(msg);
 			break;
 		case 10: // 취미1
-			if(data.value=="-- 선택 --") { msg='취미를 선택해주세요.'; joinError++; }
-			else joinError--;
+			if(data.value=="-- 선택 --") { msg='취미를 선택해주세요.'; joinError.user_hobby1Ck=true; }
+			else joinError.user_hobby1Ck=false;
 			$("#span8").text(msg);
 			break;
 		case 11: // 취미2
-			if(data.value=="-- 선택 --") { msg='취미를 선택해주세요.'; joinError++; }
-			else joinError--;
+			if(data.value=="-- 선택 --") { msg='취미를 선택해주세요.'; joinError.user_hobby2Ck=true; }
+			else joinError.user_hobby2Ck=false;
 			$("#span9").text(msg);
 			break;
 		case 12: // 비밀번호 찾기 질문
-			if(data.value=="-- 선택 --") { msg='질문을 입력해주세요.'; joinError++; }
-			else joinError--;
+			if(data.value=="-- 선택 --") { msg='질문을 입력해주세요.'; joinError.user_pwdqCk=true; }
+			else joinError.user_pwdqCk=false;
 			$("#span10").text(msg);
 			break;
 		case 13: // 비밀번호 찾기 답변
-			if(data.value.length<1) { msg='답변을 입력해주세요.'; joinError++; }
-			else joinError--;
+			if(data.value.length<1) { msg='답변을 입력해주세요.'; joinError.user_pwdaCk=true; }
+			else joinError.user_pwdaCk=false;
 			$("#span11").text(msg);
 			break;
 		case 14: // 생일
-			if(data.value.length!=6||isNaN(data.value)) { msg='생일을 6자리 숫자로 입력해주세요.'; joinError++; }
-			else joinError--;
+			if(data.value.length!=6||isNaN(data.value)) { msg='생일을 6자리 숫자로 입력해주세요.'; joinError.user_birthCk=true; }
+			else joinError.user_birthCk=false;
 			$("#span12").text(msg);
 			break;
 
 		default:
 			break;
 		}
+		joinErrorCk=joinError.user_idCk||joinError.user_pwdCk||joinError.user_pwd_confirmCk||joinError.user_nameCk||
+						joinError.user_emailCk||joinError.user_tel1Ck||joinError.user_tel2Ck||joinError.user_tel3Ck||
+						joinError.user_locCk||joinError.user_hobby1Ck||joinError.user_hobby2Ck||joinError.user_pwdqCk||
+						joinError.user_pwdaCk||joinError.user_birthCk;
+		$("#joinErrorCk").val(joinErrorCk);
 	}
 </script>
 </head>
@@ -249,6 +283,7 @@
 				$("#radio[value='${sessionScope.joinDupl.radio}']").attr("checked","checked");
 				$("#user_pwdq").val("${sessionScope.joinDupl.user_pwdq}");
 				$("#user_pwda").val("${sessionScope.joinDupl.user_pwda}");
+				$("#joinErrorCk").val("${sessionScope.joinDupl.joinErrorCk}");
 			})
 		</script>
 	</c:if>
@@ -426,6 +461,7 @@
                               <div class="form">
                                   <form class="form-validate form-horizontal " id="register_form" name="register_form" action="/overclass/join" method="post">
                                       <div class="form-group ">
+                                      		<input type="hidden" id="joinErrorCk" name="joinErrorCk"><!-- 에러났는지 카운트했던 것을 체크해서 회원가입 막음 -->
                                           <label for="fullname" class="control-label col-sm-4">아이디<span class="required">*</span></label>
                                           <div class="col-sm-4">
                                               <input class=" form-control" id="user_id" name="user_id" type="text" onblur="regCk(1, this)" />
