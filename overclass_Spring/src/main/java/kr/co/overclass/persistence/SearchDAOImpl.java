@@ -34,23 +34,6 @@ public class SearchDAOImpl implements SearchDAO {
 		return session.selectList("search.search", vo);//아이디 이름 검색
 	}
 
-
-	@Override
-	public Map<String, Object> pageMaker(String info,Criteria cri) throws Exception {
-		Map<String,Object> map = new HashMap<>();
-		//10행씩 2페이지?
-		//행의수 10 페이지1 1~10
-		//행의수 10 페이지2 11~20	end=2*10
-		//perPageNum:페이지당 보여줄 개수
-		//pageStart:현재페이지
-		int end = cri.getPage()*cri.getPerPageNum();
-		int start = end-9;
-		map.put("info", info);
-		map.put("start", start);
-		map.put("end", end);
-		return map;
-	}
-
 	@Override
 	public int countName(String user_name) throws Exception {
 		return session.selectOne("search.countName", user_name);

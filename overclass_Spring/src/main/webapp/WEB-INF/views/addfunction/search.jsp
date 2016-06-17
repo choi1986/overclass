@@ -7,7 +7,7 @@
 <br>
 
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#bt").click(function() {
@@ -37,6 +37,7 @@
 <input type="text" id="txt">
 <input type="button" id="bt" value="검색">
 <br>
+<a href="main" id="toMain">[ 메인페이지로 ]</a><br>
 <div></div>
 
 <%-- <br><br>

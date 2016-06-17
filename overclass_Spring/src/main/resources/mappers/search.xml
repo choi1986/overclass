@@ -30,6 +30,6 @@
 
 	<select id="countTag" resultType="int">
 		select count(*) from oc_document
-		where tag=#{tag}
+		where tag LIKE '%'||#{tag}||'%'
 	</select>
 </mapper>

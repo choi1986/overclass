@@ -14,7 +14,6 @@ public interface SearchDAO {
 	public int countName(String user_name)throws Exception;//페이징 처리위한 검색결과 수
 	public int countId(String user_id)throws Exception;//페이징 처리위한 검색결과 수
 	public int countTag(String tag)throws Exception;//페이징 처리위한 검색결과 수
-	public Map<String,Object> pageMaker(String info,Criteria cri)throws Exception;//sql 실행하기 위한 페이지메이커
 }
 
 
