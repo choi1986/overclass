@@ -100,7 +100,7 @@
 												<div class="form-group">
 													<label class="col-lg-3 control-label">아이디</label>
 													<div class="col-lg-3">
-														<input type="text" id="id" name="user_id" class="form-control" readonly
+														<input type="text" id="user_id" name="user_id" class="form-control" readonly
 															value="${user.user_id }">
 													</div>
 												</div>
@@ -109,7 +109,7 @@
 												<div class="form-group">
 													<label class="col-lg-3 control-label">이름</label>
 													<div class="col-lg-3">
-														<input type="text" id="name" name="user_name" class="form-control" readonly
+														<input type="text" id="user_name" name="user_name" class="form-control" readonly
 															value="${user.user_name }">
 													</div>
 												</div>
@@ -118,48 +118,52 @@
 												<div class="form-group">
 													<label class="col-lg-3 control-label">이메일</label>
 													<div class="col-lg-4">
-														<input type="text" id="email" name="user_email" class="form-control"
+														<input type="text" id="user_email" name="user_email" class="form-control"
 															value="${user.user_email }">
 													</div>
+                                          			<span id="span5" class="modifySpan"></span>
 												</div>
 											</div>
 											<div class="bio-row">
 												<div class="form-group">
 													<label class="col-lg-3 control-label">새 비밀번호</label>
 													<div class="col-lg-3">
-														<input type="text" id="pwd" name="user_pwd" class="form-control">
+														<input type="password" id="user_pwd" name="user_pwd" class="form-control">
 													</div>
+                                          			<span id="span2" class="modifySpan"></span>
 												</div>
 											</div>
 											<div class="bio-row">
 												<div class="form-group">
 													<label class="col-lg-3 control-label">전화번호</label>
 													<div class="col-lg-2">
-														<input type="text" id="tel1" name="user_tel1" class="form-control" value="${fn:substring(user.user_tel, 0, 3)}">
+														<input type="text" id="user_tel1" name="user_tel1" class="form-control" value="${fn:substring(user.user_tel, 0, 3)}">
 													</div>
 													<div class="col-lg-2">
-														<input type="text" id="tel2" name="user_tel2" class="form-control" value="${fn:substring(user.user_tel, 4, 8)}">
+														<input type="text" id="user_tel2" name="user_tel2" class="form-control" value="${fn:substring(user.user_tel, 4, 8)}">
 														
 													</div>
 													<div class="col-lg-2">
-														<input type="text" id="tel3" name="user_tel3" class="form-control" value="${fn:substring(user.user_tel, 9, 13)}">
+														<input type="text" id="user_tel3" name="user_tel3" class="form-control" value="${fn:substring(user.user_tel, 9, 13)}">
 														
 													</div>
 												</div>
+                                          	<span id="span6" class="modifySpan"></span>
 											</div>
 											<div class="bio-row">
 												<div class="form-group">
 													<label class="col-lg-3 control-label">새 비밀번호 다시입력</label>
 													<div class="col-lg-3">
-														<input type="text" id="pwd_confirm" name="user_pwd_confirm" class="form-control">
+														<input type="password" id="user_pwd_confirm" name="user_pwd_confirm" class="form-control">
 													</div>
+                                          		<span id="span3" class="modifySpan"></span>
 												</div>
 											</div>
 											<div class="bio-row">
 												<div class="form-group">
 													<label class="col-lg-3 control-label">주소</label>
 													<div class="col-lg-3">
-														<select class="form-control" id="loc" name="user_loc" onchange="" >
+														<select class="form-control" id="user_loc" name="user_loc" onchange="" >
 															<option>-- 선택 --</option>
 															<option>경기도</option>
 															<option>서울특별시</option>
@@ -176,13 +180,14 @@
 															<option>제주도</option>
 														</select>
 													</div>
+                                                <span id="span7" class="modifySpan"></span>
 												</div>
 											</div>
 											<div class="bio-row">
 												<div class="form-group">
 													<label class="col-lg-3 control-label">비밀번호찾기 질문</label>
 													<div class="col-lg-3">
-														<select class="form-control" id="pwedq" name="pwd_q">
+														<select class="form-control" id="user_pwdq" name="user_pwdq">
 															<option>-- 선택 --</option>
 															<option>나의 고향은?</option>
 															<option>나의 친한 친구 이름은?</option>
@@ -192,13 +197,14 @@
 															<option>보물제1호</option>
 														</select>
 													</div>
+                                                <span id="span10" class="modifySpan"></span>
 												</div>
 											</div>
 											<div class="bio-row">
 												<div class="form-group">
 													<label class="col-lg-3 control-label">생일</label>
 													<div class="col-lg-3">
-														<input type="text" class="form-control"
+														<input type="text" class="form-control" id="user_birth" name="user_birth"
 															value="${user.user_birth }" readonly>
 													</div>
 												</div>
@@ -207,34 +213,45 @@
 												<div class="form-group">
 													<label class="col-lg-3 control-label">비밀번호찾기 답변</label>
 													<div class="col-lg-3">
-														<input type="text" class="form-control" value="${user.user_pwda }">
+														<input type="text" class="form-control" id="user_pwda" name="user_pwda" value="${user.user_pwda }">
 													</div>
+                                          		<span id="span11" class="modifySpan"></span>
 												</div>
 											</div>
 											<div class="bio-row">
 												<div class="form-group">
 													<label id="test" class="col-lg-3 control-label">첫번째 취미</label>
 													<div class="col-lg-3">
-														<select class="form-control" id="hobby1">
+														<select class="form-control" id="user_hobby1" name="user_hobby1">
 															<option>-- 선택 --</option>
-															<option>음악 감상</option>
-															<option>독서</option>
-															<option>수정예정</option>
+															<option>스포츠</option>
+                                                 		 	<option>독서</option>
+                                                  			<option>음악</option>
+                                                  			<option>쇼핑</option>
+                                                  			<option>게임</option>
+                                                  			<option>여행</option>
+                                                  			<option>요리</option>
 														</select>
 													</div>
+                                                <span id="span8" class="modifySpan"></span>
 												</div>
 											</div>
 											<div class="bio-row">
 												<div class="form-group">
 													<label id="test" class="col-lg-3 control-label">두번째 취미</label>
 													<div class="col-lg-3">
-														<select class="form-control" id="hobby2">
+														<select class="form-control" id="user_hobby2" name="user_hobby2">
 															<option>-- 선택 --</option>
-															<option>영화 감상</option>
-															<option>여행</option>
-															<option>수정예정</option>
+															<option>스포츠</option>
+                                                 		 	<option>독서</option>
+                                                  			<option>음악</option>
+                                                  			<option>쇼핑</option>
+                                                  			<option>게임</option>
+                                                  			<option>여행</option>
+                                                  			<option>요리</option>
 														</select>
 													</div>
+                                                <span id="span9" class="modifySpan"></span>
 												</div>
 											</div>
 											<div class="form-group">
@@ -330,16 +347,16 @@
 	 } */
 	$(document).ready(function() {
 		//프로필수정에서 지역 selected
-		$("#loc").val("${user.user_loc }");
+		$("#user_loc").val("${user.user_loc }");
 		
 		//프로필수정에서 취미1 selected
-		$("#hobby1").val("${user.user_hobby1}");
+		$("#user_hobby1").val("${user.user_hobby1}");
 		
 		//프로필수정에서 취미2 selected
-		$("#hobby2").val("${user.user_hobby2}");
+		$("#user_hobby2").val("${user.user_hobby2}");
 		
 		//프로필수정에서 비밀번호질문 selected
-		$("#pwedq").val("${user.user_pwdq}");
+		$("#user_pwdq").val("${user.user_pwdq}");
 		//사진미리보기
 		function readURL(input) {
 			if (input.files && input.files[0]) {
@@ -595,10 +612,10 @@
 	                cssClass: 'btn-success',
 	                action: function(dialogRef){
 	                    var pwd = dialogRef.getModalBody().find('#pwd').val();
-		                if($.trim(pwd.toLowerCase()) !== 'banana') {
+		                if($.trim(pwd.toLowerCase()) !== '${user.user_pwd }') {
 		                	BootstrapDialog.show({
 		                		title: '',
-		                		message: '비밀번호 틀림 비번:banana',
+		                		message: '비밀번호 틀림',
 		                		type: BootstrapDialog.TYPE_primary,
 		                		buttons: [{
 		                			label:'닫기',

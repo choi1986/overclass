@@ -92,8 +92,11 @@
 		$("#searchPwd_post").click(function() {
 			//
 		})
-		$("#back").click(function() {
+		$("#back_join").click(function() {
 			$("#joinForm").hide(); //회원가입폼 감춤
+			$("#panel").show();
+		})
+		$("#back_searchIDPwd").click(function() {
 			$("#searchIDForm").hide(); //아이디 찾기 폼 감춤
 			$("#searchPwdForm").hide(); //비밀번호 찾기 폼 감춤
 			$("#panel").show();
@@ -196,7 +199,7 @@
 			$("#span4").text(msg);
 			break;
 		case 5: // 이메일
-			if(!data.value.match(/^[A-Z0-9+_.-]+@[A-Z0-9.-]+$/i)) { msg='메일을 다시 확인해주세요.'; joinError.user_emailCk=true; }
+			if(!data.value.match(/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,6}$/i)) { msg='메일을 다시 확인해주세요.'; joinError.user_emailCk=true; }
 			else joinError.user_emailCk=false;
 			$("#span5").text(msg);
 			break;
@@ -328,6 +331,57 @@
 	</c:choose>
 	<c:remove var="joinDupl" scope="session" /> <!-- 중복에 쓰인 세션들 닫기 -->
 	<c:remove var="joinDuplCk" scope="session" />
+	
+	<c:choose>
+		<c:when test="${sessionScope.joinCk=='1'}"> <!-- 회원가입 성공 모달 -->
+			<script type="text/javascript">
+					BootstrapDialog.show({
+    					title: '', //알러트 타이틀 이름
+    					message: '회원가입 성공!', //알러트 내용
+    					type: BootstrapDialog.TYPE_PRIMARY,
+    					buttons: [{
+    							label: '닫기',
+    							action: function(cancel){
+    								cancel.close();
+    								}
+    						}]
+    				})
+			</script>
+		</c:when>
+		<c:when test="${sessionScope.joinCk=='0'}"> <!-- 회원가입 실패 모달 -->
+			<script type="text/javascript">
+					BootstrapDialog.show({
+	    				title: '', //알러트 타이틀 이름
+	    				message: '회원가입 실패!', //알러트 내용
+	    				type: BootstrapDialog.TYPE_DANGER,
+	    				buttons: [{
+	    						label: '닫기',
+	    						action: function(cancel){
+	    							cancel.close();
+	    							}
+	    					}]
+	    			})
+				</script>
+		</c:when>
+	</c:choose>
+	<c:remove var="joinCk" scope="session" /> <!-- 회원가입 체크에 쓰인 세션 닫기 -->
+	
+	<c:if test="${sessionScope.loginFail=='1'}"> <!-- 로그인 실패 모달 -->
+		<script type="text/javascript">
+				BootstrapDialog.show({
+   					title: '', //알러트 타이틀 이름
+   					message: '아이디, 비밀번호를 다시 확인해주세요!', //알러트 내용
+   					type: BootstrapDialog.TYPE_DANGER,
+    				buttons: [{
+    						label: '닫기',
+    						action: function(cancel){
+    							cancel.close();
+    							}
+   						}]
+   				})
+		</script>
+	</c:if>
+	<c:remove var="loginFail" scope="session" /> <!-- 회원가입 체크에 쓰인 세션 닫기 -->
 	
 	<c:choose>
 		<c:when test="${sessionScope.searchID=='0'}"> <!-- 아이디 찾기에서 정보가 틀렸을때 -->
@@ -628,7 +682,7 @@
                                        		<div class="col-sm-3"></div>
                                               <div id="change-transitions" class="row">
 											     <button type="button" data-value="rotateInDownLeft" class="btn btn-primary btn-lg" id="join_join">가입</button>
-        		    						<button type="button" data-value="fadeInDown" class="btn btn-danger btn-lg" id="back">취소</button>
+        		    						<button type="button" data-value="fadeInDown" class="btn btn-danger btn-lg" id="back_join">취소</button>
 										      </div>
                                           </div>
                                       </div>
@@ -751,7 +805,7 @@
                                        		<div class="col-sm-3"></div>
                                               <div id="change-transitions" class="row">
 											     <button type="summit" data-value="rotateInDownLeft" class="btn btn-primary btn-lg" id="searchPwd_post">제출</button>
-        		    						<button type="button" data-value="fadeInDown" class="btn btn-danger btn-lg" id="back">취소</button>
+        		    						<button type="button" data-value="fadeInDown" class="btn btn-danger btn-lg" id="back_searchIDPwd">취소</button>
 										      </div>
                                           </div>
                                       </div>

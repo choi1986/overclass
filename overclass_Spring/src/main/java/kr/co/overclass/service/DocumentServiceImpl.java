@@ -65,6 +65,10 @@ public class DocumentServiceImpl implements DocumentService {
 		}
 		map.put("dnonum", dnonum);
 		
+		if(dnonum.length == 0) {
+			return list;
+		}
+		
 		// DB에서 굿을 했는지 리스트를 받아옴
 		List<GoodDTO> goodlist = good_dao.search(map);
 		// DB에서 굿 카운트 받아옴

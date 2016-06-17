@@ -19,22 +19,27 @@ public class AdminServiceImpl implements AdminService{
 	private AdminDAO dao;
 	
 	@Override
-	public void ban(BanVO vo) throws Exception {
-		
-	}
-
-	@Override
-	public List<ReportDTO> list(Criteria cri) throws Exception {
+	public List<ReportDTO> list(Criteria cri) throws Exception { //신고된 글 출력
 		return dao.list(cri);
 	}
 
 	@Override
-	public void report(ReportVO vo) throws Exception {
+	public void report(ReportVO vo) throws Exception { //신고하기
 		dao.report(vo);
 	}
 
 	@Override
-	public int report_count() throws Exception {
+	public int report_count() throws Exception { //신고된 글 개수
 		return dao.report_count();
+	}
+
+	@Override
+	public void banDoc(int reportno) throws Exception { //제제하기
+		dao.banDoc(reportno);
+	}
+
+	@Override
+	public void report_del(int reportno) throws Exception { //제제하고 글삭제
+		dao.report_del(reportno);
 	}
 }

@@ -24,8 +24,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void createUser(UserVO user) throws Exception {
-		userDAO.createUser(user);
+	public int createUser(UserVO user) throws Exception {
+		return userDAO.createUser(user);
 	}
 
 	@Override
