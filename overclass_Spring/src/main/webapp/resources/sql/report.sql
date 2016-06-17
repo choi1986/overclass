@@ -4,7 +4,7 @@ create table oc_report(
 	reporter varchar2(12) not null,
 	dno number not null,
 	content varchar2(120),
-	reportdate date,	-- 脚绊贸府老磊
+	reportdate date default sysdate,	-- 脚绊贸府老磊
 	foreign key (dno) references oc_document (dno)
 );
 

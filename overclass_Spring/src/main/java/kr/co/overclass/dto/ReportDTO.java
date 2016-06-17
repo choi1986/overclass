@@ -7,11 +7,13 @@ public class ReportDTO {
 	private String writer;
 	private String content;
 	private String tag;
-	private Date writedate;
 	private String image;
 	private int goodcnt;
 	private String user_image;
+	private int reportno;
 	private String report_content;
+	private String reporter;
+	private Date reportdate;
 	
 	public ReportDTO() {
 		image = "";
@@ -23,14 +25,16 @@ public class ReportDTO {
 				+", 작성자: "+writer
 				+", 글내용: "+content
 				+", 태그: "+tag
-				+", 작성날짜: "+writedate
 				+", 사진: "+image
 				+", 좋아요개수: "+goodcnt
 				+", 프로필사진: "+user_image
+				+", 신고번호: "+reportno
 				+", 신고사유: "+report_content
+				+", 신고자: "+reporter
+				+", 신고처리일자: "+reportdate
 				+"]";
 	}
-	
+
 	public int getDno() {
 		return dno;
 	}
@@ -63,14 +67,6 @@ public class ReportDTO {
 		this.tag = tag;
 	}
 
-	public Date getWritedate() {
-		return writedate;
-	}
-
-	public void setWritedate(Date writedate) {
-		this.writedate = writedate;
-	}
-
 	public String getImage() {
 		return image;
 	}
@@ -94,11 +90,36 @@ public class ReportDTO {
 	public void setUser_image(String user_image) {
 		this.user_image = user_image;
 	}
+
+	public int getReportno() {
+		return reportno;
+	}
+
+	public void setReportno(int reportno) {
+		this.reportno = reportno;
+	}
+
 	public String getReport_content() {
 		return report_content;
 	}
 
 	public void setReport_content(String report_content) {
 		this.report_content = report_content;
+	}
+
+	public String getReporter() {
+		return reporter;
+	}
+
+	public void setReporter(String reporter) {
+		this.reporter = reporter;
+	}
+
+	public Date getReportdate() {
+		return reportdate;
+	}
+
+	public void setReportdate(Date reportdate) {
+		this.reportdate = reportdate;
 	}
 }

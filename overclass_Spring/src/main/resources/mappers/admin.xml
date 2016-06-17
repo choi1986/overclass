@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="admin">
-	<insert id="ban">
-		insert into oc_ban (ban_id, ban_content) 
-		values(#{ban_id}, #{ban_content})
-	</insert>
-	
 	<insert id="report">
 		insert into oc_report (reportno, reporter, dno, content)
 		values (oc_report_seq.nextval, #{reporter}, #{dno}, #{content})
 	</insert>
 		
-		
 	<select id="list" resultType="report">
-		select oc_report.dno, oc_document.writer, oc_document.content, tag, writedate, image, goodcnt, user_image, oc_report.content report_content
+		select oc_report.dno, oc_document.writer, oc_document.content, tag, image, goodcnt, user_image, reportno, oc_report.content report_content, reporter, TO_CHAR(reportdate,'yyyymmddhh24miss') reportdate
 		from oc_document, oc_user, oc_report
 		where oc_document.dno = oc_report.dno AND oc_user.user_id = oc_document.writer
 	</select>
@@ -22,4 +16,8 @@
 		select count(*) cnt
 		from oc_report
 	</select>
+	
+	<insert id="ban">
+		
+	</insert>
 </mapper>

@@ -1,3 +1,4 @@
+<%@page import="kr.co.overclass.domain.ReportVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -87,12 +88,33 @@
                            </div>
                         </div>
 							
+							<!-- 신고자 -->
+							<div class="form-group">
+								<label class="control-label col-lg-2" for="content">신고자</label>
+								<div class="col-lg-9">
+									<div class="panel-content"  width: 100%; height: 100px; overflow: hidden; word-break: break-all;">
+										<div class="hidden">${reportDTO.reportno }</div>
+										<b>${reportDTO.reporter }</b>
+									</div>
+								</div>
+							</div>
+							
 							<!-- 신고사유 -->
 							<div class="form-group">
 								<label class="control-label col-lg-2" for="content">신고사유</label>
 								<div class="col-lg-9">
 									<div class="panel-content"  width: 100%; height: 100px; overflow: hidden; word-break: break-all;">
 										<b style="color: red;">${reportDTO.report_content }</b>
+									</div>
+								</div>
+							</div>
+							
+							<!-- 신고날짜-->
+							<div class="form-group">
+								<label class="control-label col-lg-2" for="content">신고날짜</label>
+								<div class="col-lg-9">
+									<div class="panel-content"  width: 100%; height: 100px; overflow: hidden; word-break: break-all;">
+										<b id="reportdate">${reportDTO.reportdate }</b>
 									</div>
 								</div>
 							</div>

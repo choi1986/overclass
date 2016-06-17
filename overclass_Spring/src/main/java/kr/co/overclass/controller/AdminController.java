@@ -1,8 +1,11 @@
 package kr.co.overclass.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -70,11 +73,10 @@ public class AdminController {
 	
 	//신고하기
 	@RequestMapping(value="/reportDoc",method=RequestMethod.POST)
-	public String report(ReportVO vo, RedirectAttributes attr) throws Exception {
-		vo.setReportno(0);
-		vo.setReportdate(new Date());
-		logger.info("신고처리: "+vo);
+	public String report(ReportVO vo, RedirectAttributes attr, Model model) throws Exception {
 		service.report(vo);
+		logger.info("신고처리: "+vo);
+		
 		attr.addFlashAttribute("msg", "Write_SUCCESS");
 		
 		return "redirect:/main/myFeed";

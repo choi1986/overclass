@@ -8,8 +8,9 @@ public class ReportVO {
 	private int dno;
 	private String content;
 	private Date reportdate;
-	
 	public ReportVO() {
+		reportno = 0;
+		reportdate = new Date();
 	}
 	
 	@Override
