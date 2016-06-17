@@ -74,6 +74,7 @@ public class AdminController {
 	//신고하기
 	@RequestMapping(value="/reportDoc",method=RequestMethod.POST)
 	public String report(ReportVO vo, RedirectAttributes attr, Model model) throws Exception {
+		
 		service.report(vo);
 		logger.info("신고처리: "+vo);
 		
