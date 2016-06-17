@@ -196,7 +196,7 @@
 			$("#span4").text(msg);
 			break;
 		case 5: // 이메일
-			if(!data.value.match(/^[A-Z0-9+_.-]+@[A-Z0-9.-]+$/i)) { msg='메일을 다시 확인해주세요.'; joinError.user_emailCk=true; }
+			if(!data.value.match(/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,6}$/i)) { msg='메일을 다시 확인해주세요.'; joinError.user_emailCk=true; }
 			else joinError.user_emailCk=false;
 			$("#span5").text(msg);
 			break;
