@@ -612,10 +612,10 @@
 	                cssClass: 'btn-success',
 	                action: function(dialogRef){
 	                    var pwd = dialogRef.getModalBody().find('#pwd').val();
-		                if($.trim(pwd.toLowerCase()) !== 'banana') {
+		                if($.trim(pwd.toLowerCase()) !== '${user.user_pwd }') {
 		                	BootstrapDialog.show({
 		                		title: '',
-		                		message: '비밀번호 틀림 비번:banana',
+		                		message: '비밀번호 틀림',
 		                		type: BootstrapDialog.TYPE_primary,
 		                		buttons: [{
 		                			label:'닫기',

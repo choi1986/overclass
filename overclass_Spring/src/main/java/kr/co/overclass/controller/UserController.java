@@ -88,14 +88,11 @@ public class UserController {
 		UserVO vo = new UserVO();
 		vo.setUser_id(dto.getUser_id());
 		vo.setUser_pwd(dto.getUser_pwd());
-		vo.setUser_name(dto.getUser_name());
 		vo.setUser_email(dto.getUser_email());
 		vo.setUser_tel(dto.getUser_tel1()+"-"+dto.getUser_tel2()+"-"+dto.getUser_tel3());
 		vo.setUser_loc(dto.getUser_loc());
 		vo.setUser_hobby1(dto.getUser_hobby1());
 		vo.setUser_hobby2(dto.getUser_hobby2());
-		vo.setUser_birth(dto.getUser_birth());
-		vo.setUser_gender(dto.getRadio());
 		vo.setUser_pwdq(dto.getUser_pwdq());
 		vo.setUser_pwda(dto.getUser_pwda());
 		service.updateUser(vo);
