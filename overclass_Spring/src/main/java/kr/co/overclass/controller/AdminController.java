@@ -82,4 +82,5 @@ public class AdminController {
 		
 		return "redirect:/main/myFeed";
 	}
+	
 }
