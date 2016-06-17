@@ -45,6 +45,7 @@ public class UserController {
 			service.keepLogin(vo.getUser_id(), session.getId() , sessionlimit);
 		}
 		
+		session.setAttribute("loginFail", "1");
 		return "/member/loginForm2"; // 해당 유저가 없다면 로그인 화면으로 리턴, 있다면 세션에 로그인 정보 저장하고 메인으로.
 	}
 	
@@ -77,7 +78,8 @@ public class UserController {
 		vo.setUser_gender(dto.getRadio());
 		vo.setUser_pwdq(dto.getUser_pwdq());
 		vo.setUser_pwda(dto.getUser_pwda());
-		service.createUser(vo);
+		if (service.createUser(vo)==1) session.setAttribute("joinCk", "1");
+		else session.setAttribute("joinCk", "0");
 		return "/member/loginForm2";
 	}
 	
