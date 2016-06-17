@@ -11,7 +11,7 @@ public interface UserDAO {
 	// 회원 검색
 	public UserVO searchUser (String user_id) throws Exception;
 	// 회원 가입
-	public void createUser (UserVO user) throws Exception;
+	public int createUser (UserVO user) throws Exception;
 	// 회원 정보수정
 	public void updateUser (UserVO user) throws Exception;
 	// 회원 이미지수정
