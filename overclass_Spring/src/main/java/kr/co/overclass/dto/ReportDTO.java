@@ -13,7 +13,7 @@ public class ReportDTO {
 	private int reportno;
 	private String report_content;
 	private String reporter;
-	private Date reportdate;
+	private String reportdate;
 	
 	public ReportDTO() {
 		image = "";
@@ -115,11 +115,11 @@ public class ReportDTO {
 		this.reporter = reporter;
 	}
 
-	public Date getReportdate() {
+	public String getReportdate() {
 		return reportdate;
 	}
 
-	public void setReportdate(Date reportdate) {
+	public void setReportdate(String reportdate) {
 		this.reportdate = reportdate;
 	}
 }

@@ -7,7 +7,9 @@
 	</insert>
 		
 	<select id="list" resultType="report">
-		select oc_report.dno, oc_document.writer, oc_document.content, tag, image, goodcnt, user_image, reportno, oc_report.content report_content, reporter, TO_CHAR(reportdate,'yyyymmddhh24miss') reportdate
+		select oc_report.dno, oc_document.writer, oc_document.content, tag, 
+		image, goodcnt, user_image, reportno, oc_report.content report_content, reporter, 
+		TO_CHAR(reportdate,'<![CDATA[yyyy"년" mm"월" dd"일" hh24"시" mi"분"]]>') reportdate
 		from oc_document, oc_user, oc_report
 		where oc_document.dno = oc_report.dno AND oc_user.user_id = oc_document.writer
 	</select>

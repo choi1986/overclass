@@ -9,14 +9,15 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="pull-right">
-						<div class="btn-group">
+						<!-- 드롭다운 -->
+						<!-- <div class="btn-group">
 							 <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 								<i class="fa fa-align-justify"></i> 
 							</a>
 							<ul class="dropdown-menu" role="menu">
 								<li><a href="#" style="color: red;" class="fa fa-exclamation-circle"> 제재하기</a></li>
 							</ul>
-						</div>
+						</div> -->
 					</div>
 			</div>
 			<div class="panel-body">
@@ -130,8 +131,8 @@
 							<div class="form-group">
 								<!-- Buttons -->
 								<div class="col-lg-offset-4 col-lg-4">
-									<button type="submit" id="s" class="btn btn-danger">제제</button>&nbsp;
-									<button type="submit" id="s" class="btn btn-default">취소</button>
+									<button type="button" id="ban" class="btn btn-danger">제제하기</button>&nbsp;
+									<button type="button" id="cancel" class="btn btn-default">철회하기</button>
 								</div>
 							</div>
 						</form>

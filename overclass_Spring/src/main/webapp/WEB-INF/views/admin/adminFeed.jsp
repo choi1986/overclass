@@ -134,7 +134,6 @@ lightbox.option({
 </script>
 </body>
 <script type="text/javascript">
-
 	$(document).ready(function() {
 		if (result == 'Write_SUCCESS') {
 			BootstrapDialog.show({
@@ -167,96 +166,54 @@ lightbox.option({
 	    			}]
 	    	})
 		}
-	})
-	
-	function delDoc(dno) {
-	BootstrapDialog.show({
-		title: '', //알러트 타이틀 이름
-		message: '글을 삭제 하시겠습니까?', //알러트 내용
-		type: BootstrapDialog.TYPE_DANGER,
-		buttons: [{ //알러트 버튼 정의
-			icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
-			label: '삭제', //알러트 버튼 이름
-			cssClass: 'btn-danger', //알러트 버튼 색바꾸기
-			hotkey:13,
-			action: function(confirm) {
-				location.href="/overclass/main/removeDoc?dno="+dno;
-				
-				confirm.close()
-			}
-			},{
-				label: '닫기',
-				action: function(cancel){
-					cancel.close();
+		
+		$("#ban").click(function() { //제제하기 버튼 클릭시
+			BootstrapDialog.show({
+				title: '', //알러트 타이틀 이름
+				message: '제제 하시겠습니까?', //알러트 내용
+				type: BootstrapDialog.TYPE_DANGER,
+				buttons: [{ //알러트 버튼 정의
+					icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
+					label: '제제', //알러트 버튼 이름
+					cssClass: 'btn-danger', //알러트 버튼 색바꾸기
+					hotkey:13,
+					action: function(confirm) {
+						location.href="/overclass/admin/banDoc";
+						confirm.close()
 					}
-			}]
+					},{
+						label: '닫기',
+						action: function(cancel){
+							cancel.close();
+							}
+					}]
+			})
 		})
-	}
+		$("#calcel").click(function() { //철회하기 버튼 클릭시
+			BootstrapDialog.show({
+				title: '', //알러트 타이틀 이름
+				message: '신고를 철회 하시겠습니까?', //알러트 내용
+				type: BootstrapDialog.TYPE_DANGER,
+				buttons: [{ //알러트 버튼 정의
+					icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
+					label: '철회', //알러트 버튼 이름
+					cssClass: 'btn-danger', //알러트 버튼 색바꾸기
+					hotkey:13,
+					action: function(confirm) {
+						location.href="/overclass/admin/cancelDoc";
+						confirm.close()
+					}
+					},{
+						label: '닫기',
+						action: function(cancel){
+							cancel.close();
+							}
+					}]
+			})
+		})
+		})
 		
-	var replyPage = 1;
-
-	function replyDisplayPage(dno, replyPage) {
-		var replydiv = '#reply_div' + dno;
-		var reply_page = '#reply_div_page_'+dno
-		$.ajax({
-			url : '/overclass/reply/list/' + dno + '/' + replyPage,
-			type : 'get',
-			success : function(result) {
-				var htmlTxt='';
-				for(var i=0; i<result.list.length; i++){
-					htmlTxt+=template(result.list[i]);
-				}
-				
-				// 페이징추가해야됨.
-				$(replydiv).html(htmlTxt);
-				printPaging(result.pageMaker, dno, reply_page);
-			}
-		});
-	}
-	
-	var printPaging = function(pageMaker, dno, reply_page){
-		var pageStr = "";
-		
-		if(pageMaker.prev){
-			pageStr += "<li><a href='"+(pageMaker.startPage-1)+"'>«</a></li>"
-		}
-		
-		for (var i = pageMaker.startPage, len = pageMaker.endPage; i <= len; i++) {
-			var strClass = pageMaker.cri.page == i ? 'class=active' : '';
-			pageStr += "<li "+strClass+"><a href='javascript:replyDisplayPage("+dno+","+i+")'>" + i + "</a></li>";
-		}
-
-		if (pageMaker.next) {
-			pageStr += "<li><a href='" + (pageMaker.endPage + 1)
-					+ "'> >> </a></li>";
-		}
-		
-		$(reply_page).attr("style","display: show;")
-		$(reply_page).html(pageStr);
-	}
-	
-	
-	
-	var printPaging = function(pageMaker, dno, reply_page){
-		var pageStr = "";
-		
-		if(pageMaker.prev){
-			pageStr += "<li><a href='"+(pageMaker.startPage-1)+"'>«</a></li>"
-		}
-		
-		for (var i = pageMaker.startPage, len = pageMaker.endPage; i <= len; i++) {
-			var strClass = pageMaker.cri.page == i ? 'class=active' : '';
-			pageStr += "<li "+strClass+"><a href='javascript:replyDisplayPage("+dno+","+i+")'>" + i + "</a></li>";
-		}
-
-		if (pageMaker.next) {
-			pageStr += "<li><a href='" + (pageMaker.endPage + 1)
-					+ "'> >> </a></li>";
-		}
-		
-		$(reply_page).attr("style","display: show;")
-		$(reply_page).html(pageStr);
-	}
+	})//ready
 		
 </script>
 </html>
