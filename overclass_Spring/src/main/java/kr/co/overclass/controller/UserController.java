@@ -48,6 +48,11 @@ public class UserController {
 		return "/member/loginForm2"; // 해당 유저가 없다면 로그인 화면으로 리턴, 있다면 세션에 로그인 정보 저장하고 메인으로.
 	}
 	
+	@RequestMapping(value="/admin", method=RequestMethod.POST) // 관리자 페이지로
+	public String admin () throws Exception {
+		return "/admin/adminFeed";
+	}
+	
 	@RequestMapping(value="/dupl", method=RequestMethod.POST) // 로그인 버튼 눌린 후
 	public String duplicate (JoinDTO dto, HttpSession session, Model model) throws Exception { // 로그인 정보 전송
 		UserVO vo = service.searchUser(dto.getUser_id());

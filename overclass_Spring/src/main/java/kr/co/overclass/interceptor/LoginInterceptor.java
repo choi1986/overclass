@@ -12,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kr.co.overclass.domain.UserVO;
+
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 	
 	private static final String LOGIN = "login";
@@ -37,7 +39,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 																			// 컨트롤러에서 모델 객체에 저장한 유저 정보를 로그인 성공 후 세션에 저장 
 		HttpSession session = request.getSession();
 		ModelMap modelMap = modelAndView.getModelMap();
-		Object userVO = modelMap.get("userVO"); // 모델에서 객체 얻어옴
+		UserVO userVO = (UserVO)modelMap.get("userVO"); // 모델에서 객체 얻어옴
 		
 		if (userVO != null){
 			logger.info("로그인 성공!");
@@ -54,8 +56,10 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			
 			//response.sendRedirect("/"); // 메인 화면으로
 			Object dest = session.getAttribute("dest");
-			
-			response.sendRedirect(dest != null ? (String)dest : "/overclass/main");
+			if (userVO.getUser_admin()==1)
+				response.sendRedirect(dest != null ? (String)dest : "/overclass/admin");
+			else
+				response.sendRedirect(dest != null ? (String)dest : "/overclass/main");
 		}
 	}
 }
