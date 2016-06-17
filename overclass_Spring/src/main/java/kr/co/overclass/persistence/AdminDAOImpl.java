@@ -17,11 +17,6 @@ public class AdminDAOImpl implements AdminDAO{
 	
 	@Inject
 	private SqlSession session;
-	
-	@Override
-	public void ban(BanVO vo) throws Exception {
-		
-	}
 
 	@Override
 	public List<ReportDTO> list(Criteria cri) throws Exception { //신고글 출력
@@ -36,5 +31,15 @@ public class AdminDAOImpl implements AdminDAO{
 	@Override
 	public void report(ReportVO vo) throws Exception { //신고하기
 		session.insert("admin.report", vo);
+	}
+
+	@Override
+	public void banDoc(int reportno) throws Exception { //제제하기
+		session.insert("admin.banDoc", reportno);
+	}
+
+	@Override
+	public void report_del(int reportno) throws Exception { //제제하고 글삭제
+		session.delete("admin.report_del", reportno);
 	}
 }

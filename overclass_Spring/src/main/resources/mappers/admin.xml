@@ -12,6 +12,7 @@
 		TO_CHAR(reportdate,'<![CDATA[yyyy"년" mm"월" dd"일" hh24"시" mi"분"]]>') reportdate
 		from oc_document, oc_user, oc_report
 		where oc_document.dno = oc_report.dno AND oc_user.user_id = oc_document.writer
+		order by reportno desc
 	</select>
 	
 	<select id="report_count" resultType="int">
@@ -19,7 +20,16 @@
 		from oc_report
 	</select>
 	
-	<insert id="ban">
-		
+	<insert id="banDoc">
+		insert into oc_bandoc (dno, writer, content, tag, image, 
+		goodcnt, user_id, reportno, report_content,reportdate, reporter)
+		values (select oc_report.dno, oc_document.writer, oc_document.content, tag, image, goodcnt, user_image, reportno, oc_report.content report_content, reporter, reportdate
+		from oc_document, oc_user, oc_report
+		where oc_document.dno = oc_report.dno AND oc_user.user_id = oc_document.writer AND reportno = #{reportno})
 	</insert>
+	
+	<delete id="report_del">
+		delete from oc_report
+		where reportno = #{reportno}
+	</delete>
 </mapper>

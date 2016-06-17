@@ -1,7 +1,5 @@
 package kr.co.overclass.dto;
 
-import java.util.Date;
-
 public class ReportDTO {
 	private int dno;
 	private String writer;

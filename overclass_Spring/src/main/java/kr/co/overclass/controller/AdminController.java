@@ -67,13 +67,9 @@ public class AdminController {
 		return "admin/adminFeed";
 	}
 	
-	//글번호 기준으로 검색해서 +신고내용+신고카운트
-	
-	//관리자 뷰에 뛰어줄 내용들 :유저아이디, 유저프로필사진, 글내용, 사진, 태그, 신고사유, 신고 카운트
-	
 	//신고하기
 	@RequestMapping(value="/reportDoc",method=RequestMethod.POST)
-	public String report(ReportVO vo, RedirectAttributes attr, Model model) throws Exception {
+	public String report(ReportVO vo, RedirectAttributes attr) throws Exception {
 		
 		service.report(vo);
 		logger.info("신고처리: "+vo);
@@ -83,4 +79,15 @@ public class AdminController {
 		return "redirect:/main/myFeed";
 	}
 	
+	//제제하기
+	@RequestMapping(value="/banDoc",method=RequestMethod.POST)
+	public String report(int reportno, RedirectAttributes attr) throws Exception {
+		System.out.println("신고번호: "+reportno);
+		service.banDoc(reportno);
+		service.report_del(reportno);
+		
+		attr.addFlashAttribute("msg", "Ban_SUCCESS");
+		
+		return "redirect:/admin/adminFeed";
+	}
 }

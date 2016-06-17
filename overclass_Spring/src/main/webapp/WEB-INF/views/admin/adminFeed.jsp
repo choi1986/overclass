@@ -134,21 +134,11 @@ lightbox.option({
 </script>
 </body>
 <script type="text/javascript">
+var result = '${msg}';
 	$(document).ready(function() {
-		if (result == 'Write_SUCCESS') {
-			BootstrapDialog.show({
-	    		title: '', //알러트 타이틀 이름
-	    		message: '글이 등록 되었습니다.', //알러트 내용
-	    		buttons: [{ //알러트 버튼 정의
-	    				icon: 'fa fa-check',
-	    				label: '확인',
-	    				cssClass: 'btn-primary',
-	    				hotkey:13,
-	    				action: function(cancel){
-	    					cancel.close();
-	   					}
-	    			}]
-	    	}) 
+		
+		if (result == 'Ban_SUCCESS') {
+			
 			
 		} else if (result == 'Remove_SUCCESS') {
 			BootstrapDialog.show({
@@ -167,18 +157,47 @@ lightbox.option({
 	    	})
 		}
 		
-		$("#ban").click(function() { //제제하기 버튼 클릭시
+		
+		function ban(reportno) {
+			
+		}
+		$(".report_ban").click(function() { //제제하기 버튼 클릭시
+			var reportno = this.firstChild.nextSibling.firstChild.nodeValue;
+			var banId = this.nextSibling.nextSibling.firstChild.nextSibling.firstChild.nodeValue;
 			BootstrapDialog.show({
 				title: '', //알러트 타이틀 이름
-				message: '제제 하시겠습니까?', //알러트 내용
+				message: '<b>'+banId+'</b>을 제재 하시겠습니까?', //알러트 내용
 				type: BootstrapDialog.TYPE_DANGER,
 				buttons: [{ //알러트 버튼 정의
 					icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
 					label: '제제', //알러트 버튼 이름
 					cssClass: 'btn-danger', //알러트 버튼 색바꾸기
-					hotkey:13,
 					action: function(confirm) {
-						location.href="/overclass/admin/banDoc";
+						/* var formObj = $("#reportForm");
+						formObj.submit(); */
+						alert(reportno)
+						$.ajax({
+							url:"/overclass/admin/banDoc",
+							type:"post",
+							date:{
+								reportno:reportno
+							},
+							success:function(result){
+								BootstrapDialog.show({
+						    		title: '', //알러트 타이틀 이름
+						    		message: banId+'님이 제재 되었습니다.', //알러트 내용
+						    		buttons: [{ //알러트 버튼 정의
+						    				icon: 'fa fa-check',
+						    				label: '확인',
+						    				cssClass: 'btn-primary',
+						    				hotkey:13,
+						    				action: function(cancel){
+						    					cancel.close();
+						   					}
+						    			}]
+						    	}) 
+							}
+						})
 						confirm.close()
 					}
 					},{
@@ -211,8 +230,6 @@ lightbox.option({
 					}]
 			})
 		})
-		})
-		
 	})//ready
 		
 </script>
