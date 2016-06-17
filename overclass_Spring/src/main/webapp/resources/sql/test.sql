@@ -19,6 +19,9 @@ sysdate,'/overclass/resources/img/profile_default.png',0,0);
 insert into oc_user values('admin','admin','나관리','admin@overclass.co.kr','010-7777-7777',
 '제주도','여행','요리','880505','남','보물제1호','스프링',
 sysdate,'/overclass/resources/img/profile_default.png',0,1);
+insert into oc_user values('test6','1234','테스트6','test6@test.com','010-1475-6759',
+'부산광역시','독서','여행','911001','남','나의 출신학교는?','서울대',
+sysdate,'/overclass/resources/img/profile_default.png',0,0,0,);
 
 
 insert into oc_document (dno,writer,content,tag) values (oc_document_seq.nextval,'test1','첫번째글','등수놀이');

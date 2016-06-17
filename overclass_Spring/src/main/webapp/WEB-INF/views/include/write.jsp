@@ -82,6 +82,15 @@
 						</div>
 						</div>
 					</div>
+					
+					<!-- 지도 -->
+					<div class="form-group">
+					<div class="col-lg-10">
+					<div id="map" style=>
+						
+					</div>
+					</div>
+					</div>
 
 					<!-- 등록버튼 -->
 					<div class="form-group">

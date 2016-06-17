@@ -52,7 +52,7 @@ public class MsgController {
 	}
 	
 	@RequestMapping(value="/write",method=RequestMethod.POST)
-	public ResponseEntity<String> write(MsgVO vo) {
+	public ResponseEntity<String> write(@RequestBody MsgVO vo) {
 		ResponseEntity<String> entity = null;
 		
 		try {
