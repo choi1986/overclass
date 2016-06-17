@@ -330,6 +330,57 @@
 	<c:remove var="joinDuplCk" scope="session" />
 	
 	<c:choose>
+		<c:when test="${sessionScope.joinCk=='1'}"> <!-- 회원가입 성공 모달 -->
+			<script type="text/javascript">
+					BootstrapDialog.show({
+    					title: '', //알러트 타이틀 이름
+    					message: '회원가입 성공!', //알러트 내용
+    					type: BootstrapDialog.TYPE_PRIMARY,
+    					buttons: [{
+    							label: '닫기',
+    							action: function(cancel){
+    								cancel.close();
+    								}
+    						}]
+    				})
+			</script>
+		</c:when>
+		<c:when test="${sessionScope.joinCk=='0'}"> <!-- 회원가입 실패 모달 -->
+			<script type="text/javascript">
+					BootstrapDialog.show({
+	    				title: '', //알러트 타이틀 이름
+	    				message: '회원가입 실패!', //알러트 내용
+	    				type: BootstrapDialog.TYPE_DANGER,
+	    				buttons: [{
+	    						label: '닫기',
+	    						action: function(cancel){
+	    							cancel.close();
+	    							}
+	    					}]
+	    			})
+				</script>
+		</c:when>
+	</c:choose>
+	<c:remove var="joinCk" scope="session" /> <!-- 회원가입 체크에 쓰인 세션 닫기 -->
+	
+	<c:if test="${sessionScope.loginFail=='1'}"> <!-- 로그인 실패 모달 -->
+		<script type="text/javascript">
+				BootstrapDialog.show({
+   					title: '', //알러트 타이틀 이름
+   					message: '아이디, 비밀번호를 다시 확인해주세요!', //알러트 내용
+   					type: BootstrapDialog.TYPE_DANGER,
+    				buttons: [{
+    						label: '닫기',
+    						action: function(cancel){
+    							cancel.close();
+    							}
+   						}]
+   				})
+		</script>
+	</c:if>
+	<c:remove var="loginFail" scope="session" /> <!-- 회원가입 체크에 쓰인 세션 닫기 -->
+	
+	<c:choose>
 		<c:when test="${sessionScope.searchID=='0'}"> <!-- 아이디 찾기에서 정보가 틀렸을때 -->
 			<script type="text/javascript">
 				BootstrapDialog.show({
