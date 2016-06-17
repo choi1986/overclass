@@ -16,4 +16,3 @@ public interface SearchService {
 	public int countTagNum(String tag)throws Exception;//페이징 처리위한 검색결과 수
 }
 
-
