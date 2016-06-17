@@ -92,8 +92,11 @@
 		$("#searchPwd_post").click(function() {
 			//
 		})
-		$("#back").click(function() {
+		$("#back_join").click(function() {
 			$("#joinForm").hide(); //회원가입폼 감춤
+			$("#panel").show();
+		})
+		$("#back_searchIDPwd").click(function() {
 			$("#searchIDForm").hide(); //아이디 찾기 폼 감춤
 			$("#searchPwdForm").hide(); //비밀번호 찾기 폼 감춤
 			$("#panel").show();
@@ -679,7 +682,7 @@
                                        		<div class="col-sm-3"></div>
                                               <div id="change-transitions" class="row">
 											     <button type="button" data-value="rotateInDownLeft" class="btn btn-primary btn-lg" id="join_join">가입</button>
-        		    						<button type="button" data-value="fadeInDown" class="btn btn-danger btn-lg" id="back">취소</button>
+        		    						<button type="button" data-value="fadeInDown" class="btn btn-danger btn-lg" id="back_join">취소</button>
 										      </div>
                                           </div>
                                       </div>
@@ -802,7 +805,7 @@
                                        		<div class="col-sm-3"></div>
                                               <div id="change-transitions" class="row">
 											     <button type="summit" data-value="rotateInDownLeft" class="btn btn-primary btn-lg" id="searchPwd_post">제출</button>
-        		    						<button type="button" data-value="fadeInDown" class="btn btn-danger btn-lg" id="back">취소</button>
+        		    						<button type="button" data-value="fadeInDown" class="btn btn-danger btn-lg" id="back_searchIDPwd">취소</button>
 										      </div>
                                           </div>
                                       </div>
