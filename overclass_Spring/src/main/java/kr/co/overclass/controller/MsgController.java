@@ -22,7 +22,7 @@ import kr.co.overclass.service.MsgService;
 @RestController
 @RequestMapping("/msg")
 public class MsgController {
-	private static final Logger logger = LoggerFactory.getLogger(GoodController.class);
+	private static final Logger logger = LoggerFactory.getLogger(MsgController.class);
 	
 	@Inject
 	private MsgService service;
@@ -32,12 +32,11 @@ public class MsgController {
 		ResponseEntity<Map<String,Object>> entity = null;
 		
 		try {
-			logger.info("유저아이디:"+user_id);
-			
 			// 새로온 쪽지 4개 리스트
 			List<MsgDTO> list = service.sitebarDisplay(user_id);
 			// 새로온 확인하지 않은 쪽지 갯수
 			int count = service.count(user_id);
+			logger.info("유저아이디:"+user_id+" 확인하지 않은 쪽지 : "+count);
 			
 			Map<String,Object> map = new HashMap<>();
 			map.put("list", list);

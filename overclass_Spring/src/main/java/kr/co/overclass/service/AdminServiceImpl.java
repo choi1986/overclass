@@ -9,13 +9,14 @@ import org.springframework.stereotype.Service;
 import kr.co.overclass.domain.BanVO;
 import kr.co.overclass.domain.Criteria;
 import kr.co.overclass.domain.ReportVO;
-import kr.co.overclass.persistence.adminDAO;
+import kr.co.overclass.dto.ReportDTO;
+import kr.co.overclass.persistence.AdminDAO;
 
 @Service
 public class AdminServiceImpl implements AdminService{
 
 	@Inject
-	private adminDAO dao;
+	private AdminDAO dao;
 	
 	@Override
 	public void ban(BanVO vo) throws Exception {
@@ -23,8 +24,8 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public List<ReportVO> list(Criteria cri, String writer) throws Exception {
-		return null;
+	public List<ReportDTO> list(Criteria cri) throws Exception {
+		return dao.list(cri);
 	}
 
 	@Override
@@ -33,8 +34,7 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public int report_count(String writer) throws Exception {
-		return 0;
+	public int report_count() throws Exception {
+		return dao.report_count();
 	}
-	
 }

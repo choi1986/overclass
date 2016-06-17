@@ -1,6 +1,7 @@
 package kr.co.overclass.persistence;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.overclass.domain.Criteria;
 import kr.co.overclass.domain.ReplyVO;
+import kr.co.overclass.dto.ReplyCountDTO;
 import kr.co.overclass.dto.ReplyDTO;
 
 @Repository
@@ -46,13 +48,18 @@ public class ReplyDAOImpl implements ReplyDAO {
 	}
 	
 	@Override
-	public int count(int dno) throws Exception {
-		return session.selectOne("reply.count",dno);
+	public List<ReplyCountDTO> count(Map<String, Object> map) throws Exception {
+		return session.selectList("reply.count",map);
 	}
 
 	@Override
 	public ReplyVO reply(int rno) throws Exception {
 		return session.selectOne("reply.selectOne",rno);
+	}
+
+	@Override
+	public int replycount(int dno) throws Exception {
+		return session.selectOne("reply.replycount",dno);
 	}
 
 }

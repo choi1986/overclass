@@ -47,7 +47,7 @@
 <body>
 	<header class="header dark-bg">
 		<!--로고 시작-->
-		<a href="documentaction.do?action=list" class="logo">OVER <span
+		<a href="/overclass/main" class="logo">OVER <span
 			class="lite">CLASS</span></a>
 		<!-- 로고 끝-->
 		<div class="nav search-row" id="top_menu">
@@ -166,7 +166,7 @@
 							 </a>
 						</li>
 						<li>
-							<a href="/overclass/main/logout">
+							<a href="/overclass/logout">
 								<i class="icon_key_alt"></i> 로그아웃
 							</a>
 						</li>

@@ -16,6 +16,7 @@ import kr.co.overclass.domain.DocumentVO;
 import kr.co.overclass.domain.UserVO;
 import kr.co.overclass.dto.DocumentDTO;
 import kr.co.overclass.dto.GoodDTO;
+import kr.co.overclass.dto.ReplyCountDTO;
 import kr.co.overclass.persistence.DocumentDAO;
 import kr.co.overclass.persistence.GoodDAO;
 import kr.co.overclass.persistence.ReplyDAO;
@@ -38,7 +39,6 @@ public class DocumentServiceImpl implements DocumentService {
 	@Override
 	public void create(DocumentVO vo) throws Exception {
 		dao.create(vo);
-		System.out.println("여기는 service: "+vo.getWriter());
 	}
 	
 	//특정 게시글 삭제
@@ -69,10 +69,8 @@ public class DocumentServiceImpl implements DocumentService {
 		List<GoodDTO> goodlist = good_dao.search(map);
 		// DB에서 굿 카운트 받아옴
 		List<GoodDTO> goodcount = good_dao.count(map);
-		for(int i =0 ; i<goodcount.size();i++){
-		logger.info("글번호("+i+"번) : "+goodcount.get(i).getDno()+" 좋아요갯수 : "+goodcount.get(i).getGood());
-		}
-		
+		// DB에서 댓글 카운트 받아옴
+		List<ReplyCountDTO> replycount = reply_dao.count(map); 
 		
 		for(int i = 0; i<list.size() ; i++) {
 			list.get(i).setGood(0);
@@ -87,6 +85,13 @@ public class DocumentServiceImpl implements DocumentService {
 				// 굿이 몇개되었는지 카운트해서 일치하는 dno에 입력
 				if(list.get(i).getDno() == goodcount.get(j).getDno()) {
 					list.get(i).setGoodcnt(goodcount.get(j).getGood());
+					
+				}
+			}
+			list.get(i).setReplycnt(0);
+			for(int k = 0; k<replycount.size();k++){
+				if(list.get(i).getDno() == replycount.get(k).getDno()) {
+					list.get(i).setReplycnt(replycount.get(k).getCount());
 				}
 			}
 		}

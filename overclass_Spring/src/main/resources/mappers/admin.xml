@@ -8,27 +8,18 @@
 	
 	<insert id="report">
 		insert into oc_report (reportno, reporter, dno, content)
-		values (oc_reprot_seq.nextval, #{reporter}, #{dno}, #{content})
+		values (oc_report_seq.nextval, #{reporter}, #{dno}, #{content})
 	</insert>
 		
 		
-	<select id="">
-		select dno, writer, content, tag, writedate, image, goodcnt, replycnt, user_image
-			from(select dno, writer, content, tag, writedate, image, goodcnt, replycnt, user_image
-				from oc_document, oc_user
-					where writer IN 
-						(select sender 
-						from oc_friend_rel 
-						where receiver = #{user_id}
-						union
-						select receiver 
-						from oc_friend_rel
-						where sender = #{user_id}
-						union
-						select user_id
-						from oc_user
-						where user_id = #{user_id}
-						) and oc_document.writer=oc_user.user_id
-			order by writedate desc)
+	<select id="list" resultType="report">
+		select oc_report.dno, oc_document.writer, oc_document.content, tag, writedate, image, goodcnt, user_image, oc_report.content report_content
+		from oc_document, oc_user, oc_report
+		where oc_document.dno = oc_report.dno AND oc_user.user_id = oc_document.writer
+	</select>
+	
+	<select id="report_count" resultType="int">
+		select count(*) cnt
+		from oc_report
 	</select>
 </mapper>

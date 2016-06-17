@@ -2,10 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<c:forEach items="${list }" var="reportDTO">
 <div class="row">
-<%-- 	<%
-		for (int i = 0; i < list.size(); i++) {
-	%> --%>
 	<div class="col-lg-offset-3 col-lg-5 portlets">
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -28,17 +26,17 @@
 							<!-- 타이틀 -->
 							<div class="form-group">
 								<div class="photo col-lg-2" style="text-align: center;">
-									<img alt="avatar" src='${report.report_image }' width='70'
+									<img alt="avatar" src='${reportDTO.user_image }' width='70'
 										height='70'>
 									<h4></h4>
 									<p>
-										<b>${report.report_id } </b>
+										<b>${reportDTO.writer } </b>
 									</p>
 								</div>
 								<div class="col-lg-10">
 									<div class="panel-content"
 										style="width: 100%; height: 100px; overflow: hidden; word-break: break-all;">
-										${DocumentDTO.content }
+										${reportDTO.content }
 									</div>
 								</div>
 							</div>
@@ -49,40 +47,52 @@
 								</div>
 								<div class="filebox col-lg-10">
 									<div class="col-lg-12" id="photo_div">
-									<c:if test="${DocumentDTO.image != '' }">
-									<a href="${DocumentDTO.image }" data-lightbox="image-${DocumentDTO.dno }" data-title="사진">
-										<img class="img-responsive img-thumbnail" src="${DocumentDTO.image }" width="500px" height="350px">
+									<c:if test="${reportDTO.image != '' }">
+									<a href="${reportDTO.image }" data-lightbox="image-${reportDTO.dno }" data-title="사진">
+										<img class="img-responsive img-thumbnail" src="${reportDTO.image }" width="500px" height="350px">
 									</a>
 									 </c:if>
 									</div>
 								</div>
 							</div>
 							
+							<div class="form-group">
+                           <div class="goodclass">
+                              <div style="display: none;">${reportDTO.dno }</div>
+                              <a class="control-label col-lg-2">
+                                 좋아요&nbsp;&nbsp;
+                               		<span id="good_icon${reportDTO.dno }" class="fa fa-lg fa-thumbs-o-up" style="color: blue;"></span>
+                              </a>
+                           </div>
+                              
+                           <div class="col-lg-8">
+                              <i class="fa fa-lg fa-heart" style="color: red;">
+                                 <span id="good_count${reportDTO.dno }" style="color: black;">&nbsp;${reportDTO.goodcnt }</span>
+                              </i>
+                           </div>
+                        </div>
+							
 							
 							
 							<!-- 태그 -->
-							<div class="form-group">
-								<label class="control-label col-lg-2" for="content">태그</label>
-								<div class="col-lg-9">
-									<%-- <%
-										if (list.get(i).getTag() != null) {
-												String tag[] = list.get(i).getTag().split(",");
-												for (int j = 0; j < tag.length; j++) {
-									%> --%>
-									<button class="btn btn-info"> <i>태그</i></button>
-									<%-- <%
-										} // for j 끝
-											} // if끝
-									%> --%>
-								</div>
-							</div>
+                        <div class="form-group">
+                           <label class="control-label col-lg-2" for="content">태그</label>
+                           <div class="col-lg-9">
+                              <c:if test="${reportDTO.tag != null }">
+                              <c:set var="tags" value="${fn:split(reportDTO.tag,',' )}"/>
+                              <c:forEach items="${tags }" var="tag">
+                              <button class="btn btn-info">${tag}</button>
+                              </c:forEach>
+                              </c:if>
+                           </div>
+                        </div>
 							
 							<!-- 신고사유 -->
 							<div class="form-group">
 								<label class="control-label col-lg-2" for="content">신고사유</label>
 								<div class="col-lg-9">
-									<div class="panel-content" style="width: 100%; height: 100px; overflow: hidden; word-break: break-all;">
-										${Report.content }
+									<div class="panel-content"  width: 100%; height: 100px; overflow: hidden; word-break: break-all;">
+										<b style="color: red;">${reportDTO.report_content }</b>
 									</div>
 								</div>
 							</div>
@@ -91,7 +101,7 @@
 							<div class="form-group">
 								<label class="control-label col-lg-2" for="content">신고누적회수</label>
 								<div class="col-lg-9">
-									<i class="fa fa-check">1회</i>
+									<i class="fa fa-check" style="color: red;">1회</i>
 								</div>
 							</div>
 
@@ -113,47 +123,36 @@
 		</div>
 	</div>
 </div>
-
+</c:forEach>
 <footer>
 	<!-- 페이징버튼 -->
-	<div id="page_div" class="col-lg-offset-5 col-lg-5">
-		<%-- <%
-			int totalPage = (int) request.getAttribute("totalPage");
-			int currentPage = (int) request.getAttribute("currentPage");
-			int start;
-			if (currentPage <= 5)
-				start = 1;
-			else
-				start = (currentPage / 5) * 5 + 1;
-
-			int end;
-			if (start + 4 < totalPage) {
-				end = start + 4;
-			} else
-				end = totalPage;
-			int prev;
-			if (start == 1)
-				prev = 1;
-			else
-				prev = start - 1;
-			int next;
-			if (end == totalPage)
-				next = totalPage;
-			else
-				next = end + 1;
-		%> --%>
-		<a href="feedaction.do?action=myfeed&page=<%-- <%=prev%> --%>" id="page_back"
-			type="button" class="btn btn-default">«</a>
-		<%-- <%
-			for (int i = start; i < end + 1; i++) {
-		%> --%>
-		<a href="feedaction.do?action=myfeed&page=<%-- <%=i%> --%>"><button
-				type="button" class="btn btn-primary"><%-- <%=i%> --%></button></a>
-		<%-- <%
-			}
-		%> --%>
-		<a href="feedaction.do?action=myfeed&page=<%-- <%=next%> --%>" id="page_front"
-			type="button" class="btn btn-default">»</a>
+	<div id="page_div" class="col-lg-offset-4 col-lg-4">
+		<div class="col-lg-offset-1 col-lg-8">
+			<div class="btn-toolbar">
+				<div class="btn-group">
+					<c:if test="${pageMaker.prev }">
+					<a href="/overclass/main/mainFeed_Page?page=${pageMaker.startPage -1 }">
+						<button class="btn btn-default" type="button">«</button>
+					</a>
+					</c:if>
+				</div>
+				<div class="btn-group">
+					<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
+					<a href="/overclass/main/mainFeed_Page?page=${idx }">
+						
+						<button class="<c:out value="${pageMaker.cri.page == idx?'btn btn-primary active':'btn btn-primary' }"/>">${idx }</button>
+					</a>
+					</c:forEach>
+				</div>
+				<div class="btn-group">
+					<c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
+					<a href="/overclass/main/mainFeed_Page?page=${pageMaker.endPage +1 }">
+						<button class="btn btn-default" type="button">»</button>
+					</a>
+					</c:if>
+				</div>
+			</div>
+		</div>
 	</div>
 	<!--페이징버튼-->
 </footer>

@@ -4,12 +4,14 @@
 	<typeAliases>
 		<typeAlias type="kr.co.overclass.domain.ReplyVO" alias="reply"/>
 		<typeAlias type="kr.co.overclass.dto.ReplyDTO" alias="reply_dto"/>
+		<typeAlias type="kr.co.overclass.dto.ReplyCountDTO" alias="reply_c_dto"/>
 		<typeAlias type="kr.co.overclass.domain.UserVO" alias="user"/>
 		<typeAlias type="kr.co.overclass.dto.GoodDTO" alias="good"/>
 		<typeAlias type="kr.co.overclass.dto.MsgDTO" alias="msg"/>
 		<typeAlias type="kr.co.overclass.domain.DocumentVO" alias="document"/>
 		<typeAlias type="kr.co.overclass.dto.DocumentDTO" alias="document_dto"/>
 		<typeAlias type="kr.co.overclass.domain.FriendVO" alias="friend"/>
+		<typeAlias type="kr.co.overclass.dto.ReportDTO" alias="report"/>
 		<!-- <package name="com.kosta.domain"/> -->
 	</typeAliases>
 </configuration>
