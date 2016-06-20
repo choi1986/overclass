@@ -20,12 +20,12 @@
 	
 	<select id="countName" resultType="int">
 		select count(*) from oc_user
-		where user_name=#{user_name}
+		where user_name LIKE '%'||#{user_name}||'%'
 	</select>
 	
 	<select id="countId" resultType="int">
 		select count(*) from oc_user
-		where user_id=#{user_id}
+		where user_id LIKE '%'||#{user_id}||'%'
 	</select>
 
 	<select id="countTag" resultType="int">
@@ -33,3 +33,4 @@
 		where tag LIKE '%'||#{tag}||'%'
 	</select>
 </mapper>
+
