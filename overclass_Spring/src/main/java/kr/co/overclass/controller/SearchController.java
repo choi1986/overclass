@@ -126,4 +126,3 @@ public class SearchController {
 		return "/addfunction/search";
 	}
 }
-
