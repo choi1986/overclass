@@ -155,7 +155,6 @@ var result = '${msg}';
 	    	})
 		}
 		
-		
 		function adminMove(reportno) {
 			location.href = "/overclass/admin/ban_list?reportno="+reportno;
 		}
