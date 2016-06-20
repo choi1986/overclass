@@ -42,12 +42,16 @@
 				<!-- 마이페이지메뉴폼 -->
 				<header class="panel-heading tab-bg-info">
 					<ul class="nav nav-tabs">
-						<li class="active"><a data-toggle="tab" id="dropdown_1"
-							href="#recent-activity"><span class="fa fa-comment-o">&nbsp;&nbsp;신고</span>
-						</a></li>
-						<li class=""><a id="dropdown_3" data-toggle="tab"
-							href="#edit-profile"> <span class="fa fa-users">&nbsp;&nbsp;제재목록</span>
-						</a></li>
+						<li class="active">
+							<a data-toggle="tab" id="dropdown_1" href="#recent-activity">
+								<span class="fa fa-comment-o">&nbsp;&nbsp;신고</span>
+							</a>
+						</li>
+						<li class="">
+						<a id="dropdown_ban" data-toggle="tab" href="#edit-profile"> 
+							<span class="fa fa-users">&nbsp;&nbsp;제재목록</span>
+						</a>
+						</li>
 					</ul>
 				</header>
 				<!-- 마이페이지메뉴폼 끝 -->
@@ -78,33 +82,26 @@
 							<section class="panel">
 
 								<!-- 제제목록 -->
+								<c:forEach items="${ban_list}" var="reportDTO">
 								<div class="panel-body bio-graph-info">
-									<%-- <%
-										for (int i = 0; i < friend_list.size(); i++) {
-									%> --%>
 									<div class="act-time">
 										<div class="activity-body act-in">
 											<span class="arrow"></span>
 											<div class="text">
-												<a
-													href="friendfeed.do?action=friendfeed&friend=<%-- <%=friend_list.get(i).getUser_id()%> --%>"
-													class="activity-img"><img class="avatar"
-													src="<%-- <%=friend_list.get(i).getId_img_path()%> --%>" alt="">
+												<a href="${reportDTO.writer }" class="activity-img">
+												<img class="avatar" src="${reportDTO.user_image }">
 												</a>
 												<p class="attribution">
-													<a
-														href="friendfeed.do?action=friendfeed&friend=<%-- <%=friend_list.get(i).getUser_id()%> --%>"
-														style="color: blue;"><%-- <%=friend_list.get(i).getName()%> --%></a>
-												<p>
-													<i class="icon_pin_alt" style="color: green"></i><i><%-- <%=friend_list.get(i).getLoc()%> --%></i>
+													<a href="${reportDTO.writer }" style="color: red;"><b>${reportDTO.writer }</b></a>
+												</p>
+												<p class="attribution">
+													<a><b style="color: black;">신고사유: ${reportDTO.report_content }</b></a>
 												</p>
 											</div>
 										</div>
 									</div>
-									<%-- <%
-										}
-									%> --%>
 								</div>
+							</c:forEach>
 								<!-- 친구목록 끝 -->
 
 							</section>
@@ -134,6 +131,7 @@ lightbox.option({
 </script>
 </body>
 <script type="text/javascript">
+$("#")
 var result = '${msg}';
 	$(document).ready(function() {
 		
@@ -158,8 +156,9 @@ var result = '${msg}';
 		}
 		
 		
-		function ban(reportno) {
-			
+		function adminMove(reportno, banId) {
+			alert("파라미터확인!: "+reportno);
+			location.href = "/overclass/admin/ban_list?reportno="+reportno+"&writer="+banId;
 		}
 		$(".report_ban").click(function() { //제제하기 버튼 클릭시
 			var reportno = this.firstChild.nextSibling.firstChild.nodeValue;
@@ -179,10 +178,9 @@ var result = '${msg}';
 						$.ajax({
 							url:"/overclass/admin/banDoc",
 							type:"post",
-							date:{
+							data:{
 								reportno:reportno
-							},
-							success:function(result){
+							},success:function(result){
 								BootstrapDialog.show({
 						    		title: '', //알러트 타이틀 이름
 						    		message: banId+'님이 제재 되었습니다.', //알러트 내용
@@ -190,12 +188,14 @@ var result = '${msg}';
 						    				icon: 'fa fa-check',
 						    				label: '확인',
 						    				cssClass: 'btn-primary',
-						    				hotkey:13,
 						    				action: function(cancel){
+						    					adminMove(reportno, banId)
 						    					cancel.close();
 						   					}
 						    			}]
 						    	}) 
+							},error:function(error){
+								alert(error.status+","+ error.statusText)
 							}
 						})
 						confirm.close()

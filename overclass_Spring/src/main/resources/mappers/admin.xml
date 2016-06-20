@@ -5,6 +5,11 @@
 		insert into oc_report (reportno, reporter, dno, content)
 		values (oc_report_seq.nextval, #{reporter}, #{dno}, #{content})
 	</insert>
+	
+	<select id="ban_list" resultType="report">
+		select writer, user_image, report_content
+		from oc_bandoc
+	</select>
 		
 	<select id="list" resultType="report">
 		select oc_report.dno, oc_document.writer, oc_document.content, tag, 
@@ -20,12 +25,17 @@
 		from oc_report
 	</select>
 	
+	<select id="report_stack" resultType="int">
+		select count(*) cnt
+		from oc_bandoc
+		where writer = #{writer}
+	</select>
+	
 	<insert id="banDoc">
-		insert into oc_bandoc (dno, writer, content, tag, image, 
-		goodcnt, user_id, reportno, report_content,reportdate, reporter)
-		values (select oc_report.dno, oc_document.writer, oc_document.content, tag, image, goodcnt, user_image, reportno, oc_report.content report_content, reporter, reportdate
-		from oc_document, oc_user, oc_report
-		where oc_document.dno = oc_report.dno AND oc_user.user_id = oc_document.writer AND reportno = #{reportno})
+		insert into oc_bandoc (dno, writer, content, tag, image, goodcnt, user_image, reportno, report_content, reporter, reportdate)
+			(select oc_report.dno, oc_document.writer, oc_document.content, tag, image, goodcnt, user_image, reportno, oc_report.content report_content, reporter, reportdate 
+				from oc_document, oc_user, oc_report
+				where oc_document.dno = oc_report.dno AND oc_user.user_id = oc_document.writer AND reportno = #{reportno})
 	</insert>
 	
 	<delete id="report_del">

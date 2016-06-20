@@ -6,7 +6,6 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import kr.co.overclass.domain.BanVO;
 import kr.co.overclass.domain.Criteria;
 import kr.co.overclass.domain.ReportVO;
 import kr.co.overclass.dto.ReportDTO;
@@ -20,7 +19,17 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Override
 	public List<ReportDTO> list(Criteria cri) throws Exception { //신고된 글 출력
-		return dao.list(cri);
+		List<ReportDTO> list = dao.list(cri);
+		String writers[] = new String[list.size()];
+		String writer;
+		for (int i = 0; i < list.size(); i++) {
+			writers[i] = list.get(i).getWriter();
+			writer = writers[i];
+			int t = dao.report_stack(writer);
+			list.get(i).setReport_stack(t);
+		}
+		
+		return list;
 	}
 
 	@Override
@@ -42,4 +51,10 @@ public class AdminServiceImpl implements AdminService{
 	public void report_del(int reportno) throws Exception { //제제하고 글삭제
 		dao.report_del(reportno);
 	}
+
+	@Override
+	public List<ReportDTO> ban_list() throws Exception {
+		return dao.ban_list();
+	}
+
 }

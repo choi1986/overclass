@@ -12,6 +12,7 @@ public class ReportDTO {
 	private String report_content;
 	private String reporter;
 	private String reportdate;
+	private int report_stack;
 	
 	public ReportDTO() {
 		image = "";
@@ -30,6 +31,7 @@ public class ReportDTO {
 				+", 신고사유: "+report_content
 				+", 신고자: "+reporter
 				+", 신고처리일자: "+reportdate
+				+", 신고누적횟수: "+report_content
 				+"]";
 	}
 
@@ -119,5 +121,13 @@ public class ReportDTO {
 
 	public void setReportdate(String reportdate) {
 		this.reportdate = reportdate;
+	}
+	
+	public int getReport_stack() {
+		return report_stack;
+	}
+
+	public void setReport_stack(int report_stack) {
+		this.report_stack = report_stack;
 	}
 }
