@@ -28,11 +28,6 @@ public class SearchController {
 	public String searchMain(){
 		return "/addfunction/search";//search요청시 검색 메인 페이지로 이동
 	}
-
-	@RequestMapping(value="/search2", method=RequestMethod.GET)
-	public String searchResult(){
-		return "/addfunction/search2";//검색 결과페이지
-	}
 	
 	@RequestMapping(value="/searchIdName", method=RequestMethod.GET)
 	public String searchIdName(String info, HttpSession session, Model model) throws Exception{
@@ -49,7 +44,7 @@ public class SearchController {
 			model.addAttribute("selectIdName",service.select(vo));//아이디 이름 검색
 			model.addAttribute("resultCount",service.countNameNum(info));
 			session.setAttribute("idName", info);
-			logger.info(info+": 이름 검색성공");
+			if(service.countNameNum(info)!=0){logger.info(info+": 이름 검색성공");};
 		}else{
 			logger.info("아이디........................"+info);
 			int index = service.countIdNum(info);
@@ -60,9 +55,9 @@ public class SearchController {
 			model.addAttribute("selectIdName",service.select(vo));//아이디 이름 검색
 			model.addAttribute("resultCount",service.countIdNum(info));
 			session.setAttribute("idName", info);
-			logger.info(info+": 아이디 검색성공");
+			if(service.countIdNum(info)!=0){logger.info(info+": 아이디 검색성공");};
 		}
-		return "/addfunction/search2";
+		return "/addfunction/search";
 	};
 	
 	@RequestMapping(value="/searchIdNamePage", method=RequestMethod.GET)
@@ -82,7 +77,7 @@ public class SearchController {
 			vo.setEnd(end);
 			model.addAttribute("selectIdName",service.select(vo));//아이디 이름 검색
 			model.addAttribute("resultCount",service.countNameNum(info));
-			logger.info(info+": 이름 검색성공");
+			if(service.countNameNum(info)!=0){logger.info(info+": 이름 검색성공");};
 		}else{
 			logger.info("아이디........................"+info);
 			int index = service.countIdNum(info);
@@ -92,9 +87,9 @@ public class SearchController {
 			vo.setEnd(end);
 			model.addAttribute("selectIdName",service.select(vo));//아이디 이름 검색
 			model.addAttribute("resultCount",service.countIdNum(info));
-			logger.info(info+": 아이디 검색성공");
+			if(service.countIdNum(info)!=0){logger.info(info+": 아이디 검색성공");};
 		}
-		return "/addfunction/search2";
+		return "/addfunction/search";
 	};
 	
 	@RequestMapping(value="/searchTag", method=RequestMethod.GET)
@@ -109,8 +104,8 @@ public class SearchController {
 		model.addAttribute("selectTag", service.selectTag(vo));//태그검색
 		model.addAttribute("resultCount",service.countTagNum(tag));//페이지 분할하기 위한 데이터 수 정보 전송
 		session.setAttribute("tag", tag);
-		logger.info("tag"+"검색성공");
-		return "/addfunction/search2";
+		if(service.countTagNum(tag)!=0){logger.info("tag"+"검색성공");};
+		return "/addfunction/search";
 	}
 
 	@RequestMapping(value="/searchTagPage", method=RequestMethod.GET)
@@ -124,9 +119,8 @@ public class SearchController {
 		vo.setEnd(end);
 		model.addAttribute("selectTag", service.selectTag(vo));//태그검색
 		model.addAttribute("resultCount",service.countTagNum(tag));//페이지 분할하기 위한 데이터 수 정보 전송
-		logger.info("tag"+"검색성공");
-		return "/addfunction/search2";
+		if(service.countTagNum(tag)!=0){logger.info("tag"+"검색성공");};
+		return "/addfunction/search";
 	}
 }
-
 

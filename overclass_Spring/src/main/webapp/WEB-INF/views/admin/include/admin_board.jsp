@@ -152,6 +152,9 @@
 										<span class=hidden>
 											<span class="hidden">${reportDTO.writer }</span>
 										</span>
+										<span class=hidden>
+											<span class="hidden">${reportDTO.dno }</span>
+										</span>
 										&nbsp;
 										<button type="button" id="cancel" class="btn btn-default">철회하기</button>
 									</div>

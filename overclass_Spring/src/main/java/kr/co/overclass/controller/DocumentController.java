@@ -91,7 +91,6 @@ public class DocumentController {
 			return "redirect:/main/myFeed";
 		} else {
 			return "redirect:/main";
-			
 		}
 	}
 	

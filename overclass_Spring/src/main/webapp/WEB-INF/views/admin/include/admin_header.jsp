@@ -77,7 +77,7 @@
 				</a>
 					<ul class="dropdown-menu extended logout">
 						<div class="log-arrow-up"></div>
-						<li><a href="logout.do"><i class="icon_key_alt"></i> 로그아웃</a></li>
+						<li><a href="/overclass/logout"><i class="icon_key_alt"></i> 로그아웃</a></li>
 					</ul></li>
 				<!-- 로그인한 유저 정보 끝 -->
 			</ul>

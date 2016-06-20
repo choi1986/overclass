@@ -45,6 +45,7 @@ public class DocumentServiceImpl implements DocumentService {
 	@Override
 	public void delete(int dno) throws Exception {
 		dao.delete(dno);
+		System.out.println("글삭제완료: "+dno);
 	}
 	
 	//메인피드 게시글 조회
