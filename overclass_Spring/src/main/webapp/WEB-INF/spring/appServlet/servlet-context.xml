@@ -34,6 +34,7 @@
 		<interceptor> <!-- 로그인 해야만 들어갈 수 있는 페이지들을 mapping path로 등록-->
 			<mapping path="/main"/>
 			<mapping path="/main/myFeed"/>
+			<mapping path="/admin"/>
 			<beans:ref bean="AuthInterceptor"/>
 		</interceptor>
 	</interceptors>
