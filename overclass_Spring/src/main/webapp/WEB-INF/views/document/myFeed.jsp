@@ -18,9 +18,20 @@
 					<div class="col-lg-2 col-lg-2">
 						<h4>${user.user_name }</h4>
 						<div class="follow-ava">
-							<img src="${user.user_image }" width='70' height='70'>
+							<img class="img-responsive" id="image" src="${user.user_image }" width='70' height='70'>
 						</div>
-						<h4>${user.user_id }</h4>
+						<h5>${user.user_id }</h5>
+						<!-- 파일 -->
+						<form role="form" id="user_image_update" class="form-horizontal" action="/overclass/main/user_image_update"
+							method="post" enctype="multipart/form-data">
+						<div class="form-group">
+						<div class="fileboxImage control-label col-lg-offset-3 col-lg-3">
+							<label for="file" class="btn btn-success"><span class="fa fa-camera-retro"></span> 프로필사진 변경</label>
+							<input type="file" id="imagefile" name="imagefile" accept="image/gif, image/jpeg, image/png, image/bmp#">
+						</div>
+					</div>
+					</form>
+					
 					</div>
 					<div class="col-lg-4 col-lg-4 follow-info">
 						<p>

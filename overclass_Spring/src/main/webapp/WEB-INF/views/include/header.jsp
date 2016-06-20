@@ -22,6 +22,8 @@
 	<link href="/overclass/resources/css/style-responsive.css" rel="stylesheet">
 	<!-- 애니메이션 -->
 	<link href="/overclass/resources/css/animate.css" type="text/css" rel="stylesheet">
+	<!-- 파일버튼숨기기 -->
+	<link href="/overclass/resources/css/fileboxcss.css" rel="stylesheet">
 	
 <!-- CSS끝 -->
 
