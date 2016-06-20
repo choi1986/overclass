@@ -58,7 +58,7 @@
 				<li>
 					<form class="navbar-form">
 						<input id="search_form" class="form-control" placeholder="Search"
-							type="text" onKeyDown="return search(event)">
+							type="text" onKeyDown="onKeyDown()">
 					</form>
 				</li>
 			</ul>
@@ -179,4 +179,17 @@
 			<!-- 알림 드랍다운 끝-->
 		</div>
 	</header>
-	
+<script type="text/javascript">
+function onKeyDown()
+{
+	if(event.keyCode == 13){
+		var txtvar = $('#search_form').val();
+		if(txtvar.substring(0,1)=='#'){
+			var txt = txtvar.substring(1,txtvar.length);
+				location.assign("searchTag?tag="+txt);
+			}else{
+				location.assign("searchIdName?info="+txtvar);
+			}
+	}
+}
+</script>	
