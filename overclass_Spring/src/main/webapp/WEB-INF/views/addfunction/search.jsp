@@ -9,114 +9,44 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#user1").click(function() {
-			var user_id=$("#user_id1").val();
-			alert(user_id);
-			$.ajax({
-				type:'GET',
-				url:'/overclass/friend/addReq?info='+user_id,
-						success:function(data){
-							$('div').html(data);
-						}
-			});
+			var info=$("#user_id1").val();
+			location.assign('friend/addReq?info='+info);
 		});
 		$("#user2").click(function() {
-			var user_id=$("#user_id2").val();
-			alert(user_id);
-			$.ajax({
-				type:'GET',
-				url:'/overclass/friend/addReq?info='+user_id,
-						success:function(data){
-							$('div').html(data);
-						}
-			});
+			var info=$("#user_id2").val();
+			location.assign('friend/addReq?info='+info);
 		});
 		$("#user3").click(function() {
-			var user_id=$("#user_id3").val();
-			alert(user_id);
-			$.ajax({
-				type:'GET',
-				url:'/overclass/friend/addReq?info='+user_id,
-						success:function(data){
-							$('div').html(data);
-						}
-			});
+			var info=$("#user_id3").val();
+			location.assign('friend/addReq?info='+info);
 		});
 		$("#user4").click(function() {
-			var user_id=$("#user_id4").val();
-			alert(user_id);
-			$.ajax({
-				type:'GET',
-				url:'/overclass/friend/addReq?info='+user_id,
-						success:function(data){
-							$('div').html(data);
-						}
-			});
+			var info=$("#user_id4").val();
+			location.assign('friend/addReq?info='+info);
 		});
 		$("#user5").click(function() {
-			var user_id=$("#user_id5").val();
-			alert(user_id);
-			$.ajax({
-				type:'GET',
-				url:'/overclass/friend/addReq?info='+user_id,
-						success:function(data){
-							$('div').html(data);
-						}
-			});
+			var info=$("#user_id5").val();
+			location.assign('friend/addReq?info='+info);
 		});
 		$("#user6").click(function() {
-			var user_id=$("#user_id6").val();
-			alert(user_id);
-			$.ajax({
-				type:'GET',
-				url:'/overclass/friend/addReq?info='+user_id,
-						success:function(data){
-							$('div').html(data);
-						}
-			});
+			var info=$("#user_id6").val();
+			location.assign('friend/addReq?info='+info);
 		});
 		$("#user7").click(function() {
-			var user_id=$("#user_id7").val();
-			alert(user_id);
-			$.ajax({
-				type:'GET',
-				url:'/overclass/friend/addReq?info='+user_id,
-						success:function(data){
-							$('div').html(data);
-						}
-			});
+			var info=$("#user_id7").val();
+			location.assign('friend/addReq?info='+info);
 		});
 		$("#user8").click(function() {
-			var user_id=$("#user_id8").val();
-			alert(user_id);
-			$.ajax({
-				type:'GET',
-				url:'/overclass/friend/addReq?info='+user_id,
-						success:function(data){
-							$('div').html(data);
-						}
-			});
+			var info=$("#user_id8").val();
+			location.assign('friend/addReq?info='+info);
 		});
 		$("#user9").click(function() {
-			var user_id=$("#user_id9").val();
-			alert(user_id);
-			$.ajax({
-				type:'GET',
-				url:'/overclass/friend/addReq?info='+user_id,
-						success:function(data){
-							$('div').html(data);
-						}
-			});
+			var info=$("#user_id9").val();
+			location.assign('friend/addReq?info='+info);
 		});
 		$("#user10").click(function() {
-			var user_id=$("#user_id10").val();
-			alert(user_id);
-			$.ajax({
-				type:'GET',
-				url:'/overclass/friend/addReq?info='+user_id,
-						success:function(data){
-							$('div').html(data);
-						}
-			});
+			var info=$("#user_id10").val();
+			location.assign('friend/addReq?info='+info);
 		});
 		$("#doc1").click(function() {
 			var gap = $("#doc_dno1").val()+','+$("#doc_writer1").val()+','+$("#doc_content1").val()+','+$("#doc_tag1").val();

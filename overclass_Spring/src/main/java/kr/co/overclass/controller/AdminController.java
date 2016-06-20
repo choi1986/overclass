@@ -66,7 +66,7 @@ public class AdminController {
 	
 	//신고하기
 	@RequestMapping(value="/reportDoc",method=RequestMethod.POST)
-	public String report(ReportVO vo, RedirectAttributes attr) throws Exception {
+	public String report_ban(ReportVO vo, RedirectAttributes attr) throws Exception {
 		service.report(vo);
 		logger.info("신고처리: "+vo);
 		
@@ -77,10 +77,16 @@ public class AdminController {
 	//제제하기
 	@Transactional
 	@RequestMapping(value="/banDoc",method=RequestMethod.POST)
-	public String report(int reportno, int dno, RedirectAttributes attr) throws Exception {
+	public String report_ban(int reportno, int dno, RedirectAttributes attr) throws Exception {
 		service.banDoc(reportno);
 		service.report_del(reportno);
 		docService.delete(dno);
+		return "redirect:/admin";
+	}
+	
+	@RequestMapping(value="/cancelDoc",method=RequestMethod.POST)
+	public String cancel(int reportno, RedirectAttributes attr) throws Exception {
+		service.report_del(reportno);
 		return "redirect:/admin";
 	}
 }

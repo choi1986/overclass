@@ -206,7 +206,10 @@ var result = '${msg}';
 					}]
 			})
 		})
-		$("#calcel").click(function() { //철회하기 버튼 클릭시
+		
+		$(".report_cancel").click(function() { //철회하기 버튼 클릭시
+			var reportno = this.firstChild.nextSibling.firstChild.nodeValue;
+		alert("신고번호확인!"+reportno)
 			BootstrapDialog.show({
 				title: '', //알러트 타이틀 이름
 				message: '신고를 철회 하시겠습니까?', //알러트 내용
@@ -217,7 +220,29 @@ var result = '${msg}';
 					cssClass: 'btn-danger', //알러트 버튼 색바꾸기
 					hotkey:13,
 					action: function(confirm) {
-						location.href="/overclass/admin/cancelDoc";
+						$.ajax({
+							url:"/overclass/admin/cancelDoc",
+							type:"post",
+							data:{
+								reportno:reportno
+							},success:function(result){
+								BootstrapDialog.show({
+						    		title: '', //알러트 타이틀 이름
+						    		message: '신고가 철회 되었습니다.', //알러트 내용
+						    		buttons: [{ //알러트 버튼 정의
+						    				icon: 'fa fa-check',
+						    				label: '확인',
+						    				cssClass: 'btn-primary',
+						    				action: function(cancel){
+						    					location.href = "/overclass/admin"
+						    					cancel.close();
+						   					}
+						    			}]
+						    	}) 
+							},error:function(error){
+								alert(error.status+","+ error.statusText)
+							}
+						})
 						confirm.close()
 					}
 					},{

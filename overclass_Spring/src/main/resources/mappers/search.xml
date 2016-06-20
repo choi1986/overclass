@@ -6,7 +6,7 @@
 		where user_id=#{user_id} or user_name=#{user_name}-->		
 		select user_birth,user_gender,user_id,user_image,user_loc,user_name,user_tel 
 		from (select user_birth,user_gender,user_id,user_image,user_loc,user_name,user_tel,rownum rn 
-		from oc_user where user_id=#{info} or user_name=#{info} order by rn) 
+		from oc_user where user_id LIKE '%'||#{info}||'%' or user_name LIKE '%'||#{info}||'%' order by rn) 
 		where rn between #{start} and #{end}
 	</select>
 	
@@ -20,12 +20,12 @@
 	
 	<select id="countName" resultType="int">
 		select count(*) from oc_user
-		where user_name=#{user_name}
+		where user_name LIKE '%'||#{user_name}||'%'
 	</select>
 	
 	<select id="countId" resultType="int">
 		select count(*) from oc_user
-		where user_id=#{user_id}
+		where user_id LIKE '%'||#{user_id}||'%'
 	</select>
 
 	<select id="countTag" resultType="int">

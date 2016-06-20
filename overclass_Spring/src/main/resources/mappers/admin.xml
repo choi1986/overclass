@@ -6,6 +6,11 @@
 		values (oc_report_seq.nextval, #{reporter}, #{dno}, #{content})
 	</insert>
 	
+	<delete id="report_del">
+		delete from oc_report
+		where reportno = #{reportno}
+	</delete>
+	
 	<select id="ban_list" resultType="report">
 		select writer, user_image, report_content
 		from oc_bandoc
@@ -38,9 +43,4 @@
 				from oc_document, oc_user, oc_report
 				where oc_document.dno = oc_report.dno AND oc_user.user_id = oc_document.writer AND reportno = #{reportno})
 	</insert>
-	
-	<delete id="report_del">
-		delete from oc_report
-		where reportno = #{reportno}
-	</delete>
 </mapper>
