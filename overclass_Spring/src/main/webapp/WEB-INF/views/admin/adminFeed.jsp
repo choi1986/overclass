@@ -156,13 +156,14 @@ var result = '${msg}';
 		}
 		
 		
-		function adminMove(reportno, banId) {
-			alert("파라미터확인!: "+reportno);
-			location.href = "/overclass/admin/ban_list?reportno="+reportno+"&writer="+banId;
+		function adminMove(reportno) {
+			location.href = "/overclass/admin/ban_list?reportno="+reportno;
 		}
+		
 		$(".report_ban").click(function() { //제제하기 버튼 클릭시
 			var reportno = this.firstChild.nextSibling.firstChild.nodeValue;
 			var banId = this.nextSibling.nextSibling.firstChild.nextSibling.firstChild.nodeValue;
+			var dno = this.nextSibling.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.firstChild.nodeValue;
 			BootstrapDialog.show({
 				title: '', //알러트 타이틀 이름
 				message: '<b>'+banId+'</b>을 제재 하시겠습니까?', //알러트 내용
@@ -172,14 +173,12 @@ var result = '${msg}';
 					label: '제제', //알러트 버튼 이름
 					cssClass: 'btn-danger', //알러트 버튼 색바꾸기
 					action: function(confirm) {
-						/* var formObj = $("#reportForm");
-						formObj.submit(); */
-						alert(reportno)
 						$.ajax({
 							url:"/overclass/admin/banDoc",
 							type:"post",
 							data:{
-								reportno:reportno
+								reportno:reportno,
+								dno:dno
 							},success:function(result){
 								BootstrapDialog.show({
 						    		title: '', //알러트 타이틀 이름
@@ -189,7 +188,7 @@ var result = '${msg}';
 						    				label: '확인',
 						    				cssClass: 'btn-primary',
 						    				action: function(cancel){
-						    					adminMove(reportno, banId)
+						    					adminMove(reportno)
 						    					cancel.close();
 						   					}
 						    			}]
