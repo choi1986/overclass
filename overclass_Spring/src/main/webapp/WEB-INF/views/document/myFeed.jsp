@@ -93,7 +93,7 @@
 								<!-- 마이페이지 수정폼끝 -->
 								<div class="panel-body bio-graph-info">
 								<form id="modify" method="post" action="/overclass/main/modifyUser">
-									<div class="col-lg-10">
+									<div class="col-lg-15">
 										<h1>프로필 수정</h1>
 										<div class="row">
 											<div class="bio-row">
@@ -119,51 +119,51 @@
 													<label class="col-lg-3 control-label">이메일</label>
 													<div class="col-lg-4">
 														<input type="text" id="user_email" name="user_email" class="form-control"
-															value="${user.user_email }">
+															value="${user.user_email }" onblur="regCk(5, this)">
 													</div>
-                                          			<span id="span5" class="modifySpan"></span>
+                                          			<div id="span5" class="modifySpan"></div>
 												</div>
 											</div>
 											<div class="bio-row">
 												<div class="form-group">
 													<label class="col-lg-3 control-label">새 비밀번호</label>
 													<div class="col-lg-3">
-														<input type="password" id="user_pwd" name="user_pwd" class="form-control">
+														<input type="password" id="user_pwd" name="user_pwd" class="form-control" onblur="regCk(2, this)">
 													</div>
-                                          			<span id="span2" class="modifySpan"></span>
+                                          			<div id="span2" class="modifySpan"></div>
 												</div>
 											</div>
 											<div class="bio-row">
 												<div class="form-group">
 													<label class="col-lg-3 control-label">전화번호</label>
 													<div class="col-lg-2">
-														<input type="text" id="user_tel1" name="user_tel1" class="form-control" value="${fn:substring(user.user_tel, 0, 3)}">
+														<input type="text" id="user_tel1" name="user_tel1" class="form-control" value="${fn:substring(user.user_tel, 0, 3)}" onblur="regCk(6, this)">
 													</div>
 													<div class="col-lg-2">
-														<input type="text" id="user_tel2" name="user_tel2" class="form-control" value="${fn:substring(user.user_tel, 4, 8)}">
+														<input type="text" id="user_tel2" name="user_tel2" class="form-control" value="${fn:substring(user.user_tel, 4, 8)}" onblur="regCk(7, this)">
 														
 													</div>
 													<div class="col-lg-2">
-														<input type="text" id="user_tel3" name="user_tel3" class="form-control" value="${fn:substring(user.user_tel, 9, 13)}">
+														<input type="text" id="user_tel3" name="user_tel3" class="form-control" value="${fn:substring(user.user_tel, 9, 13)}" onblur="regCk(8, this)">
 														
 													</div>
+                                          	<div id="span6" class="modifySpan"></div>
 												</div>
-                                          	<span id="span6" class="modifySpan"></span>
 											</div>
 											<div class="bio-row">
 												<div class="form-group">
 													<label class="col-lg-3 control-label">새 비밀번호 다시입력</label>
 													<div class="col-lg-3">
-														<input type="password" id="user_pwd_confirm" name="user_pwd_confirm" class="form-control">
+														<input type="password" id="user_pwd_confirm" name="user_pwd_confirm" class="form-control" onblur="regCk(3, this)">
 													</div>
-                                          		<span id="span3" class="modifySpan"></span>
+                                          		<div id="span3" class="modifySpan"></div>
 												</div>
 											</div>
 											<div class="bio-row">
 												<div class="form-group">
 													<label class="col-lg-3 control-label">주소</label>
 													<div class="col-lg-3">
-														<select class="form-control" id="user_loc" name="user_loc" onchange="" >
+														<select class="form-control" id="user_loc" name="user_loc" onchange="" onblur="regCk(9, this)">
 															<option>-- 선택 --</option>
 															<option>경기도</option>
 															<option>서울특별시</option>
@@ -180,14 +180,14 @@
 															<option>제주도</option>
 														</select>
 													</div>
-                                                <span id="span7" class="modifySpan"></span>
+                                                <div id="span7" class="modifySpan"></div>
 												</div>
 											</div>
 											<div class="bio-row">
 												<div class="form-group">
 													<label class="col-lg-3 control-label">비밀번호찾기 질문</label>
 													<div class="col-lg-3">
-														<select class="form-control" id="user_pwdq" name="user_pwdq">
+														<select class="form-control" id="user_pwdq" name="user_pwdq" onblur="regCk(12, this)">
 															<option>-- 선택 --</option>
 															<option>나의 고향은?</option>
 															<option>나의 친한 친구 이름은?</option>
@@ -197,7 +197,7 @@
 															<option>보물제1호</option>
 														</select>
 													</div>
-                                                <span id="span10" class="modifySpan"></span>
+                                                <div id="span10" class="modifySpan"></div>
 												</div>
 											</div>
 											<div class="bio-row">
@@ -213,16 +213,16 @@
 												<div class="form-group">
 													<label class="col-lg-3 control-label">비밀번호찾기 답변</label>
 													<div class="col-lg-3">
-														<input type="text" class="form-control" id="user_pwda" name="user_pwda" value="${user.user_pwda }">
+														<input type="text" class="form-control" id="user_pwda" name="user_pwda" value="${user.user_pwda }" onblur="regCk(13, this)">
 													</div>
-                                          		<span id="span11" class="modifySpan"></span>
+                                          		<div id="span11" class="modifySpan"></div>
 												</div>
 											</div>
 											<div class="bio-row">
 												<div class="form-group">
 													<label id="test" class="col-lg-3 control-label">첫번째 취미</label>
 													<div class="col-lg-3">
-														<select class="form-control" id="user_hobby1" name="user_hobby1">
+														<select class="form-control" id="user_hobby1" name="user_hobby1" onblur="regCk(10, this)">
 															<option>-- 선택 --</option>
 															<option>스포츠</option>
                                                  		 	<option>독서</option>
@@ -233,14 +233,14 @@
                                                   			<option>요리</option>
 														</select>
 													</div>
-                                                <span id="span8" class="modifySpan"></span>
+                                                <div id="span8" class="modifySpan"></div>
 												</div>
 											</div>
 											<div class="bio-row">
 												<div class="form-group">
 													<label id="test" class="col-lg-3 control-label">두번째 취미</label>
 													<div class="col-lg-3">
-														<select class="form-control" id="user_hobby2" name="user_hobby2">
+														<select class="form-control" id="user_hobby2" name="user_hobby2" onblur="regCk(11, this)">
 															<option>-- 선택 --</option>
 															<option>스포츠</option>
                                                  		 	<option>독서</option>
@@ -251,7 +251,7 @@
                                                   			<option>요리</option>
 														</select>
 													</div>
-                                                <span id="span9" class="modifySpan"></span>
+                                                <div id="span9" class="modifySpan"></div>
 												</div>
 											</div>
 											<div class="form-group">
@@ -332,6 +332,19 @@
 <script type="text/javascript">
 var result = '${msg}';
 	$(document).ready(function() {
+		joinError = { // 회원가입 메시지용 변수
+				user_pwdCk : true,
+				user_pwd_confirmCk : true,
+				user_emailCk : true,
+				user_tel1Ck : true,
+				user_tel2Ck : true,
+				user_tel3Ck : true,
+				user_locCk : true,
+				user_hobby1Ck : true,
+				user_hobby2Ck : true,
+				user_pwdqCk : true,
+				user_pwdaCk : true
+		};
 		//프로필수정에서 지역 selected
 		$("#user_loc").val("${user.user_loc }");
 		
@@ -882,6 +895,77 @@ var result = '${msg}';
 			}
 		})
 
+	}
+	function regCk(num, data) { // 프로필 수정 유효성 검사
+		var msg="";
+		$(".modifySpan").css("color","red");
+		$(".modifySpan").css("font-size","11px");
+		
+		switch (num) {
+		case 2: // 비밀번호
+			if(data.value.length<3) { msg='비밀번호를 3자리 이상 입력해주세요.'; joinError.user_pwdCk=true; }
+			else joinError.user_pwdCk=false;
+			$("#span2").text(msg);
+			break;
+		case 3: // 비밀번호 확인
+			if(data.value!=$("#user_pwd").val()) { msg='확인 비밀번호가 같지 않습니다!'; joinError.user_pwd_confirmCk=true; }
+			else joinError.user_pwd_confirmCk=false;
+			$("#span3").text(msg);
+			break;
+		case 5: // 이메일
+			if(!data.value.match(/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,6}$/i)) { msg='메일을 다시 확인해주세요.'; joinError.user_emailCk=true; }
+			else joinError.user_emailCk=false;
+			$("#span5").text(msg);
+			break;
+		case 6: // 전화번호_1
+			if(data.value.length<2||data.value.length>4||isNaN(data.value)) { msg='전화번호를 다시 확인 해주세요.'; joinError.user_tel1Ck=true; }
+			else joinError.user_tel1Ck=false;
+			$("#span6").text(msg);
+			break;
+		case 7: // 전화번호_2
+			if(data.value.length<3||data.value.length>5||isNaN(data.value)) { msg='전화번호를 다시 확인 해주세요.'; joinError.user_tel2Ck=true; }
+			else joinError.user_tel2Ck=false;
+			$("#span6").text(msg);
+			break;
+		case 8: // 전화번호_3
+			if(data.value.length<2||data.value.length>4||isNaN(data.value)) { msg='전화번호를 다시 확인 해주세요.'; joinError.user_tel3Ck=true; }
+			else joinError.user_tel3Ck=false;
+			$("#span6").text(msg);
+			break;
+		case 9: // 주소
+			if(data.value=="-- 선택 --") { msg='주소를 입력해주세요.'; joinError.user_locCk; }
+			else joinError.user_locCk=false;
+			$("#span7").text(msg);
+			break;
+		case 10: // 취미1
+			if(data.value=="-- 선택 --") { msg='취미를 선택해주세요.'; joinError.user_hobby1Ck=true; }
+			else joinError.user_hobby1Ck=false;
+			$("#span8").text(msg);
+			break;
+		case 11: // 취미2
+			if(data.value=="-- 선택 --") { msg='취미를 선택해주세요.'; joinError.user_hobby2Ck=true; }
+			else joinError.user_hobby2Ck=false;
+			$("#span9").text(msg);
+			break;
+		case 12: // 비밀번호 찾기 질문
+			if(data.value=="-- 선택 --") { msg='질문을 입력해주세요.'; joinError.user_pwdqCk=true; }
+			else joinError.user_pwdqCk=false;
+			$("#span10").text(msg);
+			break;
+		case 13: // 비밀번호 찾기 답변
+			if(data.value.length<1) { msg='답변을 입력해주세요.'; joinError.user_pwdaCk=true; }
+			else joinError.user_pwdaCk=false;
+			$("#span11").text(msg);
+			break;
+
+		default:
+			break;
+		}
+		joinErrorCk=joinError.user_pwdCk||joinError.user_pwd_confirmCk||
+						joinError.user_emailCk||joinError.user_tel1Ck||joinError.user_tel2Ck||joinError.user_tel3Ck||
+						joinError.user_locCk||joinError.user_hobby1Ck||joinError.user_hobby2Ck||joinError.user_pwdqCk||
+						joinError.user_pwdaCk;
+		$("#joinErrorCk").val(joinErrorCk);
 	}
 </script>
 </html>
