@@ -46,6 +46,8 @@
 	<!-- 애니메이션 -->
 	<script src="/overclass/resources/js/animation.js"></script>
 	<script src="/overclass/resources/js/jquery.cookie.js"></script>
+	
+	<script src="/overclass/resources/js/jquery.ripples.js"></script>
 <!-- JS끝 -->
     <script type="text/javascript">
 
@@ -74,6 +76,12 @@
 					user_pwdCk : true,
 					user_pwd_confirmCk : true,
 			};
+			
+		$('body').ripples({
+			   resolution: 512,
+			   dropRadius: 20,
+			   perturbance: 0.04,
+			});
 			
 		$("#join").click(function() { //로그인 화면에서 회원가입버튼 눌렀을시
 			$("#panel").hide(); //로그인하는 아이디,비밀번호 감춤
@@ -279,7 +287,8 @@
 		case 16: // 비밀번호 확인-비밀번호 찾기
 			if(data.value!=$('input[onblur="regCk(15, this)"]').val()) { msg='확인 비밀번호가 같지 않습니다!'; pwdError.user_pwd_confirmCk=true;}
 			else pwdError.user_pwd_confirmCk=false;
-			$("#pwd_span3").text($('input[onblur="regCk(15, this)"]').val());
+			$("#pwd_span3").text(msg);
+			break;
 			/*
 		case 3: // 비밀번호 확인
 			if(data.value!=$("#user_pwd").val()) { msg='확인 비밀번호가 같지 않습니다!'; joinError.user_pwd_confirmCk=true;}
@@ -287,7 +296,6 @@
 			$("#span3").text(msg);
 			break;
 			*/
-			break;
 
 		default:
 			break;
