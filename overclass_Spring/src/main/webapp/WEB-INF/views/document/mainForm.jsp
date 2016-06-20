@@ -298,29 +298,6 @@ $(document).ready(function() {
 		}
 	})
 	
-	//신고모달정의
-	$("#content_repot").click(function() {
-		BootstrapDialog.show({
-    		title: '', //알러트 타이틀 이름
-    		message: '이 글을 신고 하시겠습니까?', //알러트 내용
-    		type: BootstrapDialog.TYPE_DANGER, //타이틀 색바꾸기
-    		buttons: [{ //알러트 버튼 정의
-    			id: 'btn1', //알러트 버튼의 아이디
-    			icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
-    			label: '신고', //알러트 버튼 이름
-    			cssClass: 'btn-danger', //알러트 버튼 색바꾸기
-    			hotkey:13,
-    			action: function(confirm) {
-    				confirm.close()
-				}
-    			},{
-    				label: '닫기',
-    				action: function(cancel){
-    					cancel.close();
-    					}
-    			}]
-    	})
-	})
 	
 	//메세지창 숨기기
 	$("#msg_bar,#content_body").hide()
