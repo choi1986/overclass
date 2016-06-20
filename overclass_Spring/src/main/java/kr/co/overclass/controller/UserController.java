@@ -30,7 +30,9 @@ public class UserController {
 	private UserService service;
 
 	@RequestMapping(value="/")
-	public String login () { // login 페이지로
+	public String login (HttpSession session) { // login 페이지로
+		if(session.getAttribute("login")!=null)
+			session.removeAttribute("login");
 		return "/member/loginForm2";
 	}
 	
