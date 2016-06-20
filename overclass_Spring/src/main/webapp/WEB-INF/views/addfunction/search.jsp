@@ -49,44 +49,34 @@
 			location.assign('friend/addReq?info='+info);
 		});
 		$("#doc1").click(function() {
-			var gap = $("#doc_dno1").val()+','+$("#doc_writer1").val()+','+$("#doc_content1").val()+','+$("#doc_tag1").val();
-			alert(gap);
+			location.assign('main/read_document?dno='+$("#doc_dno1").val());
 		});
 		$("#doc2").click(function() {
-			var gap = $("#doc_dno2").val()+','+$("#doc_writer2").val()+','+$("#doc_content2").val()+','+$("#doc_tag2").val();
-			alert(gap);
+			location.assign('main/read_document?dno='+$("#doc_dno2").val());
 		});
 		$("#doc3").click(function() {
-			var gap = $("#doc_dno3").val()+','+$("#doc_writer3").val()+','+$("#doc_content3").val()+','+$("#doc_tag3").val();
-			alert(gap);
+			location.assign('main/read_document?dno='+$("#doc_dno3").val());
 		});
 		$("#doc4").click(function() {
-			var gap = $("#doc_dno4").val()+','+$("#doc_writer4").val()+','+$("#doc_content4").val()+','+$("#doc_tag4").val();
-			alert(gap);
+			location.assign('main/read_document?dno='+$("#doc_dno4").val());
 		});
 		$("#doc5").click(function() {
-			var gap = $("#doc_dno5").val()+','+$("#doc_writer5").val()+','+$("#doc_content5").val()+','+$("#doc_tag5").val();
-			alert(gap);
+			location.assign('main/read_document?dno='+$("#doc_dno5").val());
 		});
 		$("#doc6").click(function() {
-			var gap = $("#doc_dno6").val()+','+$("#doc_writer6").val()+','+$("#doc_content6").val()+','+$("#doc_tag6").val();
-			alert(gap);
+			location.assign('main/read_document?dno='+$("#doc_dno6").val());
 		});
 		$("#doc7").click(function() {
-			var gap = $("#doc_dno7").val()+','+$("#doc_writer7").val()+','+$("#doc_content7").val()+','+$("#doc_tag7").val();
-			alert(gap);
+			location.assign('main/read_document?dno='+$("#doc_dno7").val());
 		});
 		$("#doc8").click(function() {
-			var gap = $("#doc_dno8").val()+','+$("#doc_writer8").val()+','+$("#doc_content8").val()+','+$("#doc_tag8").val();
-			alert(gap);
+			location.assign('main/read_document?dno='+$("#doc_dno8").val());
 		});
 		$("#doc9").click(function() {
-			var gap = $("#doc_dno9").val()+','+$("#doc_writer9").val()+','+$("#doc_content9").val()+','+$("#doc_tag9").val();
-			alert(gap);
+			location.assign('main/read_document?dno='+$("#doc_dno9").val());
 		});
 		$("#doc10").click(function() {
-			var gap = $("#doc_dno10").val()+','+$("#doc_writer10").val()+','+$("#doc_content10").val()+','+$("#doc_tag10").val();
-			alert(gap);
+			location.assign('main/read_document?dno='+$("#doc_dno10").val());
 		});
 	});
 </script>

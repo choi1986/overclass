@@ -125,4 +125,12 @@ public class DocumentController {
 		
 		return forward;
 	}
+	
+	@RequestMapping(value="/read_document", method=RequestMethod.GET)
+	public String read_document(int dno,HttpSession session,Model model) throws Exception{
+		DocumentDTO dto = service.read_doc(dno);
+		System.out.println(dto.toString());
+		model.addAttribute("doc", dto);
+		return "document/readDoc";
+	}
 }

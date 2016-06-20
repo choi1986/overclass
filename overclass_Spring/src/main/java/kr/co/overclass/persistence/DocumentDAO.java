@@ -1,6 +1,7 @@
 package kr.co.overclass.persistence;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.co.overclass.domain.Criteria;
 import kr.co.overclass.domain.DocumentVO;
@@ -14,4 +15,5 @@ public interface DocumentDAO {
 	public int mainFeed_count(String user_id) throws Exception; //메인피드 게시글 개수
 	public List<DocumentDTO> myFeed_list(Criteria cri, String user_id) throws Exception; //마이피드 게시글 조회
 	public int myFeed_count(String user_id) throws Exception; //마이피드 게시글 개수
+	public DocumentDTO read_doc(int dno) throws Exception;//글 1개 조회
 }

@@ -120,4 +120,9 @@ public class DocumentServiceImpl implements DocumentService {
 	public int myFeed_count(String user_id) throws Exception {
 		return dao.myFeed_count(user_id);
 	}
+
+	@Override
+	public DocumentDTO read_doc(int dno) throws Exception{
+		return dao.read_doc(dno);
+	}
 }
