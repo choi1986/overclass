@@ -70,6 +70,10 @@
 					user_pwdaCk : true,
 					user_birthCk : true
 			};
+			pwdError = { // 비밀번호 찾기 비밀번호 에러체크 메시지용 변수
+					user_pwdCk : true,
+					user_pwd_confirmCk : true,
+			};
 			
 		$("#join").click(function() { //로그인 화면에서 회원가입버튼 눌렀을시
 			$("#panel").hide(); //로그인하는 아이디,비밀번호 감춤
@@ -90,7 +94,24 @@
 			//
 		})
 		$("#searchPwd_post").click(function() {
-			//
+			pwdErrorCk=pwdError.user_pwdCk||pwdError.user_pwd_confirmCk;
+			$("#pwdErrorCk").val(pwdErrorCk);
+			
+			if($("#pwdErrorCk").val()=="true") {
+				BootstrapDialog.show({
+		    		title: '', //알러트 타이틀 이름
+		    		message: '변경 비밀번호를 다시 확인해주세요.', //알러트 내용
+		    		type: BootstrapDialog.TYPE_DANGER,
+		    		buttons: [{
+		    				label: '닫기',
+		    				action: function(cancel){
+		    					cancel.close();
+		    					}
+		    			}]
+		    	})
+		    	return;
+			}
+	    	$("#register_form_forPwd").submit();
 		})
 		$("#back_join").click(function() {
 			$("#joinForm").hide(); //회원가입폼 감춤
@@ -130,7 +151,7 @@
 		    				label: '닫기',
 		    				action: function(cancel){
 		    					cancel.close();
-		    			    	$("#register_form").attr('action','/overclass/dupl');
+		    			    	$("#register_form_join").attr('action','/overclass/dupl');
 		    			    	$("#dupl").click();
 		    					}
 		    			}]
@@ -146,19 +167,19 @@
 		    				label: '닫기',
 		    				action: function(cancel){
 		    					cancel.close();
-		    			    	$("#register_form").attr('action','/overclass/dupl');
+		    			    	$("#register_form_join").attr('action','/overclass/dupl');
 		    			    	$("#dupl").click();
 		    					}
 		    			}]
 		    	})
 			}
 			else {
-		    	$("#register_form").attr('action','/overclass/join');
-		    	$("#register_form").submit();
+		    	$("#register_form_join").attr('action','/overclass/join');
+		    	$("#register_form_join").submit();
 			}
 		}) //join_join click 
 		$("#dupl").click(function() { //회원가입폼에서 중복검사버튼 눌렀을시
-			$("#register_form").attr('action','/overclass/dupl');
+			$("#register_form_join").attr('action','/overclass/dupl');
 		}) //dupl click 
 
 		$("#que").click(function() {
@@ -176,6 +197,8 @@
 		var msg="";
 		$(".joinSpan").css("color","red");
 		$(".joinSpan").css("font-size","11px");
+		$(".pwdSpan").css("color","red");
+		$(".pwdSpan").css("font-size","11px");
 		
 		switch (num) { // 회원가입
 		case 1: // 아이디
@@ -184,12 +207,12 @@
 			$("#span1").text(msg);
 			break;
 		case 2: // 비밀번호
-			if(data.value.length<3) { msg='비밀번호를 3자리 이상 입력해주세요.'; joinError.user_pwdCk=true; }
+			if(data.value.length<3) { msg='비밀번호를 3자리 이상 입력해주세요.'; joinError.user_pwdCk=true;}
 			else joinError.user_pwdCk=false;
 			$("#span2").text(msg);
 			break;
 		case 3: // 비밀번호 확인
-			if(data.value!=$("#user_pwd").val()) { msg='확인 비밀번호가 같지 않습니다!'; joinError.user_pwd_confirmCk=true; }
+			if(data.value!=$("#user_pwd").val()) { msg='확인 비밀번호가 같지 않습니다!'; joinError.user_pwd_confirmCk=true;}
 			else joinError.user_pwd_confirmCk=false;
 			$("#span3").text(msg);
 			break;
@@ -247,6 +270,23 @@
 			if(data.value.length!=6||isNaN(data.value)) { msg='생일을 6자리 숫자로 입력해주세요.'; joinError.user_birthCk=true; }
 			else joinError.user_birthCk=false;
 			$("#span12").text(msg);
+			break;
+		case 15: // 비밀번호
+			if(data.value.length<3) { msg='비밀번호를 3자리 이상 입력해주세요.'; pwdError.user_pwdCk=true;}
+			else pwdError.user_pwdCk=false;
+			$("#pwd_span2").text(msg);
+			break;
+		case 16: // 비밀번호 확인-비밀번호 찾기
+			if(data.value!=$('input[onblur="regCk(15, this)"]').val()) { msg='확인 비밀번호가 같지 않습니다!'; pwdError.user_pwd_confirmCk=true;}
+			else pwdError.user_pwd_confirmCk=false;
+			$("#pwd_span3").text($('input[onblur="regCk(15, this)"]').val());
+			/*
+		case 3: // 비밀번호 확인
+			if(data.value!=$("#user_pwd").val()) { msg='확인 비밀번호가 같지 않습니다!'; joinError.user_pwd_confirmCk=true;}
+			else joinError.user_pwd_confirmCk=false;
+			$("#span3").text(msg);
+			break;
+			*/
 			break;
 
 		default:
@@ -513,7 +553,7 @@
                           </header>
                           <div class="panel-body">
                               <div class="form">
-                                  <form class="form-validate form-horizontal " id="register_form" name="register_form" action="/overclass/join" method="post">
+                                  <form class="form-validate form-horizontal " id="register_form_join" name="register_form_join" action="/overclass/join" method="post">
                                       <div class="form-group ">
                                       		<input type="hidden" id="joinErrorCk" name="joinErrorCk"><!-- 에러났는지 카운트했던 것을 체크해서 회원가입 막음 -->
                                           <label for="fullname" class="control-label col-sm-4">아이디<span class="required">*</span></label>
@@ -705,7 +745,7 @@
                           </header>
                           <div class="panel-body">
                               <div class="form">
-                                  <form class="form-validate form-horizontal " id="register_form" name="register_form" action="/overclass/searchID" method="post">
+                                  <form class="form-validate form-horizontal " id="register_form_forID" name="register_form_forID" action="/overclass/searchID" method="post">
                                   
                                   <div class="form-group ">
                                           <label for="username" class="control-label col-sm-4">이름 <span class="required">*</span></label>
@@ -755,9 +795,10 @@
                           </header>
                           <div class="panel-body">
                               <div class="form">
-                                  <form class="form-validate form-horizontal " id="register_form" name="register_form" action="/overclass/searchPwd" method="post">
+                                  <form class="form-validate form-horizontal " id="register_form_forPwd" name="register_form_forPwd" action="/overclass/searchPwd" method="post">
                                   
                                   <div class="form-group ">
+                                      		<input type="hidden" id="pwdErrorCk" name="pwdErrorCk"><!-- 에러났는지 카운트했던 것을 체크해서 비밀번호 변경 막음 -->
                                           <label for="fullname" class="control-label col-sm-4">아이디<span class="required">*</span></label>
                                           <div class="col-sm-4">
                                               <input class=" form-control" id="user_id" name="user_id" type="text" />
@@ -789,22 +830,24 @@
                                       <div class="form-group ">
                                           <label for="password" class="control-label col-sm-4">변경할 비밀번호 <span class="required">*</span></label>
                                           <div class="col-sm-4">
-                                              <input class="form-control " id="user_pwd" name="user_pwd" type="password"/>
+                                              <input class="form-control " id="user_pwd" name="user_pwd" type="password" onblur="regCk(15, this)"/>
                                           </div>
+                                                <span id="pwd_span2" class="pwdSpan"></span>
                                       </div>
                                       
                                       <div class="form-group ">
                                           <label for="confirm_password" class="control-label col-sm-4">비밀번호 확인 <span class="required">*</span></label>
                                           <div class="col-sm-4">
-                                              <input class="form-control " id="user_pwd_confirm" name="user_pwd_confirm" type="password"/>
+                                              <input class="form-control " id="user_pwd_confirm" name="user_pwd_confirm" type="password" onblur="regCk(16, this)"/>
                                           </div>
+                                                <span id="pwd_span3" class="pwdSpan"></span>
                                       </div>
                                       
                                       <div class="form-group">
                                           <div class="col-sm-offset-2 col-sm-10">
                                        		<div class="col-sm-3"></div>
                                               <div id="change-transitions" class="row">
-											     <button type="summit" data-value="rotateInDownLeft" class="btn btn-primary btn-lg" id="searchPwd_post">제출</button>
+											     <button type="button" data-value="rotateInDownLeft" class="btn btn-primary btn-lg" id="searchPwd_post">제출</button>
         		    						<button type="button" data-value="fadeInDown" class="btn btn-danger btn-lg" id="back_searchIDPwd">취소</button>
 										      </div>
                                           </div>
