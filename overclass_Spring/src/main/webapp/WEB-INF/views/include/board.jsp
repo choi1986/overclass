@@ -193,6 +193,39 @@
 <script>
 
 
+$(document).ready(function() {
+	var result = '${msg}';
+	if (result == 'Write_SUCCESS') {
+		BootstrapDialog.show({
+    		title: '', //알러트 타이틀 이름
+    		message: '글이 등록 되었습니다.', //알러트 내용
+    		buttons: [{ //알러트 버튼 정의
+    				icon: 'fa fa-check',
+    				label: '확인',
+    				cssClass: 'btn-primary',
+    				hotkey:13,
+    				action: function(cancel){
+    					cancel.close();
+   					}
+    			}]
+    	})
+		
+	} else if (result == 'Remove_SUCCESS') {
+		BootstrapDialog.show({
+    		title: '', //알러트 타이틀 이름
+    		message: '글이 삭제 되었습니다.', //알러트 내용
+    		buttons: [{ //알러트 버튼 정의
+    				icon: 'fa fa-check',
+    				label: '확인',
+    				cssClass: 'btn-danger',
+    				hotkey:13,
+    				action: function(cancel){
+    					cancel.close();
+   					}
+    			}]
+    	})
+	}
+})
 
 //글삭제
 function delDoc(dno) {
@@ -205,7 +238,7 @@ function delDoc(dno) {
 			label: '삭제', //알러트 버튼 이름
 			cssClass: 'btn-danger', //알러트 버튼 색바꾸기
 			action: function(confirm) {
-				location.href="/overclass/main/removeDoc?dno="+dno+"&url=main";
+				location.href="/overclass/main/removeDoc?dno="+dno;
 				
 				confirm.close()
 			}
