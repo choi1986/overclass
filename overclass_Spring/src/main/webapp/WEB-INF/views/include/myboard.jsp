@@ -406,7 +406,9 @@
 											     div2.attr("class","fa fa-chevron-down")
 											  // 댓글목록 갱신
 												replyDisplayPage(dno,1);
-											} 
+											}else{
+												replyDisplayPage(dno,1);
+											}
 											confirm.close();
 										}
 									} ]
