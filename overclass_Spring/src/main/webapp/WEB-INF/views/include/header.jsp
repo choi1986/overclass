@@ -22,6 +22,7 @@
 	<link href="/overclass/resources/css/style-responsive.css" rel="stylesheet">
 	<!-- 애니메이션 -->
 	<link href="/overclass/resources/css/animate.css" type="text/css" rel="stylesheet">
+	
 <!-- CSS끝 -->
 
 <!-- JS -->
@@ -186,10 +187,10 @@ function onKeyDown(){
 		if(txtvar.substring(0,1)=='#'){
 			var txt = txtvar.substring(1,txtvar.length);
 				alert(txt+" 검색중.................");
-				location.assign("/overclass/searchTag?tag="+txt);
+				location.assign("searchTag?tag="+txt);
 			}else{
 				alert(txtvar+" 검색중.................");
-				location.assign("/overclass/searchIdName?info="+txtvar);
+				location.assign("searchIdName?info="+txtvar);
 			}
 	}
 }

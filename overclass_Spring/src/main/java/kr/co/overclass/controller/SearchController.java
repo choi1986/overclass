@@ -42,7 +42,7 @@ public class SearchController {
 			vo.setStart(index-(index-1));
 			vo.setEnd((index-(index-1))*10);
 			model.addAttribute("selectIdName",service.select(vo));//아이디 이름 검색
-			model.addAttribute("resultCount",service.countNameNum(info));
+			model.addAttribute("resultCount",index);
 			session.setAttribute("idName", info);
 			if(service.countNameNum(info)!=0){logger.info(info+": 이름 검색성공");};
 		}else{
@@ -76,7 +76,7 @@ public class SearchController {
 			vo.setStart(start);
 			vo.setEnd(end);
 			model.addAttribute("selectIdName",service.select(vo));//아이디 이름 검색
-			model.addAttribute("resultCount",service.countNameNum(info));
+			model.addAttribute("resultCount",index);
 			if(service.countNameNum(info)!=0){logger.info(info+": 이름 검색성공");};
 		}else{
 			logger.info("아이디........................"+info);
@@ -86,7 +86,7 @@ public class SearchController {
 			vo.setStart(start);
 			vo.setEnd(end);
 			model.addAttribute("selectIdName",service.select(vo));//아이디 이름 검색
-			model.addAttribute("resultCount",service.countIdNum(info));
+			model.addAttribute("resultCount",index);
 			if(service.countIdNum(info)!=0){logger.info(info+": 아이디 검색성공");};
 		}
 		return "/addfunction/search";
@@ -102,7 +102,7 @@ public class SearchController {
 		vo.setStart(index-(index-1));
 		vo.setEnd((index-(index-1))*10);
 		model.addAttribute("selectTag", service.selectTag(vo));//태그검색
-		model.addAttribute("resultCount",service.countTagNum(tag));//페이지 분할하기 위한 데이터 수 정보 전송
+		model.addAttribute("resultCount",index);//페이지 분할하기 위한 데이터 수 정보 전송
 		session.setAttribute("tag", tag);
 		if(service.countTagNum(tag)!=0){logger.info("tag"+"검색성공");};
 		return "/addfunction/search";
@@ -110,8 +110,11 @@ public class SearchController {
 
 	@RequestMapping(value="/searchTagPage", method=RequestMethod.GET)
 	public String searchTagPage(int page, HttpSession session, Model model) throws Exception{
-		SearchVO vo = new SearchVO();
 		String tag = (String)session.getAttribute("tag");
+		logger.info("태그검색........................"+tag);
+		SearchVO vo = new SearchVO();
+		int index = service.countTagNum(tag);
+		logger.info("결과행 수........................"+index);
 		vo.setInfo(tag);
 		int end = page*10;
 		int start = end-9;

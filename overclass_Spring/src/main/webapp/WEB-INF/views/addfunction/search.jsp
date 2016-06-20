@@ -15,7 +15,7 @@
 				type:'GET',
 				url:'/overclass/friend/addReq?info='+user_id,
 						success:function(data){
-							$('div').html(data);
+							location.assign('/overclass/friend/addReq?info='+user_id);
 						}
 			});
 		});
@@ -26,7 +26,7 @@
 				type:'GET',
 				url:'/overclass/friend/addReq?info='+user_id,
 						success:function(data){
-							$('div').html(data);
+							location.assign('/overclass/friend/addReq?info='+user_id);
 						}
 			});
 		});
@@ -37,7 +37,7 @@
 				type:'GET',
 				url:'/overclass/friend/addReq?info='+user_id,
 						success:function(data){
-							$('div').html(data);
+							location.assign('/overclass/friend/addReq?info='+user_id);
 						}
 			});
 		});
@@ -48,7 +48,7 @@
 				type:'GET',
 				url:'/overclass/friend/addReq?info='+user_id,
 						success:function(data){
-							$('div').html(data);
+							location.assign('/overclass/friend/addReq?info='+user_id);
 						}
 			});
 		});
@@ -59,7 +59,7 @@
 				type:'GET',
 				url:'/overclass/friend/addReq?info='+user_id,
 						success:function(data){
-							$('div').html(data);
+							location.assign('/overclass/friend/addReq?info='+user_id);
 						}
 			});
 		});
@@ -70,7 +70,7 @@
 				type:'GET',
 				url:'/overclass/friend/addReq?info='+user_id,
 						success:function(data){
-							$('div').html(data);
+							location.assign('/overclass/friend/addReq?info='+user_id);
 						}
 			});
 		});
@@ -81,7 +81,7 @@
 				type:'GET',
 				url:'/overclass/friend/addReq?info='+user_id,
 						success:function(data){
-							$('div').html(data);
+							location.assign('/overclass/friend/addReq?info='+user_id);
 						}
 			});
 		});
@@ -92,7 +92,7 @@
 				type:'GET',
 				url:'/overclass/friend/addReq?info='+user_id,
 						success:function(data){
-							$('div').html(data);
+							location.assign('/overclass/friend/addReq?info='+user_id);
 						}
 			});
 		});
@@ -103,7 +103,7 @@
 				type:'GET',
 				url:'/overclass/friend/addReq?info='+user_id,
 						success:function(data){
-							$('div').html(data);
+							location.assign('/overclass/friend/addReq?info='+user_id);
 						}
 			});
 		});
@@ -114,7 +114,7 @@
 				type:'GET',
 				url:'/overclass/friend/addReq?info='+user_id,
 						success:function(data){
-							$('div').html(data);
+							location.assign('/overclass/friend/addReq?info='+user_id);
 						}
 			});
 		});
