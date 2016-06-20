@@ -180,14 +180,15 @@
 		</div>
 	</header>
 <script type="text/javascript">
-function onKeyDown()
-{
+function onKeyDown(){
 	if(event.keyCode == 13){
 		var txtvar = $('#search_form').val();
 		if(txtvar.substring(0,1)=='#'){
 			var txt = txtvar.substring(1,txtvar.length);
+				alert(txt+" 검색중.................");
 				location.assign("searchTag?tag="+txt);
 			}else{
+				alert(txtvar+" 검색중.................");
 				location.assign("searchIdName?info="+txtvar);
 			}
 	}
