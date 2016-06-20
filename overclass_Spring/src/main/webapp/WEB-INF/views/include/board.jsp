@@ -217,7 +217,7 @@ $(document).ready(function() {
     		buttons: [{ //알러트 버튼 정의
     				icon: 'fa fa-check',
     				label: '확인',
-    				cssClass: 'btn-danger',
+    				cssClass: 'btn-primary',
     				hotkey:13,
     				action: function(cancel){
     					cancel.close();

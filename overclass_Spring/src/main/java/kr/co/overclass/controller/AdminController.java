@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -27,6 +28,7 @@ import kr.co.overclass.domain.ReportVO;
 import kr.co.overclass.domain.UserVO;
 import kr.co.overclass.dto.ReportDTO;
 import kr.co.overclass.service.AdminService;
+import kr.co.overclass.service.DocumentService;
 
 @Controller
 @RequestMapping("/admin")
@@ -36,6 +38,9 @@ public class AdminController {
 	
 	@Inject
 	private AdminService service;
+	
+	@Inject
+	private DocumentService docService;
 	
 	@RequestMapping(value={"","/adminFeed_Page","ban_list"},method=RequestMethod.GET)
 	public String admin(String page, Model model, HttpServletRequest request)throws Exception{
@@ -47,23 +52,13 @@ public class AdminController {
 			cri.setPage(Integer.parseInt(page));
 		}
 		
-		/*임시*/
-		String user_id = "admin";
-		String user_image = "/overclass/resources/img/profile_default.png";
-		String user_name = "관리자";
-		Map<String, Object> map = new HashMap<>();
-		map.put("user_id", user_id);
-		map.put("user_image", user_image);
-		map.put("user_name", user_name);
-		/*--------------*/
-		
 		List<ReportDTO> ban_list = service.ban_list();
 		model.addAttribute("ban_list",ban_list);
 		List<ReportDTO> list = service.list(cri);
 		maker.setCri(cri);
 		maker.setTotalCount(service.report_count());//신고글 개수
 		
-		model.addAttribute("user",map);
+		model.addAttribute("user",vo);
 		model.addAttribute("list",list);
 		model.addAttribute("pageMaker", maker);
 		return "admin/adminFeed";
@@ -72,59 +67,20 @@ public class AdminController {
 	//신고하기
 	@RequestMapping(value="/reportDoc",method=RequestMethod.POST)
 	public String report(ReportVO vo, RedirectAttributes attr) throws Exception {
-		
 		service.report(vo);
 		logger.info("신고처리: "+vo);
 		
 		attr.addFlashAttribute("msg", "Write_SUCCESS");
-		
 		return "redirect:/main/myFeed";
 	}
 	
 	//제제하기
 	@Transactional
 	@RequestMapping(value="/banDoc",method=RequestMethod.POST)
-	public String report(int reportno, String writer, Model model,RedirectAttributes attr) throws Exception {
-		logger.info("신고번호: "+reportno);
+	public String report(int reportno, int dno, RedirectAttributes attr) throws Exception {
 		service.banDoc(reportno);
 		service.report_del(reportno);
+		docService.delete(dno);
 		return "redirect:/admin";
 	}
-	
-/*	//제제목록 출력
-	@RequestMapping(value="/ban_list",method=RequestMethod.GET)
-	public String report(String page, int reportno, Model model) throws Exception {
-		logger.info("파라미터확인!: "+ reportno);
-		PageMaker maker = new PageMaker();
-		Criteria cri = new Criteria();
-		if ( page != null) {
-			cri.setPage(Integer.parseInt(page));
-		}
-		if ( reportno != null) {
-			dto.setReportno(Integer.parseInt(reportno));
-		}
-		
-		List<ReportDTO> ban_list = service.ban_list();
-		model.addAttribute("ban_list",ban_list);
-		
-		임시
-		String user_id = "admin";
-		String user_image = "/overclass/resources/img/profile_default.png";
-		String user_name = "관리자";
-		Map<String, Object> map = new HashMap<>();
-		map.put("user_id", user_id);
-		map.put("user_image", user_image);
-		map.put("user_name", user_name);
-		--------------
-		List<ReportDTO> list2 = service.list(cri);
-		int report_cnt = service.report_count();
-		maker.setCri(cri);
-		maker.setTotalCount(service.report_count());
-		
-		model.addAttribute("user",map);
-		model.addAttribute("list",list2);
-		model.addAttribute("pageMaker", maker);
-		model.addAttribute("count",report_cnt);
-		return "admin/adminFeed";
-	}*/
 }

@@ -11,8 +11,6 @@ create table oc_bandoc(
 	report_content varchar2(210), -- 신고 사유
 	reporter varchar2(12) not null, -- 신고자
 	reportdate date, -- 신고처리일자
-	
-	foreign key (dno) references oc_document (dno)
 );
 
 drop sequence oc_bandoc_seq;
