@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.WebUtils;
 
 import kr.co.overclass.domain.UserVO;
@@ -84,7 +85,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/main/modifyUser") // 프로필 수정 버튼 눌린 후
-	public String modify (JoinDTO dto, HttpSession session, Model model) throws Exception {
+	public String modify (JoinDTO dto, RedirectAttributes attr, HttpSession session, Model model) throws Exception {
 		UserVO vo = new UserVO();
 		vo.setUser_id(dto.getUser_id());
 		vo.setUser_pwd(dto.getUser_pwd());
@@ -96,8 +97,11 @@ public class UserController {
 		vo.setUser_pwdq(dto.getUser_pwdq());
 		vo.setUser_pwda(dto.getUser_pwda());
 		service.updateUser(vo);
-		session.setAttribute("modifyCk", "1");
-		return "/document/myFeed";
+		vo = service.searchUser(dto.getUser_id());
+		session.setAttribute("login", vo);
+		// attr.addFlashAttribute("msg", "Remove_SUCCESS");
+		// session.setAttribute("modifyCk", "1");
+		return "redirect:/main/myFeed";
 	}
 	
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
