@@ -52,23 +52,13 @@ public class AdminController {
 			cri.setPage(Integer.parseInt(page));
 		}
 		
-		/*임시*/
-		String user_id = "admin";
-		String user_image = "/overclass/resources/img/profile_default.png";
-		String user_name = "관리자";
-		Map<String, Object> map = new HashMap<>();
-		map.put("user_id", user_id);
-		map.put("user_image", user_image);
-		map.put("user_name", user_name);
-		/*--------------*/
-		
 		List<ReportDTO> ban_list = service.ban_list();
 		model.addAttribute("ban_list",ban_list);
 		List<ReportDTO> list = service.list(cri);
 		maker.setCri(cri);
 		maker.setTotalCount(service.report_count());//신고글 개수
 		
-		model.addAttribute("user",map);
+		model.addAttribute("user",vo);
 		model.addAttribute("list",list);
 		model.addAttribute("pageMaker", maker);
 		return "admin/adminFeed";
@@ -77,30 +67,20 @@ public class AdminController {
 	//신고하기
 	@RequestMapping(value="/reportDoc",method=RequestMethod.POST)
 	public String report(ReportVO vo, RedirectAttributes attr) throws Exception {
-		
 		service.report(vo);
 		logger.info("신고처리: "+vo);
 		
 		attr.addFlashAttribute("msg", "Write_SUCCESS");
-		
 		return "redirect:/main/myFeed";
 	}
 	
 	//제제하기
+	@Transactional
 	@RequestMapping(value="/banDoc",method=RequestMethod.POST)
 	public String report(int reportno, int dno, RedirectAttributes attr) throws Exception {
-		logger.info("신고번호: "+reportno);
 		service.banDoc(reportno);
 		service.report_del(reportno);
-		logger.info("@@@@@@글번호확인: "+dno);
 		docService.delete(dno);
 		return "redirect:/admin";
 	}
-	
-/*	@RequestMapping(value="/banDoc",method=RequestMethod.GET)
-	public String reportdel(int dno, RedirectAttributes attr) throws Exception {
-		logger.info("@@@@@@글번호확인: "+dno);
-		docService.delete(dno);
-		return "redirect:/admin";
-	}*/
 }
