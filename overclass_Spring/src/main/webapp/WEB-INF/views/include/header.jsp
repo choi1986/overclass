@@ -193,5 +193,6 @@ function onKeyDown(){
 				location.assign("searchIdName?info="+txtvar);
 			}
 	}
+	
 }
 </script>	
