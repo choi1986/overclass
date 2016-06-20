@@ -3,11 +3,12 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
+<%@include file="../include/header.jsp"%>
 <script
 	src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		alert(document.URL);
 		$("#user1").click(function() {
 			var user_id=$("#user_id1").val();
 			alert(user_id);
