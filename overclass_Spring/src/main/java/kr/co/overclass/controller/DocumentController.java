@@ -80,16 +80,18 @@ public class DocumentController {
 	}
 	
 	//메인피드, 마이피드 글 삭제
-	@RequestMapping(value="/removeDoc",method=RequestMethod.GET)
-	public String mydelete(int dno, RedirectAttributes attr, String url) throws Exception {
+	@RequestMapping(value={"/removeDoc","myremoveDoc"},method=RequestMethod.GET)
+	public String mydelete(int dno, RedirectAttributes attr, HttpServletRequest request) throws Exception {
+		String url = request.getServletPath();
 		service.delete(dno);
 		attr.addFlashAttribute("msg", "Remove_SUCCESS");
 		
 		logger.info("게시물 삭제: ["+ dno +"]");
-		if( url.equals("my") ) {
+		if( url.equals("myremoveDoc") ) {
 			return "redirect:/main/myFeed";
 		} else {
 			return "redirect:/main";
+			
 		}
 	}
 	

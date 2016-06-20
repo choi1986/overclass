@@ -193,6 +193,39 @@
 <script>
 
 
+$(document).ready(function() {
+	var result = '${msg}';
+	if (result == 'Write_SUCCESS') {
+		BootstrapDialog.show({
+    		title: '', //알러트 타이틀 이름
+    		message: '글이 등록 되었습니다.', //알러트 내용
+    		buttons: [{ //알러트 버튼 정의
+    				icon: 'fa fa-check',
+    				label: '확인',
+    				cssClass: 'btn-primary',
+    				hotkey:13,
+    				action: function(cancel){
+    					cancel.close();
+   					}
+    			}]
+    	})
+		
+	} else if (result == 'Remove_SUCCESS') {
+		BootstrapDialog.show({
+    		title: '', //알러트 타이틀 이름
+    		message: '글이 삭제 되었습니다.', //알러트 내용
+    		buttons: [{ //알러트 버튼 정의
+    				icon: 'fa fa-check',
+    				label: '확인',
+    				cssClass: 'btn-danger',
+    				hotkey:13,
+    				action: function(cancel){
+    					cancel.close();
+   					}
+    			}]
+    	})
+	}
+})
 
 //글삭제
 function delDoc(dno) {
@@ -204,9 +237,8 @@ function delDoc(dno) {
 			icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
 			label: '삭제', //알러트 버튼 이름
 			cssClass: 'btn-danger', //알러트 버튼 색바꾸기
-			hotkey:13,
 			action: function(confirm) {
-				location.href="/overclass/main/removeDoc?dno="+dno+"&url=main";
+				location.href="/overclass/main/removeDoc?dno="+dno;
 				
 				confirm.close()
 			}
@@ -231,18 +263,45 @@ function reportDoc(dno) {
          cssClass: 'btn-danger', //알러트 버튼 색바꾸기
          action: function(confirm) {
             var content = confirm.getModalBody().find('#content').val();
-            $.ajax({
-               url: "/overclass/admin/reportDoc",
-               type: "post",
-               data: {
-                  reporter:'<%= user2.getUser_id() %>',
-                  dno:dno,
-                  content:content,
-               },
-               success: function(result) {
-                  alert("신고접수!")
-               }
-            }),
+            if(content.trim() == '') {
+            	BootstrapDialog.show({
+					title : '', //알러트 타이틀 이름
+					message : '신고사유를 입력해주세요', //알러트 내용
+					buttons : [ { //알러트 버튼 정의
+						icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
+						label : '확인', //알러트 버튼 이름
+						cssClass : 'btn-primary', //알러트 버튼 색바꾸기
+						action : function(confirm) {
+							confirm.close()
+						}
+					}]
+				});
+            	return false;
+            } else {
+	            $.ajax({
+	               url: "/overclass/admin/reportDoc",
+	               type: "post",
+	               data: {
+	                  reporter:'<%= user2.getUser_id() %>',
+	                  dno:dno,
+	                  content:content,
+	               },
+	               success: function(result) {
+	            	   BootstrapDialog.show({
+							title : '', //알러트 타이틀 이름
+							message : '신고가 접수되었습니다', //알러트 내용
+							buttons : [ { //알러트 버튼 정의
+								icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
+								label : '확인', //알러트 버튼 이름
+								cssClass : 'btn-primary', //알러트 버튼 색바꾸기
+								action : function(confirm) {
+									confirm.close()
+								}
+							} ]
+						});
+	               }
+	            })
+            }
             confirm.close()
          }
          },{
@@ -255,39 +314,7 @@ function reportDoc(dno) {
 }
 var source = $("#template").html();
 var template = Handlebars.compile(source);
-	var result = '${msg}';
 	
-	if (result == 'Write_SUCCESS') {
-		BootstrapDialog.show({
-    		title: '', //알러트 타이틀 이름
-    		message: '글이 등록 되었습니다.', //알러트 내용
-    		buttons: [{ //알러트 버튼 정의
-    				icon: 'fa fa-check',
-    				label: '확인',
-    				cssClass: 'btn-primary',
-    				hotkey:13,
-    				action: function(cancel){
-    					cancel.close();
-   					}
-    			}]
-    	}) 
-		
-	} else if (result == 'Remove_SUCCESS') {
-		BootstrapDialog.show({
-    		title: '', //알러트 타이틀 이름
-    		message: '글이 삭제 되었습니다.', //알러트 내용
-    		type: BootstrapDialog.TYPE_DANGER,
-    		buttons: [{ //알러트 버튼 정의
-    				icon: 'fa fa-check',
-    				label: '확인',
-    				cssClass: 'btn-danger',
-    				hotkey:13,
-    				action: function(cancel){
-    					cancel.close();
-   					}
-    			}]
-    	})
-	}
 
 	var replyPage = 1;
 
