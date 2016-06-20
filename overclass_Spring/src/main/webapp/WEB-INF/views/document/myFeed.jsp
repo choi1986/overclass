@@ -640,7 +640,7 @@ var result = '${msg}';
 			if($("#modifyErrorCk").val()=="true") { // 에러가 있으면 리턴
 				BootstrapDialog.show({
 		    		title: '', //알러트 타이틀 이름
-		    		message: '부적합한 회원가입 항목을 다시 확인해주세요.', //알러트 내용
+		    		message: '부적합한 프로필 수정 항목을 다시 확인해주세요.', //알러트 내용
 		    		type: BootstrapDialog.TYPE_DANGER,
 		    		buttons: [{
 		    				label: '닫기',
