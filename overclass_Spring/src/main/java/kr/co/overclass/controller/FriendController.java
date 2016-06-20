@@ -32,7 +32,7 @@ public class FriendController {
 	@RequestMapping(value = "/addReq", method=RequestMethod.GET)// 模备 夸没 涝仿
 	public String addFriendreq(String info,HttpSession session,Model model) throws Exception{
 		logger.info("模备夸没 涝仿.............");
-		UserVO user = (UserVO) session.getAttribute("userVO");
+		UserVO user = (UserVO) session.getAttribute("login");
 		String sender = user.getUser_id();//模备包拌 夸没 id
 		String receiver = info;//模备包拌 罐绰 id
 		logger.info("夸没酒捞叼: "+sender+", 措惑酒捞叼: "+info);
@@ -47,7 +47,7 @@ public class FriendController {
 	
 	@RequestMapping(value = "/deleteReq")// 模备 夸没 昏力 
 	public String deleteFriendreq(String info,HttpSession session,Model model) throws Exception{// 模备 昏力
-		UserVO user = (UserVO) session.getAttribute("userVO");
+		UserVO user = (UserVO) session.getAttribute("login");
 		String sender = user.getUser_id();//模备包拌 夸没 id
 		String receiver = info;//模备包拌 罐绰 id
 		FriendVO vo = new FriendVO(sender,receiver);
@@ -61,7 +61,7 @@ public class FriendController {
 	
 	@RequestMapping(value = "/SelectReq")// 模备 夸没 八祸 
 	public String selectFriendreq(String info,HttpSession session,Model model) throws Exception{// 模备 昏力
-		UserVO user = (UserVO) session.getAttribute("userVO");
+		UserVO user = (UserVO) session.getAttribute("login");
 		String sender = user.getUser_id();//模备包拌 夸没 id
 		String receiver = info;//模备包拌 罐绰 id
 		FriendVO vo = new FriendVO(sender,receiver);
@@ -72,7 +72,7 @@ public class FriendController {
 	
 	@RequestMapping(value = "/addRel")// 模备 包拌 涝仿 
 	public String addFriendrel(String info,HttpSession session,Model model) throws Exception{
-		UserVO user = (UserVO) session.getAttribute("userVO");
+		UserVO user = (UserVO) session.getAttribute("login");
 		String sender = user.getUser_id();//模备包拌 夸没 id
 		String receiver = info;//模备包拌 罐绰 id
 		FriendVO vo = new FriendVO(sender,receiver);
@@ -83,7 +83,7 @@ public class FriendController {
 	
 	@RequestMapping(value = "/deleteRel")// 模备 夸没 昏力 
 	public String deleteFriendrel(String info,HttpSession session,Model model) throws Exception{// 模备 昏力
-		UserVO user = (UserVO) session.getAttribute("userVO");
+		UserVO user = (UserVO) session.getAttribute("login");
 		String sender = user.getUser_id();//模备包拌 夸没 id
 		String receiver = info;//模备包拌 罐绰 id
 		FriendVO vo = new FriendVO(sender,receiver);
@@ -93,7 +93,7 @@ public class FriendController {
 	
 	@RequestMapping(value = "/selectReq")// 模备 夸没 八祸 
 	public String selectFriendrel(String info,HttpSession session,Model model) throws Exception{// 模备 昏力
-		UserVO user = (UserVO) session.getAttribute("userVO");
+		UserVO user = (UserVO) session.getAttribute("login");
 		String sender = user.getUser_id();//模备包拌 夸没 id
 		String receiver = info;//模备包拌 罐绰 id
 		FriendVO vo = new FriendVO(sender,receiver);
