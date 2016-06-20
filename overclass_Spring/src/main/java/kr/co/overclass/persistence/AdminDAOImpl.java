@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import kr.co.overclass.domain.BanVO;
 import kr.co.overclass.domain.Criteria;
 import kr.co.overclass.domain.ReportVO;
 import kr.co.overclass.dto.ReportDTO;
@@ -41,5 +40,15 @@ public class AdminDAOImpl implements AdminDAO{
 	@Override
 	public void report_del(int reportno) throws Exception { //제제하고 글삭제
 		session.delete("admin.report_del", reportno);
+	}
+
+	@Override
+	public List<ReportDTO> ban_list() throws Exception {
+		return session.selectList("admin.ban_list");
+	}
+
+	@Override
+	public int report_stack(String writer) throws Exception {
+		return session.selectOne("admin.report_stack",writer);
 	}
 }

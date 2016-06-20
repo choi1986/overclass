@@ -38,14 +38,38 @@ insert into oc_document (dno,writer,content,tag) values (oc_document_seq.nextval
 select * from OC_DOCUMENT;
 select * from OC_REPLY;
 
+insert into oc_report (reportno, reporter, dno, content)
+		values (oc_report_seq.nextval, 'test1', 110, '그냥');
+insert into oc_report (reportno, reporter, dno, content)
+		values (oc_report_seq.nextval, 'test1', 110, '그냥');
+insert into oc_report (reportno, reporter, dno, content)
+		values (oc_report_seq.nextval, 'test1', 110, '그냥');
+insert into oc_report (reportno, reporter, dno, content)
+		values (oc_report_seq.nextval, 'test1', 110, '그냥');
+insert into oc_report (reportno, reporter, dno, content)
+		values (oc_report_seq.nextval, 'test1', 110, '그냥');
+insert into oc_report (reportno, reporter, dno, content)
+		values (oc_report_seq.nextval, 'test1', 110, '그냥');
+insert into oc_report (reportno, reporter, dno, content)
+		values (oc_report_seq.nextval, 'test1', 110, '그냥');
+insert into oc_report (reportno, reporter, dno, content)
+		values (oc_report_seq.nextval, 'test1', 110, '그냥');
+insert into oc_report (reportno, reporter, dno, content)
+		values (oc_report_seq.nextval, 'test1', 110, '그냥');
+insert into oc_report (reportno, reporter, dno, content)
+		values (oc_report_seq.nextval, 'test1', 110, '그냥');
 
+insert into oc_bandoc (dno, writer, content, tag, image, goodcnt, user_image, reportno, report_content, reporter, reportdate)
+		values (select oc_report.dno, oc_document.writer, oc_document.content, tag, image, goodcnt, user_image, reportno, oc_report.content report_content, reporter, reportdate 
+				from oc_document, oc_user, oc_report
+				where oc_document.dno = oc_report.dno AND oc_user.user_id = oc_document.writer AND reportno = 9);
 
+select oc_report.dno, oc_document.writer, oc_document.content, tag, image, goodcnt, user_image, reportno, oc_report.content report_content, reporter, reportdate 
+				from oc_document, oc_user, oc_report
+				where oc_document.dno = oc_report.dno AND oc_user.user_id = oc_document.writer AND reportno = 9;
 
-
-
-
-
-
+insert into oc_bandoc (dno, writer, content, tag, image, goodcnt, user_image, reportno, report_content, reporter, reportdate)
+		values (114,'test1','content','tag','/overclass/image',2,'/overclass/userimage',10,'신고내용','나','2016-06-17');
 
 
 

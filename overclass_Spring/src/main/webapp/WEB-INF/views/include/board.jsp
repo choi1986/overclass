@@ -19,8 +19,9 @@
 								<c:if test="${DocumentDTO.writer == user.user_id}">
 									<li><a href="#" onclick="delDoc(${DocumentDTO.dno })" style="color: black;" class="fa fa-bitbucket"> 게시글 삭제</a></li>
 								</c:if>
-								
-								<li><a href="#" onclick="reportDoc(${DocumentDTO.dno })" style="color: red;" class="fa fa-exclamation-circle"> 게시글 신고하기</a></li>
+								<c:if test="${DocumentDTO.writer != user.user_id}">
+									<li><a href="#" onclick="reportDoc(${DocumentDTO.dno })" style="color: red;" class="fa fa-exclamation-circle"> 게시글 신고하기</a></li>
+								</c:if>
 							</ul>
 						</div>
 					</div>

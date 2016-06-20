@@ -58,7 +58,7 @@
 										</div>
 									</div>
 								</div>
-
+			
 								<div class="form-group">
 									<div class="goodclass">
 										<div style="display: none;">${reportDTO.dno }</div>
@@ -120,8 +120,7 @@
 								<div class="form-group">
 									<label class="control-label col-lg-2" for="content">신고날짜</label>
 									<div class="col-lg-9">
-										<div class="panel-content"
-											width: 100%; height: 100px; overflow: hidden; word-break:break-all;">
+										<div class="panel-content" style="width: 100%; height: 100px; overflow: hidden; word-break:break-all;">
 											<b id="reportdate">${reportDTO.reportdate }</b>
 											<input type="hidden" name="reportdate" value="${reportDTO.reportdate }">
 										</div>
@@ -132,7 +131,14 @@
 								<div class="form-group">
 									<label class="control-label col-lg-2" for="content">신고누적회수</label>
 									<div class="col-lg-9">
-										<i class="fa fa-check" style="color: red;">1회</i>
+										<c:choose>
+											<c:when test="${reportDTO.report_stack == 0 }">
+												<i class="fa fa-check" style="color: red;">0회</i>
+											</c:when>
+											<c:otherwise>
+												<i class="fa fa-check" style="color: red;">${reportDTO.report_stack}회</i>
+											 </c:otherwise>
+										</c:choose>
 									</div>
 								</div>
 
@@ -170,7 +176,7 @@
 				<div class="btn-group">
 					<c:if test="${pageMaker.prev }">
 						<a
-							href="/overclass/main/mainFeed_Page?page=${pageMaker.startPage -1 }">
+							href="/overclass/admin/adminFeed_Page?page=${pageMaker.startPage -1 }">
 							<button class="btn btn-default" type="button">«</button>
 						</a>
 					</c:if>
@@ -178,7 +184,7 @@
 				<div class="btn-group">
 					<c:forEach begin="${pageMaker.startPage }"
 						end="${pageMaker.endPage }" var="idx">
-						<a href="/overclass/main/mainFeed_Page?page=${idx }">
+						<a href="/overclass/admin/adminFeed_Page?page=${idx }">
 
 							<button
 								class="<c:out value="${pageMaker.cri.page == idx?'btn btn-primary active':'btn btn-primary' }"/>">${idx }</button>
@@ -188,7 +194,7 @@
 				<div class="btn-group">
 					<c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
 						<a
-							href="/overclass/main/mainFeed_Page?page=${pageMaker.endPage +1 }">
+							href="/overclass/admin/adminFeed_Page?page=${pageMaker.endPage +1 }">
 							<button class="btn btn-default" type="button">»</button>
 						</a>
 					</c:if>
