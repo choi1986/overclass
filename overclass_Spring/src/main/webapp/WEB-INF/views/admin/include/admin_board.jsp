@@ -156,7 +156,10 @@
 											<span class="hidden">${reportDTO.dno }</span>
 										</span>
 										&nbsp;
-										<button type="button" id="cancel" class="btn btn-default">철회하기</button>
+										<span class="report_cancel">
+											<span id="reportno${reportDTO.reportno }" class="hidden">${reportDTO.reportno }</span>
+											<button type="button" id="cancel" class="btn btn-default">철회하기</button>
+										</span>
 									</div>
 								</div>
 							</form>
