@@ -335,6 +335,27 @@
 				$("#user_pwdq").val("${sessionScope.joinDupl.user_pwdq}");
 				$("#user_pwda").val("${sessionScope.joinDupl.user_pwda}");
 				$("#joinErrorCk").val("${sessionScope.joinDupl.joinErrorCk}");
+				
+				if ($("#user_id").val()!="") $("#user_id").focus();
+				if ($("#user_pwd").val()!="") $("#user_pwd").focus();
+				if ($("#user_pwd_confirm").val()!="") $("#user_pwd_confirm").focus();
+				if ($("#user_name").val()!="") $("#user_name").focus();
+				if ($("#user_email").val()!="") $("#user_email").focus();
+				if ($("#user_tel1").val()!="") $("#user_tel1").focus();
+				if ($("#user_tel2").val()!="") $("#user_tel2").focus();
+				if ($("#user_tel3").val()!="") $("#user_tel3").focus();
+				if ($("#user_loc").val()!="-- 선택 --") $("#user_loc").focus();
+				if ($("#user_hobby1").val()!="-- 선택 --") $("#user_hobby1").focus();
+				if ($("#user_hobby2").val()!="-- 선택 --") $("#user_hobby2").focus();
+				if ($("#user_birth").val()!="") $("#user_birth").focus();
+				if ($("#user_pwdq").val()!="-- 선택 --") $("#user_pwdq").focus();
+				if ($("#user_pwda").val()!="") $("#user_pwda").focus();
+				
+				joinErrorCk=joinError.user_idCk||joinError.user_pwdCk||joinError.user_pwd_confirmCk||joinError.user_nameCk||
+				joinError.user_emailCk||joinError.user_tel1Ck||joinError.user_tel2Ck||joinError.user_tel3Ck||
+				joinError.user_locCk||joinError.user_hobby1Ck||joinError.user_hobby2Ck||joinError.user_pwdqCk||
+				joinError.user_pwdaCk||joinError.user_birthCk;
+				$("#joinErrorCk").val(joinErrorCk);
 			})
 		</script>
 	</c:if>
