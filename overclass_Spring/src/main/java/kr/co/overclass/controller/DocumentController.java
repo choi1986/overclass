@@ -81,7 +81,6 @@ public class DocumentController {
 		Map<String, String> map = new HashMap<>();
 		map.put("user_id",user_id);
 		map.put("user_image", downloadPath+savedName);
-		
 		service.imageUpdate(map);
 		return "redirect:/main/myFeed";
 	}
