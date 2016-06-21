@@ -79,7 +79,7 @@
 			
 		$('body').ripples({
 			   resolution: 512,
-			   dropRadius: 20,
+			   dropRadius: 20,	
 			   perturbance: 0.04,
 			});
 			
@@ -551,7 +551,7 @@
 				</div>
 			</div> -->
               
-              <div class="row" style="margin-top:50px; margin-left: 0px; margin-right: 0px;">
+              <div class="row">
                   <div class="col-sm-4">
                   </div>
                   <div class="col-sm-4">
