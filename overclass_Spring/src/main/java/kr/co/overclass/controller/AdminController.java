@@ -1,23 +1,15 @@
 package kr.co.overclass.controller;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
-import org.imgscalr.Scalr.Method;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -42,10 +34,10 @@ public class AdminController {
 	@Inject
 	private DocumentService docService;
 	
+	//관리자뷰 신고목록 출력
 	@RequestMapping(value={"","/adminFeed_Page","ban_list"},method=RequestMethod.GET)
 	public String admin(String page, Model model, HttpServletRequest request)throws Exception{
-		String url = request.getServletPath();
-		UserVO vo = (UserVO) request.getSession().getAttribute("login");
+		UserVO vo = (UserVO) request.getSession().getAttribute("login"); //로그인정보를 얻음
 		PageMaker maker = new PageMaker();
 		Criteria cri = new Criteria();
 		if ( page != null) {
@@ -53,7 +45,8 @@ public class AdminController {
 		}
 		
 		List<ReportDTO> ban_list = service.ban_list();
-		model.addAttribute("ban_list",ban_list);
+		model.addAttribute("ban_list",ban_list); //제제목록 출력
+		
 		List<ReportDTO> list = service.list(cri);
 		maker.setCri(cri);
 		maker.setTotalCount(service.report_count());//신고글 개수
@@ -67,26 +60,27 @@ public class AdminController {
 	//신고하기
 	@RequestMapping(value="/reportDoc",method=RequestMethod.POST)
 	public String report_ban(ReportVO vo, RedirectAttributes attr) throws Exception {
-		service.report(vo);
+		service.report(vo); //report테이블에 신고정보 저장
 		logger.info("신고처리: "+vo);
 		
 		attr.addFlashAttribute("msg", "Write_SUCCESS");
 		return "redirect:/main/myFeed";
 	}
 	
-	//제제하기
+	//제재하기
 	@Transactional
 	@RequestMapping(value="/banDoc",method=RequestMethod.POST)
 	public String report_ban(int reportno, int dno, RedirectAttributes attr) throws Exception {
-		service.banDoc(reportno);
-		service.report_del(reportno);
-		docService.delete(dno);
+		service.banDoc(reportno); //신고된 글 정보 banDoc테이블에 저장
+		service.report_del(reportno); //report테이블에 신고정보 삭제
+		docService.delete(dno); //신고된 글 삭제
 		return "redirect:/admin";
 	}
 	
+	//신고 철회하기
 	@RequestMapping(value="/cancelDoc",method=RequestMethod.POST)
 	public String cancel(int reportno, RedirectAttributes attr) throws Exception {
-		service.report_del(reportno);
+		service.report_del(reportno); //report테이블 신고정보 삭제
 		return "redirect:/admin";
 	}
 }

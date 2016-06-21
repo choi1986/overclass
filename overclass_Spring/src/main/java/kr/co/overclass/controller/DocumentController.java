@@ -1,9 +1,7 @@
 package kr.co.overclass.controller;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.inject.Inject;
@@ -41,18 +39,18 @@ public class DocumentController {
 	//메인피드, 마이피드에서 글쓰기
 	@RequestMapping(value={"/writeDoc","/mywriteDoc"}, method=RequestMethod.POST)
 	public String create(DocumentVO vo, RedirectAttributes attr, MultipartFile file, HttpServletRequest request) throws Exception {
-		String imageName = file.getOriginalFilename();
-		String savedName = uploadFile(file.getOriginalFilename(), file.getBytes());
-		String url = request.getServletPath();
-		String forward = null;
-		String downloadPath = "/overclass/resources/upload/";
-		uploadPath = request.getSession().getServletContext().getRealPath("/resources/upload");
+		String imageName = file.getOriginalFilename(); //파일의 원래이름
+		String savedName = uploadFile(file.getOriginalFilename(), file.getBytes()); //UUID가 더해진 파일이름
+		String url = request.getServletPath(); // requestMapping url주소값 얻어옴
+		String forward = null; 
+		String downloadPath = "/overclass/resources/upload/"; //DB에 경로추가해서 저장하기 위함
+		uploadPath = request.getSession().getServletContext().getRealPath("/resources/upload"); //파일 업로드 위치
 		
 		//이미지 안올렸을때 처리
-		if(imageName.equals("")){
+		if(imageName.equals("")){ //파일이 없을때
 			service.create(vo);
-		} else {
-			vo.setImage(downloadPath+savedName);
+		} else { //파일이 있다면
+			vo.setImage(downloadPath+savedName); //전체경로 추가
 			service.create(vo);
 		}
 		attr.addFlashAttribute("msg", "Write_SUCCESS");
@@ -74,7 +72,7 @@ public class DocumentController {
 		UUID uid = UUID.randomUUID();
 		String savedName = "";
 		if(!originName.equals("")){
-			savedName = uid.toString() + "_" + originName;
+			savedName = uid.toString() + "_" + originName; //uuid와 함께저장
 			File target = new File(uploadPath, savedName);
 			FileCopyUtils.copy(fileData, target); //실제 파일 업로드
 		} 
@@ -84,9 +82,9 @@ public class DocumentController {
 	//메인피드, 마이피드 글 삭제
 	@RequestMapping(value={"/removeDoc","/myremoveDoc"},method=RequestMethod.GET)
 	public String mydelete(int dno, RedirectAttributes attr, HttpServletRequest request) throws Exception {
-		String url = request.getServletPath();
+		String url = request.getServletPath(); //requestMapping url주소값 얻어옴
 		String forward = null;
-		service.delete(dno);
+		service.delete(dno); //해당 글번호의 글 삭제
 		attr.addFlashAttribute("msg", "Remove_SUCCESS");
 		
 		logger.info("게시물 삭제: ["+ dno +"]");
@@ -101,8 +99,8 @@ public class DocumentController {
 	//메인피드, 마이피드 글 조회 + 페이징
 	@RequestMapping(value={"","/myFeed","/mainFeed_Page","/myFeed_Page"},method=RequestMethod.GET)
 	public String mainFeed_page(String page, Model model, HttpServletRequest request)throws Exception{
-		String url = request.getServletPath();
-		UserVO vo = (UserVO) request.getSession().getAttribute("login");
+		String url = request.getServletPath(); //requestMapping url주소값 얻어옴
+		UserVO vo = (UserVO) request.getSession().getAttribute("login"); //로그인정보 얻어옴
 		String user_id = vo.getUser_id();
 		Criteria cri = new Criteria();
 		
