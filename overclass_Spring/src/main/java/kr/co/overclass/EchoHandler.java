@@ -70,6 +70,8 @@ public class EchoHandler extends TextWebSocketHandler {
 		
 		Gson togson = new Gson();
 		
+		logger.info("프로토콜 : "+frommsg.getProtocol());
+		logger.info("내용 : "+frommsg.getMsg());
 		// 프로토콜번호에 따른 행동
 		switch(frommsg.getProtocol()){
 		case 100:{	// 접속했다는 프로토콜이 오면
@@ -83,16 +85,20 @@ public class EchoHandler extends TextWebSocketHandler {
 					// 110 프로토콜과 메시지로 welcome을 보냄.
 					session.sendMessage(new TextMessage(togson.toJson(tomsg)));
 				} break;
-		case 101:{
+		case 200:{
+					MsgwsVO tomsg = new MsgwsVO();
+					tomsg.setSender(frommsg.getSender());
+					tomsg.setMsg(frommsg.getMsg());
+					tomsg.setProtocol(210);
 					
+					for(int i=0;i<connectedUsers.size();i++){
+						if(connectedUsers.get(i).getId() != session.getId()) {
+							connectedUsers.get(i).sendMessage(new TextMessage(togson.toJson(tomsg)));
+						}
+					}
 				} break;
-				
 		}
-		List<WebSocketSession> chatroom = new ArrayList<>();
 		
-		
-		
-		session.sendMessage(new TextMessage("ECHO : "+payloadMessage));
 	}
 	
 	// 클라이언트가 연결을 끊었을 때 실행되는 메소드
