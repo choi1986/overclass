@@ -388,7 +388,7 @@ var result = '${msg}';
 			    			}]
 			    	})
 				    $('#photo_div').hide();
-			        $('#file').val('');
+			        $('#imagefile').val('');
 			    	return;
 			    }
 			    
@@ -406,7 +406,7 @@ var result = '${msg}';
 		}//readURL()
 
 		//file 양식으로 이미지를 선택(값이 변경) 되었을때 처리하는 코드
-		$("#file").change(function() {
+		$("#imagefile").change(function() {
 			//alert(this.value); //선택한 이미지 경로 표시
 			if(this.value != "") {
 				readURL(this);
