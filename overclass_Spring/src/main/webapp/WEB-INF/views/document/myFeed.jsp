@@ -18,7 +18,7 @@
 					<div class="col-lg-2 col-lg-2">
 						<h4>${user.user_name }</h4>
 						<div class="follow-ava">
-							<img class="img-responsive" id="image" src="${user.user_image }" width='70' height='70'>
+							<img class="img-responsive" id="user_image" src="${user.user_image }" width='70' height='70'>
 						</div>
 						<h5>${user.user_id }</h5>
 						<!-- 파일 -->
@@ -367,53 +367,6 @@ var result = '${msg}';
 		//프로필수정에서 비밀번호질문 selected
 		$("#user_pwdq").val("${user.user_pwdq}");
 		
-		//사진미리보기
-		function readURL(input) {
-			if (input.files && input.files[0]) {
-				var file = input.files[0].name;
-				var img_format = "\.(bmp|gif|jpg|jpeg|png)$"; 
-				
-			    if(!(new RegExp(img_format, "i")).test(file)){
-			    	BootstrapDialog.show({
-			    		title: '', //알러트 타이틀 이름
-			    		message: '이미지 파일만 첨부 가능합니다..', //알러트 내용
-			    		type: BootstrapDialog.TYPE_DANGER,
-			    		buttons: [{ //알러트 버튼 정의
-			    				icon: 'fa fa-check',
-			    				label: '확인',
-			    				cssClass: 'btn-danger',
-			    				action: function(cancel){
-			    					cancel.close();
-			   					}
-			    			}]
-			    	})
-				    $('#photo_div').hide();
-			        $('#imagefile').val('');
-			    	return;
-			    }
-			    
-				var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성d
-				reader.onload = function(e) {
-					//파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
-					$('#photo').attr('src', e.target.result);
-					$('#photo_div').show()
-					//이미지 Tag의 SRC속성에 읽어들인 File내용을 지정
-					//(아래 코드에서 읽어들인 dataURL형식)
-				}
-					reader.readAsDataURL(input.files[0]);
-				//File내용을 읽어 dataURL형식의 문자열로 저장
-			}
-		}//readURL()
-
-		//file 양식으로 이미지를 선택(값이 변경) 되었을때 처리하는 코드
-		$("#imagefile").change(function() {
-			//alert(this.value); //선택한 이미지 경로 표시
-			if(this.value != "") {
-				readURL(this);
-			} else {
-				$('#photo_div').hide()
-			}
-		});
 		 //   댓글div 열닫
 		   $(".wminimize").click(function() {
 		      
@@ -438,6 +391,55 @@ var result = '${msg}';
 				div3.attr("style","display: none;")
 		      }
 		   })
+		   
+				   //사진미리보기
+			function readURL(input) {
+				if (input.files && input.files[0]) {
+					var file = input.files[0].name;
+					var img_format = "\.(bmp|gif|jpg|jpeg|png)$"; 
+					
+				    if(!(new RegExp(img_format, "i")).test(file)){
+				    	BootstrapDialog.show({
+				    		title: '', //알러트 타이틀 이름
+				    		message: '이미지 파일만 첨부 가능합니다..', //알러트 내용
+				    		type: BootstrapDialog.TYPE_DANGER,
+				    		buttons: [{ //알러트 버튼 정의
+				    				icon: 'fa fa-check',
+				    				label: '확인',
+				    				cssClass: 'btn-danger',
+				    				action: function(cancel){
+				    					cancel.close();
+				   					}
+				    			}]
+				    	})
+					    $('#photo_div').hide();
+				        $('#file').val('');
+				    	return;
+				    }
+				    
+					var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
+					reader.onload = function(e) {
+						//파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+						$('#photo').attr('src', e.target.result);
+						$('#photo_div').show()
+						//이미지 Tag의 SRC속성에 읽어들인 File내용을 지정
+						//(아래 코드에서 읽어들인 dataURL형식)
+					}
+						reader.readAsDataURL(input.files[0]);
+					//File내용을 읽어 dataURL형식의 문자열로 저장
+				}
+			}//readURL()
+			
+			//file 양식으로 이미지를 선택(값이 변경) 되었을때 처리하는 코드
+			$("#file").change(function() {
+				//alert(this.value); //선택한 이미지 경로 표시
+				if(this.value != "") {
+					readURL(this);
+				} else {
+					$('#photo_div').hide()
+				}
+			});
+		   
 		   $(".goodclass").click(function() {
 	      
 	      // 이게 dno
@@ -529,61 +531,7 @@ var result = '${msg}';
 			}
 		})
 		
-		if (result == 'Write_SUCCESS') {
-			BootstrapDialog.show({
-	    		title: '', //알러트 타이틀 이름
-	    		message: '글이 등록 되었습니다.', //알러트 내용
-	    		buttons: [{ //알러트 버튼 정의
-	    				icon: 'fa fa-check',
-	    				label: '확인',
-	    				cssClass: 'btn-primary',
-	    				hotkey:13,
-	    				action: function(cancel){
-	    					cancel.close();
-	   					}
-	    			}]
-	    	}) 
-			
-		} else if (result == 'Remove_SUCCESS') {
-			BootstrapDialog.show({
-	    		title: '', //알러트 타이틀 이름
-	    		message: '글이 삭제 되었습니다.', //알러트 내용
-	    		type: BootstrapDialog.TYPE_DANGER,
-	    		buttons: [{ //알러트 버튼 정의
-	    				icon: 'fa fa-check',
-	    				label: '확인',
-	    				cssClass: 'btn-danger',
-	    				hotkey:13,
-	    				action: function(cancel){
-	    					cancel.close();
-	   					}
-	    			}]
-	    	})
-		}
 		
-		//신고모달정의
-		$("#content_repot").click(function() {
-			BootstrapDialog.show({
-	    		title: '', //알러트 타이틀 이름
-	    		message: '이 글을 신고 하시겠습니까?', //알러트 내용
-	    		type: BootstrapDialog.TYPE_DANGER,
-	    		buttons: [{ //알러트 버튼 정의
-	    			id: 'btn1', //알러트 버튼의 아이디
-	    			icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
-	    			label: '신고', //알러트 버튼 이름
-	    			cssClass: 'btn-danger', //알러트 버튼 색바꾸기
-	    			hotkey:13,
-	    			action: function(confirm) {
-	    				confirm.close()
-					}
-	    			},{
-	    				label: '닫기',
-	    				action: function(cancel){
-	    					cancel.close();
-	    					}
-	    			}]
-	    	})
-		})
 		//회원탈퇴 모달정의
 		$("#member_leave").click(function() {
 			

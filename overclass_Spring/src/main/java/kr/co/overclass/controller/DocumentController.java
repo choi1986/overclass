@@ -39,13 +39,14 @@ public class DocumentController {
 	String uploadPath;
 	
 	//메인피드, 마이피드에서 글쓰기
-	@RequestMapping(value="/writeDoc", method=RequestMethod.POST)
-	public String create(String url, DocumentVO vo, RedirectAttributes attr, MultipartFile file, HttpSession session) throws Exception {
+	@RequestMapping(value={"/writeDoc","/mywriteDoc"}, method=RequestMethod.POST)
+	public String create(DocumentVO vo, RedirectAttributes attr, MultipartFile file, HttpServletRequest request) throws Exception {
 		String imageName = file.getOriginalFilename();
 		String savedName = uploadFile(file.getOriginalFilename(), file.getBytes());
-		logger.info("파일이름: "+imageName);
-		uploadPath = session.getServletContext().getRealPath("/resources/upload");
+		String url = request.getServletPath();
+		String forward = null;
 		String downloadPath = "/overclass/resources/upload/";
+		uploadPath = request.getSession().getServletContext().getRealPath("/resources/upload");
 		
 		//이미지 안올렸을때 처리
 		if(imageName.equals("")){
@@ -57,14 +58,15 @@ public class DocumentController {
 		attr.addFlashAttribute("msg", "Write_SUCCESS");
 		
 		logger.info("글쓰기...[" + vo + "]");	
-		logger.info("사진: [파일이름: "+file.getOriginalFilename()+
+		logger.info("사진: [파일이름: "+imageName+
 				", "+"파일크기: "+ Math.floor(((float)file.getSize()/1048576)*100f)/100f +"MB"+
 				", "+"파일타입: "+file.getContentType()+"]");
-		if( url.equals("my") ) {
-			return "redirect:/main/myFeed";
+		if( url.equals("/main/mywriteDoc") ) {
+			forward = "redirect:/main/myFeed";
 		} else {
-			return "redirect:/main";
+			forward = "redirect:/main";
 		}
+		return forward;
 	}
 	
 	//파일업로드
@@ -80,18 +82,20 @@ public class DocumentController {
 	}
 	
 	//메인피드, 마이피드 글 삭제
-	@RequestMapping(value={"/removeDoc","myremoveDoc"},method=RequestMethod.GET)
+	@RequestMapping(value={"/removeDoc","/myremoveDoc"},method=RequestMethod.GET)
 	public String mydelete(int dno, RedirectAttributes attr, HttpServletRequest request) throws Exception {
 		String url = request.getServletPath();
+		String forward = null;
 		service.delete(dno);
 		attr.addFlashAttribute("msg", "Remove_SUCCESS");
 		
 		logger.info("게시물 삭제: ["+ dno +"]");
-		if( url.equals("myremoveDoc") ) {
-			return "redirect:/main/myFeed";
+		if( url.equals("/main/myremoveDoc") ) {
+			forward = "redirect:/main/myFeed";
 		} else {
-			return "redirect:/main";
+			forward = "redirect:/main";
 		}
+		return forward;
 	}
 	
 	//메인피드, 마이피드 글 조회 + 페이징

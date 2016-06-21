@@ -42,7 +42,7 @@
 
 			<!-- 글쓰기폼-->
 			<div class="form quick-post">
-				<form role="form" id="writeDoc" class="form-horizontal" action="/overclass/main/writeDoc?url=my"
+				<form role="form" id="writeDoc" class="form-horizontal" action="/overclass/main/mywriteDoc"
 					method="post" enctype="multipart/form-data">
 					<!-- 타이틀 -->
 					<div class="form-group">
@@ -71,9 +71,8 @@
 					<!-- 파일 -->
 					<div class="form-group">
 						<div class="filebox control-label col-lg-2">
-						<!-- <label class="control-label col-lg-2" for="content">사진올리기</label> -->
 							<label for="file" class="btn btn-primary"><span class="fa fa-camera-retro" style="color: #007aff;"></span> 사진올리기</label>
-							<input type="file" id="file" name="file" accept="image/gif, image/jpeg, image/png">
+							<input type="file" id="file" name="file" accept="image/gif, image/jpeg, image/png, image/bmp#">
 						</div>
 						<div class="filebox col-lg-10">
 						<div class="col-lg-12" id="photo_div" style="display: none;">
