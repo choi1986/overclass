@@ -107,7 +107,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
-	public String logout (HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
+	public String logout (HttpServletRequest request, RedirectAttributes attr, HttpServletResponse response, HttpSession session) throws Exception {
 		Object obj = session.getAttribute("login");
 		
 		if (obj!=null) {
@@ -125,27 +125,27 @@ public class UserController {
 				service.keepLogin(vo.getUser_id(), session.getId(), new Date());
 			}
 		}
-		return "/member/loginForm2";
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value="/searchID") // 아이디 찾기 버튼 눌린 후
-	public String searchID (SearchIDDTO dto, HttpSession session, Model model) throws Exception { // 회원 가입 화면으로
+	public String searchID (SearchIDDTO dto, RedirectAttributes attr, HttpSession session, Model model) throws Exception { // 회원 가입 화면으로
 		String user_id = service.searchID(dto); // 해당 아이디가 있다면 찾아옴
 		//유저아이디 있다면 아래 문장, 없다면 세션에 같은 이름으로 다른 값 넣어서 로그인 폼에서 체크 후 메시지 띄우기
 		if (user_id==null) session.setAttribute("searchID", "0");
 		else session.setAttribute("searchID", user_id);
 		
-		return "/member/loginForm2";
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value="/searchPwd") // 비번 찾기 버튼 눌린 후
-	public String searchPwd (SearchPwdDTO dto, HttpSession session, Model model) throws Exception { // 회원 가입 화면으로
+	public String searchPwd (SearchPwdDTO dto, RedirectAttributes attr, HttpSession session, Model model) throws Exception { // 회원 가입 화면으로
 		if (service.searchPwd(dto))
 			session.setAttribute("searchPwd", "suc");
 		else if (!dto.getUser_pwd().equals(dto.getUser_pwd_confirm()))
 			session.setAttribute("searchPwd", "pwdFail");
 		else
 			session.setAttribute("searchPwd", "fail");
-		return "/member/loginForm2";
+		return "redirect:/";
 	}
 }
