@@ -1,4 +1,4 @@
-package kr.co.overclass.controller;
+package kr.co.overclass;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,17 +55,15 @@ public class EchoHandler extends TextWebSocketHandler {
 		 ****************** 프로토콜 정의 **********************
 		
 		**클라이언트 전송프로토콜
-		100 : 서버접속, 101 : 대화방접속, 102 : 대화방나가기
+		100 : 서버접속
 		200 : 메시지 전송
 		300 : 로그아웃 (종료)
 		
 		*서버 전송프로토콜
-		110 : 서버접속완료, 111 : 대화방접속 성공, 112 : 대화방나가기(다른상대랑 대화시작)
+		110 : 서버접속완료
 		210 : 친구메시지 전송
 		310 : 친구 로그아웃
 		*/
-		
-		//String msg[] = payloadMessage.split("|&");	// 이건 String으로 할때
 		
 		Gson fromgson = new Gson();
 		MsgwsVO frommsg = fromgson.fromJson(payloadMessage, MsgwsVO.class);
@@ -77,6 +75,7 @@ public class EchoHandler extends TextWebSocketHandler {
 		case 100:{	// 접속했다는 프로토콜이 오면
 					// 같이온 sender와 Websession을 저장해서 해당 세션id가 누구인지를 이어줌
 					users.put(frommsg.getSender(), session);
+					logger.info("welcome "+frommsg.getSender());
 					
 					MsgwsVO tomsg = new MsgwsVO();
 					tomsg.setProtocol(110);

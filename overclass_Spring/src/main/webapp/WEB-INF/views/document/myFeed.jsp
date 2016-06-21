@@ -347,7 +347,7 @@
 <script type="text/javascript">
 var result = '${msg}';
 	$(document).ready(function() {
-		modifyError = { // 회원가입 메시지용 변수
+		modifyError = {
 				user_pwdCk : true,
 				user_pwd_confirmCk : true,
 				user_emailCk : false,
@@ -704,10 +704,10 @@ var result = '${msg}';
 	                cssClass: 'btn-danger',
 	                action: function(dialogRef){
 	                    var pwd = dialogRef.getModalBody().find('#pwd').val();
-		                if($.trim(pwd.toLowerCase()) !== 'banana') {
+		                if($.trim(pwd.toLowerCase()) !== '${user.user_pwd }') {
 		                	BootstrapDialog.show({
 		                		title: '',
-		                		message: '비밀번호 틀림 비번:banana',
+		                		message: '비밀번호 틀림',
 		                		type: BootstrapDialog.TYPE_primary,
 		                		buttons: [{
 		                			label:'닫기',

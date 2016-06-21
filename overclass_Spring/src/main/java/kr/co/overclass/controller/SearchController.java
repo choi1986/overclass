@@ -44,6 +44,8 @@ public class SearchController {
 			model.addAttribute("selectIdName",service.select(vo));//아이디 이름 검색
 			model.addAttribute("resultCount",index);
 			session.setAttribute("idName", info);
+			model.addAttribute("currentPage", 1);
+			logger.info("현재페이지...........1");
 			if(service.countNameNum(info)!=0){logger.info(info+": 이름 검색성공");};
 		}else{
 			logger.info("아이디........................"+info);
@@ -55,6 +57,8 @@ public class SearchController {
 			model.addAttribute("selectIdName",service.select(vo));//아이디 이름 검색
 			model.addAttribute("resultCount",service.countIdNum(info));
 			session.setAttribute("idName", info);
+			model.addAttribute("currentPage", 1);
+			logger.info("현재페이지...........1");
 			if(service.countIdNum(info)!=0){logger.info(info+": 아이디 검색성공");};
 		}
 		return "/addfunction/search";
@@ -77,6 +81,8 @@ public class SearchController {
 			vo.setEnd(end);
 			model.addAttribute("selectIdName",service.select(vo));//아이디 이름 검색
 			model.addAttribute("resultCount",index);
+			model.addAttribute("currentPage", page);
+			logger.info("현재페이지..........."+page);
 			if(service.countNameNum(info)!=0){logger.info(info+": 이름 검색성공");};
 		}else{
 			logger.info("아이디........................"+info);
@@ -87,6 +93,8 @@ public class SearchController {
 			vo.setEnd(end);
 			model.addAttribute("selectIdName",service.select(vo));//아이디 이름 검색
 			model.addAttribute("resultCount",index);
+			model.addAttribute("currentPage", page);
+			logger.info("현재페이지..........."+page);
 			if(service.countIdNum(info)!=0){logger.info(info+": 아이디 검색성공");};
 		}
 		return "/addfunction/search";
@@ -104,6 +112,8 @@ public class SearchController {
 		model.addAttribute("selectTag", service.selectTag(vo));//태그검색
 		model.addAttribute("resultCount",index);//페이지 분할하기 위한 데이터 수 정보 전송
 		session.setAttribute("tag", tag);
+		model.addAttribute("currentPage", 1);
+		logger.info("현재페이지...........1");
 		if(service.countTagNum(tag)!=0){logger.info("tag"+"검색성공");};
 		return "/addfunction/search";
 	}
@@ -122,6 +132,8 @@ public class SearchController {
 		vo.setEnd(end);
 		model.addAttribute("selectTag", service.selectTag(vo));//태그검색
 		model.addAttribute("resultCount",service.countTagNum(tag));//페이지 분할하기 위한 데이터 수 정보 전송
+		model.addAttribute("currentPage", page);
+		logger.info("현재페이지..........."+page);
 		if(service.countTagNum(tag)!=0){logger.info("tag"+"검색성공");};
 		return "/addfunction/search";
 	}
