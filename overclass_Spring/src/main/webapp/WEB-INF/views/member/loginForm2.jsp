@@ -123,11 +123,57 @@
 		})
 		$("#back_join").click(function() {
 			$("#joinForm").hide(); //회원가입폼 감춤
+			duplCk = 0; // 중복검사 성공 or 실패 체크
+			duplID = ""; // 중복검사 아이디 임시 저장
+			joinError.user_idCk = true;
+			joinError.user_pwdCk = true;
+			joinError.user_pwd_confirmCk = true;
+			joinError.user_nameCk = true;
+			joinError.user_emailCk = true;
+			joinError.user_tel1Ck = true;
+			joinError.user_tel2Ck = true;
+			joinError.user_tel3Ck = true;
+			joinError.user_locCk = true;
+			joinError.user_hobby1Ck = true;
+			joinError.user_hobby2Ck = true;
+			joinError.user_pwdqCk = true;
+			joinError.user_pwdaCk = true;
+			joinError.user_birthCk = true;
+			$("#user_id*").val("");
+			$("#user_pwd*").val("");
+			$("#user_pwd_confirm*").val("");
+			$("#user_name*").val("");
+			$("#user_email*").val("");
+			$("#user_tel1").val("");
+			$("#user_tel2").val("");
+			$("#user_tel3").val("");
+			$("#user_loc").val("-- 선택 --");
+			$("#user_hobby1").val("-- 선택 --");
+			$("#user_hobby2").val("-- 선택 --");
+			$("#user_birth*").val(""); cnt=1;
+			$("#radio[value='남']").attr("checked","checked");
+			$("#user_pwdq*").val("-- 선택 --");
+			$("#user_pwda*").val("");
+			$("#joinErrorCk").val("");
+			//for (i=1;i<13;i++) 
+			$(".joinSpan").text("");
 			$("#panel").show();
 		})
 		$("#back_searchIDPwd").click(function() {
 			$("#searchIDForm").hide(); //아이디 찾기 폼 감춤
 			$("#searchPwdForm").hide(); //비밀번호 찾기 폼 감춤
+				pwdError.user_pwdCk = true;
+				pwdError.user_pwd_confirmCk = true;
+				$("#user_name*").val("");
+				$("#user_email*").val("");
+				$("#user_birth*").val(""); cnt=1;
+
+				$("#user_id*").val("");
+				$("#user_pwdq*").val("-- 선택 --");
+				$("#user_pwda*").val("");
+				$("#user_pwd*").val("");
+				$("#user_pwd_confirm*").val("");
+				$(".pwdSpan").text("");
 			$("#panel").show();
 		})
 		var email_op = $("email_op").val()
