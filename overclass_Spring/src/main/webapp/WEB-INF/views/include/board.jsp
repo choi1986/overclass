@@ -35,8 +35,7 @@
 								<!-- 타이틀 -->
 								<div class="form-group">
 									<div class="photo col-lg-2" style="text-align: center;">
-										<img alt="avatar" src="${DocumentDTO.user_image}" width='70' height='70'>
-										<h4></h4>
+										<img class="img-circle" src="${DocumentDTO.user_image}" width='70px' height='70px'>
 										<p>
 											<b>${DocumentDTO.writer } </b>
 										</p>

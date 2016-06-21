@@ -148,7 +148,7 @@
 				<li class="dropdown">
 					<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 						<span class="avatar">
-							<img src="${user.user_image }" width='30' height='30'>
+							<img class="img-circle" src="${user.user_image }" width='30' height='30'>
 						</span> 
 						<span class="username">${user.user_id }</span> 
 						<b class="caret"></b>

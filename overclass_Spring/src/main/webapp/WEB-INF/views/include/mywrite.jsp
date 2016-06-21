@@ -47,7 +47,7 @@
 					<!-- 타이틀 -->
 					<div class="form-group">
 						<div class="photo col-lg-2" style="text-align: center;">
-							<img alt="avatar" src="${user.user_image}" width='70' height='70'>
+							<img class="img-circle" alt="avatar" src="${user.user_image}" width='70' height='70'>
 							<h4></h4>
 							<p>
 								<b>${user.user_id }</b>
