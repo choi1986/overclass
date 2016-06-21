@@ -125,4 +125,9 @@ public class DocumentServiceImpl implements DocumentService {
 	public DocumentDTO read_doc(int dno) throws Exception{
 		return dao.read_doc(dno);
 	}
+
+	@Override
+	public void imageUpdate(Map<String, String> map) throws Exception {
+		dao.imageUpdate(map);
+	}
 }

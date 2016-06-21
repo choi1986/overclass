@@ -1,7 +1,9 @@
 package kr.co.overclass.controller;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.inject.Inject;
@@ -67,6 +69,22 @@ public class DocumentController {
 		return forward;
 	}
 	
+	//마이피드 수정
+	@RequestMapping(value="/imageUp",method=RequestMethod.POST)
+	public String imageupdate(String user_id, MultipartFile imagefile, RedirectAttributes attr, HttpServletRequest request) throws Exception {
+		String imageName = imagefile.getOriginalFilename(); //파일의 원래이름
+		String savedName = uploadFile(imagefile.getOriginalFilename(), imagefile.getBytes()); //UUID가 더해진 파일이름
+		String downloadPath = "/overclass/resources/upload/"; //DB에 경로추가해서 저장하기 위함
+		System.out.println("@@@파일이름:"+imageName);
+		System.out.println("@@@바뀐파일이름:"+savedName);
+		uploadPath = request.getSession().getServletContext().getRealPath("/resources/upload"); //파일 업로드 위치
+		Map<String, String> map = new HashMap<>();
+		map.put("user_id",user_id);
+		map.put("user_image", downloadPath+savedName);
+		service.imageUpdate(map);
+		return "redirect:/main/myFeed";
+	}
+		
 	//파일업로드
 	private String uploadFile(String originName, byte[] fileData) throws Exception {
 		UUID uid = UUID.randomUUID();
@@ -81,7 +99,7 @@ public class DocumentController {
 	
 	//메인피드, 마이피드 글 삭제
 	@RequestMapping(value={"/removeDoc","/myremoveDoc"},method=RequestMethod.GET)
-	public String mydelete(int dno, RedirectAttributes attr, HttpServletRequest request) throws Exception {
+	public String delete(int dno, RedirectAttributes attr, HttpServletRequest request) throws Exception {
 		String url = request.getServletPath(); //requestMapping url주소값 얻어옴
 		String forward = null;
 		service.delete(dno); //해당 글번호의 글 삭제
@@ -98,7 +116,7 @@ public class DocumentController {
 	
 	//메인피드, 마이피드 글 조회 + 페이징
 	@RequestMapping(value={"","/myFeed","/mainFeed_Page","/myFeed_Page"},method=RequestMethod.GET)
-	public String mainFeed_page(String page, Model model, HttpServletRequest request)throws Exception{
+	public String mainlist(String page, Model model, HttpServletRequest request)throws Exception{
 		String url = request.getServletPath(); //requestMapping url주소값 얻어옴
 		UserVO vo = (UserVO) request.getSession().getAttribute("login"); //로그인정보 얻어옴
 		String user_id = vo.getUser_id();

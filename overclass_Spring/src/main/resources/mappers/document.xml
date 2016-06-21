@@ -23,6 +23,11 @@
 		where dno = #{dno}
 	</select>		
 	
+	<update id="imageUp">
+		update oc_user set user_image = #{user_image}
+		where user_id = #{user_id}
+	</update>
+	
 	<!-- 메인피드 게시글 목록 -->
 	<select id="mainFeed_list" resultType="document_dto">
 			select dno, writer, content, tag, writedate, image, goodcnt, replycnt, user_image

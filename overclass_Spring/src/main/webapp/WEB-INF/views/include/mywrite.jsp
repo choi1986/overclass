@@ -72,11 +72,12 @@
 					<div class="form-group">
 						<div class="filebox control-label col-lg-2">
 							<label for="file" class="btn btn-primary"><span class="fa fa-camera-retro" style="color: #007aff;"></span> 사진올리기</label>
-							<input type="file" id="file" name="file" accept="image/gif, image/jpeg, image/png, image/bmp#">
+							<input type="file" id="file" name="file" accept="image/gif, image/jpeg, image/png, image/bmp">
 						</div>
 						<div class="filebox col-lg-10">
 						<div class="col-lg-12" id="photo_div" style="display: none;">
 							<img class="img-responsive img-thumbnail" src="" id="photo" width="250px" height="200px">
+							<br/><a href="#" class="hidden">삭제</a>
 						</div>
 						</div>
 					</div>

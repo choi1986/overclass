@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.overclass.domain.Criteria;
 import kr.co.overclass.domain.DocumentVO;
+import kr.co.overclass.domain.UserVO;
 import kr.co.overclass.dto.DocumentDTO;
 
 @Repository
@@ -60,5 +61,10 @@ public class DocumentDAOImpl implements DocumentDAO{
 	@Override
 	public DocumentDTO read_doc(int dno) throws Exception {
 		return session.selectOne("document.read_doc", dno);
+	}
+
+	@Override
+	public void imageUpdate(Map<String, String> map) throws Exception {
+		session.update("document.imageUp",map);
 	}
 }

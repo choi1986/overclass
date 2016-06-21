@@ -12,6 +12,7 @@
 		<typeAlias type="kr.co.overclass.dto.DocumentDTO" alias="document_dto"/>
 		<typeAlias type="kr.co.overclass.domain.FriendVO" alias="friend"/>
 		<typeAlias type="kr.co.overclass.dto.ReportDTO" alias="report"/>
+		<typeAlias type="kr.co.overclass.domain.UserVO" alias="user"/>
 		<!-- <package name="com.kosta.domain"/> -->
 	</typeAliases>
 </configuration>
