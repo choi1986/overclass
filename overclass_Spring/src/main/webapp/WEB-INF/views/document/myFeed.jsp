@@ -360,7 +360,6 @@ var result = '${msg}';
 				user_pwdqCk : false,
 				user_pwdaCk : false
 		};
-		
 		//프로필수정에서 지역 selected
 		$("#user_loc").val("${user.user_loc }");
 		
