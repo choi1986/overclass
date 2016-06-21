@@ -23,6 +23,7 @@
 		where dno = #{dno}
 	</select>		
 	
+	<!-- 프로필사진 수정 -->
 	<update id="imageUp">
 		update oc_user set user_image = #{user_image}
 		where user_id = #{user_id}

@@ -649,6 +649,21 @@ var result = '${msg}';
 	   					}
 	    			}]
 	    	})
+		} else if (result == 'Update_SUCCESS') {
+			BootstrapDialog.show({
+	    		title: '', //알러트 타이틀 이름
+	    		message: '프로필이 수정 되었습니다.', //알러트 내용
+	    		type: BootstrapDialog.TYPE_DANGER,
+	    		buttons: [{ //알러트 버튼 정의
+	    				icon: 'fa fa-check',
+	    				label: '확인',
+	    				cssClass: 'btn-danger',
+	    				hotkey:13,
+	    				action: function(cancel){
+	    					cancel.close();
+	   					}
+	    			}]
+	    	})
 		}
 		
 		//신고모달정의

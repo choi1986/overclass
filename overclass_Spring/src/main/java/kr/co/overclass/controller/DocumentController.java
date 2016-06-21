@@ -71,7 +71,7 @@ public class DocumentController {
 	
 	//마이피드 수정
 	@RequestMapping(value="/imageUp",method=RequestMethod.POST)
-	public String imageupdate(String user_id, MultipartFile imagefile, RedirectAttributes attr, HttpServletRequest request) throws Exception {
+	public String imageupdate(String user_id, MultipartFile imagefile, Model model, HttpServletRequest request) throws Exception {
 		String imageName = imagefile.getOriginalFilename(); //파일의 원래이름
 		String savedName = uploadFile(imagefile.getOriginalFilename(), imagefile.getBytes()); //UUID가 더해진 파일이름
 		String downloadPath = "/overclass/resources/upload/"; //DB에 경로추가해서 저장하기 위함
