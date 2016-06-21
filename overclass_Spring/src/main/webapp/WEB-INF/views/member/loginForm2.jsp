@@ -575,7 +575,7 @@
               <div class="row">
                   <div class="col-sm-4">
                   </div>
-                  <div class="col-sm-4">
+                  <div class="col-sm-4" style="margin-top: 50px">
                       <section class="panel">
                           <header class="panel-heading">
                              	회원가입
@@ -767,7 +767,7 @@
               <div class="row" style="margin-left: 0px, margin-right: 0px">
                   <div class="col-sm-4">
                   </div>
-                  <div class="col-sm-4">
+                  <div class="col-sm-4" style="margin-top: 50px">
                       <section class="panel">
                           <header class="panel-heading">
                              	아이디 찾기
