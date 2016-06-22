@@ -109,7 +109,7 @@
 								<!-- 마이페이지 수정폼끝 -->
 								<div class="panel-body bio-graph-info">
 								<form id="modify" method="post" action="/overclass/main/modifyUser">
-									<div class="col-lg-13">
+									<div class="col-sm-13">
 										<h1>프로필 수정</h1>
 										<div class="row">
 											<div class="bio-row">
@@ -134,7 +134,7 @@
 											<div class="bio-row">
 												<div class="form-group">
 													<label class="col-lg-3 control-label">이메일</label>
-													<div class="col-lg-4">
+													<div class="col-lg-3">
 														<input type="text" id="user_email" name="user_email" class="form-control"
 															value="${user.user_email }" onblur="regCk(5, this)">
 													</div>
@@ -152,14 +152,14 @@
 											</div>
 											<div class="bio-row">
 												<div class="form-group">
-													<label class="col-lg-3 control-label">전화번호</label>
-													<div class="col-lg-2">
+													<label class="col-lg-3 col-sm-3 control-label">전화번호</label>
+													<div class="col-lg-2 col-sm-3">
 														<input type="text" id="user_tel1" name="user_tel1" class="form-control" value="${fn:split(user.user_tel, '-')[0]}" onblur="regCk(6, this)">
 													</div><!-- ${fn:substring(user.user_tel, 0, 3)} -->
-													<div class="col-lg-2">
+													<div class="col-lg-2 col-sm-3">
 														<input type="text" id="user_tel2" name="user_tel2" class="form-control" value="${fn:split(user.user_tel, '-')[1]}" onblur="regCk(7, this)">
 													</div><!-- ${fn:substring(user.user_tel, 4, 8)} -->
-													<div class="col-lg-2">
+													<div class="col-lg-2 col-sm-3">
 														<input type="text" id="user_tel3" name="user_tel3" class="form-control" value="${fn:split(user.user_tel, '-')[2]}" onblur="regCk(8, this)">
 													</div><!-- ${fn:substring(user.user_tel, 9, 13)} -->
                                           	<div id="span6" class="modifySpan"></div>
@@ -271,14 +271,14 @@
 											</div>
 											<div class="form-group">
 												<label class="col-lg-12"></label>
-												<div class="col-lg-offset-3 col-lg-3">
+												<div class="col-sm-offset-4 col-sm-3">
 													<span data-toggle="modal" data-target="#update">
 														<button type="button" id="member_update" class="btn btn-success btn-block">수정</button>
 													</span>
 												</div>
 											</div>
 										</div>
-										<div class="col-lg-offset-12">
+										<div class="col-sm-offset-12">
 											<a href="#" id="member_leave" style="color: red;" class="fa fa-ban">
 												회원탈퇴
 											</a>

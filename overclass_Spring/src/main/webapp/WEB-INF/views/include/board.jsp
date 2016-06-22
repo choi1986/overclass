@@ -49,19 +49,19 @@
 								</div>
 									
 									<!-- 사진 -->
+								<c:if test="${DocumentDTO.image != '' }">
 									<div class="form-group">
-										<div class="control-label col-sm-2">
+										<div class="control-label col-sm-2">사진
 										</div>
-										<div class="filebox col-lg-8">
-											<c:if test="${DocumentDTO.image != '' }">
-												<div class="col-sm-12" id="photo_div">
-												<a href="${DocumentDTO.image }" data-lightbox="image-${DocumentDTO.dno }" data-title="사진">
-													<img class="img-responsive img-thumbnail" src="${DocumentDTO.image }" width="500px" height="350px">
-												</a>
-												</div>
-											 </c:if>
+										<div class="filebox col-sm-8">
+											<div class="col-sm-12" id="photo_div">
+											<a href="${DocumentDTO.image }" data-lightbox="image-${DocumentDTO.dno }" data-title="사진">
+												<img class="img-responsive img-thumbnail" src="${DocumentDTO.image }" width="500px" height="350px">
+											</a>
+											</div>
 										</div>
 									</div>
+								 </c:if>
 									
 									
 
@@ -91,7 +91,7 @@
                         <!-- 태그 -->
                         <div class="form-group">
                            <label class="control-label col-sm-2" for="content">태그</label>
-                           <div class="col-lg-9">
+                           <div class="col-sm-9">
                               <c:if test="${DocumentDTO.tag != null }">
                               <c:set var="tags" value="${fn:split(DocumentDTO.tag,',' )}"/>
                               <c:forEach items="${tags }" var="tag">

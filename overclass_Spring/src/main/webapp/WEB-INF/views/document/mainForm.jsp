@@ -130,16 +130,17 @@ $(document).ready(function() {
 		   					}
 		    			}]
 		    	})
-			    $('#photo_div').hide();
+			    $('#photo_div').slideUp(1000)
 		        $('#file').val('');
 		    	return;
 		    }
 		    
-			var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
+			var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성d
 			reader.onload = function(e) {
 				//파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
 				$('#photo').attr('src', e.target.result);
-				$('#photo_div').show()
+				$('#photo_div').slideDown(1000)
+				$('#photo_div a').attr("class","")
 				//이미지 Tag의 SRC속성에 읽어들인 File내용을 지정
 				//(아래 코드에서 읽어들인 dataURL형식)
 			}
@@ -154,9 +155,24 @@ $(document).ready(function() {
 		if(this.value != "") {
 			readURL(this);
 		} else {
-			$('#photo_div').hide()
+			$('#photo_div').slideUp(1000)
 		}
 	});
+	
+	$('#photo_div a').bind('click', function() {
+        resetFormElement($('#file')); //전달한 양식 초기화
+        $('#file').slideDown(1000); //파일 양식 보여줌
+        $(this).parent().slideUp(1000); //미리 보기 영역 감춤
+        return false; //기본 이벤트 막음
+    });
+	
+	function resetFormElement(e) {
+        e.wrap('<form>').closest('form').get(0).reset(); 
+        //리셋하려는 폼양식 요소를 폼(<form>) 으로 감싸고 (wrap()) , 
+        //요소를 감싸고 있는 가장 가까운 폼( closest('form')) 에서 Dom요소를 반환받고 ( get(0) ),
+        //DOM에서 제공하는 초기화 메서드 reset()을 호출
+        e.unwrap(); //감싼 <form> 태그를 제거
+    }
 	
 	//게시글삭제
 	$("#boardDel").click(function() {

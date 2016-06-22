@@ -20,7 +20,7 @@
 					method="post" enctype="multipart/form-data">
 					<!-- 타이틀 -->
 					<div class="form-group">
-						<div class="photo col-lg-2" style="text-align: center;">
+						<div class="photo col-sm-2" style="text-align: center;">
 							<img class="img-circle" alt="avatar" src="${user.user_image}" width='70' height='70'>
 							<h4></h4>
 							<p>
@@ -30,7 +30,7 @@
 								</b>
 							</p>
 						</div>
-						<div class="col-lg-10">
+						<div class="col-sm-10">
 							<input type="hidden" id="action" name="action" value="contentInsert"> 
 							<textarea class="form-control" name="content" id="content" rows="5"></textarea>
 						</div>
@@ -38,28 +38,29 @@
 
 					<!-- 태그 -->
 					<div class="form-group">
-						<label class="control-label col-lg-2" for="content">태그</label>
-						<div class="col-lg-10">
+						<label class="control-label col-sm-2" for="content">태그</label>
+						<div class="col-sm-10">
 							<input name="tag" id="tagsinput" class="tagsinput" />							
 						</div>
 					</div>
 
 					<!-- 파일 -->
 					<div class="form-group">
-						<div class="filebox control-label col-lg-2">
+						<div class="filebox control-label col-sm-2">
 							<label for="file" class="btn btn-primary"><span class="fa fa-camera-retro" style="color: #007aff;"></span> 사진올리기</label>
 							<input type="file" id="file" name="file" accept="image/gif, image/jpeg, image/png, image/bmp#">
 						</div>
-						<div class="filebox col-lg-10">
-						<div class="col-lg-12" id="photo_div" style="display: none;">
+						<div class="filebox col-sm-10">
+						<div class="col-sm-12" id="photo_div" style="display: none;">
 							<img class="img-responsive img-thumbnail" src="" id="photo" width="250px" height="200px">
+							<br/><a href="#" class="hidden">삭제</a>
 						</div>
 						</div>
 					</div>
 					
 					<!-- 지도 -->
 					<div class="form-group">
-					<div class="col-lg-10">
+					<div class="col-sm-10">
 					<div id="map" style=>
 						
 					</div>
@@ -68,7 +69,7 @@
 
 					<!-- 등록버튼 -->
 					<div class="form-group">
-						<div class="col-lg-offset-4 col-lg-4">
+						<div class="col-sm-offset-4 col-sm-4">
 							<button type="button" id="docWriteSubmitBt" class="btn btn-primary btn-block">등록</button>
 						</div>
 					</div>
