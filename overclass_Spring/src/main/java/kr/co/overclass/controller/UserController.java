@@ -106,6 +106,12 @@ public class UserController {
 		return "redirect:/main/myFeed";
 	}
 	
+	@RequestMapping(value="/main/leave") // 프로필 수정 버튼 눌린 후
+	public String leave (String user_id, RedirectAttributes attr, HttpServletRequest request) throws Exception {
+		service.deleteUser(user_id);
+		return "redirect:/";
+	}
+	
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
 	public String logout (HttpServletRequest request, RedirectAttributes attr, HttpServletResponse response, HttpSession session) throws Exception {
 		Object obj = session.getAttribute("login");
