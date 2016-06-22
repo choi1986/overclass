@@ -4,7 +4,7 @@
 	<!-- Widget -->
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<div class="pull-left">메시지</div>
+			<div class="pull-left"><span class="fa fa-comments-o"></span><strong> 메세지</strong></div>
 			<div class="clearfix"></div>
 		</div>
 
@@ -272,7 +272,7 @@
 	style="width: 300px; height: 660px; overflow: auto;">
 	<div class="panel-heading">
 		<h2>
-			<i class="fa fa-flag-o red"></i><strong>친구목록</strong>
+			<span class="fa fa-group"></span><strong> 친구목록</strong>
 		</h2>
 	</div>
 	<div class="panel-body">
