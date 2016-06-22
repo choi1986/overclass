@@ -26,9 +26,10 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 	    HttpSession session = request.getSession(); 	
+	    UserVO vo = (UserVO)session.getAttribute("login");
 		//세션로그인 여부 판별
 	    
-	    if(session.getAttribute("login")==null){
+	    if(vo==null){
 	    	logger.info("현재 사용자는 로그인하지 않았습니다!!");
 	    	saveDest(request);
 	    	
@@ -46,6 +47,14 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 	    	response.sendRedirect("/overclass");
 	    	//로그인하지 않았을때 로그인페이지로 이동
 	    	
+	    	return false;//컨트롤러를 거치지 않음!!
+	    }
+	    else if (request.getRequestURI().equals("/overclass/admin")&&vo.getUser_admin()==0) {
+	    	response.sendRedirect("/overclass/main");
+	    	return false;//컨트롤러를 거치지 않음!!
+	    }
+	    else if (request.getRequestURI().equals("/overclass/main")&&vo.getUser_admin()==1) {
+	    	response.sendRedirect("/overclass/admin");
 	    	return false;//컨트롤러를 거치지 않음!!
 	    }
 	    return true;
