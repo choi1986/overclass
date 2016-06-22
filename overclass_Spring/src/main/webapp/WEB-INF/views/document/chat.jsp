@@ -14,7 +14,7 @@
 			<div class="panel-body">
 				<div id="recent-activity" class="tab-pane active">
 					<div class="profile-activity">
-						<div class="col-sm-offset-3">
+						<div class="col-sm-offset-2">
 							<%@include file="../include/chatting.jsp"%>
 						</div>
 					</div>

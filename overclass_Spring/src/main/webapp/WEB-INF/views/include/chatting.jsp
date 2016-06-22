@@ -278,96 +278,25 @@
 	<div class="panel-body">
 		<table class="table bootstrap-datatable countries">
 			<tbody>
-				<tr>
-					<td><img src="img/Germany.png" class="img-circle"
-						style="height: 30px; width: 30px;"></td>
-					<td>test1</td>
+				<tr class="info">
+					<td>
+						<a href="#">
+							<img src="img/Germany.png" class="img-circle" style="height: 30px; width: 30px;">
+						</a>
+					</td>
+					<td><a href="#">test1</a>
+						<!-- <div class="btn-group">
+                           <a data-toggle="dropdown" class="btn btn-link dropdown-toggle" type="button">teset1 
+                           </a>
+                           <ul class="dropdown-menu">
+                               <li><a href="#">피드가기</a></li>
+                               <li><a href="#">메세지 보내기</a></li>
+                           </ul>
+                       </div> -->
+					</td>
 					<td>홍길동</td>
 				</tr>
-				<tr>
-					<td><img src="img/Germany.png" class="img-circle"
-						style="height: 30px; width: 30px;"></td>
-					<td>test1</td>
-					<td>홍길동</td>
-				</tr>
-				<tr>
-					<td><img src="img/Germany.png" class="img-circle"
-						style="height: 30px; width: 30px;"></td>
-					<td>test1</td>
-					<td>홍길동</td>
-				</tr>
-				<tr>
-					<td><img src="img/Germany.png" class="img-circle"
-						style="height: 30px; width: 30px;"></td>
-					<td>test1</td>
-					<td>홍길동</td>
-				</tr>
-				<tr>
-					<td><img src="img/Germany.png" class="img-circle"
-						style="height: 30px; width: 30px;"></td>
-					<td>test1</td>
-					<td>홍길동</td>
-				</tr>
-				<tr>
-					<td><img src="img/Germany.png" class="img-circle"
-						style="height: 30px; width: 30px;"></td>
-					<td>test1</td>
-					<td>홍길동</td>
-				</tr>
-				<tr>
-					<td><img src="img/Germany.png" class="img-circle"
-						style="height: 30px; width: 30px;"></td>
-					<td>test1</td>
-					<td>홍길동</td>
-				</tr>
-				<tr>
-					<td><img src="img/Germany.png" class="img-circle"
-						style="height: 30px; width: 30px;"></td>
-					<td>test1</td>
-					<td>홍길동</td>
-				</tr>
-				<tr>
-					<td><img src="img/Germany.png" class="img-circle"
-						style="height: 30px; width: 30px;"></td>
-					<td>test1</td>
-					<td>홍길동</td>
-				</tr>
-				<tr>
-					<td><img src="img/Germany.png" class="img-circle"
-						style="height: 30px; width: 30px;"></td>
-					<td>test1</td>
-					<td>홍길동</td>
-				</tr>
-				<tr>
-					<td><img src="img/Germany.png" class="img-circle"
-						style="height: 30px; width: 30px;"></td>
-					<td>test1</td>
-					<td>홍길동</td>
-				</tr>
-				<tr>
-					<td><img src="img/Germany.png" class="img-circle"
-						style="height: 30px; width: 30px;"></td>
-					<td>test1</td>
-					<td>홍길동</td>
-				</tr>
-				<tr>
-					<td><img src="img/Germany.png" class="img-circle"
-						style="height: 30px; width: 30px;"></td>
-					<td>test1</td>
-					<td>홍길동</td>
-				</tr>
-				<tr>
-					<td><img src="img/Germany.png" class="img-circle"
-						style="height: 30px; width: 30px;"></td>
-					<td>test1</td>
-					<td>홍길동</td>
-				</tr>
-				<tr>
-					<td><img src="img/Germany.png" class="img-circle"
-						style="height: 30px; width: 30px;"></td>
-					<td>test1</td>
-					<td>홍길동</td>
-				</tr>
+				
 
 			</tbody>
 		</table>
