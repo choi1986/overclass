@@ -87,11 +87,6 @@
 								<div class="col-lg-4">
 									<div class="row">
 										<div class="col-md-offset-7 col-md-2 portlets">
-
-											<!-- 메세지폼 -->
-											<%@ include file="../include/message.jsp"%>
-											<!-- 메세지폼 끝 -->
-
 										</div>
 									</div>
 								</div>
@@ -492,6 +487,7 @@ var result = '${msg}';
 			}
 		});
 		
+		//사진삭제
 		$('#photo_div a').bind('click', function() {
 	        resetFormElement($('#file')); //전달한 양식 초기화
 	        $('#file').slideDown(1000); //파일 양식 보여줌
@@ -499,6 +495,7 @@ var result = '${msg}';
 	        return false; //기본 이벤트 막음
 	    });
 		
+		//파일리셋
 		function resetFormElement(e) {
 	        e.wrap('<form>').closest('form').get(0).reset(); 
 	        //리셋하려는 폼양식 요소를 폼(<form>) 으로 감싸고 (wrap()) , 
@@ -623,6 +620,7 @@ var result = '${msg}';
 			}
 		})
 		
+		//글쓰기 성공시
 		if (result == 'Write_SUCCESS') {
 			BootstrapDialog.show({
 	    		title: '', //알러트 타이틀 이름
@@ -638,6 +636,7 @@ var result = '${msg}';
 	    			}]
 	    	}) 
 			
+	    //글삭제 성공시
 		} else if (result == 'Remove_SUCCESS') {
 			BootstrapDialog.show({
 	    		title: '', //알러트 타이틀 이름
@@ -653,6 +652,8 @@ var result = '${msg}';
 	   					}
 	    			}]
 	    	})
+	    	
+	    //프로필사진 변경 성공시
 		} else if (result == 'Update_SUCCESS') {
 			BootstrapDialog.show({
 	    		title: '', //알러트 타이틀 이름
@@ -693,9 +694,9 @@ var result = '${msg}';
 	    			}]
 	    	})
 		})
+		
 		//회원탈퇴 모달정의
 		$("#member_leave").click(function() {
-			
 			BootstrapDialog.show({
 				title: '',
 	            message: '비밀번호 입력: <input id="pwd" type="password" class="form-control">',
@@ -835,32 +836,7 @@ var result = '${msg}';
 		$("#dropdown_1").click(function() {
 			$("#page_div").show()
 		})
-		//메세지창 숨기기
-		$("#msg_bar").hide()
-		$("#content_body").hide()
-		//메세지아이콘 클릭시
-		$("#msg_icon").click(function() {
-			$("#msg_bar").slideToggle(1000)
-			$("#msg_icon").slideToggle(500)
-			document
-					.getElementById('msg_scroll').scrollTop = document
-					.getElementById('msg_scroll').scrollHeight;
-		})
-		$("#msg_icon2").click(function() {
-			$("#msg_bar").slideToggle(500)
-			$("#msg_icon").slideToggle(1000)
-		})
-
-		//글쓰기 아이콘 클릭시
-		/* $("#content_bar").click(function() { 
-			$("#content_body").slideToggle("slow"); //글쓰기아이콘 누르면 슬라이드 효과
-			if ($("#content_icon").attr("class") == "fa fa-chevron-up") { //글쓰기아이콘 바꾸기
-				$("#content_icon").attr("class", "fa fa-chevron-down")
-			} else {
-				$("#content_icon").attr("class", "fa fa-chevron-up")
-			}
-		}) */
-
+		
 		//글쓰기 폼 클릭시
 		$("#content_form").click(function() {
 			$("#content_body").slideToggle(
@@ -878,7 +854,6 @@ var result = '${msg}';
 		})
 		//페이징버튼 앞으로  클릭시
 		$("#page_front").click(function() {
-
 			alert(Number($("#page_1").val()) + 1)
 		})
 
@@ -1101,5 +1076,26 @@ var result = '${msg}';
 			break;
 		}
 	}
+	//스크롤업
+	function enterKey(e) {
+		if (e.keyCode == 13) { /* IE기준으로 설명 */
+			msg_write();
+			return false;
+		} else
+			return true;
+	}
+
+	$(function () {
+	    $.scrollUp({
+	        animation: 'fade',
+	        scrollImg: {
+	            active: true,
+	            type: 'background',
+	            src: 'img/top.png'
+	        }
+	    });
+	});
+	$('#scrollUpTheme').attr('href', '/overclass/resources/css/image.css?1.1');
+	$('.image-switch').addClass('active');
 </script>
 </html>

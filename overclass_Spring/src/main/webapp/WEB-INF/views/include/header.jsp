@@ -24,7 +24,8 @@
 	<link href="/overclass/resources/css/animate.css" type="text/css" rel="stylesheet">
 	<!-- 파일버튼숨기기 -->
 	<link href="/overclass/resources/css/fileboxcss.css" rel="stylesheet">
-	
+	<!-- 스크롤업 -->
+	<link href="/overclass/resources/css/themes/tab.css" rel="stylesheet" id="scrollUpTheme">
 <!-- CSS끝 -->
 
 <!-- JS -->
@@ -47,6 +48,8 @@
 	<script src="/overclass/resources/js/jquery.cookie.js"></script>
 	<!-- handlebars (댓글) -->
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+  	<!-- 스크롤업 -->
+  	<script src="/overclass/resources/js/jquery.scrollUp.js"></script>
 <!-- JS끝 -->
 </head>
 <body>

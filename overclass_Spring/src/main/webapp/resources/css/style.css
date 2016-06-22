@@ -92,6 +92,7 @@ table tr th { color: #688a7e;}
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  height: 1080px;
 }
 
 .login-form {

@@ -27,9 +27,6 @@
 							<div class="col-lg-4">
 								<div class="row">
 									<div class="col-md-offset-7 col-md-2 portlets">
-									<!-- 메세지폼 -->
-										<%@ include file="../include/message.jsp" %>
-									<!-- 메세지폼 끝 -->
 									</div>
 								</div>
 							</div>
@@ -314,21 +311,6 @@ $(document).ready(function() {
 		}
 	})
 	
-	
-	//메세지창 숨기기
-	$("#msg_bar,#content_body").hide()
-
-	//메세지아이콘 클릭시
-	$("#msg_icon").click(function() {
-		$("#msg_bar").slideToggle(1000)
-		$("#msg_icon").slideToggle(500)
-		document.getElementById('msg_scroll').scrollTop = document.getElementById('msg_scroll').scrollHeight;
-	})
-	$("#msg_icon2").click(function() {
-		$("#msg_bar").slideToggle(500)
-		$("#msg_icon").slideToggle(1000)
-	})
-
 	//글쓰기 폼 클릭시
 	$("#content_form").click(function() {
 		$("#content_body").slideToggle(
@@ -339,8 +321,6 @@ $(document).ready(function() {
 			$("#content_icon").attr("class","fa fa-chevron-up")
 		}
 	})
-	
-	
 	
 	// 사이트바 쪽지 클릭 이벤트
 	$("#mail_notificatoin_bar").click(function() { 
@@ -360,11 +340,6 @@ $(document).ready(function() {
 		});
 	});
 
-	
-	
-	
-	
-	
 	$("#alert_notificatoin_bar").click(function() { // 알림바 알림 클릭 이벤트
 		$.ajax({
 			url : "addfunctionaction.do?action=notice",
@@ -417,6 +392,7 @@ function msg_write() {
 	})
 }
 
+//스크롤업
 function enterKey(e) {
 	if (e.keyCode == 13) { /* IE기준으로 설명 */
 		msg_write();
@@ -424,5 +400,19 @@ function enterKey(e) {
 	} else
 		return true;
 }
+
+$(function () {
+    $.scrollUp({
+        animation: 'fade',
+        scrollImg: {
+            active: true,
+            type: 'background',
+            src: 'img/top.png'
+        }
+    });
+});
+$('#scrollUpTheme').attr('href', '/overclass/resources/css/image.css?1.1');
+$('.image-switch').addClass('active');
+
 </script>
 </html>

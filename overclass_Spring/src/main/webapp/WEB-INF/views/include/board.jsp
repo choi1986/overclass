@@ -193,7 +193,10 @@
 
 
 $(document).ready(function() {
+	
 	var result = '${msg}';
+	
+	//글쓰기 성공시
 	if (result == 'Write_SUCCESS') {
 		BootstrapDialog.show({
     		title: '', //알러트 타이틀 이름
@@ -208,7 +211,7 @@ $(document).ready(function() {
    					}
     			}]
     	})
-		
+		//글삭제 성공시
 	} else if (result == 'Remove_SUCCESS') {
 		BootstrapDialog.show({
     		title: '', //알러트 타이틀 이름
