@@ -10,12 +10,12 @@
 <% UserVO user = (UserVO)session.getAttribute("login"); %>
 <section id="my_page" class="wrapper">
 	<div class="row">
-		<div class="col-lg-12">
+		<div class="col-sm-12">
 		
 			<!-- 마이페이지메인 폼  -->
 			<div class="profile-widget profile-widget-info">
 				<div class="panel-body">
-					<div class="col-lg-2 col-lg-2">
+					<div class="col-sm-2 col-sm-2">
 						<h4>${user.user_name }</h4>
 						<div class="follow-ava" id="image_div">
 							<img class="img-responsive img-circle" id="user_image" src="${user.user_image }" width='70' height='70'>
@@ -30,7 +30,7 @@
 							method="post" enctype="multipart/form-data">
 							<input type="hidden" name="user_id" value="${user.user_id }"> 
 						<div class="form-group">
-						<div class="fileboxImage control-label col-lg-offset-3 col-lg-3">
+						<div class="fileboxImage control-label col-lg-offset-3 col-sm-3">
 							<label for="imagefile" class="btn btn-success"><span class="fa fa-camera-retro"></span> 프로필사진 변경</label>
 							<input type="file" id="imagefile" name="imagefile" accept="image/gif, image/jpeg, image/png, image/bmp#">
 						</div>
@@ -38,7 +38,7 @@
 					</form>
 					
 					</div>
-					<div class="col-lg-4 col-lg-4 follow-info">
+					<div class="col-sm-4 col-sm-4 follow-info">
 						<p>
 							<i class="fa fa-lg fa-github-alt">&nbsp;MyPage</i>
 						</p>
@@ -416,9 +416,10 @@ var result = '${msg}';
 			//alert(this.value); //선택한 이미지 경로 표시
 			if(this.value != "") {
 				userReadURL(this);
-			} /* else {
-				$('#photo_div').slideUp(1000)
-			} */
+			} else {
+				var cancel = $('#cancel_image').attr("src")
+				$('#user_image').attr('src', cancel)
+			}
 		});
 		
 		$("#image_update").click(function() {
@@ -426,8 +427,12 @@ var result = '${msg}';
 			formObj.submit();
 		})
 		
-		$("#image_cancel").click(function() {
+		$("#image_cancel").bind('click', function() {
+			resetFormElement($('#imagefile')); //전달한 양식 초기화
+	        $('#imagefile').slideDown(1000); //파일 양식 보여줌
+	        $(this).parent().slideUp(1000); //미리 보기 영역 감춤
 			location.href = "/overclass/main/myFeed"
+	        return false; //기본 이벤트 막음
 		})
 		
 		

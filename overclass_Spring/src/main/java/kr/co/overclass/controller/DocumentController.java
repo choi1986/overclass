@@ -78,14 +78,21 @@ public class DocumentController {
 		System.out.println("@@@파일이름:"+imageName);
 		System.out.println("@@@바뀐파일이름:"+savedName);
 		uploadPath = request.getSession().getServletContext().getRealPath("/resources/upload"); //파일 업로드 위치
-		Map<String, String> map = new HashMap<>();
-		map.put("user_id",user_id);
-		map.put("user_image", downloadPath+savedName);
-		service.imageUpdate(map);
 		UserVO vo = (UserVO) request.getSession().getAttribute("login");
-		vo.setUser_image(downloadPath+savedName);
-		request.getSession().removeAttribute("login");
-		request.getSession().setAttribute("login", vo);
+		String image = vo.getUser_image();
+		Map<String, String> map = new HashMap<>();
+		//파일이 빈값이 아닐때 선택한이미지로 삽입
+		if (!imageName.equals("")) {
+			vo.setUser_image(downloadPath+savedName);
+			map.put("user_image",downloadPath+savedName);
+		} else { //파일이 빈값일때 기존이미지 삽입
+			vo.setUser_image(image);
+			map.put("user_image",image);
+		}
+		map.put("user_id",user_id);
+		service.imageUpdate(map);
+		request.getSession().removeAttribute("login"); //세션정보 갱신을 위해 세션정보 삭제
+		request.getSession().setAttribute("login", vo); //갱신된 세션정보를 다시 저장
 		attr.addFlashAttribute("msg", "Update_SUCCESS");
 		return "redirect:/main/myFeed";
 	}

@@ -53,13 +53,13 @@
 										<div class="control-label col-sm-2">
 										</div>
 										<div class="filebox col-lg-8">
-											<div class="col-sm-12" id="photo_div">
 											<c:if test="${DocumentDTO.image != '' }">
-											<a href="${DocumentDTO.image }" data-lightbox="image-${DocumentDTO.dno }" data-title="사진">
-												<img class="img-responsive img-thumbnail" src="${DocumentDTO.image }" width="500px" height="350px">
-											</a>
+												<div class="col-sm-12" id="photo_div">
+												<a href="${DocumentDTO.image }" data-lightbox="image-${DocumentDTO.dno }" data-title="사진">
+													<img class="img-responsive img-thumbnail" src="${DocumentDTO.image }" width="500px" height="350px">
+												</a>
+												</div>
 											 </c:if>
-											</div>
 										</div>
 									</div>
 									

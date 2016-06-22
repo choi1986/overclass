@@ -21,7 +21,7 @@ public class UserVO {
 	private int user_admin;
 
 	public UserVO() {
-		// TODO Auto-generated constructor stub
+		user_image = "";
 	}
 
 	@Override
