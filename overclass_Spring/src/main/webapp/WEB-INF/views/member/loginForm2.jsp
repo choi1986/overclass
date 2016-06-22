@@ -582,10 +582,10 @@
 	<c:remove var="searchPwd" scope="session" /> <!-- 비밀번호 찾기 세션 종료 -->
 
 <!-- --------------------------로그인화면---------------------------------------------- -->
-<div id="loginForm" style="display: ">
+<div id="loginForm" class="col-sm-12" style="display: ">
   <div id="panel" style="display:">
     <div class="container">
-      <form class="login-form" action="/overclass/loginPost" method="post">        
+      <form class="login-form"  action="/overclass/loginPost" method="post">        
         <div class="login-wrap">
             <p class="login-img"><i class="icon_lock_alt"></i></p>
             <div class="input-group">
@@ -598,11 +598,11 @@
             </div>
             <label class="checkbox">
                 <input type="checkbox" name="useCookie"> 아이디 저장
-                <span class="pull-right"> <a id="searchID" href="javascript:document.test.submit()">문제가 있나요?</a></span><!--  <a href="#"> -->
+                <span class="pull-right"> <a type="button" class="btn btn-link" id="searchID" data-value="bounceIn" href="javascript:document.test.submit()">문제가 있나요?</a></span><!--  <a href="#"> -->
             </label>
             
             <div id="change-transitions" class="row">
-				<button type="submit" data data-value="fadeInLeftBig" class="btn btn-primary btn-lg btn-block">로그인</button>
+				<button type="submit" data-value="bounceIn" class="btn btn-primary btn-lg btn-block">로그인</button>
    		        <button type="button" data-value="fadeInLeftBig" class="btn btn-info btn-lg btn-block" id="join" >가입하기</button>
 			</div>
         </div>
@@ -796,7 +796,7 @@
                                           <div class="col-sm-offset-2 col-sm-10">
                                        		<div class="col-sm-3"></div>
                                               <div id="change-transitions" class="row">
-											     <button type="button" data-value="rotateInDownLeft" class="btn btn-primary btn-lg" id="join_join">가입</button>
+											     <button type="button" data-value="bounceInDown" class="btn btn-primary btn-lg" id="join_join">가입</button>
         		    						<button type="button" data-value="fadeInDown" class="btn btn-danger btn-lg" id="back_join">취소</button>
 										      </div>
                                           </div>
@@ -847,7 +847,7 @@
                                           <div class="col-sm-offset-2 col-sm-10">
                                        		<div class="col-sm-3"></div>
                                               <div id="change-transitions" class="row">
-											     <button type="summit" data-value="rotateInDownLeft" class="btn btn-primary btn-lg" id="searchID_post">제출</button>
+											     <button type="submit" data-value="fadeIn" class="btn btn-primary btn-lg" id="searchID_post">제출</button>
 										      </div>
                                           </div>
                                       </div>
@@ -922,7 +922,7 @@
                                           <div class="col-sm-offset-2 col-sm-10">
                                        		<div class="col-sm-3"></div>
                                               <div id="change-transitions" class="row">
-											     <button type="button" data-value="rotateInDownLeft" class="btn btn-primary btn-lg" id="searchPwd_post">제출</button>
+											     <button type="button" data-value="fadeIn" class="btn btn-primary btn-lg" id="searchPwd_post">제출</button>
         		    						<button type="button" data-value="fadeInDown" class="btn btn-danger btn-lg" id="back_searchIDPwd">취소</button>
 										      </div>
                                           </div>
