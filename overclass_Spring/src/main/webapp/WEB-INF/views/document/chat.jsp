@@ -1,6 +1,6 @@
 <%@page import="java.util.List"%>
 <%@page import="kr.co.overclass.domain.UserVO"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -8,41 +8,19 @@
 <%@include file="../include/header.jsp"%>
 <!-- 헤더끝 -->
 <% UserVO user = (UserVO)session.getAttribute("login"); %>
-<section id="my_page" class="wrapper">
-
+<section class="wrapper">
 	<div class="row">
-		<div class="col-lg-12">
-			<section class="panel">
-				<div class="panel-body">
-					<div id="recent-activity" class="tab-pane active">
-						<div class="profile-activity">
-							<div class="col-lg-offset-3 col-lg-5 portlets">
-							
-								<!-- 글쓰기폼 시작 -->
-								<%@include file="../include/write.jsp"%>
-								<!-- 글쓰기폼 끝 -->
-								
-							</div>
-
-							<div class="col-lg-4">
-								<div class="row">
-									<div class="col-md-offset-7 col-md-2 portlets">
-									<!-- 메세지폼 -->
-										<%@ include file="../include/message.jsp" %>
-									<!-- 메세지폼 끝 -->
-									</div>
-								</div>
-							</div>
-
-							<!-- 게시글시작 -->
-							<%@ include file="../include/board.jsp"%>
-							<!-- 게시글폼 끝 -->
-
+		<section class="panel">
+			<div class="panel-body">
+				<div id="recent-activity" class="tab-pane active">
+					<div class="profile-activity">
+						<div class="col-sm-offset-3">
+							<%@include file="../include/chatting.jsp"%>
 						</div>
 					</div>
 				</div>
-			</section>
-		</div>
+			</div>
+		</section>
 	</div>
 </section>
 
