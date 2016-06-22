@@ -5,20 +5,22 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Repository;
 
 import kr.co.overclass.domain.DocumentVO;
 import kr.co.overclass.domain.FriendVO;
 import kr.co.overclass.domain.GoodVO;
 import kr.co.overclass.dto.GoodNoticeDTO;
 
+@Repository
 public class NoticeDAOImpl implements NoticeDAO {
 
 	@Inject
 	private SqlSession session;
 	
 	@Override
-	public List<GoodVO> goodNotice() throws Exception {
-		return null;
+	public List<GoodVO> goodNotice(int dno) throws Exception {
+		return session.selectList("notice.good", dno);
 	}
 
 	@Override
