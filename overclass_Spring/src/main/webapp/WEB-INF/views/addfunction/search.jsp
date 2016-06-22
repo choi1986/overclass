@@ -93,7 +93,7 @@ if (request.getAttribute("selectIdName") != null) {
 					지역: <input type="text" value="<%=list.get(i).getUser_loc()%>" readonly="readonly" size="10" id="user_loc<%=i + 1%>"><br>
 					이름: <input type="text" value="<%=list.get(i).getUser_name()%>" readonly="readonly" size="10" id="user_name<%=i + 1%>"><br>
 					전화: <input type="text" value="<%=list.get(i).getUser_tel()%>" readonly="readonly" size="10" id="user_tel<%=i + 1%>"><br>
-					<input type="button" value="친구요청" id=user <%=i + 1%>><br><%
+					<input type="button" value="친구요청" id="user<%=i + 1%>"><br><%
 	};
 	if (resultCount < 11) {
 					%><a href="main" id="toMain">[ 메인페이지로 ]</a><br><%
@@ -164,7 +164,7 @@ if (request.getAttribute("selectIdName") != null) {
 					작성자: <input type="text" value="<%=doclist.get(i).getWriter()%>" readonly="readonly" size="10" id="doc_writer<%=i + 1%>"><br>
 					글내용: <input type="text" value="<%=doclist.get(i).getContent()%>" readonly="readonly" size="10" id="doc_content<%=i + 1%>"><br>
 					태그: <input type="text" value="<%=doclist.get(i).getTag()%>" readonly="readonly" size="10" id="doc_tag<%=i + 1%>"><br>
-					<input type="button" value="글 조회" id=doc <%=i + 1%>><br><%
+					<input type="button" value="글 조회" id="doc<%=i + 1%>"><br><%
 	};
 	if (resultCount < 11) {
 					%><a href="main" id="toMain">[ 메인페이지로 ]</a><br><%

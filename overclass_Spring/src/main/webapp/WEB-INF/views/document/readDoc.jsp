@@ -13,7 +13,7 @@ if(dto!=null){
 태그: <%=dto.getTag()%><br>
 글내용: <%=dto.getContent()%><br>
 <%}; %>
-
+<a href="/overclass/main"><input type="button" id="goMain" value="메인으로"></a>
 <%-- <%=
 dto.getContent()
 dto.getDno()
