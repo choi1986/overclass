@@ -24,8 +24,8 @@
 	<link href="/overclass/resources/css/animate.css" type="text/css" rel="stylesheet">
 	<!-- 파일버튼숨기기 -->
 	<link href="/overclass/resources/css/fileboxcss.css" rel="stylesheet">
-	<!-- 스크롤업 -->
-	<link href="/overclass/resources/css/themes/tab.css" rel="stylesheet" id="scrollUpTheme">
+	<!-- 지도 -->
+	<link href="/overclass/resources/css/map.css">
 <!-- CSS끝 -->
 
 <!-- JS -->
