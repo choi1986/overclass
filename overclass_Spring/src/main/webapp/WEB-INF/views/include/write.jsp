@@ -66,7 +66,6 @@
 					</div>
 					</div>
 					</div>
-
 					<!-- 등록버튼 -->
 					<div class="form-group">
 						<div class="col-sm-offset-4 col-sm-4">
