@@ -274,7 +274,7 @@
 											</div>
 										</div>
 										<div class="col-sm-offset-12">
-											<a href="/overclass/main/leave?user_id=${user.user_id }" id="member_leave" style="color: red;" class="fa fa-ban">
+											<a href="#" id="member_leave" style="color: red;" class="fa fa-ban">
 												회원탈퇴
 											</a>
 										</div>
@@ -734,7 +734,8 @@ var result = '${msg}';
 		                			hotkey:13,
 		                			cssClass:'btn-primary',
 		                			action: function(alert) {
-										alert.close()
+										alert.close();
+										location.href("/overclass/main/leave?user_id=${user.user_id }");
 									}
 		                		}]
 		                	})
