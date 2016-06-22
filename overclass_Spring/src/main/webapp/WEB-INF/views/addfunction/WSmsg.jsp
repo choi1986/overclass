@@ -6,8 +6,8 @@
 <meta charset="utf-8">
 <title>Insert title here</title>
 </head>
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script type="text/javascript">
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"/>
+<script>
 
 	// 소켓생성하기
 	var ws = new WebSocket('ws://192.168.0.131/overclass/chat');

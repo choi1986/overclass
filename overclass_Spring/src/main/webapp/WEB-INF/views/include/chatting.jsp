@@ -4,7 +4,7 @@
 	<!-- Widget -->
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<div class="pull-left"><span class="fa fa-comments-o"></span><strong> 메세지</strong></div>
+			<div class="pull-left"><span class="fa fa-comments-o"></span><strong> 대화</strong></div>
 			<div class="clearfix"></div>
 		</div>
 
@@ -181,72 +181,7 @@
 							<div class="clearfix"></div>
 						</div>
 					</li>
-					<li class="by-me">
-						<!-- Use the class "pull-left" in avatar -->
-						<div class="avatar pull-left">
-							<img src="img/user.jpg" alt="">
-						</div>
-
-						<div class="chat-content">
-							<!-- In meta area, first include "name" and then "time" -->
-							<div class="chat-meta">
-								<span style="color: black;">라임</span> <span class="pull-right">3
-									시간전</span>
-							</div>
-							ㅂㅇ
-							<div class="clearfix"></div>
-						</div>
-					</li>
-
-					<!-- Chat by other. Use the class "by-other". -->
-					<li class="by-other">
-						<!-- Use the class "pull-right" in avatar -->
-						<div class="avatar pull-right">
-							<img src="img/user22.png" alt="">
-						</div>
-
-						<div class="chat-content" style="border-color: #ffd700;">
-							<!-- In the chat meta, first include "time" then "name" -->
-							<div class="chat-meta">
-								3 시간전 <span class="pull-right" style="color: black;">나</span>
-							</div>
-							ㅎㅇ
-							<div class="clearfix"></div>
-						</div>
-					</li>
-					<li class="by-me">
-						<!-- Use the class "pull-left" in avatar -->
-						<div class="avatar pull-left">
-							<img src="img/user.jpg" alt="">
-						</div>
-
-						<div class="chat-content">
-							<!-- In meta area, first include "name" and then "time" -->
-							<div class="chat-meta">
-								<span style="color: black;">라임</span> <span class="pull-right">3
-									시간전</span>
-							</div>
-							ㅂㅇ
-							<div class="clearfix"></div>
-						</div>
-					</li>
-
-					<!-- Chat by other. Use the class "by-other". -->
-					<li class="by-other">
-						<!-- Use the class "pull-right" in avatar -->
-						<div class="avatar pull-right">
-							<img src="img/user22.png" alt="">
-						</div>
-
-						<div class="chat-content" style="border-color: #ffd700;">
-							<!-- In the chat meta, first include "time" then "name" -->
-							<div class="chat-meta">
-								3 시간전 <span class="pull-right" style="color: black;">나</span>
-							</div>
-							ㅎㅇ
-							<div class="clearfix"></div>
-						</div>
-					</li>
+					
 
 				</ul>
 
@@ -254,12 +189,11 @@
 			<!-- Widget footer -->
 			<div class="widget-foot">
 				<div class="row" style="margin-top: 25px;">
-					<div
-						class="form-group col-lg-offset-1 col-lg-9 form-group has-success">
-						<input type="text" class="form-control"
-							placeholder="메시지를 입력하세요...">
+					<div class="form-group col-lg-offset-1 col-lg-9 form-group has-success">
+						<input type="text" id="sendtext" class="form-control"
+							placeholder="메시지를 입력하세요..." onkeydown="return chatEnter(event)">
 					</div>
-					<button type="button" class="btn btn-success">보내기</button>
+					<button type="button" id="txtsubmit" class="btn btn-success">보내기</button>
 				</div>
 			</div>
 		</div>
@@ -284,7 +218,7 @@
 							<img src="img/Germany.png" class="img-circle" style="height: 30px; width: 30px;">
 						</a>
 					</td>
-					<td><a href="#">test1</a>
+					<td><a href="#">test2</a>
 						<!-- <div class="btn-group">
                            <a data-toggle="dropdown" class="btn btn-link dropdown-toggle" type="button">teset1 
                            </a>
@@ -294,7 +228,7 @@
                            </ul>
                        </div> -->
 					</td>
-					<td>홍길동</td>
+					<td>테스트2</td>
 				</tr>
 				
 
