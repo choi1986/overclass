@@ -142,8 +142,8 @@
 </c:forEach>
 <footer>
 	<!-- 페이징버튼 -->
-	<div id="page_div" class="col-sm-offset-3 col-sm-8">
-		<div class="col-sm-offset-2# col-sm-10">
+	<div id="page_div" class="col-sm-offset-2 col-sm-9">
+		<div class="col-sm-offset-3 col-sm-10">
 			<div class="btn-toolbar">
 				<div class="btn-group">
 					<c:if test="${pageMaker.prev }">
