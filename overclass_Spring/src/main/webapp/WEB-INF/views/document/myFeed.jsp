@@ -296,7 +296,6 @@
 
 						<div id="edit-profile" class="tab-pane">
 							<section class="panel">
-
 								<!-- 친구목록 -->
 								<div class="panel-body bio-graph-info">
 									<%-- <%
