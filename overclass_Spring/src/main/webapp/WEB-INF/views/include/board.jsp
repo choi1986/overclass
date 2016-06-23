@@ -32,16 +32,6 @@
 						<div class="form quick-post">
 							<!-- 글쓰기폼-->
 							<form class="form-horizontal">
-								<!-- 타이틀 -->
-									<%-- <div class="form-group">
-									<div class="photo col-sm-2" style="text-align: center;">
-										<img class="img-circle" src="${DocumentDTO.user_image}" width='70px' height='70px'>
-										<p>
-											<b>${DocumentDTO.writer } </b>
-										</p>
-									</div>
-									</div> --%>
-									
 									<!-- 프로필 -->
 									<div class="form-group">
 										<label class="col-sm-2">
@@ -50,8 +40,14 @@
 										<div class="col-sm-10"> 
 											<h4><b>${DocumentDTO.writer } </b></h4><br>
 												 <h5><a href="#" id="locDoc">
-													<span class="fa fa-map-marker" style="color: green"> </span> 서울시용산구<b> [이디야]</b>											
-													</a><span style="color: black;">에서</span>
+													<c:if test="${DocumentDTO.mapLoc != null}">
+														<span class="fa fa-map-marker" style="color: green"> </span>
+													</c:if> 
+														${DocumentDTO.mapLoc}											
+													</a>
+													<c:if test="${DocumentDTO.mapLoc != null}">
+														<span style="color: black;">에서</span>
+													</c:if>
 												</h5>
 										</div>
 									</div>

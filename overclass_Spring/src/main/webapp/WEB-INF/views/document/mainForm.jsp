@@ -536,7 +536,6 @@ $(document).ready(function() {
     			}]
 	    	})
 		} else {
-			alert($("#mapLoc").val())
 			BootstrapDialog.show({
 	    		title: '', //알러트 타이틀 이름
 	    		message: '글을 등록 하시겠습니까?', //알러트 내용

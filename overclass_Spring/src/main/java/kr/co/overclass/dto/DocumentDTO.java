@@ -9,6 +9,7 @@ public class DocumentDTO {
 	private String tag;
 	private Date writedate;
 	private String image;
+	private String mapLoc;
 	private int goodcnt;
 	private int replycnt;
 	private String user_image;
@@ -79,6 +80,14 @@ public class DocumentDTO {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+	
+	public String getMapLoc() {
+		return mapLoc;
+	}
+
+	public void setMapLoc(String mapLoc) {
+		this.mapLoc = mapLoc;
 	}
 
 	public int getGoodcnt() {
