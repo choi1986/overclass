@@ -12,6 +12,19 @@
   border-bottom-color: #e2e2e2;
   border-radius: .30em;
 }
+.filebtn {
+  display: inline-block;
+  padding: .5em .75em;
+  color: #808080;
+  font-size: inherit;
+  line-height: normal;
+  vertical-align: middle;
+  background-color: #fdfdfd;/* #007aff; */
+  cursor: pointer;
+  border: 1px solid #ebebeb;
+  border-bottom-color: #e2e2e2;
+  border-radius: .30em;
+}
 
 .fileboxImage label {
   display: inline-block;
