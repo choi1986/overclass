@@ -16,8 +16,7 @@
 
 			<!-- 글쓰기폼-->
 			<div class="form quick-post">
-				<form role="form" id="writeDoc" class="form-horizontal" action="/overclass/main/writeDoc"
-					method="post" enctype="multipart/form-data">
+				<form role="form" onsubmit="searchPlaces(); return false;" id="writeDoc" class="form-horizontal" action="" method="get" enctype="multipart/form-data">
 					<!-- 타이틀 -->
 					<div class="form-group">
 						<div class="photo col-sm-2" style="text-align: center;">
@@ -60,24 +59,27 @@
 					
 					<!-- 지도 -->
 					<div class="form-group">
-						<label class="control-label col-sm-2" for="content">지도</label>
+						<label class="control-label col-sm-2">지도</label>
 						<div class="col-sm-10">
+
 							<div class="map_wrap">
-							    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-							
-							    <div id="menu_wrap" class="bg_white">
-							        <div class="option">
-							            <div>
-							                <form onsubmit="searchPlaces(); return false;">
-							                    키워드 : <input type="text" value="이태원 맛집" id="keyword" size="15"> 
-							                    <button type="submit">검색하기</button> 
-							                </form>
-							            </div>
-							        </div>
-							        <hr>
-							        <ul id="placesList"></ul>
-							        <div id="pagination"></div>
-							    </div>
+								<div id="map"
+									style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
+
+								<div id="menu_wrap" class="bg_white">
+									<div class="option">
+										<div>
+											<!-- <form onsubmit="searchPlaces(); return false;"> -->
+												키워드 : <input type="text" value="이태원 맛집" id="keyword"
+													size="15">
+												<button id="map_search" type="submit">검색하기</button>
+											<!-- </form> -->
+										</div>
+									</div>
+									<hr>
+									<ul id="placesList"></ul>
+									<div id="pagination"></div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -92,3 +94,4 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=3d4e4c724fafd5907ed9e9da045588fb&query&libraries=services"></script>

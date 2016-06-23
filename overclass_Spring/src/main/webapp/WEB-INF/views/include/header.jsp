@@ -25,12 +25,10 @@
 	<!-- 파일버튼숨기기 -->
 	<link href="/overclass/resources/css/fileboxcss.css" rel="stylesheet">
 	<!-- 지도 -->
-	<link href="/overclass/resources/css/map.css">
+	<link href="/overclass/resources/css/map.css" rel="stylesheet">
 <!-- CSS끝 -->
 
 <!-- JS -->
-	<!-- 지도API -->
-	<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=3d4e4c724fafd5907ed9e9da045588fb"></script>
 	<!-- 제이쿼리 -->
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 	<!-- 부트스트랩 -->

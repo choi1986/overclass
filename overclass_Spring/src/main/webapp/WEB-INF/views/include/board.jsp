@@ -100,13 +100,6 @@
                               </c:if>
                            </div>
                         </div>
-                        <div class="form-group">
-                           <label class="control-label col-sm-2" for="content">지도</label>
-                           <div class="col-sm-9">
-                           	<div id="staticMap" style="width:300px;height:150px;"></div>  
-                           </div>
-                        </div>
-                       
                         <!-- 댓글쓰기 -->
 								<div class="form-group">
 									<label class="control-label col-sm-2" for="reply_write">댓글</label>
