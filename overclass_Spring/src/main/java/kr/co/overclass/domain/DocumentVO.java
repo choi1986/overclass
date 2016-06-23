@@ -11,6 +11,7 @@ public class DocumentVO {
 	private String image;
 	private int goodcnt;
 	private int replycnt;
+	private String mapLoc;
 
 	public DocumentVO() {
 		image = "";
@@ -93,6 +94,11 @@ public class DocumentVO {
 		this.replycnt = replycnt;
 	}
 	
-	
-	
+	public String getMapLoc() {
+		return mapLoc;
+	}
+
+	public void setMapLoc(String mapLoc) {
+		this.mapLoc = mapLoc;
+	}
 }

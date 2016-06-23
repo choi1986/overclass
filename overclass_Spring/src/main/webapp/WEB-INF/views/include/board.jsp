@@ -32,31 +32,45 @@
 						<div class="form quick-post">
 							<!-- 글쓰기폼-->
 							<form class="form-horizontal">
-								<!-- 타이틀 -->
-								<div class="form-group">
-									<div class="photo col-sm-2" style="text-align: center;">
-										<img class="img-circle" src="${DocumentDTO.user_image}" width='70px' height='70px'>
-										<p>
-											<b>${DocumentDTO.writer } </b>
-										</p>
-									</div>
-									<!-- 글내용 -->
-									<div class="col-sm-10">
-										<div class="panel-content" style="width: 100%; height: 100px; overflow: hidden; word-break: break-all;">
-											${DocumentDTO.content }
+									<!-- 프로필 -->
+									<div class="form-group">
+										<label class="col-sm-2">
+											<img class="img-rounded" src="${DocumentDTO.user_image}" width='90px' height='90px'>
+										</label>
+										<div class="col-sm-10"> 
+											<h4><b>${DocumentDTO.writer } </b></h4><br>
+												 <h5><a href="#" id="locDoc">
+													<c:if test="${DocumentDTO.mapLoc != null}">
+														<span class="fa fa-map-marker" style="color: green"> </span>
+													</c:if> 
+														${DocumentDTO.mapLoc}											
+													</a>
+													<c:if test="${DocumentDTO.mapLoc != null}">
+														<span style="color: black;">에서</span>
+													</c:if>
+												</h5>
 										</div>
 									</div>
-								</div>
 									
+									<!-- 글내용 -->
+									<div class="form-group">
+										<label class="control-label col-sm-2" for="content">내용</label>
+										<div class="col-sm-10">
+											<div class="panel-content"
+												style="width: 100%; height: 100px; overflow: hidden; word-break: break-all;">
+												${DocumentDTO.content }</div>
+										</div>
+									</div>
+
 									<!-- 사진 -->
 								<c:if test="${DocumentDTO.image != '' }">
 									<div class="form-group">
 										<div class="control-label col-sm-2">사진
 										</div>
-										<div class="filebox col-sm-8">
+										<div class="filebox col-sm-10">
 											<div class="col-sm-12" id="photo_div">
 											<a href="${DocumentDTO.image }" data-lightbox="image-${DocumentDTO.dno }" data-title="사진">
-												<img class="img-responsive img-thumbnail" src="${DocumentDTO.image }" width="500px" height="350px">
+												<img class="img-responsive img-thumbnail" src="${DocumentDTO.image }" style="width: 100%; height: 100%; position: relative; overflow: hidden;">
 											</a>
 											</div>
 										</div>
@@ -70,7 +84,7 @@
                            <div class="goodclass">
                               <div style="display: none;">${DocumentDTO.dno }</div>
                               <a class="control-label col-sm-2">
-                                 좋아요&nbsp;&nbsp;
+                      		           좋아요&nbsp;&nbsp;
                                <c:choose>
                                	<c:when test="${DocumentDTO.good == 0 }">
                                		<span id="good_icon${DocumentDTO.dno }" class="fa fa-lg fa-thumbs-o-up" style="color: blue;"></span>
@@ -88,6 +102,7 @@
                               </i>
                            </div>
                         </div>
+                        
                         <!-- 태그 -->
                         <div class="form-group">
                            <label class="control-label col-sm-2" for="content">태그</label>
@@ -100,6 +115,7 @@
                               </c:if>
                            </div>
                         </div>
+                        
                         <!-- 댓글쓰기 -->
 								<div class="form-group">
 									<label class="control-label col-sm-2" for="reply_write">댓글</label>

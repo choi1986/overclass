@@ -6,6 +6,7 @@ create table oc_document(
 	tag varchar2(210),
 	writedate date default sysdate,
 	image varchar2(300),
+	mapLoc varchar2(210),
 	goodcnt number default 0,
 	replycnt number default 0,
 	foreign key (writer) references oc_user (user_id)
@@ -18,5 +19,5 @@ create sequence oc_document_seq
 	nocycle
 	nocache;
 
-insert into oc_document (dno, writer, content, tag, image) 
-(select oc_document_seq.nextval, writer, content, tag, image from oc_document);
+insert into oc_document (dno, writer, content, tag, image, mapLoc) 
+(select oc_document_seq.nextval, writer, content, tag, image, mapLoc from oc_document);

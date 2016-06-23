@@ -32,8 +32,9 @@ public class FriendDAOImpl implements FriendDAO {
 	}
 
 	@Override
-	public List<FriendVO> oc_select_rel(FriendVO vo) throws Exception {
-		return session.selectList("friend.select_rel", vo);
+	public List<FriendVO> oc_select_rel(String user_id) throws Exception {
+		List<FriendVO> vo = session.selectList("friend.select_rel", user_id);
+		return session.selectList("friend.select_rel", user_id);
 		//검색된 결과 리스트로 리턴
 	}
 

@@ -67,6 +67,9 @@ var map = new daum.maps.Map(mapContainer, mapOption);
 // 장소 검색 객체를 생성합니다
 var ps = new daum.maps.services.Places();  
 
+//주소-좌표 변환 객체를 생성합니다
+var geocoder = new daum.maps.services.Geocoder();
+
 // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
 var infowindow = new daum.maps.InfoWindow({zIndex:1});
 
@@ -148,6 +151,33 @@ function displayPlaces(places) {
             daum.maps.event.addListener(marker, 'mouseout', function() {
                 infowindow.close();
             });
+            
+            daum.maps.event.addListener(marker, 'click', function() {
+            	var markerPostion = marker.getPosition();
+            	/* alert("좌표: "+markerPostion) */
+	           	searchDetailAddrFromCoords(markerPostion, function(status, result) {
+			        if (status === daum.maps.services.Status.OK) {
+			            /* var detailAddr = !!result[0].roadAddress.name ? '<div>도로명주소 : ' + result[0].roadAddress.name + '</div>' : '';
+			            
+			            detailAddr += '<div>지번 주소 : ' + result[0].jibunAddress.name + '</div>';
+			            
+			            var content = '<div class="bAddr">' +
+			                            '<span class="title">법정동 주소정보</span>' + 
+			                            detailAddr + 
+			                        '</div>'; */
+			        	/* alert("도로명: "+result[0].roadAddress.name) */
+			        	document.getElementById("loc_div").setAttribute("style","display:''")
+			        	/* alert(document.getElementById("loc_div").getAttribute("style")) */
+			        	var addrName = result[0].roadAddress.name
+			        	var locDiv = document.getElementById('loc');
+			            var locInput = document.getElementById('mapLoc');
+			           	locInput.setAttribute("value",addrName+' ['+title+']')
+			            locDiv.innerHTML = '<span class="fa fa-map-marker" style="color: green"></span>'
+			            +'<span> '+addrName+'</span>'
+			            +'<span> <b>['+title+']</b></span><span style="color: black;"> 에서</span>';
+			        }
+       	    	})
+            })
 
             itemEl.onmouseover =  function () {
                 displayInfowindow(marker, title);
@@ -156,6 +186,32 @@ function displayPlaces(places) {
             itemEl.onmouseout =  function () {
                 infowindow.close();
             };
+            
+            itemEl.onclick = function() {
+            	searchDetailAddrFromCoords(marker.getPosition(), function(status, result) {
+			        if (status === daum.maps.services.Status.OK) {
+			            /* var detailAddr = !!result[0].roadAddress.name ? '<div>도로명주소 : ' + result[0].roadAddress.name + '</div>' : '';
+			            
+			            detailAddr += '<div>지번 주소 : ' + result[0].jibunAddress.name + '</div>';
+			            
+			            var content = '<div class="bAddr">' +
+			                            '<span class="title">법정동 주소정보</span>' + 
+			                            detailAddr + 
+			                        '</div>'; */
+			        	/* alert("도로명: "+result[0].roadAddress.name) */
+			        	document.getElementById("loc_div").setAttribute("style","display:''")
+			        	/* alert(document.getElementById("loc_div").getAttribute("style")) */
+			        	var addrName = result[0].roadAddress.name
+			        	var locDiv = document.getElementById('loc');
+			            var locInput = document.getElementById('mapLoc');
+			           	locInput.setAttribute("value",addrName+' ['+title+']')
+			            locDiv.innerHTML = '<span class="fa fa-map-marker" style="color: green"></span>'
+			            +'<span> '+addrName+'</span>'
+			            +'<span> <b>['+title+']</b></span><span style="color: black;"> 에서</span>';
+			        }
+       	    	})
+			}
+            
         })(marker, places[i].title);
 
         fragment.appendChild(itemEl);
@@ -268,7 +324,10 @@ function removeAllChildNods(el) {
         el.removeChild (el.lastChild);
     }
 }
-
+function searchDetailAddrFromCoords(coords, callback) {
+    // 좌표로 법정동 상세 주소 정보를 요청합니다
+    geocoder.coord2detailaddr(coords, callback);
+}
 </script>
 </body>
 
@@ -303,8 +362,8 @@ var msgtop_template = Handlebars.compile(msgtop_source);
 
 var timer;
 var msgid;
+
 $(document).ready(function() {
-	
 	$.ajax({
 		url : "/overclass/msg/sitebarCount",
 		type:'POST',
@@ -345,6 +404,7 @@ $(document).ready(function() {
 			reader.onload = function(e) {
 				//파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
 				$('#photo').attr('src', e.target.result);
+				$('#photoview').attr('href', e.target.result);
 				$('#photo_div').slideDown(1000)
 				$('#photo_div a').attr("class","")
 				//이미지 Tag의 SRC속성에 읽어들인 File내용을 지정
@@ -365,47 +425,12 @@ $(document).ready(function() {
 		}
 	});
 	
-	$('#photo_div a').bind('click', function() {
-        resetFormElement($('#file')); //전달한 양식 초기화
-        $('#file').slideDown(1000); //파일 양식 보여줌
-        $(this).parent().slideUp(1000); //미리 보기 영역 감춤
-        return false; //기본 이벤트 막음
-    });
-	
-	function resetFormElement(e) {
-        e.wrap('<form>').closest('form').get(0).reset(); 
-        //리셋하려는 폼양식 요소를 폼(<form>) 으로 감싸고 (wrap()) , 
-        //요소를 감싸고 있는 가장 가까운 폼( closest('form')) 에서 Dom요소를 반환받고 ( get(0) ),
-        //DOM에서 제공하는 초기화 메서드 reset()을 호출
-        e.unwrap(); //감싼 <form> 태그를 제거
-    }
-	
-	//게시글삭제
-	$("#boardDel").click(function() {
-		BootstrapDialog.show({
-    		title: '', //알러트 타이틀 이름
-    		message: '글을 삭제 하시겠습니까?', //알러트 내용
-    		buttons: [{ //알러트 버튼 정의
-    			id: 'dd', //알러트 버튼의 아이디
-    			icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
-    			label: '삭제', //알러트 버튼 이름
-    			cssClass: 'btn-primary', //알러트 버튼 색바꾸기
-    			hotkey:13,
-    			action: function(confirm) {
-    				/* var formObj = $("form[role='form']");  */   				
-    				/* formObj.submit(); */
-    				confirm.close()
-				}
-    			},{
-    				label: '취소',
-    				action: function(cancel){
-    					cancel.close();
-    					}
-    			}]
-    	})
+	//사진 삭제버튼
+	$('#photoDel').click(function() {
+        $('#photo_div').slideUp(1000)
+        $('#file').val(""); //전달한 양식 초기화
 	})
-
-
+	
 	   //   댓글div 열닫
 	   $(".wminimize").click(function() {
 	      
@@ -481,6 +506,19 @@ $(document).ready(function() {
 	      }
 	   })
 	   
+	 
+	//지도버튼 show hide
+	$("#map_div").hide()
+	$("#mapbtn").click(function() {
+		$("#map_div").slideToggle(1000)
+		/* alert($("#map_div").height()) */
+	})
+	
+	//지도 닫기버튼
+	$('#mapDel').click(function() {
+        $('#map_div').slideUp(1000)
+	})
+	
 	//글등록 모달정의
 	$("#docWriteSubmitBt").click(function() {
 		if($("#content").val().trim() == "") {
@@ -508,9 +546,7 @@ $(document).ready(function() {
 	    			cssClass: 'btn-primary', //알러트 버튼 색바꾸기
 	    			action: function(confirm) {
 	    				var formObj = $("#writeDoc");
-	    				formObj.attr("action","/overclass/main/writeDoc");
-	    				formObj.attr("method","post");
-	    				formObj.attr("onsubmit","");
+	    				formObj.attr({action:'/overclass/main/writeDoc',method:'post',onsubmit:''});
 	    				formObj.submit();
 	    				confirm.close()
 					}

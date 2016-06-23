@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.overclass.domain.FriendVO;
 import kr.co.overclass.domain.UserVO;
@@ -30,7 +31,7 @@ public class FriendController {
 	}
 	
 	@RequestMapping(value = "/addReq", method=RequestMethod.GET)// 친구 요청 입력
-	public String addFriendreq(String info,HttpSession session,Model model) throws Exception{
+	public String addFriendreq(String info, RedirectAttributes attr, HttpSession session,Model model) throws Exception{
 		logger.info("친구요청 입력.............");
 		UserVO user = (UserVO) session.getAttribute("login");
 		String sender = user.getUser_id();//친구관계 요청 id
@@ -38,11 +39,11 @@ public class FriendController {
 		logger.info("요청아이디: "+sender+", 대상아이디: "+info);
 		FriendVO vo = new FriendVO(sender,receiver);
 		if(service.insert_req(vo)!=0){
-			model.addAttribute("result", "success");//입력 성공하면 result로 success
+			session.setAttribute("result", "success");//입력 성공하면 result로 success
 		}else{
-			model.addAttribute("result", "fail");//입력 실패하면 result로 fail
+			session.setAttribute("result", "fail");//입력 실패하면 result로 fail
 		}
-		return "addfunction/friendList";//친구 요청 입력 후 메인 폼으로 돌아간다
+		return "redirect:/main/myFeed";//친구 요청 입력 후 메인 폼으로 돌아간다
 	}
 	
 	@RequestMapping(value = "/deleteReq")// 친구 요청 삭제 
@@ -97,7 +98,7 @@ public class FriendController {
 		String sender = user.getUser_id();//친구관계 요청 id
 		String receiver = info;//친구관계 받는 id
 		FriendVO vo = new FriendVO(sender,receiver);
-		service.select_rel(vo);
+		//service.select_rel(vo);
 		return "/addfunction/friendList";
 	}
 }

@@ -1,6 +1,7 @@
 package kr.co.overclass.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,10 +23,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.overclass.domain.Criteria;
 import kr.co.overclass.domain.DocumentVO;
+import kr.co.overclass.domain.FriendVO;
 import kr.co.overclass.domain.PageMaker;
 import kr.co.overclass.domain.UserVO;
 import kr.co.overclass.dto.DocumentDTO;
 import kr.co.overclass.service.DocumentService;
+import kr.co.overclass.service.FriendService;
 
 
 @Controller
@@ -36,6 +39,8 @@ public class DocumentController {
 	
 	@Inject
 	private DocumentService service;
+	@Inject
+	private FriendService friService;
 	String uploadPath;
 	
 	//메인피드, 마이피드에서 글쓰기
@@ -128,7 +133,7 @@ public class DocumentController {
 	
 	//메인피드, 마이피드 글 조회 + 페이징
 	@RequestMapping(value={"","/myFeed","/mainFeed_Page","/myFeed_Page"},method=RequestMethod.GET)
-	public String mainlist(String page, Model model, HttpServletRequest request)throws Exception{
+	public String mainlist(String page, Model model, HttpServletRequest request, HttpSession session)throws Exception{
 		String url = request.getServletPath(); //requestMapping url주소값 얻어옴
 		UserVO vo = (UserVO) request.getSession().getAttribute("login"); //로그인정보 얻어옴
 		String user_id = vo.getUser_id();
@@ -154,6 +159,18 @@ public class DocumentController {
 		model.addAttribute("user",vo);
 		model.addAttribute("list", list);
 		model.addAttribute("pageMaker", maker);
+		
+		List<FriendVO> friTempList = friService.select_rel(vo.getUser_id());
+		ArrayList<String> friList = new ArrayList<String>();
+		for (int i=0; i<friTempList.size(); i++) {
+			if(!friTempList.get(i).getSender().equals(vo.getUser_id()))
+				friList.add(friTempList.get(i).getSender());
+		}
+		for (int i=0; i<friTempList.size(); i++) {
+			if(!friTempList.get(i).getReceiver().equals(vo.getUser_id()))
+				friList.add(friTempList.get(i).getReceiver());
+		}
+		session.setAttribute("friend_rel", friList);
 		
 		return forward;
 	}
