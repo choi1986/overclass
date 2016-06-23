@@ -98,7 +98,7 @@ public class FriendController {
 		String sender = user.getUser_id();//模备包拌 夸没 id
 		String receiver = info;//模备包拌 罐绰 id
 		FriendVO vo = new FriendVO(sender,receiver);
-		service.select_rel(vo);
+		//service.select_rel(vo);
 		return "/addfunction/friendList";
 	}
 }

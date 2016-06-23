@@ -26,8 +26,8 @@ public class FriendServiceImpl implements FriendService {
 	}
 
 	@Override
-	public List<FriendVO> select_rel(FriendVO vo) throws Exception {
-		return dao.oc_select_rel(vo);
+	public List<FriendVO> select_rel(String user_id) throws Exception {
+		return dao.oc_select_rel(user_id);
 	}
 
 	@Override

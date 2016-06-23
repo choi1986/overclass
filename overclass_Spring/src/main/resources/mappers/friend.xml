@@ -16,11 +16,8 @@
   <!-- 친구 관계 검색(1명) -->
   <select id="select_rel" resultType="friend">
   	select * from oc_friend_rel
-  	where sender = #{sender}
-  	and receiver = #{receiver}
-  	or
-  	where sender = #{receiver}
-  	and receiver = #{sender}
+  	where sender = #{user_id}
+  	or receiver = #{user_id}
   </select>
   
   <!-- 친구 요청 입력 -->
