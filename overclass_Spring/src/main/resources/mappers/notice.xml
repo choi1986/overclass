@@ -4,29 +4,12 @@
 <!-- 좋아요 알림, 좋아요취소 알림, 친구요청보냄 알림, 친구요청받음 알림, 친구수락 알림, 새글 알림, 댓글알림, 신고알림 -->
 
 <mapper namespace="notice">
-	<select id="good" resultType="good_notice_dto">
-		select A.DNO,A.WRITER,B.GOOD_USER from oc_document A Left join oc_good B
-  		on A.DNO = B.DNO
-		where A.dno=#{dno};
-	</select>  
-	
-	<select id="sendreq">
-	
-	</select>  
-	
-	<select id="receivereq">
-	
-	</select>  
-	
-	<select id="submitreq">
-	
-	</select>  
-	
-	<select id="newdoc">
-	
-	</select>  
-
-	<select id="newRep">
-	
-	</select>  
+	<select id="receivereq" resultType="friend">
+		select * from oc_friend_req
+		where receiver=#{user_id}
+	</select> 
+	<select id="countReq" resultType="int">
+		select count(*) from oc_friend_req
+		where receiver=#{user_id}
+	</select>
 </mapper>

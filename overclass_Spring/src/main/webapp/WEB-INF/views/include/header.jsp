@@ -190,10 +190,10 @@ function onKeyDown(){
 		if(txtvar.substring(0,1)=='#'){
 			var txt = txtvar.substring(1,txtvar.length);
 				alert(txt+" 검색중.................");
-				location.assign("searchTag?tag="+txt);
+				location.assign("/overclass/searchTag?tag="+txt);
 			}else{
 				alert(txtvar+" 검색중.................");
-				location.assign("searchIdName?info="+txtvar);
+				location.assign("/overclass/searchIdName?info="+txtvar);
 			}
 	}
 	
