@@ -6,11 +6,11 @@
 <meta charset="utf-8">
 <title>Insert title here</title>
 </head>
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"/>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script>
 
 	// 소켓생성하기
-	var ws = new WebSocket('ws://192.168.0.131/overclass/chat');
+	var ws = new WebSocket('ws://192.168.0.131/overclass/chata');
 	
 	// 서버로부터 메시지 전달 받을때
 	ws.onmessage = function (event) {

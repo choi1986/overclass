@@ -56,7 +56,7 @@ public class MsgController {
 		ResponseEntity<String> entity = null;
 		
 		try {
-			service.write(vo);
+			//service.write(vo);
 			entity = new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
 		} catch (Exception e) {
 			entity = new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);

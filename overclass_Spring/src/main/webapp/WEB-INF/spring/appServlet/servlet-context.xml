@@ -35,6 +35,7 @@
 			<mapping path="/main"/>
 			<mapping path="/main/myFeed"/>
 			<mapping path="/admin"/>
+			<mapping path="/chat"/>
 			<beans:ref bean="AuthInterceptor"/>
 		</interceptor>
 	</interceptors>

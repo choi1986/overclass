@@ -4,7 +4,7 @@ public class MsgwsVO {
 	private String sender;
 	private String receiver;
 	private int protocol;
-	private String msg;
+	private String content;
 	
 	public MsgwsVO() {
 	}
@@ -33,12 +33,12 @@ public class MsgwsVO {
 		this.protocol = protocol;
 	}
 
-	public String getMsg() {
-		return msg;
+	public String getContent() {
+		return content;
 	}
 
-	public void setMsg(String msg) {
-		this.msg = msg;
+	public void setContent(String content) {
+		this.content = content;
 	}
 	
 }

@@ -6,7 +6,7 @@ public class MsgVO {
 	private String sender;
 	private String receiver;
 	private String content;
-	private Date writedate;
+	private String writedate;
 	private int read;
 	
 	public MsgVO() {
@@ -37,11 +37,11 @@ public class MsgVO {
 		this.content = content;
 	}
 
-	public Date getWritedate() {
+	public String getWritedate() {
 		return writedate;
 	}
 
-	public void setWritedate(Date writedate) {
+	public void setWritedate(String writedate) {
 		this.writedate = writedate;
 	}
 

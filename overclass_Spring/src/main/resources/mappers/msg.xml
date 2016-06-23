@@ -17,12 +17,27 @@
 			and oc_msg.sender = oc_user.user_id
 	</select>
 	<insert id="write">
-		insert into oc_msg
-		values(#{sender},#{receiver},#{content},sysdate,#{read})
+		insert into oc_msg(sender, receiver, content)
+		values(#{sender},#{receiver},#{content})
 	</insert>
 	<select id="count" resultType="int">
 		select count(read)
 		from oc_msg
 		where receiver = #{receiver} and read = 0
+	</select>
+	
+	<select id="friendList" resultType="flist">
+		select user_id, user_name, user_image
+		from oc_user
+		where user_id IN
+			(select receiver from oc_friend_rel where sender = #{user_id}
+			UNION
+			select sender from oc_friend_rel where receiver = #{user_id})
+	</select>
+	
+	<select id="chatList" resultType="msg">
+		select sender, receiver, content, TO_CHAR(writedate,'yyyymmddhh24miss') writedate, read
+		from oc_msg
+		where (sender = #{sender} and receiver = #{receiver}) OR (sender = #{receiver} and receiver = #{sender})
 	</select>
 </mapper>

@@ -6,7 +6,7 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
    <websocket:handlers>
-   	<websocket:mapping handler="echoHandler" path="/chat"/>
+   	<websocket:mapping handler="echoHandler" path="/chatting"/>
    </websocket:handlers>
    
    <bean id="echoHandler" class="kr.co.overclass.EchoHandler"></bean>
