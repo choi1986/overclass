@@ -327,6 +327,43 @@
 			</section>
 		</div>
 	</div>
+	<c:choose>
+		<c:when test="${sessionScope.result=='success'}"> <!-- 친구 신청 성공 모달 -->
+			<script type="text/javascript">
+				$(document).ready(function(){
+					BootstrapDialog.show({
+    					title: '', //알러트 타이틀 이름
+    					message: '친구신청 성공!', //알러트 내용
+    					type: BootstrapDialog.TYPE_PRIMARY,
+    					buttons: [{
+    							label: '닫기',
+    							action: function(cancel){
+    								cancel.close();
+    								}
+    						}]
+    				})
+				})
+			</script>
+		</c:when>
+		<c:when test="${sessionScope.result=='fail'}"> <!-- 친구 신청 실패 모달 -->
+			<script type="text/javascript">
+				$(document).ready(function(){
+					BootstrapDialog.show({
+	    				title: '', //알러트 타이틀 이름
+	    				message: '친구신청 실패!', //알러트 내용
+	    				type: BootstrapDialog.TYPE_DANGER,
+	    				buttons: [{
+	    						label: '닫기',
+	    						action: function(cancel){
+	    							cancel.close();
+	    							}
+	    					}]
+	    			})
+				})
+				</script>
+		</c:when>
+	</c:choose>
+	<c:remove var="result" scope="session" /> <!-- 친구 신청 메시지에 쓰인 세션들 닫기 -->
 
 
 	<!-- page end-->
