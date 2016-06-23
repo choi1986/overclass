@@ -97,7 +97,7 @@
 								<div class="form-group">
 									<label class="control-label col-lg-2" for="content">신고자</label>
 									<div class="col-lg-9">
-										<div class="panel-content" width: 100%; height: 100px; overflow: hidden; word-break:break-all;">
+										<div class="panel-content" style="width: 100%; height: 100px; overflow: hidden; word-break:break-all;">
 											<input type="hidden" name="reporter" value="${reportDTO.reporter }">
 											<b>${reportDTO.reporter }</b>
 										</div>

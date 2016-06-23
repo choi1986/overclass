@@ -32,7 +32,8 @@
 							<input type="hidden" id="writer" name="writer" value="${user.user_id }">
 							<div id="loc_div">
 							<a href="#" id="loc" onclick="mapLocDel()"></a>
-							<input id="mapLoc" type="hidden" name="mapLoc" value="">
+								<input id="mapLoc" type="hidden" name="mapLoc" value="">
+								<input id="mapXY" type="hidden" name="mapXY" value="">
 							</div>
 						</div>
 					</div>
@@ -125,6 +126,7 @@
 //위치정보 삭제
 function mapLocDel() {
 	$("#mapLoc").attr("value","")
+	$("#mapXY").attr("value","")
 	$("#loc_div").slideUp(1000)
 }
 </script>

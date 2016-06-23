@@ -39,12 +39,16 @@
 										</label>
 										<div class="col-sm-10"> 
 											<h4><b>${DocumentDTO.writer } </b></h4><br>
-												 <h5><a href="#" id="locDoc">
+												 <h5>
+												 <span class="mapXY">
+												 	<span class="hidden">${DocumentDTO.mapXY}</span>
+													<a href="" id="locDoc">
 													<c:if test="${DocumentDTO.mapLoc != null}">
 														<span class="fa fa-map-marker" style="color: green"> </span>
 													</c:if> 
-														${DocumentDTO.mapLoc}											
+														${DocumentDTO.mapLoc}
 													</a>
+												 </span>
 													<c:if test="${DocumentDTO.mapLoc != null}">
 														<span style="color: black;">에서</span>
 													</c:if>
@@ -208,6 +212,11 @@
 
 
 $(document).ready(function() {
+	
+	$(".mapXY").click(function name() {
+		var mapXY = this.firstChild.nextSibling.firstChild.nodeValue;
+		alert(mapXY)
+	})
 	
 	var result = '${msg}';
 	

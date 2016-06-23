@@ -167,11 +167,13 @@ function displayPlaces(places) {
 			                        '</div>'; */
 			        	/* alert("도로명: "+result[0].roadAddress.name) */
 			        	document.getElementById("loc_div").setAttribute("style","display:''")
-			        	/* alert(document.getElementById("loc_div").getAttribute("style")) */
+			        	document.getElementById("map_div").setAttribute("style","display: none;")
 			        	var addrName = result[0].roadAddress.name
 			        	var locDiv = document.getElementById('loc');
 			            var locInput = document.getElementById('mapLoc');
+			            var mapXY = document.getElementById('mapXY');
 			           	locInput.setAttribute("value",addrName+' ['+title+']')
+			           	mapXY.setAttribute("value",markerPostion)
 			            locDiv.innerHTML = '<span class="fa fa-map-marker" style="color: green"></span>'
 			            +'<span> '+addrName+'</span>'
 			            +'<span> <b>['+title+']</b></span><span style="color: black;"> 에서</span>';
@@ -188,7 +190,8 @@ function displayPlaces(places) {
             };
             
             itemEl.onclick = function() {
-            	searchDetailAddrFromCoords(marker.getPosition(), function(status, result) {
+            	var markerPostion = marker.getPosition();
+            	searchDetailAddrFromCoords(markerPostion, function(status, result) {
 			        if (status === daum.maps.services.Status.OK) {
 			            /* var detailAddr = !!result[0].roadAddress.name ? '<div>도로명주소 : ' + result[0].roadAddress.name + '</div>' : '';
 			            
@@ -200,11 +203,13 @@ function displayPlaces(places) {
 			                        '</div>'; */
 			        	/* alert("도로명: "+result[0].roadAddress.name) */
 			        	document.getElementById("loc_div").setAttribute("style","display:''")
-			        	/* alert(document.getElementById("loc_div").getAttribute("style")) */
+			        	document.getElementById("map_div").setAttribute("style","display: none;")
 			        	var addrName = result[0].roadAddress.name
 			        	var locDiv = document.getElementById('loc');
 			            var locInput = document.getElementById('mapLoc');
+			            var mapXY = document.getElementById('mapXY');
 			           	locInput.setAttribute("value",addrName+' ['+title+']')
+			           	mapXY.setAttribute("value",markerPostion)
 			            locDiv.innerHTML = '<span class="fa fa-map-marker" style="color: green"></span>'
 			            +'<span> '+addrName+'</span>'
 			            +'<span> <b>['+title+']</b></span><span style="color: black;"> 에서</span>';

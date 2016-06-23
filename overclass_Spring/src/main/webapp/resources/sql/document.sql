@@ -7,6 +7,7 @@ create table oc_document(
 	writedate date default sysdate,
 	image varchar2(300),
 	mapLoc varchar2(210),
+	mapXY varchar2(210),
 	goodcnt number default 0,
 	replycnt number default 0,
 	foreign key (writer) references oc_user (user_id)

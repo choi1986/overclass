@@ -9,9 +9,10 @@ public class DocumentVO {
 	private String tag;
 	private Date writedate;
 	private String image;
+	private String mapLoc;
+	private String mapXY;
 	private int goodcnt;
 	private int replycnt;
-	private String mapLoc;
 
 	public DocumentVO() {
 		image = "";
@@ -78,6 +79,22 @@ public class DocumentVO {
 		this.image = image;
 	}
 
+	public String getMapLoc() {
+		return mapLoc;
+	}
+
+	public void setMapLoc(String mapLoc) {
+		this.mapLoc = mapLoc;
+	}
+	
+	public String getMapXY() {
+		return mapXY;
+	}
+
+	public void setMapXY(String mapXY) {
+		this.mapXY = mapXY;
+	}
+
 	public int getGoodcnt() {
 		return goodcnt;
 	}
@@ -92,13 +109,5 @@ public class DocumentVO {
 
 	public void setReplycnt(int replycnt) {
 		this.replycnt = replycnt;
-	}
-	
-	public String getMapLoc() {
-		return mapLoc;
-	}
-
-	public void setMapLoc(String mapLoc) {
-		this.mapLoc = mapLoc;
 	}
 }

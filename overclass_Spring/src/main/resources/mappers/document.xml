@@ -3,8 +3,8 @@
 <mapper namespace="document">
 	<!-- 글 쓰기 -->
 	<insert id="insert">
-		insert into oc_document (dno, writer, content, tag, image, mapLoc)
-		values (oc_document_seq.nextval, #{writer}, #{content}, #{tag}, #{image}, #{mapLoc})
+		insert into oc_document (dno, writer, content, tag, image, mapLoc, mapXY)
+		values (oc_document_seq.nextval, #{writer}, #{content}, #{tag}, #{image}, #{mapLoc}, #{mapXY})
 	</insert>
 	
 	<!-- 특정 게시글 삭제 -->
@@ -31,8 +31,8 @@
 	
 	<!-- 메인피드 게시글 목록 -->
 	<select id="mainFeed_list" resultType="document_dto">
-			select dno, writer, content, tag, writedate, image, mapLoc, goodcnt, replycnt, user_image
-			from(select dno, writer, content, tag, writedate, image, mapLoc, goodcnt, replycnt, user_image
+			select dno, writer, content, tag, writedate, image, mapLoc, mapXY, goodcnt, replycnt, user_image
+			from(select dno, writer, content, tag, writedate, image, mapLoc, mapXY, goodcnt, replycnt, user_image
 				from oc_document, oc_user
 					where writer IN 
 						(select sender 
@@ -72,8 +72,8 @@
 	
 	<!-- 마이피드 게시글 목록 -->
 	<select id="myFeed_list" resultType="document_dto">
-		select dno, writer, content, tag, writedate, image, mapLoc, goodcnt, replycnt, user_image
-			from( select dno, writer, content, tag, writedate, image, mapLoc, goodcnt, replycnt, user_image
+		select dno, writer, content, tag, writedate, image, mapLoc, mapXY, goodcnt, replycnt, user_image
+			from( select dno, writer, content, tag, writedate, image, mapLoc, mapXY, goodcnt, replycnt, user_image
 				from oc_document, oc_user
 				where writer = #{user_id} and oc_document.writer=oc_user.user_id 
 				order by writedate desc )
@@ -87,8 +87,8 @@
 	
 	<!-- 태그검색후 글 1건 조회 -->
 	<select id="read_doc" resultType="document_dto">
-		select dno, writer, content, tag, writedate, image, mapLoc, goodcnt, replycnt, user_image
-			from( select dno, writer, content, tag, writedate, image, mapLoc, goodcnt, replycnt, user_image
+		select dno, writer, content, tag, writedate, image, mapLoc, mapXY, goodcnt, replycnt, user_image
+			from( select dno, writer, content, tag, writedate, image, mapLoc, mapXY goodcnt, replycnt, user_image
 				from oc_document, oc_user
 				where dno=#{dno} and oc_document.writer=oc_user.user_id)
 	</select>
