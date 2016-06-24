@@ -42,10 +42,8 @@
 					<div class="form-group">
 						<label class="control-label col-sm-2" for="content">내용</label>
 						<div class="col-sm-10">
-							<input type="hidden" id="action" name="action"
-								value="contentInsert">
-							<textarea class="form-control" name="content" id="content"
-								rows="5"></textarea>
+							<input type="hidden" id="action" name="action" value="contentInsert">
+							<textarea class="form-control" name="content" id="content" rows="5" onkeyup="fn_TextAreaInputLimit()"></textarea>
 						</div>
 					</div>
 
@@ -128,5 +126,46 @@ function mapLocDel() {
 	$("#mapLoc").attr("value","")
 	$("#mapXY").attr("value","")
 	$("#loc_div").slideUp(1000)
+}
+function fn_TextAreaInputLimit() {
+    var tempText = $("#content");
+    var tempChar = "";                                        // TextArea의 문자를 한글자씩 담는다
+    var tempChar2 = "";                                        // 절삭된 문자들을 담기 위한 변수
+    var countChar = 0;                                        // 한글자씩 담긴 문자를 카운트 한다
+    var tempHangul = 0;                                        // 한글을 카운트 한다
+    var maxSize = 250;                                        // 최대값
+    
+    // 글자수 바이트 체크를 위한 반복
+    for(var i = 0 ; i < tempText.val().length; i++) {
+        tempChar = tempText.val().charAt(i);
+
+        // 한글일 경우 2 추가, 영문일 경우 1 추가
+        if(escape(tempChar).length > 4) {
+            countChar += 2;
+            tempHangul++;
+        } else {
+            countChar++;
+        }
+    }
+    
+    // 카운트된 문자수가 MAX 값을 초과하게 되면 절삭 수치까지만 출력을 한다.(한글 입력 체크)
+    // 내용에 한글이 입력되어 있는 경우 한글에 해당하는 카운트 만큼을 전체 카운트에서 뺀 숫자가 maxSize보다 크면 수행
+    if((countChar-tempHangul) > maxSize) {
+    	BootstrapDialog.show({
+			title : '', //알러트 타이틀 이름
+			message : '최대 글자수를 초과하였습니다.', //알러트 내용
+			buttons : [ { //알러트 버튼 정의
+				icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
+				label : '확인', //알러트 버튼 이름
+				cssClass : 'btn-primary', //알러트 버튼 색바꾸기
+				action : function(confirm) {
+					confirm.close()
+				}
+			} ]
+		});
+        
+        tempChar2 = tempText.val().substr(0, maxSize-1);
+        tempText.val(tempChar2);
+    }
 }
 </script>

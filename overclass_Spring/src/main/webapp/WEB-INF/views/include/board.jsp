@@ -62,9 +62,9 @@
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="content">내용</label>
 										<div class="col-sm-10">
-											<div class="panel-content"
-												style="width: 100%; height: 100px; overflow: hidden; word-break: break-all;">
-												${DocumentDTO.content }</div>
+											<div class="panel-content" style="width: 100%; height: 100%; overflow: hidden; word-break: break-all;">
+												${DocumentDTO.content }
+											</div>
 										</div>
 									</div>
 
@@ -126,7 +126,8 @@
 								<div class="form-group">
 									<label class="control-label col-sm-2" for="reply_write">댓글</label>
 									<div class="col-sm-10">
-										<input id="reply_write${DocumentDTO.dno }" type="text" class="form-control" size="18" placeholder="댓글을 입력하세요..." onkeydown="return writeReply(event,${DocumentDTO.dno})">
+										<input id="reply_write${DocumentDTO.dno }" type="text" class="form-control" size="18" placeholder="댓글을 입력하세요..." onkeydown="return writeReply(event,${DocumentDTO.dno}); ">
+										
 									</div>
 								</div>
 								
