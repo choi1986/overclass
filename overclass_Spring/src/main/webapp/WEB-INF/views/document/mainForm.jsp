@@ -339,7 +339,7 @@ function searchDetailAddrFromCoords(coords, callback) {
 <!-- 쪽지 리스트처리를 위한 템플릿 -->
 <script id="msgtemp" type="text/x-handlebars-template">
 <li>
-	<a href='/overclass/chat'>
+	<a href='/overclass/chat/?sender={{sender}}'>
 		<span class="photo">
 			<img alt="avatar" width='30' height='30' src='{{user_image}}'></span>
 		<span class="subject">
@@ -349,9 +349,22 @@ function searchDetailAddrFromCoords(coords, callback) {
 		<span class="subject">{{content}}</span>
 	</a>
 </li>
-	
-
 </script>
+<script id="msgtempNR" type="text/x-handlebars-template">
+<li style="background-color: #e6e6e6;">
+	<a href='/overclass/chat/?sender={{sender}}'>
+		<span class="photo">
+			<img alt="avatar" width='30' height='30' src='{{user_image}}'></span>
+		<span class="subject">
+			<span class="from">{{sender}}</span>
+			<span class="time">{{writedate}}전</span>
+		</span>
+		<span class="subject">{{content}}</span>
+	</a>
+</li>
+</script>
+
+
 <script id="msgtoptemp" type="text/x-handlebars-template">
 <div class="notify-arrow notify-arrow-blue"></div>
 						<li>
@@ -364,6 +377,9 @@ var msg_source = $("#msgtemp").html();
 var msg_template = Handlebars.compile(msg_source);
 var msgtop_source = $("#msgtoptemp").html();
 var msgtop_template = Handlebars.compile(msgtop_source);
+var msg_source_NR = $("#msgtempNR").html();
+var msg_templateNR = Handlebars.compile(msg_source_NR);
+
 
 var timer;
 var msgid;
@@ -576,7 +592,7 @@ $(document).ready(function() {
 		}
 	})
 	
-	// 사이트바 쪽지 클릭 이벤트
+	<%-- // 사이트바 쪽지 클릭 이벤트
 	$("#mail_notificatoin_bar").click(function() { 
 		$.ajax({
 			url : "/overclass/msg/sitebar",
@@ -592,7 +608,7 @@ $(document).ready(function() {
 				$("#msg4").html(htmlTxt);
 			}
 		});
-	});
+	}); --%>
 
 	$("#alert_notificatoin_bar").click(function() { // 알림바 알림 클릭 이벤트
 		$.ajax({
@@ -667,6 +683,46 @@ $(function () {
 });
 $('#scrollUpTheme').attr('href', '/overclass/resources/css/image.css?1.1');
 $('.image-switch').addClass('active');
+
+// ***********************   소       켓      ****************************************
+//소켓생성하기
+var sender='<%=user.getUser_id()%>';
+
+var ws = new WebSocket('ws://192.168.0.131/overclass/chatting');
+
+// 서버에서 메시지 날라올때
+ws.onmessage = function (event) {
+	var data = JSON.parse(event.data);
+		if(data.protocol == 130) {
+			//msgtemp, msgtempNR
+			var htmlTxt = msgtop_template(data);
+			for(var i=0; i<data.list.length; i++){
+				if(data.list[i].read == 0){	// 안읽었으면
+					htmlTxt+=msg_templateNR(data.list[i]);
+				}else{	// 읽었으면
+					htmlTxt+=msg_template(data.list[i]);
+				}
+			}// for
+			$("#msg4").html(htmlTxt);
+		}// if
+}
+
+//웹 소켓 서버 열릴 때
+ws.onopen = function() {
+	var connmsg = JSON.stringify({
+		sender:sender,
+		receiver:'allUser',
+		protocol:100,
+		content:'connected WS Server!'
+	});
+	ws.send(connmsg);
+}
+
+//웹 소켓 서버가 닫힐 때,
+ws.onclose = function() {
+	
+}
+
 
 </script>
 </html>

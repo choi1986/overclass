@@ -162,7 +162,7 @@
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="/overclass/chat">
 								<i class="icon_mail_alt"></i> 메세지 함
 							</a>
 						</li>

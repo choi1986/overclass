@@ -36,7 +36,6 @@ public class MsgController {
 			List<MsgDTO> list = service.sitebarDisplay(user_id);
 			// 새로온 확인하지 않은 쪽지 갯수
 			int count = service.count(user_id);
-			logger.info("유저아이디:"+user_id+" 확인하지 않은 쪽지 : "+count);
 			
 			Map<String,Object> map = new HashMap<>();
 			map.put("list", list);
@@ -71,7 +70,6 @@ public class MsgController {
 		
 		try {
 			int count = service.count(user_id);
-			logger.info("새로온쪽지수:"+count);
 			entity = new ResponseEntity<Integer>(count,HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

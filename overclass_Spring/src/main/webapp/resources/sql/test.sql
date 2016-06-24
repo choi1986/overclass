@@ -74,4 +74,12 @@ insert into oc_bandoc (dno, writer, content, tag, image, goodcnt, user_image, re
 
 
 
+ select sender, content, writedate, read from oc_msg
+where sender='test1';
 
+
+select sender, receiver, content, TO_CHAR(writedate,'yyyymmddhh24miss') writedate, read
+		from oc_msg
+		where (sender = 'test1' and receiver = 'test2') OR (sender = 'test2' and receiver = 'test1')
+		
+select * from oc_msg

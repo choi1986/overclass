@@ -1,5 +1,6 @@
 package kr.co.overclass.persistence;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -7,15 +8,19 @@ import javax.inject.Inject;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import kr.co.overclass.domain.MsgVO;
 import kr.co.overclass.domain.MsgwsVO;
 import kr.co.overclass.dto.ChatFriendListDTO;
 import kr.co.overclass.dto.MsgDTO;
+import kr.co.overclass.service.MsgServiceImpl;
 
 @Repository
 public class MsgDAOImpl implements MsgDAO {
+	private static final Logger logger = LoggerFactory.getLogger(MsgDAO.class);
 	
 	@Inject
 	private SqlSession session;
@@ -48,6 +53,22 @@ public class MsgDAOImpl implements MsgDAO {
 	@Override
 	public List<MsgDTO> chatList(Map<String, String> map) throws Exception {
 		RowBounds rb = new RowBounds(0, 30);
-		return session.selectList("msg.chatList", map, rb);
+		List<MsgDTO> temp = session.selectList("msg.chatList", map, rb);
+		List<MsgDTO> returnlist = new ArrayList<>();
+		int j = temp.size()-1;
+		for(int i=temp.size()-1; i>=0;i--){
+			returnlist.add(temp.get(i));
+		}
+		return returnlist;
+	}
+
+	@Override
+	public void changeRead(Map<String, String> map) throws Exception {
+		session.update("msg.changeRead",map);
+	}
+
+	@Override
+	public void writeNR(MsgwsVO vo) throws Exception {
+		session.insert("msg.writeNR",vo);
 	}
 }

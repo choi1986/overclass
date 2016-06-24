@@ -1,7 +1,6 @@
 package kr.co.overclass.service;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import kr.co.overclass.EchoHandler;
 import kr.co.overclass.domain.MsgwsVO;
 import kr.co.overclass.dto.ChatFriendListDTO;
 import kr.co.overclass.dto.MsgDTO;
@@ -32,7 +30,6 @@ public class MsgServiceImpl implements MsgService {
 	
 	@Override
 	public List<MsgDTO> sitebarDisplay(String user_id) throws Exception {
-		logger.info("서비스임플 들어옴");
 		List<MsgDTO> list = dao.sitebarDisplay(user_id);
 		
 		//*****************몇초전, 몇분전*******************
@@ -59,7 +56,6 @@ public class MsgServiceImpl implements MsgService {
 			}// if
 		}
 		//**************************************
-		logger.info("리스트 리턴완료!");
 		return list;
 	}
 
@@ -109,5 +105,15 @@ public class MsgServiceImpl implements MsgService {
 		//**************************************
 		
 		return list;
+	}
+
+	@Override
+	public void changeRead(Map<String, String> map) throws Exception {
+		dao.changeRead(map);
+	}
+
+	@Override
+	public void writeNR(MsgwsVO vo) throws Exception {
+		dao.writeNR(vo);
 	}
 }
