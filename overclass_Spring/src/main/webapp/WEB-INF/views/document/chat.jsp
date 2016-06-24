@@ -5,6 +5,7 @@
 	pageEncoding="UTF-8"%>
 <% UserVO user = (UserVO)session.getAttribute("login"); %>
 
+
 <!-- 헤더 -->
 <%@include file="../include/header.jsp"%>
 <!-- 헤더끝 -->
@@ -41,7 +42,6 @@
 	</div>
 </li>
 </script>
-
 <!-- 내가쓴채팅 템플릿 -->
 <script id="chatme" type="text/x-handlebars-template">
 <li class="by-other">
@@ -59,15 +59,52 @@
 </li>
 </script>
 
+<!-- 쪽지 리스트처리를 위한 템플릿 -->
+<script id="msgtemp" type="text/x-handlebars-template">
+<li>
+	<a href='/overclass/chat/?sender={{sender}}'>
+		<span class="photo">
+			<img alt="avatar" width='30' height='30' src='{{user_image}}'></span>
+		<span class="subject">
+			<span class="from">{{sender}}</span>
+			<span class="time">{{writedate}}전</span>
+		</span>
+		<span class="subject">{{content}}</span>
+	</a>
+</li>
+</script>
+<script id="msgtempNR" type="text/x-handlebars-template">
+<li style="background-color: gray;">
+	<a href='/overclass/chat/?sender={{sender}}'>
+		<span class="photo">
+			<img alt="avatar" width='30' height='30' src='{{user_image}}'></span>
+		<span class="subject">
+			<span class="from">{{sender}}</span>
+			<span class="time">{{writedate}}전</span>
+		</span>
+		<span class="subject">{{content}}</span>
+	</a>
+</li>
+</script>
+
+
+
+
 <!-- 웹소켓부분 -->
 <script>
 	var sender = '<%=user.getUser_id()%>';
 	var receiver = '<%=user.getUser_id()%>';
+	var target = '';
 	
 	var sourceme = $("#chatme").html();
 	var sourceother = $("#chatother").html();
+	var sourcebar = $("#msgtemp").html();
+	var sourcebarNR = $("#msgtempNR").html();
+	
 	var templateme = Handlebars.compile(sourceme);
 	var templateother = Handlebars.compile(sourceother);
+	var templatesb = Handlebars.compile(sourcebar);
+	var templatesbNR = Handlebars.compile(sourcebarNR);
 	
 	// 소켓생성하기
 	var ws = new WebSocket('ws://192.168.0.131/overclass/chatting');
@@ -100,6 +137,19 @@
 				}
 				var window = document.getElementById('chatwindow');
 				window.scrollTop = window.scrollHeight; 
+			}break;
+			case 130:{
+				// data.list -> 상단에 표시해야될 리스트들
+				// "#msg4"
+				var completeHtml = '';
+				for(var i=0 ; i<data.list.length;i++){
+					if(data.list.read == 1){	// 1이면 읽은거
+						completeHtml += templatesb(data.list[i]);
+					}else{	// 0 이면 안읽은거
+						completeHtml += templatesbNR(data.list[i]);
+					}
+				}
+				$("#msg4").html(htmltxt);
 			}break;
 			case 210:{
 				// 내가 지금 대화를 하고있는 상대한태서 온 메시지이면 화면에 표출
@@ -138,11 +188,26 @@
 		});
 		// 접속했다는 메시지 서버전송
 		ws.send(connmsg);
+		
+		// 데이터를 전달받았나 확인하고 그에알맞는 상대와 대화시작
+		var target = document.getElementById('chatTo').firstChild.nodeValue;
+		if(target != ' '){
+			chatChange(target);
+		}
 	};
 	
 	// 웹 소켓 서버가 닫힐 때,
 	ws.onclose = function() {
-		
+		var currentChatUser = document.getElementById('chatTo').firstChild.nodeValue;
+		if(currentChatUser != ' '){
+			var preChange = JSON.stringify({
+				sender:sender,
+				receiver:currentChatUser.trim(),
+				protocol:140,
+				content:'CHAT END'
+			});
+			ws.send(preChange);
+		}
 	};
 	
 	// 채팅 입력부
@@ -152,12 +217,13 @@
 			this.receiver = document.getElementById('chatTo').firstChild.nodeValue;
 			text = JSON.stringify({
 				sender:sender,
-				receiver:receiver,
+				receiver:receiver.trim(),
 				protocol:200,
 				content:$("#sendtext").val()
 			})
 			// 서버전송
 			ws.send(text);
+			
 			var parseText = JSON.parse(text);
 			parseText.writedate = '방금전';
 			var htmltxt = templateme(parseText);
@@ -171,19 +237,31 @@
 	
 	// 채팅상대변경
 	function chatChange(user_id) {
+		if(document.getElementById('chatTo').firstChild.nodeValue != ' '){
+			var recei = document.getElementById('chatTo').firstChild.nodeValue;
+			var preChange = JSON.stringify({
+				sender:sender,
+				receiver:recei.trim(),
+				protocol:140,
+				content:'CHAT CHANGE PREPROCCESING'
+			});
+			ws.send(preChange);
+		}
+		
 		//document.getElementById('chatTo').firstChild.value = user_id;
 		this.receiver = user_id;
 		$("#textout").html('');
 		$("#chatTo").text(user_id);
 		var changeMsg = JSON.stringify({
 			sender:sender,
-			receiver:user_id,
+			receiver:user_id.trim(),
 			protocol:110,
 			content:'CHANGE CHATTING USER'
 		});
 		// 접속했다는 메시지 서버전송
 		ws.send(changeMsg);
 	}
+	
 	
 </script>
 </html>

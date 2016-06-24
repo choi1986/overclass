@@ -6,7 +6,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<div class="pull-left"><span class="fa fa-comments-o"></span><strong> 대화&nbsp;&nbsp;</strong></div>
-			<div id="chatTo" class="pull-left"></div>
+			<div id="chatTo" class="pull-left">${targetuser } </div>
 			<div class="clearfix"></div>
 		</div>
 

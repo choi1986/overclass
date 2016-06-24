@@ -8,7 +8,7 @@
 		order by writedate desc
 	</select>
 	<select id="read4" resultType="msg">
-		select sender, content, TO_CHAR(writedate,'yyyymmddhh24miss') writedate, user_image 
+		select sender, content, TO_CHAR(writedate,'yyyymmddhh24miss') writedate, user_image, read
 		from oc_msg, oc_user
 		where (sender, writedate) IN (select sender, max(writedate)
 										from oc_msg
@@ -17,9 +17,15 @@
 			and oc_msg.sender = oc_user.user_id
 	</select>
 	<insert id="write">
+		insert into oc_msg(sender, receiver, content, read)
+		values(#{sender},#{receiver},#{content},1)
+	</insert>
+	
+	<insert id="writeNR">
 		insert into oc_msg(sender, receiver, content)
 		values(#{sender},#{receiver},#{content})
 	</insert>
+	
 	<select id="count" resultType="int">
 		select count(read)
 		from oc_msg
@@ -39,5 +45,12 @@
 		select sender, receiver, content, TO_CHAR(writedate,'yyyymmddhh24miss') writedate, read
 		from oc_msg
 		where (sender = #{sender} and receiver = #{receiver}) OR (sender = #{receiver} and receiver = #{sender})
+		order by writedate desc
 	</select>
+	
+	<update id="changeRead">
+		update oc_msg
+		set read = 1
+		where sender = #{sender} and receiver = #{receiver}
+	</update>
 </mapper>
