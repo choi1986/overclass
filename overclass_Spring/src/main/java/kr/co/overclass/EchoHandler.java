@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import javax.inject.Inject;
 
@@ -18,9 +17,8 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.google.gson.Gson;
 
-import kr.co.overclass.domain.MsgVO;
 import kr.co.overclass.domain.MsgwsVO;
-import kr.co.overclass.domain.RoomVO;
+import kr.co.overclass.dto.MsgDTO;
 import kr.co.overclass.service.MsgService;
 
 public class EchoHandler extends TextWebSocketHandler {
@@ -89,7 +87,8 @@ public class EchoHandler extends TextWebSocketHandler {
 					map.put("sender", frommsg.getSender());
 					map.put("receiver", frommsg.getReceiver());
 					// receiver = 선택한 대화상대
-					List<MsgVO> chatlist = service.chatList(map);
+					
+					List<MsgDTO> chatlist = service.chatList(map);
 					
 					Map<String, Object> sendData = new HashMap<>();
 					sendData.put("protocol", 120);
