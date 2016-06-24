@@ -34,8 +34,9 @@
 							method="post" enctype="multipart/form-data">
 							<input type="hidden" name="user_id" value="${user.user_id }"> 
 						<div class="form-group">
-						<div class="fileboxImage control-label col-lg-offset-3 col-sm-3">
+						<div class="fileboxImage control-label col-sm-offset-2 col-sm-8">
 							<label for="imagefile" class="btn btn-success"><span class="fa fa-camera-retro"></span> 프로필사진 변경</label>
+							<label id="image_default" class="btn btn-danger"><span class="fa fa-close"></span></label>
 							<input type="file" id="imagefile" name="imagefile" accept="image/gif, image/jpeg, image/png, image/bmp#">
 						</div>
 					</div>
@@ -732,6 +733,32 @@ var result = '${msg}';
 		//지도 닫기버튼
 		$('#mapDel').click(function() {
 	        $('#map_div').slideUp(1000)
+		})
+		
+		//프로필사진 디폴트이미지로 바꾸기
+		$("#image_default").click(function() {
+			BootstrapDialog.show({
+	    		title: '', //알러트 타이틀 이름
+	    		message: '프로필사진을 기본이미지로 변경하시겠습니까?', //알러트 내용
+	    		buttons: [{ //알러트 버튼 정의
+	    			id: 'btn1', //알러트 버튼의 아이디
+	    			icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
+	    			label: '확인', //알러트 버튼 이름
+	    			cssClass: 'btn-primary', //알러트 버튼 색바꾸기
+	    			hotkey:13,
+	    			action: function(confirm) {
+	    				var formObj = $("#user_image_update");
+	    				formObj.attr("action","/overclass/main/imageDefault")
+	    				formObj.submit();
+	    				confirm.close()
+					}
+	    			},{
+	    				label: '닫기',
+	    				action: function(cancel){
+	    					cancel.close();
+	    					}
+	    			}]
+	    	})
 		})
 		
 		//프로필사진바꾸기

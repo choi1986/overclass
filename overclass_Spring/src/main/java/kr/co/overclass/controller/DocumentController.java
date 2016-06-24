@@ -78,16 +78,21 @@ public class DocumentController {
 	}
 	
 	//마이피드 수정
-	@RequestMapping(value="/imageUp",method=RequestMethod.POST)
+	@RequestMapping(value={"/imageUp","/imageDefault"},method=RequestMethod.POST)
 	public String imageupdate(String user_id, MultipartFile imagefile, RedirectAttributes attr,Model model, HttpServletRequest request) throws Exception {
+		String url = request.getServletPath();
 		String imageName = imagefile.getOriginalFilename(); //파일의 원래이름
 		String savedName = uploadFile(imagefile.getOriginalFilename(), imagefile.getBytes()); //UUID가 더해진 파일이름
 		String downloadPath = "/overclass/resources/upload/"; //DB에 경로추가해서 저장하기 위함
-		System.out.println("@@@파일이름:"+imageName);
-		System.out.println("@@@바뀐파일이름:"+savedName);
 		uploadPath = request.getSession().getServletContext().getRealPath("/resources/upload"); //파일 업로드 위치
 		UserVO vo = (UserVO) request.getSession().getAttribute("login");
-		String image = vo.getUser_image();
+		String image = null;
+		
+		if (url.equals("/main/imageDefault")) { //프로필 기본이미지로 변경 요청시
+			image = "/overclass/resources/img/profile_default.png"; 
+		} else {
+			image = vo.getUser_image();
+		}
 		Map<String, String> map = new HashMap<>();
 		//파일이 빈값이 아닐때 선택한이미지로 삽입
 		if (!imageName.equals("")) {
