@@ -29,6 +29,7 @@ import kr.co.overclass.domain.UserVO;
 import kr.co.overclass.dto.DocumentDTO;
 import kr.co.overclass.service.DocumentService;
 import kr.co.overclass.service.FriendService;
+import kr.co.overclass.service.UserService;
 
 
 @Controller
@@ -41,6 +42,8 @@ public class DocumentController {
 	private DocumentService service;
 	@Inject
 	private FriendService friService;
+	@Inject
+	private UserService userService;
 	String uploadPath;
 	
 	//메인피드, 마이피드에서 글쓰기
@@ -161,16 +164,18 @@ public class DocumentController {
 		model.addAttribute("pageMaker", maker);
 		
 		List<FriendVO> friTempList = friService.select_rel(vo.getUser_id());
-		ArrayList<String> friList = new ArrayList<String>();
+		ArrayList<UserVO> friVoList = new ArrayList<UserVO>();
+		
 		for (int i=0; i<friTempList.size(); i++) {
 			if(!friTempList.get(i).getSender().equals(vo.getUser_id()))
-				friList.add(friTempList.get(i).getSender());
+				friVoList.add(userService.searchUser(friTempList.get(i).getSender()));
+			
 		}
 		for (int i=0; i<friTempList.size(); i++) {
 			if(!friTempList.get(i).getReceiver().equals(vo.getUser_id()))
-				friList.add(friTempList.get(i).getReceiver());
+				friVoList.add(userService.searchUser(friTempList.get(i).getReceiver()));
 		}
-		session.setAttribute("friend_rel", friList);
+		session.setAttribute("friend_rel", friVoList);
 		
 		return forward;
 	}

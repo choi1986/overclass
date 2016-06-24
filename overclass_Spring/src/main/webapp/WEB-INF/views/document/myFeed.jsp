@@ -300,17 +300,33 @@
 										<div class="activity-body act-in">
 											<span class="arrow"></span>
 											<div class="text">
-												<a href="friendfeed.do?action=friendfeed&friend=<%-- <%=friend_list.get(i).getUser_id()%> --%>"
-													class="activity-img"><img class="avatar"
-													src="<%-- <%=friend_list.get(i).getId_img_path()%> --%>" alt="">
-												</a>
-												<p class="attribution">
-													<a
-														href="friendfeed.do?action=friendfeed&friend=<%-- <%=friend_list.get(i).getUser_id()%> --%>"
-														style="color: blue;"><%-- <%=friend_list.get(i).getName()%> --%></a>
-												<p>
-													<i class="icon_pin_alt" style="color: green"></i><i><%-- <%=friend_list.get(i).getLoc()%> --%></i>
-												</p>
+												<table>
+													<c:forEach var="i" items="${friend_rel}" begin="0">
+														<tr>
+														<td>
+															<a href="friendfeed.do?action=friendfeed&friend=${i.user_id}"
+																class="activity-img"><img class="avatar"
+																src="${i.user_image}" alt="">
+															</a>
+														</td>
+														<td>
+														<p class="attribution">
+															<a
+																href="friendfeed.do?action=friendfeed&friend=${i.user_id}"
+																style="color: blue;">${i.user_name}
+															</a>
+														</td>
+														<td>
+															${i.user_id}
+														</td>
+														<td>
+															<p>
+																<i class="icon_pin_alt" style="color: green"></i><i>${i.user_loc}</i>
+															</p>
+														</td>
+														</tr>
+													</c:forEach>
+												</table>
 											</div>
 										</div>
 									</div>
