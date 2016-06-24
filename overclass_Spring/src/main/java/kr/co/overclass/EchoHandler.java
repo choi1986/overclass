@@ -1,6 +1,8 @@
 package kr.co.overclass;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -89,7 +91,13 @@ public class EchoHandler extends TextWebSocketHandler {
 					map.put("sender", frommsg.getSender());
 					map.put("receiver", frommsg.getReceiver());
 					// receiver = 선택한 대화상대
+					
 					List<MsgVO> chatlist = service.chatList(map);
+					
+					logger.info("테스트로거");
+					//logger.info(chatlist.get(0).getReceiver());
+					logger.info("테스트로거2");
+					
 					
 					Map<String, Object> sendData = new HashMap<>();
 					sendData.put("protocol", 120);

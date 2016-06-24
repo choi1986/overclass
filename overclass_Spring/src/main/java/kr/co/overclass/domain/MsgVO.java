@@ -1,7 +1,5 @@
 package kr.co.overclass.domain;
 
-import java.util.Date;
-
 public class MsgVO {
 	private String sender;
 	private String receiver;
@@ -10,7 +8,6 @@ public class MsgVO {
 	private int read;
 	
 	public MsgVO() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getSender() {
