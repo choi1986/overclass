@@ -12,21 +12,21 @@
 			<!-- 마이페이지메인 폼  -->
 			<div class="profile-widget profile-widget-info">
 				<div class="panel-body">
-					<div class="col-lg-2 col-lg-2">
-						<h4>${user.user_name } </h4>
-						<div class="follow-ava">
-							<img src="${user.user_image }" width='70' height='70'>
+					<div class="col-sm-2 col-sm-2">
+						<div class="row">
+							<div class="follow-ava" id="image_div">
+								<img class="img-responsive img-circle" id="user_image" src="${user.user_image }" style="width: 90px; height: 90px;">
+							</div>
 						</div>
-						<h4>${user.user_id } </h4>
+						<div class="row"><h4><b>${user.user_id }</b></h4></div>
 					</div>
-					<div class="col-lg-4 col-lg-4 follow-info">
-						<p>
-							<i class="fa fa-lg fa-github-alt">&nbsp;AdminPage</i>
-						</p>
-						<%-- <i class="fa fa-twitter"><span>&nbsp;</span><%=user.getBirth().substring(2, 4)%>월
-							<%=user.getBirth().substring(4)%>일</i><br> <i
-							class="fa fa-envelope-o"><span>&nbsp;</span><%=user.getEmail()%></i><br>
-						<i class="icon_pin_alt"><i><%=user.getLoc()%></i></i> --%>
+					<div class="col-sm-4 col-sm-4 follow-info" style="margin-top: -30px;">
+						<div class="row">
+							<h3><span class="fa fa-lg fa-github-alt">&nbsp;AdminPage</span></h3>
+						</div>
+						<div class="row">
+							<h4><i class="fa fa-user-md">&nbsp;${user.user_name }</i></h4>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -209,7 +209,6 @@ var result = '${msg}';
 		
 		$(".report_cancel").click(function() { //철회하기 버튼 클릭시
 			var reportno = this.firstChild.nextSibling.firstChild.nodeValue;
-		alert("신고번호확인!"+reportno)
 			BootstrapDialog.show({
 				title: '', //알러트 타이틀 이름
 				message: '신고를 철회 하시겠습니까?', //알러트 내용

@@ -60,11 +60,17 @@ public class AdminController {
 	//신고하기
 	@RequestMapping(value="/reportDoc",method=RequestMethod.POST)
 	public String report_ban(ReportVO vo, RedirectAttributes attr) throws Exception {
-		service.report(vo); //report테이블에 신고정보 저장
-		logger.info("신고처리: "+vo);
-		
-		attr.addFlashAttribute("msg", "Write_SUCCESS");
-		return "redirect:/main/myFeed";
+		String msg = null;
+		if ( service.report_sel(vo) == 0 ) {
+			msg = "Report_SUCCESS";
+			service.report(vo); //report테이블에 신고정보 저장
+			System.out.println("성공:"+service.report_sel(vo));
+		} else {
+			msg = "Report_FAIL";
+			System.out.println("실패:"+service.report_sel(vo));
+		}
+		attr.addFlashAttribute("msg", msg);
+		return "redirect:/main";
 	}
 	
 	//제재하기

@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <div class="panel panel-default">
-	<div id="content_form" class="panel-heading"
-		style="background-color: #EEF6FF;">
+	<div id="content_form" class="panel-heading" style="background-color: #EEF6FF;">
 		<div class="pull-left">
 			<h4>글쓰기</h4>
 		</div>
@@ -11,7 +10,7 @@
 		</div>
 		<div class="clearfix"></div>
 	</div>
-	<div id="content_body" class="panel-body">
+	<div id="content_body" class="panel-body" style="">
 		<div class="padd">
 
 			<!-- 글쓰기폼-->

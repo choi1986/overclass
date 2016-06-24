@@ -51,4 +51,9 @@ public class AdminDAOImpl implements AdminDAO{
 	public int report_stack(String writer) throws Exception {
 		return session.selectOne("admin.report_stack",writer);
 	}
+
+	@Override
+	public int report_sel(ReportVO vo) throws Exception {
+		return session.selectOne("admin.report_sel", vo);
+	}
 }

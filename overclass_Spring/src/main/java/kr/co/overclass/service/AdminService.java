@@ -13,4 +13,5 @@ public interface AdminService {
 	public void banDoc(int reportno) throws Exception; //제제하기
 	public void report_del(int reportno) throws Exception; //제제하고 글삭제
 	public List<ReportDTO> ban_list() throws Exception; //제제목록 출력
+	public int report_sel(ReportVO vo) throws Exception;
 }

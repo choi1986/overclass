@@ -57,4 +57,8 @@ public class AdminServiceImpl implements AdminService{
 		return dao.ban_list();
 	}
 
+	@Override
+	public int report_sel(ReportVO vo) throws Exception {
+		return dao.report_sel(vo);
+	}
 }

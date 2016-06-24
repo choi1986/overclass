@@ -16,41 +16,49 @@
 			<div class="profile-widget profile-widget-info">
 				<div class="panel-body">
 					<div class="col-sm-2 col-sm-2">
-						<h4>${user.user_name }</h4>
-						<div class="follow-ava" id="image_div">
-							<img class="img-responsive img-circle" id="user_image" src="${user.user_image }" width='70' height='70'>
+						<h4> </h4>
+						<div class="row">
+							<div class="follow-ava" id="image_div">
+								<img class="img-responsive img-circle" id="user_image" src="${user.user_image }" style="width: 90px; height: 90px;">
+							</div>
 						</div>
-						<h5>${user.user_id }</h5>
+						<div class="row"><h4><b>${user.user_id }</b></h4></div>
+						<div class="row">
 						<div id="image_update_div" style="display: none;">
 							<button type="button" id="image_update" class="btn btn-success">변경</button>
 							<button type="button" id="image_cancel" class="btn btn-danger">취소</button>
 						</div>
-						
+						</div>
 						<!-- 파일 -->
 						<form role="form" id="user_image_update" class="form-horizontal" action="/overclass/main/imageUp"
 							method="post" enctype="multipart/form-data">
 							<input type="hidden" name="user_id" value="${user.user_id }"> 
 						<div class="form-group">
-						<div class="fileboxImage control-label col-lg-offset-3 col-sm-3">
+						<div class="fileboxImage control-label col-sm-offset-2 col-sm-8">
 							<label for="imagefile" class="btn btn-success"><span class="fa fa-camera-retro"></span> 프로필사진 변경</label>
+							<label id="image_default" class="btn btn-danger"><span class="fa fa-close"></span></label>
 							<input type="file" id="imagefile" name="imagefile" accept="image/gif, image/jpeg, image/png, image/bmp#">
 						</div>
 					</div>
 					</form>
 					
 					</div>
-					<div class="col-sm-4 col-sm-4 follow-info">
+					<div class="col-sm-4 col-sm-4 follow-info" style="margin-top: -30px;">
 						<div class="row">
 							<h3><span class="fa fa-lg fa-github-alt">&nbsp;MyPage</span></h3>
 						</div>
 						<div class="row">
-							<i class="fa fa-twitter"><span>&nbsp;</span>${fn:substring(user.user_birth,2,4)}월
-							${fn:substring(user.user_birth,4,6)}일</i></div>
-						<div class="row">
-							<i class="fa fa-envelope-o"><span>&nbsp;</span>${user.user_email }</i>
+							<h4><i class="fa fa-user">&nbsp;${user.user_name }</i></h4>
 						</div>
 						<div class="row">
-							<i class="icon_pin_alt"><i>${user.user_loc }</i></i>
+							<h4><i class="fa fa-birthday-cake">&nbsp;${fn:substring(user.user_birth,2,4)}월
+							${fn:substring(user.user_birth,4,6)}일</i></h4>
+						</div>
+						<div class="row">
+							<h4><i class="fa fa-envelope-o">&nbsp;${user.user_email }</i></h4>
+						</div>
+						<div class="row">
+							<h4><i class="icon_pin_alt">&nbsp;${user.user_loc }</i></h4>
 						</div>
 					</div>
 				</div>
@@ -727,6 +735,32 @@ var result = '${msg}';
 	        $('#map_div').slideUp(1000)
 		})
 		
+		//프로필사진 디폴트이미지로 바꾸기
+		$("#image_default").click(function() {
+			BootstrapDialog.show({
+	    		title: '', //알러트 타이틀 이름
+	    		message: '프로필사진을 기본이미지로 변경하시겠습니까?', //알러트 내용
+	    		buttons: [{ //알러트 버튼 정의
+	    			id: 'btn1', //알러트 버튼의 아이디
+	    			icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
+	    			label: '확인', //알러트 버튼 이름
+	    			cssClass: 'btn-primary', //알러트 버튼 색바꾸기
+	    			hotkey:13,
+	    			action: function(confirm) {
+	    				var formObj = $("#user_image_update");
+	    				formObj.attr("action","/overclass/main/imageDefault")
+	    				formObj.submit();
+	    				confirm.close()
+					}
+	    			},{
+	    				label: '닫기',
+	    				action: function(cancel){
+	    					cancel.close();
+	    					}
+	    			}]
+	    	})
+		})
+		
 		//프로필사진바꾸기
 		function userReadURL(input) {
 			if (input.files && input.files[0]) {
@@ -1138,29 +1172,14 @@ var result = '${msg}';
 	        });	
 		})
 		
-		$("#dropdown_2").click(function() {
-			$("#page_div").hide()
-		})
-		$("#dropdown_3").click(function() {
-			$("#page_div").hide()
-		})
-		$("#dropdown_1").click(function() {
-			$("#page_div").show()
-		})
-		
 		//글쓰기 폼 클릭시
+		$("#content_body").hide()
 		$("#content_form").click(function() {
-			$("#content_body").slideToggle(
-					"slow"); //글쓰기아이콘 누르면 슬라이드 효과
-			if ($("#content_icon")
-					.attr("class") == "fa fa-chevron-up") { //글쓰기아이콘 바꾸기
-				$("#content_icon").attr(
-						"class",
-						"fa fa-chevron-down")
+			$("#content_body").slideToggle(1000); //글쓰기아이콘 누르면 슬라이드 효과
+			if ($("#content_icon").attr("class") == "fa fa-chevron-up") { //글쓰기아이콘 바꾸기
+				$("#content_icon").attr("class","fa fa-chevron-down")
 			} else {
-				$("#content_icon").attr(
-						"class",
-						"fa fa-chevron-up")
+				$("#content_icon").attr("class","fa fa-chevron-up")
 			}
 		})
 		//페이징버튼 앞으로  클릭시

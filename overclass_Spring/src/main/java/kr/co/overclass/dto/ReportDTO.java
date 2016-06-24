@@ -6,6 +6,8 @@ public class ReportDTO {
 	private String content;
 	private String tag;
 	private String image;
+	private String mapXY;
+	private String mapLoc;
 	private int goodcnt;
 	private String user_image;
 	private int reportno;
@@ -73,6 +75,22 @@ public class ReportDTO {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+	
+	public String getMapXY() {
+		return mapXY;
+	}
+
+	public void setMapXY(String mapXY) {
+		this.mapXY = mapXY;
+	}
+
+	public String getMapLoc() {
+		return mapLoc;
+	}
+
+	public void setMapLoc(String mapLoc) {
+		this.mapLoc = mapLoc;
 	}
 
 	public int getGoodcnt() {

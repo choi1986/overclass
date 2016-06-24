@@ -20,6 +20,11 @@
 									<li><a href="#" onclick="delDoc(${DocumentDTO.dno })" style="color: black;" class="fa fa-bitbucket"> 게시글 삭제</a></li>
 								</c:if>
 								<c:if test="${DocumentDTO.writer != user.user_id}">
+								<form class="report_form${DocumentDTO.dno }" method="post" action="/overclass/admin/reportDoc">
+								<input type="hidden" name="dno" value="${DocumentDTO.dno }">
+								<input id="form_reporter" type="hidden" name="reporter" value="${user.user_id }">
+								<input id="form_content" type="hidden" name="content" value="">
+								</form>
 									<li><a href="#" onclick="reportDoc(${DocumentDTO.dno })" style="color: red;" class="fa fa-exclamation-circle"> 게시글 신고하기</a></li>
 								</c:if>
 							</ul>
@@ -62,9 +67,9 @@
 									<div class="form-group">
 										<label class="control-label col-sm-2" for="content">내용</label>
 										<div class="col-sm-10">
-											<div class="panel-content"
-												style="width: 100%; height: 100px; overflow: hidden; word-break: break-all;">
-												${DocumentDTO.content }</div>
+											<div class="panel-content" style="width: 100%; height: 100%; overflow: hidden; word-break: break-all;">
+												${DocumentDTO.content }
+											</div>
 										</div>
 									</div>
 
@@ -126,7 +131,8 @@
 								<div class="form-group">
 									<label class="control-label col-sm-2" for="reply_write">댓글</label>
 									<div class="col-sm-10">
-										<input id="reply_write${DocumentDTO.dno }" type="text" class="form-control" size="18" placeholder="댓글을 입력하세요..." onkeydown="return writeReply(event,${DocumentDTO.dno})">
+										<input id="reply_write${DocumentDTO.dno }" type="text" class="form-control" size="18" placeholder="댓글을 입력하세요..." onkeydown="return writeReply(event,${DocumentDTO.dno}); ">
+										
 									</div>
 								</div>
 								
@@ -211,11 +217,7 @@
 
 
 <script>
-
-
 $(document).ready(function() {
-	
-	
 	/* $(".mapXY").click(function name() {
 		var mapXY = this.firstChild.nextSibling.firstChild.nodeValue;
 		$("#locDoc").attr("href","/overclass/main/map?mapXY="+mapXY)
@@ -253,6 +255,35 @@ $(document).ready(function() {
     				icon: 'fa fa-check',
     				label: '확인',
     				cssClass: 'btn-primary',
+    				hotkey:13,
+    				action: function(cancel){
+    					cancel.close();
+   					}
+    			}]
+    	})
+	} else if (result == 'Report_SUCCESS') {
+		BootstrapDialog.show({
+    		title: '', //알러트 타이틀 이름
+    		message: '신고 접수가 되었습니다.', //알러트 내용
+    		buttons: [{ //알러트 버튼 정의
+    				icon: 'fa fa-check',
+    				label: '확인',
+    				cssClass: 'btn-primary',
+    				hotkey:13,
+    				action: function(cancel){
+    					cancel.close();
+   					}
+    			}]
+    	})
+	} else if (result == 'Report_FAIL') {
+		BootstrapDialog.show({
+    		title: '', //알러트 타이틀 이름
+    		message: '이미 신고 접수가 되었습니다.', //알러트 내용
+    		type: BootstrapDialog.TYPE_DANGER,
+    		buttons: [{ //알러트 버튼 정의
+    				icon: 'fa fa-check',
+    				label: '확인',
+    				cssClass: 'btn-danger',
     				hotkey:13,
     				action: function(cancel){
     					cancel.close();
@@ -313,29 +344,10 @@ function reportDoc(dno) {
 				});
             	return false;
             } else {
-	            $.ajax({
-	               url: "/overclass/admin/reportDoc",
-	               type: "post",
-	               data: {
-	                  reporter:'<%= user2.getUser_id() %>',
-	                  dno:dno,
-	                  content:content,
-	               },
-	               success: function(result) {
-	            	   BootstrapDialog.show({
-							title : '', //알러트 타이틀 이름
-							message : '신고가 접수되었습니다', //알러트 내용
-							buttons : [ { //알러트 버튼 정의
-								icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
-								label : '확인', //알러트 버튼 이름
-								cssClass : 'btn-primary', //알러트 버튼 색바꾸기
-								action : function(confirm) {
-									confirm.close()
-								}
-							} ]
-						});
-	               }
-	            })
+            	var report_form = $(".report_form"+dno)
+            	/* var report_reporter = $("#form_reporter").attr("value",'') */
+            	var report_content = $("#form_content").attr("value",content)
+            	report_form.submit();
             }
             confirm.close()
          }

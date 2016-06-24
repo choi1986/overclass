@@ -582,9 +582,9 @@ $(document).ready(function() {
 	})
 	
 	//글쓰기 폼 클릭시
+	$("#content_body").hide()
 	$("#content_form").click(function() {
-		$("#content_body").slideToggle(
-				"slow"); //글쓰기아이콘 누르면 슬라이드 효과
+		$("#content_body").slideToggle(1000); //글쓰기아이콘 누르면 슬라이드 효과
 		if ($("#content_icon").attr("class") == "fa fa-chevron-up") { //글쓰기아이콘 바꾸기
 			$("#content_icon").attr("class","fa fa-chevron-down")
 		} else {
