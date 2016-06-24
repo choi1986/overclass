@@ -20,9 +20,9 @@
 									<li><a href="#" onclick="delDoc(${DocumentDTO.dno })" style="color: black;" class="fa fa-bitbucket"> 게시글 삭제</a></li>
 								</c:if>
 								<c:if test="${DocumentDTO.writer != user.user_id}">
-								<form id="report_form" method="post" action="/overclass/admin/reportDoc">
+								<form class="report_form${DocumentDTO.dno }" method="post" action="/overclass/admin/reportDoc">
 								<input type="hidden" name="dno" value="${DocumentDTO.dno }">
-								<input id="form_reporter" type="hidden" name="reporter" value="">
+								<input id="form_reporter" type="hidden" name="reporter" value="${user.user_id }">
 								<input id="form_content" type="hidden" name="content" value="">
 								</form>
 									<li><a href="#" onclick="reportDoc(${DocumentDTO.dno })" style="color: red;" class="fa fa-exclamation-circle"> 게시글 신고하기</a></li>
@@ -344,8 +344,8 @@ function reportDoc(dno) {
 				});
             	return false;
             } else {
-            	var report_form = $("#report_form")
-            	var report_reporter = $("#form_reporter").attr("value",'<%= user2.getUser_id() %>')
+            	var report_form = $(".report_form"+dno)
+            	/* var report_reporter = $("#form_reporter").attr("value",'') */
             	var report_content = $("#form_content").attr("value",content)
             	report_form.submit();
             }

@@ -12,7 +12,7 @@
 	</delete>
 	
 	<select id="report_sel" resultType="int">
-		select count(reporter)
+		select count(reportno)
 		from oc_report
 		where reporter = #{reporter} AND dno = #{dno}
 	</select>

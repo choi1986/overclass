@@ -64,8 +64,10 @@ public class AdminController {
 		if ( service.report_sel(vo) == 0 ) {
 			msg = "Report_SUCCESS";
 			service.report(vo); //report테이블에 신고정보 저장
+			System.out.println("성공:"+service.report_sel(vo));
 		} else {
 			msg = "Report_FAIL";
+			System.out.println("실패:"+service.report_sel(vo));
 		}
 		attr.addFlashAttribute("msg", msg);
 		return "redirect:/main";
