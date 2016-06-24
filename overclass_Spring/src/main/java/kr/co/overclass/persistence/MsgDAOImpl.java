@@ -46,7 +46,7 @@ public class MsgDAOImpl implements MsgDAO {
 	}
 
 	@Override
-	public List<MsgVO> chatList(Map<String, String> map) throws Exception {
+	public List<MsgDTO> chatList(Map<String, String> map) throws Exception {
 		RowBounds rb = new RowBounds(0, 30);
 		return session.selectList("msg.chatList", map, rb);
 	}

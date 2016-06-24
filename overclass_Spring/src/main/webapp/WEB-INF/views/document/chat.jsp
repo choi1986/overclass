@@ -98,10 +98,13 @@
 						$("#textout").append(htmltxt);
 					}
 				}
+				var window = document.getElementById('chatwindow');
+				window.scrollTop = window.scrollHeight; 
 			}break;
 			case 210:{
 				// 내가 지금 대화를 하고있는 상대한태서 온 메시지이면 화면에 표출
 				if(data.receiver == sender){
+					data.writedate = '방금전';
 					htmltxt = templateother(data);
 					$("#textout").append(htmltxt);
 					var window = document.getElementById('chatwindow');
@@ -155,7 +158,9 @@
 			})
 			// 서버전송
 			ws.send(text);
-			var htmltxt = templateme(JSON.parse(text));
+			var parseText = JSON.parse(text);
+			parseText.writedate = '방금전';
+			var htmltxt = templateme(parseText);
 			$("#textout").append(htmltxt);
 			$("#sendtext").val('');
 			var window = document.getElementById('chatwindow');

@@ -14,5 +14,5 @@ public interface MsgService {
 	public List<MsgDTO> sitebarDisplay(String user_id) throws Exception;
 	public int count(String user_id) throws Exception;
 	public List<ChatFriendListDTO> friendList(String user_id) throws Exception;
-	public List<MsgVO> chatList(Map<String, String> map) throws Exception;
+	public List<MsgDTO> chatList(Map<String, String> map) throws Exception;
 }
