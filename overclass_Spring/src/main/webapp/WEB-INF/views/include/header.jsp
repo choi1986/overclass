@@ -103,11 +103,11 @@
 							<p class="blue">새알림 n개</p>
 						</li>
 						<li>
-							<a href="#"> 
+							<a href="/overclass/notice/req?user_id=${login.user_id}"> 
 								<span class="label label-primary">
 									<i class="icon_profile"></i>
 								</span>
-								 홍길동님이 친구 요청 
+								<input type="text" id="reqCount" size="1"></b>건의 친구요청
 								<span class="small italic pull-right">5분 전</span>
 							</a>
 						</li>
