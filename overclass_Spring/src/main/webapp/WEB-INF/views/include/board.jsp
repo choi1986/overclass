@@ -42,16 +42,18 @@
 												 <h5>
 												 <span class="mapXY">
 												 	<span class="hidden">${DocumentDTO.mapXY}</span>
-													<a href="" id="locDoc">
+													<%-- <a href="/overclass/main/map?mapXY=${DocumentDTO.mapXY}&mapLoc=${DocumentDTO.mapLoc}" id="locDoc"> --%>
+													<a href="#" onClick="window.open('/overclass/main/map?mapXY=${DocumentDTO.mapXY}&mapLoc=${DocumentDTO.mapLoc}','지도','width=900, height=600, toolbar=no, menubar=no, scrollbars=no, resizable=yes');return false;" id="locDoc">
 													<c:if test="${DocumentDTO.mapLoc != null}">
 														<span class="fa fa-map-marker" style="color: green"> </span>
 													</c:if> 
 														${DocumentDTO.mapLoc}
-													</a>
-												 </span>
 													<c:if test="${DocumentDTO.mapLoc != null}">
 														<span style="color: black;">에서</span>
 													</c:if>
+													</a>
+												 </span>
+													
 												</h5>
 										</div>
 									</div>
@@ -213,11 +215,18 @@
 
 $(document).ready(function() {
 	
-	$(".mapXY").click(function name() {
-		var mapXY = this.firstChild.nextSibling.firstChild.nodeValue;
-		alert(mapXY)
-	})
 	
+	/* $(".mapXY").click(function name() {
+		var mapXY = this.firstChild.nextSibling.firstChild.nodeValue;
+		$("#locDoc").attr("href","/overclass/main/map?mapXY="+mapXY)
+		
+	}) */
+	
+/* 	function openMap(mapXY,mapLoc) {
+		alert()
+	} */
+	
+				
 	var result = '${msg}';
 	
 	//글쓰기 성공시
