@@ -175,6 +175,22 @@ public class DocumentController {
 		return forward;
 	}
 	
+	//Áöµµ
+	@RequestMapping(value="/map", method=RequestMethod.GET)
+	public String map(String mapXY, String mapLoc, HttpSession session,Model model) throws Exception{
+		System.out.println("map: "+mapXY);
+		String temp = mapXY.replaceAll("[()]", "");
+		String format[] = temp.split(", ");
+		String mapX = format[0];
+		String mapY = format[1];
+		Map<String, Object> map = new HashMap<>();
+		map.put("mapX", mapX);
+		map.put("mapY", mapY);
+		map.put("mapLoc", mapLoc);
+		model.addAttribute("mapinfo",map);
+		return "document/map";
+	}
+	
 	@RequestMapping(value="/read_document", method=RequestMethod.GET)
 	public String read_document(int dno,HttpSession session,Model model) throws Exception{
 		DocumentDTO dto = service.read_doc(dno);
