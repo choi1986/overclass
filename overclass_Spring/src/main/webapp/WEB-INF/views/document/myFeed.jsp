@@ -16,16 +16,19 @@
 			<div class="profile-widget profile-widget-info">
 				<div class="panel-body">
 					<div class="col-sm-2 col-sm-2">
-						<h4>${user.user_name }</h4>
-						<div class="follow-ava" id="image_div">
-							<img class="img-responsive img-circle" id="user_image" src="${user.user_image }" width='70' height='70'>
+						<h4> </h4>
+						<div class="row">
+							<div class="follow-ava" id="image_div">
+								<img class="img-responsive img-circle" id="user_image" src="${user.user_image }" style="width: 90px; height: 90px;">
+							</div>
 						</div>
-						<h5>${user.user_id }</h5>
+						<div class="row"><h4><b>${user.user_id }</b></h4></div>
+						<div class="row">
 						<div id="image_update_div" style="display: none;">
 							<button type="button" id="image_update" class="btn btn-success">변경</button>
 							<button type="button" id="image_cancel" class="btn btn-danger">취소</button>
 						</div>
-						
+						</div>
 						<!-- 파일 -->
 						<form role="form" id="user_image_update" class="form-horizontal" action="/overclass/main/imageUp"
 							method="post" enctype="multipart/form-data">
@@ -39,18 +42,22 @@
 					</form>
 					
 					</div>
-					<div class="col-sm-4 col-sm-4 follow-info">
+					<div class="col-sm-4 col-sm-4 follow-info" style="margin-top: -30px;">
 						<div class="row">
 							<h3><span class="fa fa-lg fa-github-alt">&nbsp;MyPage</span></h3>
 						</div>
 						<div class="row">
-							<i class="fa fa-twitter"><span>&nbsp;</span>${fn:substring(user.user_birth,2,4)}월
-							${fn:substring(user.user_birth,4,6)}일</i></div>
-						<div class="row">
-							<i class="fa fa-envelope-o"><span>&nbsp;</span>${user.user_email }</i>
+							<h4><i class="fa fa-user">&nbsp;${user.user_name }</i></h4>
 						</div>
 						<div class="row">
-							<i class="icon_pin_alt"><i>${user.user_loc }</i></i>
+							<h4><i class="fa fa-birthday-cake">&nbsp;${fn:substring(user.user_birth,2,4)}월
+							${fn:substring(user.user_birth,4,6)}일</i></h4>
+						</div>
+						<div class="row">
+							<h4><i class="fa fa-envelope-o">&nbsp;${user.user_email }</i></h4>
+						</div>
+						<div class="row">
+							<h4><i class="icon_pin_alt">&nbsp;${user.user_loc }</i></h4>
 						</div>
 					</div>
 				</div>
@@ -1138,29 +1145,14 @@ var result = '${msg}';
 	        });	
 		})
 		
-		$("#dropdown_2").click(function() {
-			$("#page_div").hide()
-		})
-		$("#dropdown_3").click(function() {
-			$("#page_div").hide()
-		})
-		$("#dropdown_1").click(function() {
-			$("#page_div").show()
-		})
-		
 		//글쓰기 폼 클릭시
+		$("#content_body").hide()
 		$("#content_form").click(function() {
-			$("#content_body").slideToggle(
-					"slow"); //글쓰기아이콘 누르면 슬라이드 효과
-			if ($("#content_icon")
-					.attr("class") == "fa fa-chevron-up") { //글쓰기아이콘 바꾸기
-				$("#content_icon").attr(
-						"class",
-						"fa fa-chevron-down")
+			$("#content_body").slideToggle(1000); //글쓰기아이콘 누르면 슬라이드 효과
+			if ($("#content_icon").attr("class") == "fa fa-chevron-up") { //글쓰기아이콘 바꾸기
+				$("#content_icon").attr("class","fa fa-chevron-down")
 			} else {
-				$("#content_icon").attr(
-						"class",
-						"fa fa-chevron-up")
+				$("#content_icon").attr("class","fa fa-chevron-up")
 			}
 		})
 		//페이징버튼 앞으로  클릭시
