@@ -20,7 +20,7 @@
 									<li><a href="#" onclick="delDoc(${DocumentDTO.dno })" style="color: black;" class="fa fa-bitbucket"> 게시글 삭제</a></li>
 								</c:if>
 								<c:if test="${DocumentDTO.writer != user.user_id}">
-									<li><a href="#" style="color: red;" class="fa fa-exclamation-circle"> 게시글 신고하기</a></li>
+									<li><a href="#" onclick="reportDoc(${DocumentDTO.dno })" style="color: red;" class="fa fa-exclamation-circle"> 게시글 신고하기</a></li>
 								</c:if>
 							</ul>
 						</div>
@@ -32,32 +32,51 @@
 						<div class="form quick-post">
 							<!-- 글쓰기폼-->
 							<form class="form-horizontal">
-								<!-- 타이틀 -->
-								<div class="form-group">
-									<div class="photo col-lg-2" style="text-align: center;">
-										<img class="img-circle" alt="avatar" src="${DocumentDTO.user_image}" width='70' height='70'>
-										<h4></h4>
-										<p>
-											<b>${DocumentDTO.writer }</b>
-										</p>
-									</div>
-									<!-- 글내용 -->
-									<div class="col-lg-10">
-										<div class="panel-content" style="width: 100%; height: 100px; overflow: hidden; word-break: break-all;">
-											${DocumentDTO.content }
+									<!-- 프로필 -->
+									<div class="form-group">
+										<label class="col-sm-2">
+											<img class="img-rounded" src="${DocumentDTO.user_image}" width='90px' height='90px'>
+										</label>
+										<div class="col-sm-10"> 
+											<h4><b>${DocumentDTO.writer } </b></h4><br>
+												 <h5>
+												 <span class="mapXY">
+												 	<span class="hidden">${DocumentDTO.mapXY}</span>
+													<%-- <a href="/overclass/main/map?mapXY=${DocumentDTO.mapXY}&mapLoc=${DocumentDTO.mapLoc}" id="locDoc"> --%>
+													<a href="#" onClick="window.open('/overclass/main/map?mapXY=${DocumentDTO.mapXY}&mapLoc=${DocumentDTO.mapLoc}','지도','width=900, height=600, toolbar=no, menubar=no, scrollbars=no, resizable=yes');return false;" id="locDoc">
+													<c:if test="${DocumentDTO.mapLoc != null}">
+														<span class="fa fa-map-marker" style="color: green"> </span>
+													</c:if> 
+														${DocumentDTO.mapLoc}
+													<c:if test="${DocumentDTO.mapLoc != null}">
+														<span style="color: black;">에서</span>
+													</c:if>
+													</a>
+												 </span>
+													
+												</h5>
 										</div>
 									</div>
-								</div>
 									
+									<!-- 글내용 -->
+									<div class="form-group">
+										<label class="control-label col-sm-2" for="content">내용</label>
+										<div class="col-sm-10">
+											<div class="panel-content"
+												style="width: 100%; height: 100px; overflow: hidden; word-break: break-all;">
+												${DocumentDTO.content }</div>
+										</div>
+									</div>
+
 									<!-- 사진 -->
 								<c:if test="${DocumentDTO.image != '' }">
 									<div class="form-group">
-										<div class="control-label col-lg-2">사진
+										<div class="control-label col-sm-2">사진
 										</div>
-										<div class="filebox col-lg-10">
-											<div class="col-lg-12" id="photo_div">
-											<a href="${DocumentDTO.image }" data-lightbox="image-${DocmentDTO.dno }" data-title="사진">
-												<img class="img-responsive img-thumbnail" src="${DocumentDTO.image }" width="500px" height="350px">
+										<div class="filebox col-sm-10">
+											<div class="col-sm-12" id="photo_div">
+											<a href="${DocumentDTO.image }" data-lightbox="image-${DocumentDTO.dno }" data-title="사진">
+												<img class="img-responsive img-thumbnail" src="${DocumentDTO.image }" style="width: 100%; height: 100%; position: relative; overflow: hidden;">
 											</a>
 											</div>
 										</div>
@@ -70,8 +89,8 @@
                         <div class="form-group">
                            <div class="goodclass">
                               <div style="display: none;">${DocumentDTO.dno }</div>
-                              <a class="control-label col-lg-2">
-                                 좋아요&nbsp;&nbsp;
+                              <a class="control-label col-sm-2">
+                      		           좋아요&nbsp;&nbsp;
                                <c:choose>
                                	<c:when test="${DocumentDTO.good == 0 }">
                                		<span id="good_icon${DocumentDTO.dno }" class="fa fa-lg fa-thumbs-o-up" style="color: blue;"></span>
@@ -83,15 +102,17 @@
                               </a>
                            </div>
                               
-                           <div class="col-lg-8">
+                           <div class="col-sm-8">
                               <i class="fa fa-lg fa-heart" style="color: red;">
                                  <span id="good_count${DocumentDTO.dno }" style="color: black;">&nbsp;${DocumentDTO.goodcnt }</span>
                               </i>
                            </div>
                         </div>
+                        
+                        <!-- 태그 -->
                         <div class="form-group">
-                           <label class="control-label col-lg-2" for="content">태그</label>
-                           <div class="col-lg-9">
+                           <label class="control-label col-sm-2" for="content">태그</label>
+                           <div class="col-sm-9">
                               <c:if test="${DocumentDTO.tag != null }">
                               <c:set var="tags" value="${fn:split(DocumentDTO.tag,',' )}"/>
                               <c:forEach items="${tags }" var="tag">
@@ -103,8 +124,8 @@
                         
                         <!-- 댓글쓰기 -->
 								<div class="form-group">
-									<label class="control-label col-lg-2" for="reply_write">댓글</label>
-									<div class="col-lg-10">
+									<label class="control-label col-sm-2" for="reply_write">댓글</label>
+									<div class="col-sm-10">
 										<input id="reply_write${DocumentDTO.dno }" type="text" class="form-control" size="18" placeholder="댓글을 입력하세요..." onkeydown="return writeReply(event,${DocumentDTO.dno})">
 									</div>
 								</div>
@@ -113,7 +134,7 @@
 								<div class="widget-icons pull-right">
 									<a id="reply_icon" class="wminimize">
 										<div style="display: none;">${DocumentDTO.dno }</div>
-										<i id="reply_icon${DocumentDTO.dno }_2" class="fa fa-chevron-up">댓글&nbsp;&nbsp;&nbsp;&nbsp;</i>
+										<i id="reply_icon${DocumentDTO.dno }_2" class="fa fa-chevron-up">댓글[${DocumentDTO.replycnt }]&nbsp;&nbsp;&nbsp;&nbsp;</i>
 									</a>
 								</div><br>
                         <!-- 댓글 -->
@@ -142,19 +163,19 @@
 </c:forEach>
 <footer>
 	<!-- 페이징버튼 -->
-	<div id="page_div" class="col-lg-offset-4 col-lg-4">
-		<div class="col-lg-offset-1 col-lg-8">
+	<div id="page_div" class="col-sm-offset-2 col-sm-9">
+		<div class="col-sm-offset-3 col-sm-10">
 			<div class="btn-toolbar">
 				<div class="btn-group">
 					<c:if test="${pageMaker.prev }">
-					<a href="/overclass/main/myFeed_Page?page=${pageMaker.startPage -1 }">
+					<a href="/overclass/main/mainFeed_Page?page=${pageMaker.startPage -1 }">
 						<button class="btn btn-default" type="button">«</button>
 					</a>
 					</c:if>
 				</div>
 				<div class="btn-group">
 					<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
-					<a href="/overclass/main/myFeed_Page?page=${idx }">
+					<a href="/overclass/main/mainFeed_Page?page=${idx }">
 						
 						<button class="<c:out value="${pageMaker.cri.page == idx?'btn btn-primary active':'btn btn-primary' }"/>">${idx }</button>
 					</a>
@@ -162,7 +183,7 @@
 				</div>
 				<div class="btn-group">
 					<c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
-					<a href="/overclass/main/myFeed_Page?page=${pageMaker.endPage +1 }">
+					<a href="/overclass/main/mainFeed_Page?page=${pageMaker.endPage +1 }">
 						<button class="btn btn-default" type="button">»</button>
 					</a>
 					</c:if>
@@ -173,7 +194,7 @@
 	<!--페이징버튼-->
 </footer>
 
-<!-- 댓글처리를 위한 템플릿 -->
+<!-- 댓글처리를 위한 템플릿. -->
 <script id="template" type="text/x-handlebars-template">
 <div class="act-time">
    <div class="activity-body act-in">
@@ -190,37 +211,140 @@
 
 
 <script>
-	var source = $("#template").html();
-	var template = Handlebars.compile(source);
+
+
+$(document).ready(function() {
 	
-	//글삭제
-	function delDoc(dno) {
+	var result = '${msg}';
+	
+	//글쓰기 성공시
+	if (result == 'Write_SUCCESS') {
 		BootstrapDialog.show({
-			title: '', //알러트 타이틀 이름
-			message: '글을 삭제 하시겠습니까?', //알러트 내용
-			type: BootstrapDialog.TYPE_DANGER,
-			buttons: [{ //알러트 버튼 정의
-				icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
-				label: '삭제', //알러트 버튼 이름
-				cssClass: 'btn-danger', //알러트 버튼 색바꾸기
-				hotkey:13,
-				action: function(confirm) {
-					location.href="/overclass/main/myremoveDoc?dno="+dno;
-					confirm.close()
-				}
-				},{
-					label: '닫기',
-					action: function(cancel){
-						cancel.close();
-						}
-				}]
-		})
+    		title: '', //알러트 타이틀 이름
+    		message: '글이 등록 되었습니다.', //알러트 내용
+    		buttons: [{ //알러트 버튼 정의
+    				icon: 'fa fa-check',
+    				label: '확인',
+    				cssClass: 'btn-primary',
+    				hotkey:13,
+    				action: function(cancel){
+    					cancel.close();
+   					}
+    			}]
+    	})
+		//글삭제 성공시
+	} else if (result == 'Remove_SUCCESS') {
+		BootstrapDialog.show({
+    		title: '', //알러트 타이틀 이름
+    		message: '글이 삭제 되었습니다.', //알러트 내용
+    		buttons: [{ //알러트 버튼 정의
+    				icon: 'fa fa-check',
+    				label: '확인',
+    				cssClass: 'btn-primary',
+    				hotkey:13,
+    				action: function(cancel){
+    					cancel.close();
+   					}
+    			}]
+    	})
 	}
+})
+
+//글삭제
+function delDoc(dno) {
+	BootstrapDialog.show({
+		title: '', //알러트 타이틀 이름
+		message: '글을 삭제 하시겠습니까?', //알러트 내용
+		type: BootstrapDialog.TYPE_DANGER,
+		buttons: [{ //알러트 버튼 정의
+			icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
+			label: '삭제', //알러트 버튼 이름
+			cssClass: 'btn-danger', //알러트 버튼 색바꾸기
+			action: function(confirm) {
+				location.href="/overclass/main/myremoveDoc?dno="+dno;
+				
+				confirm.close()
+			}
+			},{
+				label: '닫기',
+				action: function(cancel){
+					cancel.close();
+					}
+			}]
+	})
+}
+
+//신고
+function reportDoc(dno) {
+   BootstrapDialog.show({
+      title: '', //알러트 타이틀 이름
+      message: '신고사유: <input name="content" id="content" type="text" class="form-control">', //알러트 내용
+      type: BootstrapDialog.TYPE_DANGER,
+      buttons: [{ //알러트 버튼 정의
+         icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
+         label: '신고', //알러트 버튼 이름
+         cssClass: 'btn-danger', //알러트 버튼 색바꾸기
+         action: function(confirm) {
+            var content = confirm.getModalBody().find('#content').val();
+            if(content.trim() == '') {
+            	BootstrapDialog.show({
+					title : '', //알러트 타이틀 이름
+					message : '신고사유를 입력해주세요', //알러트 내용
+					buttons : [ { //알러트 버튼 정의
+						icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
+						label : '확인', //알러트 버튼 이름
+						cssClass : 'btn-primary', //알러트 버튼 색바꾸기
+						action : function(confirm) {
+							confirm.close()
+						}
+					}]
+				});
+            	return false;
+            } else {
+	            $.ajax({
+	               url: "/overclass/admin/reportDoc",
+	               type: "post",
+	               data: {
+	                  reporter:'<%= user2.getUser_id() %>',
+	                  dno:dno,
+	                  content:content,
+	               },
+	               success: function(result) {
+	            	   BootstrapDialog.show({
+							title : '', //알러트 타이틀 이름
+							message : '신고가 접수되었습니다', //알러트 내용
+							buttons : [ { //알러트 버튼 정의
+								icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
+								label : '확인', //알러트 버튼 이름
+								cssClass : 'btn-primary', //알러트 버튼 색바꾸기
+								action : function(confirm) {
+									confirm.close()
+								}
+							} ]
+						});
+	               }
+	            })
+            }
+            confirm.close()
+         }
+         },{
+            label: '닫기',
+            action: function(cancel){
+               cancel.close();
+               }
+         }]
+   })
+}
+var source = $("#template").html();
+var template = Handlebars.compile(source);
+	
+
 	var replyPage = 1;
 
 	function replyDisplayPage(dno, replyPage) {
 		var replydiv = '#reply_div' + dno;
 		var reply_page = '#reply_div_page_'+dno
+		var reply_icon = '#reply_icon'+dno+'_2';
 		$.ajax({
 			url : '/overclass/reply/list/' + dno + '/' + replyPage,
 			type : 'get',
@@ -228,8 +352,8 @@
 				var htmlTxt='';
 				for(var i=0; i<result.list.length; i++){
 					htmlTxt+=template(result.list[i]);
+					$(reply_icon).html('댓글['+result.count+']&nbsp;&nbsp;&nbsp;&nbsp;')
 				}
-				
 				// 페이징추가해야됨.
 				$(replydiv).html(htmlTxt);
 				printPaging(result.pageMaker, dno, reply_page);

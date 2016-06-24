@@ -21,10 +21,11 @@
 							<img class="img-responsive img-circle" id="user_image" src="${user.user_image }" width='70' height='70'>
 						</div>
 						<h5>${user.user_id }</h5>
-						<div id="image_update" style="display: none;">
+						<div id="image_update_div" style="display: none;">
 							<button type="button" id="image_update" class="btn btn-success">변경</button>
 							<button type="button" id="image_cancel" class="btn btn-danger">취소</button>
 						</div>
+						
 						<!-- 파일 -->
 						<form role="form" id="user_image_update" class="form-horizontal" action="/overclass/main/imageUp"
 							method="post" enctype="multipart/form-data">
@@ -39,13 +40,18 @@
 					
 					</div>
 					<div class="col-sm-4 col-sm-4 follow-info">
-						<p>
-							<i class="fa fa-lg fa-github-alt">&nbsp;MyPage</i>
-						</p>
-						<i class="fa fa-twitter"><span>&nbsp;</span>${fn:substring(user.user_birth,2,4)}월
-							${fn:substring(user.user_birth,4,6)}일</i><br> <i
-							class="fa fa-envelope-o"><span>&nbsp;</span>${user.user_email }</i><br>
-						<i class="icon_pin_alt"><i>${user.user_loc }</i></i>
+						<div class="row">
+							<h3><span class="fa fa-lg fa-github-alt">&nbsp;MyPage</span></h3>
+						</div>
+						<div class="row">
+							<i class="fa fa-twitter"><span>&nbsp;</span>${fn:substring(user.user_birth,2,4)}월
+							${fn:substring(user.user_birth,4,6)}일</i></div>
+						<div class="row">
+							<i class="fa fa-envelope-o"><span>&nbsp;</span>${user.user_email }</i>
+						</div>
+						<div class="row">
+							<i class="icon_pin_alt"><i>${user.user_loc }</i></i>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -390,6 +396,296 @@
 
 </section>
 <script src="/overclass/resources/js/lightbox.js"></script>
+<script>
+lightbox.option({
+    'disableScrolling' : true,
+    'showImageNumberLabel' : false,
+    'fadeDuration' : 700
+})
+
+// 마커를 담을 배열입니다
+var markers = [];
+
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new daum.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
+
+// 지도를 생성합니다    
+var map = new daum.maps.Map(mapContainer, mapOption); 
+
+// 장소 검색 객체를 생성합니다
+var ps = new daum.maps.services.Places();  
+
+//주소-좌표 변환 객체를 생성합니다
+var geocoder = new daum.maps.services.Geocoder();
+
+// 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
+var infowindow = new daum.maps.InfoWindow({zIndex:1});
+
+// 키워드로 장소를 검색합니다
+searchPlaces();
+
+// 키워드 검색을 요청하는 함수입니다
+function searchPlaces() {
+
+    var keyword = document.getElementById('keyword').value;
+
+    if (!keyword.replace(/^\s+|\s+$/g, '')) {
+        alert('키워드를 입력해주세요!');
+        return false;
+    }
+
+    // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
+    ps.keywordSearch( keyword, placesSearchCB); 
+}
+
+// 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
+function placesSearchCB(status, data, pagination) {
+    if (status === daum.maps.services.Status.OK) {
+
+        // 정상적으로 검색이 완료됐으면
+        // 검색 목록과 마커를 표출합니다
+        displayPlaces(data.places);
+
+        // 페이지 번호를 표출합니다
+        displayPagination(pagination);
+
+    } else if (status === daum.maps.services.Status.ZERO_RESULT) {
+
+        alert('검색 결과가 존재하지 않습니다.');
+        return;
+
+    } else if (status === daum.maps.services.Status.ERROR) {
+
+        alert('검색 결과 중 오류가 발생했습니다.');
+        return;
+
+    }
+}
+
+// 검색 결과 목록과 마커를 표출하는 함수입니다
+function displayPlaces(places) {
+
+    var listEl = document.getElementById('placesList'), 
+    menuEl = document.getElementById('menu_wrap'),
+    fragment = document.createDocumentFragment(), 
+    bounds = new daum.maps.LatLngBounds(), 
+    listStr = '';
+    
+    // 검색 결과 목록에 추가된 항목들을 제거합니다
+    removeAllChildNods(listEl);
+
+    // 지도에 표시되고 있는 마커를 제거합니다
+    removeMarker();
+    
+    for ( var i=0; i<places.length; i++ ) {
+
+        // 마커를 생성하고 지도에 표시합니다
+        var placePosition = new daum.maps.LatLng(places[i].latitude, places[i].longitude),
+            marker = addMarker(placePosition, i), 
+            itemEl = getListItem(i, places[i], marker); // 검색 결과 항목 Element를 생성합니다
+
+        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+        // LatLngBounds 객체에 좌표를 추가합니다
+        bounds.extend(placePosition);
+
+        // 마커와 검색결과 항목에 mouseover 했을때
+        // 해당 장소에 인포윈도우에 장소명을 표시합니다
+        // mouseout 했을 때는 인포윈도우를 닫습니다
+        (function(marker, title) {
+            daum.maps.event.addListener(marker, 'mouseover', function() {
+                displayInfowindow(marker, title);
+            });
+
+            daum.maps.event.addListener(marker, 'mouseout', function() {
+                infowindow.close();
+            });
+            
+            daum.maps.event.addListener(marker, 'click', function() {
+            	var markerPostion = marker.getPosition();
+            	/* alert("좌표: "+markerPostion) */
+	           	searchDetailAddrFromCoords(markerPostion, function(status, result) {
+			        if (status === daum.maps.services.Status.OK) {
+			            /* var detailAddr = !!result[0].roadAddress.name ? '<div>도로명주소 : ' + result[0].roadAddress.name + '</div>' : '';
+			            
+			            detailAddr += '<div>지번 주소 : ' + result[0].jibunAddress.name + '</div>';
+			            
+			            var content = '<div class="bAddr">' +
+			                            '<span class="title">법정동 주소정보</span>' + 
+			                            detailAddr + 
+			                        '</div>'; */
+			        	/* alert("도로명: "+result[0].roadAddress.name) */
+			        	document.getElementById("loc_div").setAttribute("style","display:''")
+			        	document.getElementById("map_div").setAttribute("style","display: none;")
+			        	var addrName = result[0].roadAddress.name
+			        	var locDiv = document.getElementById('loc');
+			            var locInput = document.getElementById('mapLoc');
+			            var mapXY = document.getElementById('mapXY');
+			           	locInput.setAttribute("value",addrName+' ['+title+']')
+			           	mapXY.setAttribute("value",markerPostion)
+			            locDiv.innerHTML = '<span class="fa fa-map-marker" style="color: green"></span>'
+			            +'<span> '+addrName+'</span>'
+			            +'<span> <b>['+title+']</b></span><span style="color: black;"> 에서</span>';
+			        }
+       	    	})
+            })
+
+            itemEl.onmouseover =  function () {
+                displayInfowindow(marker, title);
+            };
+
+            itemEl.onmouseout =  function () {
+                infowindow.close();
+            };
+            
+            itemEl.onclick = function() {
+            	var markerPostion = marker.getPosition();
+            	searchDetailAddrFromCoords(markerPostion, function(status, result) {
+			        if (status === daum.maps.services.Status.OK) {
+			            /* var detailAddr = !!result[0].roadAddress.name ? '<div>도로명주소 : ' + result[0].roadAddress.name + '</div>' : '';
+			            
+			            detailAddr += '<div>지번 주소 : ' + result[0].jibunAddress.name + '</div>';
+			            
+			            var content = '<div class="bAddr">' +
+			                            '<span class="title">법정동 주소정보</span>' + 
+			                            detailAddr + 
+			                        '</div>'; */
+			        	/* alert("도로명: "+result[0].roadAddress.name) */
+			        	document.getElementById("loc_div").setAttribute("style","display:''")
+			        	document.getElementById("map_div").setAttribute("style","display: none;")
+			        	var addrName = result[0].roadAddress.name
+			        	var locDiv = document.getElementById('loc');
+			            var locInput = document.getElementById('mapLoc');
+			            var mapXY = document.getElementById('mapXY');
+			           	locInput.setAttribute("value",addrName+' ['+title+']')
+			           	mapXY.setAttribute("value",markerPostion)
+			            locDiv.innerHTML = '<span class="fa fa-map-marker" style="color: green"></span>'
+			            +'<span> '+addrName+'</span>'
+			            +'<span> <b>['+title+']</b></span><span style="color: black;"> 에서</span>';
+			        }
+       	    	})
+			}
+            
+        })(marker, places[i].title);
+
+        fragment.appendChild(itemEl);
+    }
+
+    // 검색결과 항목들을 검색결과 목록 Elemnet에 추가합니다
+    listEl.appendChild(fragment);
+    menuEl.scrollTop = 0;
+
+    // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+    map.setBounds(bounds);
+}
+
+// 검색결과 항목을 Element로 반환하는 함수입니다
+function getListItem(index, places) {
+
+    var el = document.createElement('li'),
+    itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +
+                '<div class="info">' +
+                '   <h5>' + places.title + '</h5>';
+
+    if (places.newAddress) {
+        itemStr += '    <span>' + places.newAddress + '</span>' +
+                    '   <span class="jibun gray">' +  places.address  + '</span>';
+    } else {
+        itemStr += '    <span>' +  places.address  + '</span>'; 
+    }
+                 
+      itemStr += '  <span class="tel">' + places.phone  + '</span>' +
+                '</div>';           
+
+    el.innerHTML = itemStr;
+    el.className = 'item';
+
+    return el;
+}
+
+// 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
+function addMarker(position, idx, title) {
+    var imageSrc = 'http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+        imageSize = new daum.maps.Size(36, 37),  // 마커 이미지의 크기
+        imgOptions =  {
+            spriteSize : new daum.maps.Size(36, 691), // 스프라이트 이미지의 크기
+            spriteOrigin : new daum.maps.Point(0, (idx*46)+10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
+            offset: new daum.maps.Point(13, 37) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
+        },
+        markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imgOptions),
+            marker = new daum.maps.Marker({
+            position: position, // 마커의 위치
+            image: markerImage 
+        });
+
+    marker.setMap(map); // 지도 위에 마커를 표출합니다
+    markers.push(marker);  // 배열에 생성된 마커를 추가합니다
+
+    return marker;
+}
+
+// 지도 위에 표시되고 있는 마커를 모두 제거합니다
+function removeMarker() {
+    for ( var i = 0; i < markers.length; i++ ) {
+        markers[i].setMap(null);
+    }   
+    markers = [];
+}
+
+// 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
+function displayPagination(pagination) {
+    var paginationEl = document.getElementById('pagination'),
+        fragment = document.createDocumentFragment(),
+        i; 
+
+    // 기존에 추가된 페이지번호를 삭제합니다
+    while (paginationEl.hasChildNodes()) {
+        paginationEl.removeChild (paginationEl.lastChild);
+    }
+
+    for (i=1; i<=pagination.last; i++) {
+        var el = document.createElement('a');
+        el.href = "#";
+        el.innerHTML = i;
+
+        if (i===pagination.current) {
+            el.className = 'on';
+        } else {
+            el.onclick = (function(i) {
+                return function() {
+                    pagination.gotoPage(i);
+                }
+            })(i);
+        }
+
+        fragment.appendChild(el);
+    }
+    paginationEl.appendChild(fragment);
+}
+
+// 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
+// 인포윈도우에 장소명을 표시합니다
+function displayInfowindow(marker, title) {
+    var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
+
+    infowindow.setContent(content);
+    infowindow.open(map, marker);
+}
+
+ // 검색결과 목록의 자식 Element를 제거하는 함수입니다
+function removeAllChildNods(el) {   
+    while (el.hasChildNodes()) {
+        el.removeChild (el.lastChild);
+    }
+}
+function searchDetailAddrFromCoords(coords, callback) {
+    // 좌표로 법정동 상세 주소 정보를 요청합니다
+    geocoder.coord2detailaddr(coords, callback);
+}
+</script>
+
 </body>
 <script type="text/javascript">
 var result = '${msg}';
@@ -418,6 +714,18 @@ var result = '${msg}';
 		
 		//프로필수정에서 비밀번호질문 selected
 		$("#user_pwdq").val("${user.user_pwdq}");
+		
+		//지도버튼 show hide
+		$("#map_div").hide()
+		$("#mapbtn").click(function() {
+			$("#map_div").slideToggle(1000)
+			/* alert($("#map_div").height()) */
+		})
+		
+		//지도 닫기버튼
+		$('#mapDel').click(function() {
+	        $('#map_div').slideUp(1000)
+		})
 		
 		//프로필사진바꾸기
 		function userReadURL(input) {
@@ -449,7 +757,7 @@ var result = '${msg}';
 					//파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
 					$('#user_image').attr('src', e.target.result);
 					/* $('#photo_div').slideDown(1000) */
-					$('#image_update').slideDown(1000); 
+					$('#image_update_div').slideDown(1000); 
 					//이미지 Tag의 SRC속성에 읽어들인 File내용을 지정
 					//(아래 코드에서 읽어들인 dataURL형식)
 				}
@@ -474,22 +782,13 @@ var result = '${msg}';
 			formObj.submit();
 		})
 		
-		$("#image_cancel").bind('click', function() {
-			resetFormElement($('#imagefile')); //전달한 양식 초기화
-	        $('#imagefile').slideDown(1000); //파일 양식 보여줌
-	        $(this).parent().slideUp(1000); //미리 보기 영역 감춤
-			location.href = "/overclass/main/myFeed"
-	        return false; //기본 이벤트 막음
+		$("#image_cancel").click(function() {
+			$('#image_update_div').slideUp(1000)
+			$('#imagefile').val('');
+			var cancel = $('#cancel_image').attr("src")
+			$('#user_image').attr('src', cancel)
+			/* location.href = "/overclass/main/myFeed" */
 		})
-		
-		
-		$('#photo_div a').bind('click', function() {
-	        resetFormElement($('#imagefile')); //전달한 양식 초기화
-	        $('image#file').slideDown(1000); //파일 양식 보여줌
-	        $(this).parent().slideUp(1000); //미리 보기 영역 감춤
-	        return false; //기본 이벤트 막음
-	    });
-		
 		
 		//사진미리보기
 		function readURL(input) {
@@ -520,6 +819,7 @@ var result = '${msg}';
 				reader.onload = function(e) {
 					//파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
 					$('#photo').attr('src', e.target.result);
+					$('#photoview').attr('href', e.target.result);
 					$('#photo_div').slideDown(1000)
 					$('#photo_div a').attr("class","")
 					//이미지 Tag의 SRC속성에 읽어들인 File내용을 지정
@@ -540,22 +840,11 @@ var result = '${msg}';
 			}
 		});
 		
-		//사진삭제
-		$('#photo_div a').bind('click', function() {
-	        resetFormElement($('#file')); //전달한 양식 초기화
-	        $('#file').slideDown(1000); //파일 양식 보여줌
-	        $(this).parent().slideUp(1000); //미리 보기 영역 감춤
-	        return false; //기본 이벤트 막음
-	    });
-		
-		//파일리셋
-		function resetFormElement(e) {
-	        e.wrap('<form>').closest('form').get(0).reset(); 
-	        //리셋하려는 폼양식 요소를 폼(<form>) 으로 감싸고 (wrap()) , 
-	        //요소를 감싸고 있는 가장 가까운 폼( closest('form')) 에서 Dom요소를 반환받고 ( get(0) ),
-	        //DOM에서 제공하는 초기화 메서드 reset()을 호출
-	        e.unwrap(); //감싼 <form> 태그를 제거
-	    }
+		//사진 삭제버튼
+		$('#photoDel').click(function() {
+	        $('#photo_div').slideUp(1000)
+	        $('#file').val(""); //전달한 양식 초기화
+		})
 		
 		
 		 //   댓글div 열닫
@@ -659,7 +948,8 @@ var result = '${msg}';
 		    			cssClass: 'btn-primary', //알러트 버튼 색바꾸기
 		    			hotkey:13,
 		    			action: function(confirm) {
-		    				var formObj = $("#writeDoc");    				
+		    				var formObj = $("#writeDoc");
+		    				formObj.attr({action:'/overclass/main/mywriteDoc',method:'post',onsubmit:''});
 		    				formObj.submit();
 		    				confirm.close()
 						}
@@ -673,41 +963,8 @@ var result = '${msg}';
 			}
 		})
 		
-		//글쓰기 성공시
-		if (result == 'Write_SUCCESS') {
-			BootstrapDialog.show({
-	    		title: '', //알러트 타이틀 이름
-	    		message: '글이 등록 되었습니다.', //알러트 내용
-	    		buttons: [{ //알러트 버튼 정의
-	    				icon: 'fa fa-check',
-	    				label: '확인',
-	    				cssClass: 'btn-primary',
-	    				hotkey:13,
-	    				action: function(cancel){
-	    					cancel.close();
-	   					}
-	    			}]
-	    	}) 
-			
-	    //글삭제 성공시
-		} else if (result == 'Remove_SUCCESS') {
-			BootstrapDialog.show({
-	    		title: '', //알러트 타이틀 이름
-	    		message: '글이 삭제 되었습니다.', //알러트 내용
-	    		type: BootstrapDialog.TYPE_DANGER,
-	    		buttons: [{ //알러트 버튼 정의
-	    				icon: 'fa fa-check',
-	    				label: '확인',
-	    				cssClass: 'btn-danger',
-	    				hotkey:13,
-	    				action: function(cancel){
-	    					cancel.close();
-	   					}
-	    			}]
-	    	})
-	    	
 	    //프로필사진 변경 성공시
-		} else if (result == 'Update_SUCCESS') {
+		if (result == 'Update_SUCCESS') {
 			BootstrapDialog.show({
 	    		title: '', //알러트 타이틀 이름
 	    		message: '프로필이 수정 되었습니다.', //알러트 내용

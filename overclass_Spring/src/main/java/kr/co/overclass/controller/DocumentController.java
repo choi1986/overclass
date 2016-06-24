@@ -69,7 +69,7 @@ public class DocumentController {
 		logger.info("사진: [파일이름: "+imageName+
 				", "+"파일크기: "+ Math.floor(((float)file.getSize()/1048576)*100f)/100f +"MB"+
 				", "+"파일타입: "+file.getContentType()+"]");
-		if( url.equals("/main/mywriteDoc") ) {
+		if( url.matches(".*mywriteDoc.*") ) {
 			forward = "redirect:/main/myFeed";
 		} else {
 			forward = "redirect:/main";
