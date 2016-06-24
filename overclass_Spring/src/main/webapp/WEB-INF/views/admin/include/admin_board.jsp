@@ -9,55 +9,65 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<div class="pull-right">
-						<!-- 드롭다운 -->
-						<!-- <div class="btn-group">
-							 <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-								<i class="fa fa-align-justify"></i> 
-							</a>
-							<ul class="dropdown-menu" role="menu">
-								<li><a href="#" style="color: red;" class="fa fa-exclamation-circle"> 제재하기</a></li>
-							</ul>
-						</div> -->
 					</div>
 				</div>
 				<div class="panel-body">
 					<div class="padd">
 						<div class="form quick-post">
-							<!-- 글쓰기폼-->
-							<form class="form-horizontal" id="reportForm" method="post"
+						<form class="form-horizontal" id="reportForm" method="post"
 								action="/overclass/admin/banDoc">
-								<!-- 타이틀 -->
-								<div class="form-group">
-									<div class="photo col-lg-2" style="text-align: center;">
-										<img name="user_image" alt="avatar" src='${reportDTO.user_image }' width='70' height='70'>
-										<h4></h4>
-										<p>
-											<b>${reportDTO.writer } </b>
+									<!-- 프로필 -->
+									<div class="form-group">
+										<label class="col-sm-2">
+											<img class="img-rounded" name="user_image" src='${reportDTO.user_image }' width='90px' height='90px'>
+										</label>
+										<div class="col-sm-10"> 
+											<h4><b>${reportDTO.writer } </b></h4><br>
 											<input type="hidden" name="writer" value="${reportDTO.writer }">
 											<input type="hidden" name="dno" value="${reportDTO.dno }">
-										</p>
-									</div>
-									<div class="col-lg-10">
-										<div class="panel-content" style="width: 100%; height: 100px; overflow: hidden; word-break: break-all;">
-											${reportDTO.content }
-										<input type="hidden" name="content" value="${reportDTO.content }">
+												 <h5>
+												 <span class="mapXY">
+												 	<span class="hidden">${reportDTO.mapXY}</span>
+													<%-- <a href="/overclass/main/map?mapXY=${DocumentDTO.mapXY}&mapLoc=${DocumentDTO.mapLoc}" id="locDoc"> --%>
+													<a href="#" onClick="window.open('/overclass/main/map?mapXY=${reportDTO.mapXY}&mapLoc=${reportDTO.mapLoc}','지도','width=900, height=600, toolbar=no, menubar=no, scrollbars=no, resizable=yes');return false;" id="locDoc">
+													<c:if test="${reportDTO.mapLoc != null}">
+														<span class="fa fa-map-marker" style="color: green"> </span>
+													</c:if> 
+														${reportDTO.mapLoc}
+													<c:if test="${reportDTO.mapLoc != null}">
+														<span style="color: black;">에서</span>
+													</c:if>
+													</a>
+												 </span>
+													
+												</h5>
 										</div>
 									</div>
-								</div>
+									
+									<!-- 글내용 -->
+									<div class="form-group">
+										<label class="control-label col-sm-2" for="content">내용</label>
+										<div class="col-sm-10">
+											<div class="panel-content" style="width: 100%; height: 100%; overflow: hidden; word-break: break-all;">
+												${reportDTO.content }
+												<input type="hidden" name="content" value="${reportDTO.content }">
+											</div>
+										</div>
+									</div>
 
 								<!-- 사진 -->
-								<div class="form-group">
-									<div class="control-label col-lg-2"></div>
-									<div class="filebox col-lg-10">
-										<div class="col-lg-12" id="photo_div">
-											<c:if test="${reportDTO.image != '' }">
-												<a href="${reportDTO.image }" data-lightbox="image-${reportDTO.dno }" data-title="사진">
-													<img name="image" class="img-responsive img-thumbnail" src="${reportDTO.image }" width="500px" height="350px">
-												</a>
-											</c:if>
+								<c:if test="${reportDTO.image != '' }">
+									<div class="form-group">
+										<div class="control-label col-lg-2"></div>
+										<div class="filebox col-lg-10">
+											<div class="col-lg-12" id="photo_div">
+													<a href="${reportDTO.image }" data-lightbox="image-${reportDTO.dno }" data-title="사진">
+														<img name="image" class="img-responsive img-thumbnail" src="${reportDTO.image }" width="500px" height="350px">
+													</a>
+											</div>
 										</div>
 									</div>
-								</div>
+								</c:if>
 			
 								<div class="form-group">
 									<div class="goodclass">
@@ -97,7 +107,7 @@
 								<div class="form-group">
 									<label class="control-label col-lg-2" for="content">신고자</label>
 									<div class="col-lg-9">
-										<div class="panel-content" style="width: 100%; height: 100px; overflow: hidden; word-break:break-all;">
+										<div class="panel-content" style="width: 100%; height: 100%; overflow: hidden; word-break:break-all;">
 											<input type="hidden" name="reporter" value="${reportDTO.reporter }">
 											<b>${reportDTO.reporter }</b>
 										</div>
@@ -108,8 +118,7 @@
 								<div class="form-group">
 									<label class="control-label col-lg-2" for="content">신고사유</label>
 									<div class="col-lg-9">
-										<div class="panel-content"
-											width: 100%; height: 100px; overflow: hidden; word-break:break-all;">
+										<div class="panel-content" style="width: 100%; height: 100%; overflow: hidden; word-break:break-all;">
 											<b style="color: red;">${reportDTO.report_content }</b>
 											<input type="hidden" name="report_content" value="${reportDTO.report_content }">
 										</div>
@@ -120,7 +129,7 @@
 								<div class="form-group">
 									<label class="control-label col-lg-2" for="content">신고날짜</label>
 									<div class="col-lg-9">
-										<div class="panel-content" style="width: 100%; height: 100px; overflow: hidden; word-break:break-all;">
+										<div class="panel-content" style="width: 100%; height: 100%; overflow: hidden; word-break:break-all;">
 											<b id="reportdate">${reportDTO.reportdate }</b>
 											<input type="hidden" name="reportdate" value="${reportDTO.reportdate }">
 										</div>
