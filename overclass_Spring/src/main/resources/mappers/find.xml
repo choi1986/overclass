@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="find">
+	<select id="tagfind" resultType="document_dto">
+		select dno, writer, content, tag, writedate, image, mapLoc, mapXY, goodcnt, replycnt, user_image
+		from oc_document, oc_user
+		where tag LIKE '%'||#{tag}||'%' AND oc_document.writer = oc_user.user_id
+		order by writedate desc
+	</select>
+	
+	<select id="tagcnt" resultType="int">
+		select count(*) cnt 
+		from oc_document
+		where tag = #{tag}
+	</select>
+</mapper>

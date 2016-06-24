@@ -60,9 +60,9 @@
 			<!-- 검색폼 시작 -->
 			<ul class="nav top-menu">
 				<li>
-					<form class="navbar-form">
-						<input id="search_form" class="form-control" placeholder="Search"
-							type="text" onKeyDown="onKeyDown()">
+					<form id="find_form" class="navbar-form" method="get" action="">
+						<input id="search_form" class="form-control" placeholder="'#태그','친구아이디','친구이름'"
+							type="text" onKeyDown="find()">
 					</form>
 				</li>
 			</ul>
@@ -184,6 +184,22 @@
 		</div>
 	</header>
 <script type="text/javascript">
+function find() {
+	if(event.keyCode == 13){
+		var formObj = $("#find_form");
+		var txtvar = $('#search_form').val();
+		if(txtvar.substring(0,1)=='#'){ //태그검색
+			var txt = txtvar.substring(1,txtvar.length);
+			alert(txt)
+			/* formObj.attr("action","/overclass/find/tagfind?tag="+txt);
+			alert(formObj.attr("action"))
+			formObj.submit(); */
+			location.href="/overclass/find/tagfind?tag="+txt;
+		} else { //친구검색
+			
+		}
+	}
+}
 function onKeyDown(){
 	if(event.keyCode == 13){
 		var txtvar = $('#search_form').val();
