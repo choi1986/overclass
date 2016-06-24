@@ -11,6 +11,12 @@
 		where reportno = #{reportno}
 	</delete>
 	
+	<select id="report_sel" resultType="int">
+		select count(reporter)
+		from oc_report
+		where reporter = #{reporter} AND dno = #{dno}
+	</select>
+	
 	<select id="ban_list" resultType="report">
 		select writer, user_image, report_content
 		from oc_bandoc

@@ -14,4 +14,5 @@ public interface AdminDAO {
 	public void report_del(int reportno) throws Exception; //力力窍绊 臂昏力
 	public List<ReportDTO> ban_list() throws Exception; //力力格废
 	public int report_stack(String writer) throws Exception;
+	public int report_sel(ReportVO vo) throws Exception;
 }
