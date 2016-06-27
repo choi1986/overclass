@@ -315,17 +315,17 @@
 												<table class="table table-striped table-advance table-hover">
 													<tbody>
 														<tr>
-															<th><i class="icon_profile"></i> 프로필</th>
-															<th><i class="icon_calendar"></i> 아이디</th>
-															<th><i class="icon_mail_alt"></i> 이름</th>
-															<th><i class="icon_pin_alt"></i> 지역</th>
+															<th> 프로필</th>
+															<th> 아이디</th>
+															<th> 이름</th>
+															<th> 지역</th>
 														</tr>
 														<c:forEach var="i" items="${friend_rel}" begin="0">
 														<tr onclick="friendFeed('${i.user_id }')">
 															<td><img class="img-rounded" src="${i.user_image}" width='70px' height='70px'></td>
 															<td>${i.user_id }</td>
 															<td>${ i.user_name }</td>
-															<td>${i.user_loc }</td>
+															<td><i class="icon_pin_alt"></i>${i.user_loc }</td>
 														</tr>
 														</c:forEach>
 													</tbody>
