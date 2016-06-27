@@ -107,7 +107,7 @@
 								<span class="label label-primary">
 									<i class="icon_profile"></i>
 								</span>
-								<input type="text" id="reqCount" size="1"></b>건의 친구요청
+								<input type="text" id="reqCount" size="1">건의 친구요청
 								<span class="small italic pull-right">5분 전</span>
 							</a>
 						</li>
