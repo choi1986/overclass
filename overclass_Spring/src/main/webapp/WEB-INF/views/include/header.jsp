@@ -153,7 +153,7 @@
 						<span class="avatar">
 							<img id="cancel_image" class="img-circle" src="${user.user_image }" width='30' height='30'>
 						</span> 
-						<span class="username">${user.user_id }</span> 
+						<span id="useridspan" class="username">${user.user_id }</span> 
 						<b class="caret"></b>
 					</a>
 					<ul class="dropdown-menu extended logout">
