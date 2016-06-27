@@ -20,8 +20,10 @@ public class UserLoginDAOImpl implements UserLoginDAO {
 	}
 
 	@Override
-	public void createUserLogin (String user_id) throws Exception {
-		session.insert("user.createUserLogin", user_id);
+	public int createUserLogin (String user_id) throws Exception {
+		if (session.selectOne("user.searchUserLogin", user_id)!=null)
+			return 0;
+		else return session.insert("user.createUserLogin", user_id);
 	}
 
 	@Override
