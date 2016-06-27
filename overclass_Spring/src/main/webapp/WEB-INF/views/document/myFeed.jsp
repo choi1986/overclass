@@ -1504,7 +1504,7 @@ var result = '${msg}';
     			cssClass: 'btn-danger', //알러트 버튼 색바꾸기
     			hotkey:13,
     			action: function(confirm) {
-					location.href = "/overclass/main/friendDel?user_id="+user;
+					location.href = "/overclass/main/friendDel?user_id="+user; 
     				confirm.close()
 				}
     			},{
