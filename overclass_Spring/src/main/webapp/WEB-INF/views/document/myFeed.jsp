@@ -330,7 +330,7 @@
 															<td>
 																<div class="col-sm-offset-8 col-sm-4">
 																	<button type="button" id="friendDel" onclick="friendDel('${i.user_id }')" class="btn btn-danger">  
-																		<span class="fa fa-close"></span>
+																		<span class="fa fa-close"></span> 
 																	</button>
 																</div>
 															</td>
