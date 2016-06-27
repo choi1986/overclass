@@ -75,6 +75,8 @@ var msg_source = $("#msgtemp").html();
 var msg_template = Handlebars.compile(msg_source);
 var msgtop_source = $("#msgtoptemp").html();
 var msgtop_template = Handlebars.compile(msgtop_source);
+var msg_source_NR = $("#msgtempNR").html();
+var msg_templateNR = Handlebars.compile(msg_source_NR);
 
 var timer;
 var msgid;
@@ -379,5 +381,44 @@ $(function () {
 $('#scrollUpTheme').attr('href', '/overclass/resources/css/image.css?1.1');
 $('.image-switch').addClass('active');
 
+//***********************   소       켓      ****************************************
+//소켓생성하기
+var sender='<%=user.getUser_id()%>';
+
+var ws = new WebSocket('ws://192.168.0.131/overclass/chatting');
+
+//서버에서 메시지 날라올때
+ws.onmessage = function (event) {
+	var data = JSON.parse(event.data);
+		if(data.protocol == 130) {
+			//msgtemp, msgtempNR
+			var htmlTxt = msgtop_template(data);
+			$("#sitebarMsgCount").text(data.count);
+			for(var i=0; i<data.list.length; i++){
+				if(data.list[i].read == 0){	// 안읽었으면
+					htmlTxt+=msg_templateNR(data.list[i]);
+				}else{	// 읽었으면
+					htmlTxt+=msg_template(data.list[i]);
+				}
+			}// for
+			$("#msg4").html(htmlTxt);
+		}// if
+}
+
+//웹 소켓 서버 열릴 때
+ws.onopen = function() {
+	var connmsg = JSON.stringify({
+		sender:sender,
+		receiver:'allUser',
+		protocol:100,
+		content:'connected WS Server!'
+	});
+	ws.send(connmsg);
+}
+
+//웹 소켓 서버가 닫힐 때,
+ws.onclose = function() {
+	
+}
 </script>
 </html>

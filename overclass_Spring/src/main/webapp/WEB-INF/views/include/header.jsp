@@ -275,7 +275,7 @@ function friendapply(applyfriendid) {
 				label: '거절',
 				action: function(cancel){
 					$.ajax({
-						url:'/overclass/friend/applyfriend',
+						url:'/overclass/friend/delreq',
 						type:'post',
 						headers:{
 							"Content-Type":"application/json",
