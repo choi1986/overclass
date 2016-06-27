@@ -62,7 +62,7 @@
 <!-- 쪽지 리스트처리를 위한 템플릿 -->
 <script id="msgtemp" type="text/x-handlebars-template">
 <li>
-	<a href='/overclass/chat/?sender={{sender}}'>
+	<a href='javascript:chatChange({{user_id}});'>
 		<span class="photo">
 			<img alt="avatar" width='30' height='30' src='{{user_image}}'></span>
 		<span class="subject">
@@ -75,7 +75,7 @@
 </script>
 <script id="msgtempNR" type="text/x-handlebars-template">
 <li style="background-color: gray;">
-	<a href='/overclass/chat/?sender={{sender}}'>
+	<a href='javascript:chatChange({{user_id}});'>
 		<span class="photo">
 			<img alt="avatar" width='30' height='30' src='{{user_image}}'></span>
 		<span class="subject">
@@ -139,17 +139,16 @@
 				window.scrollTop = window.scrollHeight; 
 			}break;
 			case 130:{
-				// data.list -> 상단에 표시해야될 리스트들
-				// "#msg4"
-				var completeHtml = '';
-				for(var i=0 ; i<data.list.length;i++){
-					if(data.list.read == 1){	// 1이면 읽은거
-						completeHtml += templatesb(data.list[i]);
-					}else{	// 0 이면 안읽은거
-						completeHtml += templatesbNR(data.list[i]);
+				//msgtemp, msgtempNR
+				var htmlTxt = msgtop_template(data);
+				for(var i=0; i<data.list.length; i++){
+					if(data.list[i].read == 0){	// 안읽었으면
+						htmlTxt+=msg_templateNR(data.list[i]);
+					}else{	// 읽었으면
+						htmlTxt+=msg_template(data.list[i]);
 					}
-				}
-				$("#msg4").html(htmltxt);
+				}// for
+				$("#msg4").html(htmlTxt);
 			}break;
 			case 210:{
 				// 내가 지금 대화를 하고있는 상대한태서 온 메시지이면 화면에 표출
