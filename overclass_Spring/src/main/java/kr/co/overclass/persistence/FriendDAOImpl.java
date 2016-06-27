@@ -61,7 +61,17 @@ public class FriendDAOImpl implements FriendDAO {
 	}
 
 	@Override
-	public List<FriendVO> oc_select_req_receive(FriendVO vo) throws Exception {
-		return session.selectList("friend.select_req_recieve", vo);
+	public List<FriendVO> oc_select_req_receive(String receiver) throws Exception {
+		return session.selectList("friend.select_req_recieve", receiver);
+	}
+
+	@Override
+	public int findReq(FriendVO vo) throws Exception {
+		return session.selectOne("friend.findreq",vo);
+	}
+
+	@Override
+	public int findRel(FriendVO vo) throws Exception {
+		return session.selectOne("friend.findrel",vo);
 	}
 }

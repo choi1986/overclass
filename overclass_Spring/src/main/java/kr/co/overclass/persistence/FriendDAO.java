@@ -12,5 +12,7 @@ public interface FriendDAO {
 	public int oc_delete_req(FriendVO vo) throws Exception;//친구 요청 삭제
 	public FriendVO oc_select_req_all(FriendVO vo) throws Exception;//친구 요청 검색(1명)
 	public List<FriendVO> oc_select_req_send(FriendVO vo) throws Exception;//친구 요청 검색(1명)
-	public List<FriendVO> oc_select_req_receive(FriendVO vo) throws Exception;//친구 요청 검색(1명)
+	public List<FriendVO> oc_select_req_receive(String receiver) throws Exception;//친구 요청 검색(1명)
+	public int findReq(FriendVO vo) throws Exception;
+	public int findRel(FriendVO vo) throws Exception;
 }

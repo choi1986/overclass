@@ -46,14 +46,24 @@ public class FriendServiceImpl implements FriendService {
 	}
 
 	@Override
-	public List<FriendVO> select_req_receive(FriendVO vo) throws Exception {
-		return dao.oc_select_req_receive(vo);
+	public List<FriendVO> select_req_receive(String receiver) throws Exception {
+		return dao.oc_select_req_receive(receiver);
 	}
 
 	@Override
 	public List<FriendVO> select_req_all(FriendVO vo) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int findReq(FriendVO vo) throws Exception {
+		return dao.findReq(vo);
+	}
+
+	@Override
+	public int findRel(FriendVO vo) throws Exception {
+		return dao.findRel(vo);
 	}
 
 }

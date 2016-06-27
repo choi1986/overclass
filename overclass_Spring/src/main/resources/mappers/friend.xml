@@ -43,4 +43,17 @@
   	select * from oc_friend_req
   	where sender = #{sender}
   </select>
+  
+  <select id="findreq" resultType="int">
+  	select count(sender)
+  	from oc_friend_req
+  	where sender = #{sender} and receiver = #{receiver}
+  </select>
+  
+  <select id="findrel" resultType="int">
+  	select count(sender)
+  	from oc_friend_rel
+  	where (sender = #{sender} and receiver = #{receiver}) OR
+  	(sender = #{receiver} and receiver = #{sender})
+  </select>
 </mapper>

@@ -1,88 +1,123 @@
 package kr.co.overclass.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.RestController;
 
 import kr.co.overclass.domain.FriendVO;
-import kr.co.overclass.domain.UserVO;
 import kr.co.overclass.service.FriendService;
 
 
-@Controller
+@RestController
 @RequestMapping("/friend")
 public class FriendController {
 	private static final Logger logger = LoggerFactory.getLogger(FriendController.class);
 	
 	@Inject
 	private FriendService service;
+	
 	@RequestMapping(value = "/friendfunc")// 친구 요청 입력
 	public String friendMain(){
 		return "addfunction/friendAdd";
 	}
 	
-	@RequestMapping(value = "/addReq", method=RequestMethod.GET)// 친구 요청 입력
-	public String addFriendreq(String info, RedirectAttributes attr, HttpSession session,Model model) throws Exception{
-		logger.info("친구요청 입력.............");
-		UserVO user = (UserVO) session.getAttribute("login");
-		String sender = user.getUser_id();//친구관계 요청 id
-		String receiver = info;//친구관계 받는 id
-		logger.info("요청아이디: "+sender+", 대상아이디: "+info);
-		FriendVO vo = new FriendVO(sender,receiver);
-		if(service.insert_req(vo)!=0){
-			session.setAttribute("result", "success");//입력 성공하면 result로 success
-		}else{
-			session.setAttribute("result", "fail");//입력 실패하면 result로 fail
+	// 친구추가요청
+	@RequestMapping(value="/addfriend", method=RequestMethod.POST)
+	public ResponseEntity<String> addFriend(@RequestBody FriendVO vo){
+		ResponseEntity<String> entity = null;
+		
+		try {
+			if(service.findRel(vo) == 0){	// 친구가 아니고
+				if(service.findReq(vo) == 0) {	// 친구요청중인게 없으면 친구요청
+					service.insert_req(vo);
+					entity = new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
+				}else{
+					entity = new ResponseEntity<String>("DUPLICATE",HttpStatus.OK);
+				}
+			}else{
+				entity = new ResponseEntity<String>("ALREADY",HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			entity = new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
 		}
-		return "redirect:/main/myFeed";//친구 요청 입력 후 메인 폼으로 돌아간다
+		return entity;
 	}
 	
-	@RequestMapping(value = "/deleteReq")// 친구 요청 삭제 
-	public String deleteFriendreq(String info,HttpSession session,Model model) throws Exception{// 친구 삭제
-		UserVO user = (UserVO) session.getAttribute("login");
-		String sender = user.getUser_id();//친구관계 요청 id
-		String receiver = info;//친구관계 받는 id
-		FriendVO vo = new FriendVO(sender,receiver);
-		if(service.delete_req(vo)!=0){
-			model.addAttribute("result", "success");//삭제 성공하면 result로 success
-		}else{
-			model.addAttribute("result", "fail");//삭제 실패하면 result로 fail
+	// 친구추가요청승낙
+	@RequestMapping(value="/applyfriend", method=RequestMethod.POST)
+	public ResponseEntity<String> applyFriend(@RequestBody FriendVO vo){
+		ResponseEntity<String> entity = null;
+		
+		try {
+				service.insert_rel(vo);
+				service.delete_req(vo);
+				entity = new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
+		} catch (Exception e) {
+			entity = new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
 		}
-		return "addfunction/friendList";//친구 요청 입력 후 메인 폼으로 돌아간다
+		return entity;
 	}
 	
-	@RequestMapping(value = "/SelectReq")// 친구 요청 검색 
-	public String selectFriendreq(String info,HttpSession session,Model model) throws Exception{// 친구 삭제
-		UserVO user = (UserVO) session.getAttribute("login");
-		String sender = user.getUser_id();//친구관계 요청 id
-		String receiver = info;//친구관계 받는 id
-		FriendVO vo = new FriendVO(sender,receiver);
-		List<FriendVO> list = service.select_req_receive(vo);
-		model.addAttribute("list", list);
-		return "addfunction/friendList";
+	// 친구삭제
+	@RequestMapping(value="/delrel", method=RequestMethod.POST)
+	public ResponseEntity<String> delFriend(@RequestBody FriendVO vo){
+		ResponseEntity<String> entity = null;
+		
+		try {
+				service.delete_rel(vo);
+				entity = new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
+		} catch (Exception e) {
+			entity = new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
+		return entity;
 	}
 	
-	@RequestMapping(value = "/addRel")// 친구 관계 입력 
-	public String addFriendrel(String info,HttpSession session,Model model) throws Exception{
-		UserVO user = (UserVO) session.getAttribute("login");
-		String sender = user.getUser_id();//친구관계 요청 id
-		String receiver = info;//친구관계 받는 id
-		FriendVO vo = new FriendVO(sender,receiver);
-		service.insert_rel(vo);
-		service.delete_req(vo);
-		return "addfunction/friendList";//친구 요청 입력 후 메인 폼으로 돌아간다 
+	
+	// 친구요청검색
+	@RequestMapping(value="/searchreq", method=RequestMethod.POST)
+	public ResponseEntity<Map<String, Object>> searchReq(@RequestBody FriendVO vo){
+		ResponseEntity<Map<String, Object>> entity = null;
+		
+		try {
+			List<FriendVO> list = service.select_req_receive(vo.getReceiver());
+			
+			Map<String, Object> map = new HashMap<>();
+			map.put("list", list);
+			map.put("count", list.size());
+			entity = new ResponseEntity<Map<String, Object>>(map,HttpStatus.OK);
+		} catch (Exception e) {
+			entity = new ResponseEntity<Map<String, Object>>(HttpStatus.BAD_REQUEST);
+			logger.error(e.getMessage());
+		}
+		return entity;
 	}
 	
-	@RequestMapping(value = "/deleteRel")// 친구 요청 삭제 
+	// 친구요청삭제
+	@RequestMapping(value="/delreq", method=RequestMethod.POST)
+	public ResponseEntity<String> reqFriendDel(@RequestBody FriendVO vo){
+		ResponseEntity<String> entity = null;
+		
+		try {
+				service.delete_req(vo);
+				entity = new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
+		} catch (Exception e) {
+			entity = new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
+	/*@RequestMapping(value = "/deleteRel")// 친구 요청 삭제 
 	public String deleteFriendrel(String info,HttpSession session,Model model) throws Exception{// 친구 삭제
 		UserVO user = (UserVO) session.getAttribute("login");
 		String sender = user.getUser_id();//친구관계 요청 id
@@ -100,5 +135,5 @@ public class FriendController {
 		FriendVO vo = new FriendVO(sender,receiver);
 		//service.select_rel(vo);
 		return "/addfunction/friendList";
-	}
+	}*/
 }
