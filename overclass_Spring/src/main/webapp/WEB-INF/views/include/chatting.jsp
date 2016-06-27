@@ -43,16 +43,15 @@
 		</h2>
 	</div>
 	<div class="panel-body">
-		<table class="table bootstrap-datatable countries">
+		<table class="table table-hover bootstrap-datatable countries">
 			<tbody>
 				<c:forEach items="${friendlist }" var="flist">
-				<tr class="info">
+				<tr class="info" onclick="javascript:chatChange('${flist.user_id }');">
 					<td>
-						<a href="javascript:chatChange('${flist.user_id }');">
 							<img src="${flist.user_image }" class="img-circle" style="height: 30px; width: 30px;">
-						</a>
 					</td>
-					<td><a href="javascript:chatChange('${flist.user_id }');" id="cl_${flist.user_id }">${flist.user_id }</a>
+					<td>
+						${flist.user_id }
 						<!-- <div class="btn-group">
                            <a data-toggle="dropdown" class="btn btn-link dropdown-toggle" type="button">teset1 
                            </a>
@@ -62,7 +61,9 @@
                            </ul>
                        </div> -->
 					</td>
-					<td><a href="javascript:chatChange('${flist.user_id }');">${flist.user_name }</a></td>
+					<td>
+						${flist.user_name }
+					</td>
 					
 				</tr>
 				</c:forEach>

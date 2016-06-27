@@ -15,7 +15,7 @@
 			<div class="panel-body">
 				<div id="recent-activity" class="tab-pane active">
 					<div class="profile-activity">
-						<div class="col-sm-offset-2">
+						<div class="col-sm-offset-3">
 							<%@include file="../include/chatting.jsp"%>
 						</div>
 					</div>
@@ -117,7 +117,7 @@
 	var msg_templateNR = Handlebars.compile(msg_source_NR);
 	
 	// 소켓생성하기
-	var ws = new WebSocket('ws://192.168.0.131/overclass/chatting');
+	var ws = new WebSocket('ws://192.168.0.114/overclass/chatting');
 	
 	// 주의!!!
 	// 웹브라우저에서 localhost/overclass 로 접속했을땐 소켓이 localhost 으로만 접속됨.
