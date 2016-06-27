@@ -1276,12 +1276,7 @@ var result = '${msg}';
 		})
 
 		$("#alert_notificatoin_bar").click(function() { // 알림바 알림 클릭 이벤트
-			$.ajax({
-				url : "addfunctionaction.do?action=notice",
-				success : function(success) {
-					$("#alert_notificatoin_bar").html(success);
-				}
-			})
+			friendlist('<%=user.getUser_id()%>');
 		})
 	}) // ready
 

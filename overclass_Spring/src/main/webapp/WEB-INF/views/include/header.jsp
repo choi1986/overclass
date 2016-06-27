@@ -64,10 +64,7 @@
 			<!-- 검색폼 시작 -->
 			<ul class="nav top-menu">
 				<li>
-					<form id="find_form" class="navbar-form" method="get" action="">
-						<input id="search_form" class="form-control" placeholder="#태그 / 아이디 / 이름"
-							type="text" onKeyDown="find()">
-					</form>
+					<input id="search_form" class="form-control" placeholder="#태그 / 아이디 / 이름" type="text" onKeyDown="find()">
 				</li>
 			</ul>
 			<!--  검색폼 끝 -->
@@ -180,33 +177,19 @@ var countsource = $("#alarmCount").html();
 var alarmtemp = Handlebars.compile(alarm);
 var counttemp = Handlebars.compile(countsource);
 
-
-
 function find() {
-	if(event.keyCode == 13){
-		var formObj = $("#find_form");
-		var txtvar = $('#search_form').val().toLowerCase();
-		if(txtvar.substring(0,1)=='#'){ //태그검색
-			var txt = txtvar.substring(1,txtvar.length);
-			location.href="/overclass/find/tagfind?tag="+txt;
-		} else { //친구검색
-			location.href="/overclass/find/friendfind?friend="+txtvar;
-		}
+	   if(event.keyCode == 13){
+	      var formObj = $("#find_form");
+	      var txtvar = $('#search_form').val().toLowerCase();
+	      if(txtvar.substring(0,1)=='#'){ //태그검색
+	         var txt = txtvar.substring(1,txtvar.length);
+	         location.href="/overclass/find/tagfind?tag="+txt;
+	      } else { //친구검색
+	         location.href="/overclass/find/friendfind?friend="+txtvar;
+	      }
+	      return false;
+	   }
 	}
-}
-function onKeyDown(){
-	if(event.keyCode == 13){
-		var txtvar = $('#search_form').val();
-		if(txtvar.substring(0,1)=='#'){
-			var txt = txtvar.substring(1,txtvar.length);
-				alert(txt+" 검색중.................");
-				location.assign("/overclass/searchTag?tag="+txt);
-			}else{
-				alert(txtvar+" 검색중.................");
-				location.assign("/overclass/searchIdName?info="+txtvar);
-			}
-	}
-}
 
 function friendlist(receiver){
 	var htmltxt='';
