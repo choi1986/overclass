@@ -189,32 +189,13 @@
 function find() {
 	if(event.keyCode == 13){
 		var formObj = $("#find_form");
-		var txtvar = $('#search_form').val();
+		var txtvar = $('#search_form').val().toLowerCase();
 		if(txtvar.substring(0,1)=='#'){ //태그검색
 			var txt = txtvar.substring(1,txtvar.length);
-			alert(txt)
-			/* formObj.attr("action","/overclass/find/tagfind?tag="+txt);
-			alert(formObj.attr("action"))
-			formObj.submit(); */
 			location.href="/overclass/find/tagfind?tag="+txt;
 		} else { //친구검색
-			alert(txtvar)
 			location.href="/overclass/find/friendfind?friend="+txtvar;
 		}
 	}
-}
-function onKeyDown(){
-	if(event.keyCode == 13){
-		var txtvar = $('#search_form').val();
-		if(txtvar.substring(0,1)=='#'){
-			var txt = txtvar.substring(1,txtvar.length);
-				alert(txt+" 검색중.................");
-				location.assign("/overclass/searchTag?tag="+txt);
-			}else{
-				alert(txtvar+" 검색중.................");
-				location.assign("/overclass/searchIdName?info="+txtvar);
-			}
-	}
-	
 }
 </script>	
