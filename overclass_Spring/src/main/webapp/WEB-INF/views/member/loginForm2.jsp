@@ -307,6 +307,7 @@
 			break;
 		case 11: // 취미2
 			if(data.value=="-- 선택 --") { msg='취미를 선택해주세요.'; joinError.user_hobby2Ck=true; }
+			else if(data.value==$("#user_hobby1").val()) { msg='첫번째 취미와 다르게 선택해주세요!'; joinError.user_hobby2Ck=true; }
 			else joinError.user_hobby2Ck=false;
 			$("#span9").text(msg);
 			break;
