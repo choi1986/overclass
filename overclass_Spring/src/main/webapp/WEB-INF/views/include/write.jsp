@@ -51,7 +51,7 @@
 					<div class="form-group">
 						<label class="control-label col-sm-2" for="content">태그</label>
 						<div class="col-sm-10">
-							<input name="tag" id="tagsinput" class="tagsinput" />
+							<input name="tag" id="tagsinput" class="tagsinput" onkeydown="javascript:validate();"/>
 						</div>
 					</div>
 
@@ -166,6 +166,14 @@ function fn_TextAreaInputLimit() {
         
         tempChar2 = tempText.val().substr(0, maxSize-1);
         tempText.val(tempChar2);
+    }
+}
+function validate() {
+	val = this.value;
+	alert(val);
+	var reg = "/[\[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"\\\'\\]/g"; 
+    if(reg.test(val)) {
+    	alert("특수문자금지")
     }
 }
 </script>

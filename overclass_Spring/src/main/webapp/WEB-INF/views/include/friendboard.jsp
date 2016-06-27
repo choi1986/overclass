@@ -16,7 +16,7 @@
 								<i class="fa fa-align-justify"></i> 
 							</a>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="#" onclick="reportDoc(${DocumentDTO.dno })" style="color: red;" class="fa fa-exclamation-circle"> 게시글 신고하기</a></li>
+								<li><a href="#" onclick="reportDoc('${DocumentDTO.dno }')" style="color: red;" class="fa fa-exclamation-circle"> 게시글 신고하기</a></li>
 							</ul>
 						</div>
 					</div>
