@@ -33,5 +33,6 @@ public class NoticeDAOImpl implements NoticeDAO {
 		map.put("sender", sender);
 		map.put("receiver", receiver);
 		session.insert("notice.reqSubmit", map);
+		session.delete("notice.reqDelete", map);
 	}
 }

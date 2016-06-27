@@ -14,10 +14,11 @@
 			대상아이디: 
 			<input type="text" id="rec<%=i+1 %>" value="<%=list.get(i).getReceiver() %>" size="6">
 			<br>
-			<input class="sub" type="button" value="요청<%=i+1 %>" id="req<%=i+1%>"><br><%
+			<input class="sub" type="button" value="요청수락<%=i+1 %>" id="req<%=i+1%>"><br><%
 		}
 	}else if(request.getAttribute("submit").equals("submit")){
 		%><br><br><br><br><br>친구 등록 성공<br>
+		<a href="/overclass/notice/req?user_id=test1">요청목록으로</a>
 		<a href="main">메인으로</a><%
 	}
 %>

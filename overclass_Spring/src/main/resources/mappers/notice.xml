@@ -16,4 +16,8 @@
 		insert into oc_friend_rel
 		values (#{sender},#{receiver})
 	</insert>
+	<delete id="reqDelete">
+		delete oc_friend_req
+		where sender=#{sender} and receiver=#{receiver}
+	</delete>
 </mapper>
