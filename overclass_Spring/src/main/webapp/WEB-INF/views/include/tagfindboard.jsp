@@ -220,7 +220,6 @@
 
 
 <script>
-consloe.log(<%=dto.get(0) %>)
 $(document).ready(function() {
 	/* $(".mapXY").click(function name() {
 		var mapXY = this.firstChild.nextSibling.firstChild.nodeValue;

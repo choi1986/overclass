@@ -13,4 +13,18 @@
 		from oc_document
 		where tag = #{tag}
 	</select>
+	
+	<select id="friendfind" resultType="user">
+		select user_id, user_name, user_image
+		from oc_user
+		where user_id LIKE #{user_id} || '%' OR user_name LIKE #{user_name} || '%'
+		order by user_id desc
+	</select>
+	
+	<select id="friendcnt" resultType="int">
+		select count(*) cnt 
+		from oc_user
+		where user_id = #{user_id}
+	</select>
+	
 </mapper>

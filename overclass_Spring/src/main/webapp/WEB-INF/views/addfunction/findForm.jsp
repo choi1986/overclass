@@ -16,24 +16,16 @@
 				<div class="panel-body">
 					<div id="recent-activity" class="tab-pane active">
 						<div class="profile-activity">
-							<div class="col-lg-offset-3 col-lg-5 portlets">
-							
-								<!-- 글쓰기폼 시작 -->
-								<%-- <%@include file="../include/write.jsp"%> --%>
-								<!-- 글쓰기폼 끝 -->
-
-
-							</div>
-
-							<div class="col-lg-4">
-								<div class="row">
-									<div class="col-md-offset-7 col-md-2 portlets">
-									</div>
-								</div>
-							</div>
 
 							<!-- 게시글시작 -->
-							<%@ include file="../include/findboard.jsp"%>
+							<c:choose>
+							<c:when test="${taglist != null}">
+							<%@ include file="../include/tagfindboard.jsp"%>
+							</c:when>
+							<c:otherwise>
+							<%@ include file="../include/friendfindboard.jsp"%>
+							</c:otherwise>
+							</c:choose>
 							<!-- 게시글폼 끝 -->
 
 						</div>

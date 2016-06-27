@@ -196,7 +196,8 @@ function find() {
 			formObj.submit(); */
 			location.href="/overclass/find/tagfind?tag="+txt;
 		} else { //친구검색
-			
+			alert(txtvar)
+			location.href="/overclass/find/friendfind?friend="+txtvar;
 		}
 	}
 }

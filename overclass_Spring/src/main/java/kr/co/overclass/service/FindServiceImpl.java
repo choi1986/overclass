@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import kr.co.overclass.domain.FriendVO;
+import kr.co.overclass.domain.UserVO;
 import kr.co.overclass.dto.DocumentDTO;
 import kr.co.overclass.persistence.FindDAO;
 import kr.co.overclass.persistence.FriendDAO;
@@ -25,5 +26,15 @@ public class FindServiceImpl implements FindService {
 	@Override
 	public int tagcnt(String tag) throws Exception {
 		return dao.tagcnt(tag);
+	}
+
+	@Override
+	public List<UserVO> friendFind(String friend) throws Exception {
+		return dao.friendFind(friend);
+	}
+
+	@Override
+	public int friendcnt(String friend) throws Exception {
+		return dao.friendcnt(friend);
 	}
 }
