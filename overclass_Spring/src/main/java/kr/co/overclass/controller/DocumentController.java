@@ -140,11 +140,10 @@ public class DocumentController {
 	}
 	
 	//메인피드, 마이피드 글 조회 + 페이징
-	@RequestMapping(value={"","/myFeed","/mainFeed_Page","/myFeed_Page"},method=RequestMethod.GET)
-	public String mainlist(String page, Model model, HttpServletRequest request, HttpSession session)throws Exception{
+	@RequestMapping(value={"","/myFeed","/mainFeed_Page","/myFeed_Page","friendFeed","friendFeed_page"},method=RequestMethod.GET)
+	public String mainlist(String page, String user_id, Model model, HttpServletRequest request, HttpSession session)throws Exception{
 		String url = request.getServletPath(); //requestMapping url주소값 얻어옴
 		UserVO vo = (UserVO) request.getSession().getAttribute("login"); //로그인정보 얻어옴
-		String user_id = vo.getUser_id();
 		Criteria cri = new Criteria();
 		
 		if ( page != null) {
@@ -155,14 +154,22 @@ public class DocumentController {
 		maker.setCri(cri);
 		List<DocumentDTO> list = null;
 		if( url.equals("/main/myFeed") || url.equals("/main/myFeed_Page") ) {
-			list = service.myFeed_list(cri, user_id);
-			maker.setTotalCount(service.myFeed_count(user_id));
+			list = service.myFeed_list(cri, vo.getUser_id());
+			maker.setTotalCount(service.myFeed_count(vo.getUser_id()));
 			forward = "document/myFeed";
 		} else if( url.equals("/main") || url.equals("/main/mainFeed_Page")) {
 			logger.info("\""+user_id+"\"로 접속, "+vo.toString());
-			maker.setTotalCount(service.mainFeed_count(user_id));
-			list = service.mainFeed_list(cri, user_id);
+			maker.setTotalCount(service.mainFeed_count(vo.getUser_id()));
+			list = service.mainFeed_list(cri, vo.getUser_id());
 			forward = "document/mainForm";
+		} else if ( url.equals("/main/friendFeed") ) {
+			UserVO friend = new UserVO();
+			System.out.println("친구이름:"+user_id);
+			list = service.myFeed_list(cri, user_id);
+			maker.setTotalCount(service.myFeed_count(user_id));
+			friend = userService.searchUser(user_id);
+			model.addAttribute("friend",friend);
+			forward = "document/friendFeed";
 		}
 		model.addAttribute("user",vo);
 		model.addAttribute("list", list);

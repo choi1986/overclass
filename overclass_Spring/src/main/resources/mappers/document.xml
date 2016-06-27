@@ -85,6 +85,11 @@
 		where writer = #{user_id}
 	</select>
 	
+	<select id="">
+	
+	</select>
+	
+	
 	<!-- 태그검색후 글 1건 조회 -->
 	<select id="read_doc" resultType="document_dto">
 		select dno, writer, content, tag, writedate, image, mapLoc, mapXY, goodcnt, replycnt, user_image

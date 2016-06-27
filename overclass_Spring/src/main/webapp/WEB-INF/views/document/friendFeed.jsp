@@ -19,46 +19,29 @@
 						<h4> </h4>
 						<div class="row">
 							<div class="follow-ava" id="image_div">
-								<img class="img-responsive img-circle" id="user_image" src="${user.user_image }" style="width: 90px; height: 90px;">
+								<img class="img-responsive img-circle" id="user_image" src="${friend.user_image }" style="width: 90px; height: 90px;">
 							</div>
 						</div>
-						<div class="row"><h4><b>${user.user_id }</b></h4></div>
+						<div class="row"><h4><b>${friend.user_id }</b></h4></div>
 						<div class="row">
-						<div id="image_update_div" style="display: none;">
-							<button type="button" id="image_update" class="btn btn-success">변경</button>
-							<button type="button" id="image_cancel" class="btn btn-danger">취소</button>
 						</div>
-						</div>
-						<!-- 파일 -->
-						<form role="form" id="user_image_update" class="form-horizontal" action="/overclass/main/imageUp"
-							method="post" enctype="multipart/form-data">
-							<input type="hidden" name="user_id" value="${user.user_id }"> 
-						<div class="form-group">
-						<div class="fileboxImage control-label col-sm-offset-2 col-sm-9">
-							<label for="imagefile" class="btn btn-success"><span class="fa fa-camera-retro"></span> 프로필사진 변경</label>
-							<label id="image_default" class="btn btn-danger"><span class="fa fa-close"></span></label>
-							<input type="file" id="imagefile" name="imagefile" accept="image/gif, image/jpeg, image/png, image/bmp#">
-						</div>
-					</div>
-					</form>
-					
 					</div>
 					<div class="col-sm-4 col-sm-4 follow-info" style="margin-top: -30px;">
 						<div class="row">
-							<h3><span class="fa fa-lg fa-github-alt">&nbsp;MyPage</span></h3>
+							<h3><span class="fa fa-lg fa-github-alt">&nbsp;FriendPage</span></h3>
 						</div>
 						<div class="row">
-							<h4><i class="fa fa-user">&nbsp;${user.user_name }</i></h4>
+							<h4><i class="fa fa-user">&nbsp;${friend.user_name }</i></h4>
 						</div>
 						<div class="row">
-							<h4><i class="fa fa-birthday-cake">&nbsp;${fn:substring(user.user_birth,2,4)}월
-							${fn:substring(user.user_birth,4,6)}일</i></h4>
+							<h4><i class="fa fa-birthday-cake">&nbsp;${fn:substring(friend.user_birth,2,4)}월
+							${fn:substring(friend.user_birth,4,6)}일</i></h4>
 						</div>
 						<div class="row">
-							<h4><i class="fa fa-envelope-o">&nbsp;${user.user_email }</i></h4>
+							<h4><i class="fa fa-envelope-o">&nbsp;${friend.user_email }</i></h4>
 						</div>
 						<div class="row">
-							<h4><i class="icon_pin_alt">&nbsp;${user.user_loc }</i></h4>
+							<h4><i class="icon_pin_alt">&nbsp;${friend.user_loc }</i></h4>
 						</div>
 					</div>
 				</div>
@@ -78,11 +61,6 @@
 						<li class="active"><a data-toggle="tab" id="dropdown_1"
 							href="#recent-activity"><span class="fa fa-comment-o">&nbsp;&nbsp;글</span>
 						</a></li>
-						<li><a id="dropdown_2" data-toggle="tab" href="#profile"><span
-								class="fa fa-user">&nbsp;&nbsp;프로필수정</span> </a></li>
-						<li class=""><a id="dropdown_3" data-toggle="tab"
-							href="#edit-profile"> <span class="fa fa-users">&nbsp;&nbsp;친구목록</span>
-						</a></li>
 					</ul>
 				</header>
 				<!-- 마이페이지메뉴폼 끝 -->
@@ -93,10 +71,6 @@
 							<div class="profile-activity">
 								<div class="col-lg-offset-3 col-lg-5 portlets">
 
-									<!-- 글쓰기폼 시작 -->
-									<%@include file="../include/mywrite.jsp"%>
-									<!-- 글쓰기폼 끝 -->
-
 								</div>
 								<div class="col-lg-4">
 									<div class="row">
@@ -106,239 +80,10 @@
 								</div>
 
 								<!-- 게시글시작 -->
-								<%@ include file="../include/myboard.jsp"%>
+								<%@ include file="../include/friendboard.jsp"%>
 								<!-- 게시글폼 끝 -->
 
 							</div>
-						</div>
-
-						<div id="profile" class="tab-pane">
-							<section class="panel">
-
-								<!-- 마이페이지 수정폼끝 -->
-								<div class="panel-body bio-graph-info">
-								<form id="modify" method="post" action="/overclass/main/modifyUser">
-									<div class="col-sm-13">
-										<h1>프로필 수정</h1>
-										<div class="row">
-											<div class="bio-row">
-												<div class="form-group">
-                                      		<input type="hidden" id="modifyErrorCk" name="modifyErrorCk"><!-- 에러났는지 카운트했던 것을 체크해서 프로필 수정 막음 -->
-													<label class="col-lg-3 control-label">아이디</label>
-													<div class="col-lg-3">
-														<input type="text" id="user_id" name="user_id" class="form-control" readonly
-															value="${user.user_id }">
-													</div>
-												</div>
-											</div>
-											<div class="bio-row">
-												<div class="form-group">
-													<label class="col-lg-3 control-label">이름</label>
-													<div class="col-lg-3">
-														<input type="text" id="user_name" name="user_name" class="form-control" readonly
-															value="${user.user_name }">
-													</div>
-												</div>
-											</div>
-											<div class="bio-row">
-												<div class="form-group">
-													<label class="col-lg-3 control-label">이메일</label>
-													<div class="col-lg-3">
-														<input type="text" id="user_email" name="user_email" class="form-control"
-															value="${user.user_email }" onblur="regCk(5, this)">
-													</div>
-                                          			<div id="span5" class="modifySpan"></div>
-												</div>
-											</div>
-											<div class="bio-row">
-												<div class="form-group">
-													<label class="col-lg-3 control-label">새 비밀번호</label>
-													<div class="col-lg-3">
-														<input type="password" id="user_pwd" name="user_pwd" class="form-control" onblur="regCk(2, this)">
-													</div>
-                                          			<div id="span2" class="modifySpan"></div>
-												</div>
-											</div>
-											<div class="bio-row">
-												<div class="form-group">
-													<label class="col-lg-3 col-sm-3 control-label">전화번호</label>
-													<div class="col-lg-2 col-sm-3">
-														<input type="text" id="user_tel1" name="user_tel1" class="form-control" value="${fn:split(user.user_tel, '-')[0]}" onblur="regCk(6, this)">
-													</div><!-- ${fn:substring(user.user_tel, 0, 3)} -->
-													<div class="col-lg-2 col-sm-3">
-														<input type="text" id="user_tel2" name="user_tel2" class="form-control" value="${fn:split(user.user_tel, '-')[1]}" onblur="regCk(7, this)">
-													</div><!-- ${fn:substring(user.user_tel, 4, 8)} -->
-													<div class="col-lg-2 col-sm-3">
-														<input type="text" id="user_tel3" name="user_tel3" class="form-control" value="${fn:split(user.user_tel, '-')[2]}" onblur="regCk(8, this)">
-													</div><!-- ${fn:substring(user.user_tel, 9, 13)} -->
-                                          	<div id="span6" class="modifySpan"></div>
-												</div>
-											</div>
-											<div class="bio-row">
-												<div class="form-group">
-													<label class="col-lg-3 control-label">새 비밀번호 다시입력</label>
-													<div class="col-lg-3">
-														<input type="password" id="user_pwd_confirm" name="user_pwd_confirm" class="form-control" onblur="regCk(3, this)">
-													</div>
-                                          		<div id="span3" class="modifySpan"></div>
-												</div>
-											</div>
-											<div class="bio-row">
-												<div class="form-group">
-													<label class="col-lg-3 control-label">주소</label>
-													<div class="col-lg-3">
-														<select class="form-control" id="user_loc" name="user_loc" onchange="" onblur="regCk(9, this)">
-															<option>-- 선택 --</option>
-															<option>경기도</option>
-															<option>서울특별시</option>
-															<option>인천광역시</option>
-															<option>대구광역시</option>
-															<option>대전광역시</option>
-															<option>광주광역시</option>
-															<option>부산광역시</option>
-															<option>경상북도</option>
-															<option>경상남도</option>
-															<option>전라북도</option>
-															<option>전라남도</option>
-															<option>강원도</option>
-															<option>제주도</option>
-														</select>
-													</div>
-                                                <div id="span7" class="modifySpan"></div>
-												</div>
-											</div>
-											<div class="bio-row">
-												<div class="form-group">
-													<label class="col-lg-3 control-label">비밀번호찾기 질문</label>
-													<div class="col-lg-3">
-														<select class="form-control" id="user_pwdq" name="user_pwdq" onblur="regCk(12, this)">
-															<option>-- 선택 --</option>
-															<option>나의 고향은?</option>
-															<option>나의 친한 친구 이름은?</option>
-															<option>나의 별명은?</option>
-															<option>나의 출신학교는?</option>
-															<option>부모님의 성함은?</option>
-															<option>보물제1호</option>
-														</select>
-													</div>
-                                                <div id="span10" class="modifySpan"></div>
-												</div>
-											</div>
-											<div class="bio-row">
-												<div class="form-group">
-													<label class="col-lg-3 control-label">생일</label>
-													<div class="col-lg-3">
-														<input type="text" class="form-control" id="user_birth" name="user_birth"
-															value="${user.user_birth }" readonly>
-													</div>
-												</div>
-											</div>
-											<div class="bio-row">
-												<div class="form-group">
-													<label class="col-lg-3 control-label">비밀번호찾기 답변</label>
-													<div class="col-lg-3">
-														<input type="text" class="form-control" id="user_pwda" name="user_pwda" value="${user.user_pwda }" onblur="regCk(13, this)">
-													</div>
-                                          		<div id="span11" class="modifySpan"></div>
-												</div>
-											</div>
-											<div class="bio-row">
-												<div class="form-group">
-													<label id="test" class="col-lg-3 control-label">첫번째 취미</label>
-													<div class="col-lg-3">
-														<select class="form-control" id="user_hobby1" name="user_hobby1" onblur="regCk(10, this)">
-															<option>-- 선택 --</option>
-															<option>스포츠</option>
-                                                 		 	<option>독서</option>
-                                                  			<option>음악</option>
-                                                  			<option>쇼핑</option>
-                                                  			<option>게임</option>
-                                                  			<option>여행</option>
-                                                  			<option>요리</option>
-														</select>
-													</div>
-                                                <div id="span8" class="modifySpan"></div>
-												</div>
-											</div>
-											<div class="bio-row">
-												<div class="form-group">
-													<label id="test" class="col-lg-3 control-label">두번째 취미</label>
-													<div class="col-lg-3">
-														<select class="form-control" id="user_hobby2" name="user_hobby2" onblur="regCk(11, this)">
-															<option>-- 선택 --</option>
-															<option>스포츠</option>
-                                                 		 	<option>독서</option>
-                                                  			<option>음악</option>
-                                                  			<option>쇼핑</option>
-                                                  			<option>게임</option>
-                                                  			<option>여행</option>
-                                                  			<option>요리</option>
-														</select>
-													</div>
-                                                <div id="span9" class="modifySpan"></div>
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-lg-12"></label>
-												<div class="col-sm-offset-4 col-sm-3">
-													<span data-toggle="modal" data-target="#update">
-														<button type="button" id="member_update" class="btn btn-success btn-block">수정</button>
-													</span>
-												</div>
-											</div>
-										</div>
-										<div class="col-sm-offset-12">
-											<a href="#" id="member_leave" style="color: red;" class="fa fa-ban">
-												회원탈퇴
-											</a>
-										</div>
-									</div>
-									</form>
-								</div>
-								<!-- 마이페이지 수정폼끝 -->
-
-							</section>
-							<section>
-								<div class="row"></div>
-							</section>
-						</div>
-
-						<div id="edit-profile" class="tab-pane">
-							<section class="panel">
-								<!-- 친구목록 -->
-								<div class="panel-body bio-graph-info">
-									<%-- <%
-										for (int i = 0; i < friend_list.size(); i++) {
-									%> --%>
-									<div class="act-time">
-										<div class="activity-body act-in">
-												<table class="table table-striped table-advance table-hover">
-													<tbody>
-														<tr>
-															<th><i class="icon_profile"></i> 프로필</th>
-															<th><i class="icon_calendar"></i> 아이디</th>
-															<th><i class="icon_mail_alt"></i> 이름</th>
-															<th><i class="icon_pin_alt"></i> 지역</th>
-														</tr>
-														<c:forEach var="i" items="${friend_rel}" begin="0">
-														<tr onclick="friendFeed('${i.user_id }')">
-															<td><img class="img-rounded" src="${i.user_image}" width='70px' height='70px'></td>
-															<td>${i.user_id }</td>
-															<td>${ i.user_name }</td>
-															<td>${i.user_loc }</td>
-														</tr>
-														</c:forEach>
-													</tbody>
-												</table>
-										</div>
-									</div>
-									<%-- <%
-										}
-									%> --%>
-								</div>
-								<!-- 친구목록 끝 -->
-
-							</section>
 						</div>
 					</div>
 				</div>
@@ -348,37 +93,37 @@
 	<c:choose>
 		<c:when test="${sessionScope.result=='success'}"> <!-- 친구 신청 성공 모달 -->
 			<script type="text/javascript">
-				$(document).ready(function() {
+				$(document).ready(function(){
 					BootstrapDialog.show({
-						title : '', //알러트 타이틀 이름
-						message : '친구신청 성공!', //알러트 내용
-						type : BootstrapDialog.TYPE_PRIMARY,
-						buttons : [ {
-							label : '닫기',
-							action : function(cancel) {
-								cancel.close();
-							}
-						} ]
-					})
+    					title: '', //알러트 타이틀 이름
+    					message: '친구신청 성공!', //알러트 내용
+    					type: BootstrapDialog.TYPE_PRIMARY,
+    					buttons: [{
+    							label: '닫기',
+    							action: function(cancel){
+    								cancel.close();
+    								}
+    						}]
+    				})
 				})
 			</script>
 		</c:when>
 		<c:when test="${sessionScope.result=='fail'}"> <!-- 친구 신청 실패 모달 -->
 			<script type="text/javascript">
-				$(document).ready(function() {
+				$(document).ready(function(){
 					BootstrapDialog.show({
-						title : '', //알러트 타이틀 이름
-						message : '친구신청 실패!', //알러트 내용
-						type : BootstrapDialog.TYPE_DANGER,
-						buttons : [ {
-							label : '닫기',
-							action : function(cancel) {
-								cancel.close();
-							}
-						} ]
-					})
+	    				title: '', //알러트 타이틀 이름
+	    				message: '친구신청 실패!', //알러트 내용
+	    				type: BootstrapDialog.TYPE_DANGER,
+	    				buttons: [{
+	    						label: '닫기',
+	    						action: function(cancel){
+	    							cancel.close();
+	    							}
+	    					}]
+	    			})
 				})
-			</script>
+				</script>
 		</c:when>
 	</c:choose>
 	<c:remove var="result" scope="session" /> <!-- 친구 신청 메시지에 쓰인 세션들 닫기 -->
@@ -1485,9 +1230,5 @@ var result = '${msg}';
 	});
 	$('#scrollUpTheme').attr('href', '/overclass/resources/css/image.css?1.1');
 	$('.image-switch').addClass('active');
-	
-	function friendFeed(user) {
-		location.href = "/overclass/main/friendFeed?user_id="+user;
-	}
 </script>
 </html>
