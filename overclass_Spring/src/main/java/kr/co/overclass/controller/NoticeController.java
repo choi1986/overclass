@@ -40,10 +40,19 @@ public class NoticeController {
 		logger.info("친구요청 수"+countReq);
 		return "/addfunction/notice";
 	}
+	
 	@RequestMapping("/notice/reqCount")
-	public void reqCount(Model model,HttpSession session) throws Exception{
+	public String reqCount(Model model,HttpSession session) throws Exception{
 		UserVO user = (UserVO)session.getAttribute("login");
 		String user_id = user.getUser_id();
 		model.addAttribute("reqCount", service.countReq(user_id));
+		return "mainForm";
+	}
+	
+	@RequestMapping("/notice/friendSubmit")
+	public String reqSubmit(String sender,String receiver,Model model) throws Exception{
+		service.reqSubmit(sender, receiver);
+		model.addAttribute("submit", "submit");
+		return "/addfunction/notice";
 	}
 }

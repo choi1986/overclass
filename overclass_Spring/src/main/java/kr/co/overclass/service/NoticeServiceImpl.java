@@ -24,4 +24,9 @@ public class NoticeServiceImpl implements NoticeService {
 	public int countReq(String user_id) throws Exception {
 		return dao.countReq(user_id);
 	}
+
+	@Override
+	public void reqSubmit(String sender, String receiver) throws Exception {
+		dao.reqSubmit(sender, receiver);
+	}
 }

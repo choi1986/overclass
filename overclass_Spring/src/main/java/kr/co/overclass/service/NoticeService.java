@@ -8,4 +8,5 @@ import kr.co.overclass.domain.FriendVO;
 public interface NoticeService {
 	public List<FriendVO> receiveReqNotice(String user_id)throws Exception;//친구요청한 아이디 확인
 	public int countReq(String user_id) throws Exception;//친구요청 수
+	public void reqSubmit(String sender,String receiver) throws Exception;//요청수락
 }

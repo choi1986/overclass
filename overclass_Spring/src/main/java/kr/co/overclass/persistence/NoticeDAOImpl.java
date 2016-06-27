@@ -1,6 +1,8 @@
 package kr.co.overclass.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -23,5 +25,13 @@ public class NoticeDAOImpl implements NoticeDAO {
 	@Override
 	public int countReq(String user_id) throws Exception {
 		return session.selectOne("notice.countReq", user_id);
+	}
+
+	@Override
+	public void reqSubmit(String sender, String receiver) throws Exception {
+		Map<String,String> map = new HashMap<>();
+		map.put("sender", sender);
+		map.put("receiver", receiver);
+		session.insert("notice.reqSubmit", map);
 	}
 }

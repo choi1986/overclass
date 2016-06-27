@@ -12,4 +12,8 @@
 		select count(*) from oc_friend_req
 		where receiver=#{user_id}
 	</select>
+	<insert id="reqSubmit">
+		insert into oc_friend_rel
+		values (#{sender},#{receiver})
+	</insert>
 </mapper>
