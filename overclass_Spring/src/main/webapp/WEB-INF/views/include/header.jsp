@@ -91,8 +91,6 @@
 				</li>
 				<!-- 메시지알림 끝-->
 
-
-
 				<!-- 새글알림 시작-->
 			<li id="alert_notificatoin_bar" class="dropdown">
 				<a data-toggle="dropdown" class="dropdown-toggle" href="#"> 
