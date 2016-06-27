@@ -162,7 +162,6 @@ public class DocumentController {
 			forward = "document/mainForm";
 		} else if ( url.equals("/main/friendFeed") || url.equals("/main/friendFeed_Page") ) {
 			UserVO friend = new UserVO();
-			System.out.println("친구이름:"+user_id);
 			list = service.myFeed_list(cri, user_id);
 			maker.setTotalCount(service.myFeed_count(user_id));
 			friend = userService.searchUser(user_id);
