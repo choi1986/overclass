@@ -327,7 +327,13 @@
 															<td onclick="friendFeed('${i.user_id }')">${i.user_id }</td>
 															<td onclick="friendFeed('${i.user_id }')">${ i.user_name }</td>
 															<td onclick="friendFeed('${i.user_id }')"><i class="icon_pin_alt"></i>${i.user_loc }</td>
-															<td><div class="col-sm-offset-8 col-sm-4"><button type="button" id="friendDel" onclick="friendDel('${i.user_id }')" class="btn btn-danger"><span class="fa fa-close"></span></button></div></td>
+															<td>
+																<div class="col-sm-offset-8 col-sm-4">
+																	<button type="button" id="friendDel" onclick="friendDel('${i.user_id }')" class="btn btn-danger">  
+																		<span class="fa fa-close"></span>
+																	</button>
+																</div>
+															</td>
 														</tr>
 														</c:forEach>
 													</tbody>
