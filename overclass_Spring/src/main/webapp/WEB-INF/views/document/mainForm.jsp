@@ -682,8 +682,6 @@ $(function () {
     });
 });
 $('#scrollUpTheme').attr('href', '/overclass/resources/css/image.css?1.1');
-$('.image-switch').addClass('active');
-
 // ***********************   소       켓      ****************************************
 //소켓생성하기
 var sender='<%=user.getUser_id()%>';

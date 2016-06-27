@@ -40,7 +40,7 @@
 									<!-- 프로필 -->
 									<div class="form-group">
 										<label class="col-sm-2">
-											<img class="img-rounded" src="${DocumentDTO.user_image}" width='90px' height='90px'>
+											<a href="#"><img class="img-rounded" src="${DocumentDTO.user_image}" width='90px' height='90px' onclick="friendAdd('${DocumentDTO.writer }')"></a>
 										</label>
 										<div class="col-sm-10"> 
 											<h4><b>${DocumentDTO.writer } </b></h4><br>
@@ -290,7 +290,7 @@ $(document).ready(function() {
    					}
     			}]
     	})
-	}
+	} 
 })
 
 //글삭제
@@ -558,5 +558,25 @@ var template = Handlebars.compile(source);
 				$(divtemp3).attr("style","display: none;"); */
 				return false;
 			} // keycode if
+	}
+	function friendAdd(user) {
+		BootstrapDialog.show({
+			title: '', //알러트 타이틀 이름
+			message: '['+user+'] 친구 추가를 하시겠습니까?', //알러트 내용
+			buttons: [{ //알러트 버튼 정의
+				icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
+				label: '추가', //알러트 버튼 이름
+				cssClass: 'btn-primary', //알러트 버튼 색바꾸기
+				action: function(confirm) {
+					alert("친구추가!"+user);
+					confirm.close();
+				}
+				},{
+					label: '닫기',
+					action: function(cancel){
+						cancel.close();
+						}
+				}]
+		})
 	}
 </script>

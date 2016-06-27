@@ -26,6 +26,8 @@
 	<link href="/overclass/resources/css/fileboxcss.css" rel="stylesheet">
 	<!-- 지도 -->
 	<link href="/overclass/resources/css/map.css" rel="stylesheet">
+	<!-- 스크롤업 -->
+	<link id="scrollUpTheme" rel="stylesheet" href="/overclass/resources/css/image.css">
 <!-- CSS끝 -->
 
 <!-- JS -->
@@ -61,7 +63,7 @@
 			<ul class="nav top-menu">
 				<li>
 					<form id="find_form" class="navbar-form" method="get" action="">
-						<input id="search_form" class="form-control" placeholder="'#태그','친구아이디','친구이름'"
+						<input id="search_form" class="form-control" placeholder="#태그 / 아이디 / 이름"
 							type="text" onKeyDown="find()">
 					</form>
 				</li>

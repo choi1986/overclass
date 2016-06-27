@@ -6,7 +6,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <% UserVO user2 = (UserVO)session.getAttribute("login"); %>
-<% List<DocumentDTO> dto = (List<DocumentDTO>)request.getAttribute("friendlist"); %>
 <div class="col-sm-offset-3 col-sm-6">
 	<div class="container">
 		<section class="panel">
@@ -68,6 +67,22 @@
 	<!--페이징버튼-->
 </footer>
 <script type="text/javascript">
+var result = "${msg}";
+if (result == 'FIND_FAIL') {
+	BootstrapDialog.show({
+		title: '', //알러트 타이틀 이름
+		message: '검색결과가 없습니다.', //알러트 내용
+		buttons: [{ //알러트 버튼 정의
+				icon: 'fa fa-check',
+				label: '확인',
+				cssClass: 'btn-primary',
+				hotkey:13,
+				action: function(cancel){
+					cancel.close();
+					}
+			}]
+	})
+}
 function friendAdd(user) {
 	BootstrapDialog.show({
 		title: '', //알러트 타이틀 이름
