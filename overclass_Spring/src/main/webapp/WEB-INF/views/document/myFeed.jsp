@@ -319,13 +319,15 @@
 															<th> 아이디</th>
 															<th> 이름</th>
 															<th> 지역</th>
+															<th></th>
 														</tr>
 														<c:forEach var="i" items="${friend_rel}" begin="0">
-														<tr onclick="friendFeed('${i.user_id }')">
-															<td><img class="img-rounded" src="${i.user_image}" width='70px' height='70px'></td>
-															<td>${i.user_id }</td>
-															<td>${ i.user_name }</td>
-															<td><i class="icon_pin_alt"></i>${i.user_loc }</td>
+														<tr >
+															<td onclick="friendFeed('${i.user_id }')"><img class="img-rounded" src="${i.user_image}" width='70px' height='70px'></td>
+															<td onclick="friendFeed('${i.user_id }')">${i.user_id }</td>
+															<td onclick="friendFeed('${i.user_id }')">${ i.user_name }</td>
+															<td onclick="friendFeed('${i.user_id }')"><i class="icon_pin_alt"></i>${i.user_loc }</td>
+															<td><div class="col-sm-offset-8 col-sm-4"><button type="button" id="friendDel" onclick="friendDel('${i.user_id }')" class="btn btn-danger"><span class="fa fa-close"></span></button></div></td>
 														</tr>
 														</c:forEach>
 													</tbody>
@@ -1489,6 +1491,29 @@ var result = '${msg}';
 	
 	function friendFeed(user) {
 		location.href = "/overclass/main/friendFeed?user_id="+user;
+	}
+	function friendDel(user) {
+		BootstrapDialog.show({
+    		title: '', //알러트 타이틀 이름
+    		message: '['+user+'] 친구를 삭제 하시겠습니까?', //알러트 내용
+    		type: BootstrapDialog.TYPE_DANGER,
+    		buttons: [{ //알러트 버튼 정의
+    			id: 'btn1', //알러트 버튼의 아이디
+    			icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
+    			label: '삭제', //알러트 버튼 이름
+    			cssClass: 'btn-danger', //알러트 버튼 색바꾸기
+    			hotkey:13,
+    			action: function(confirm) {
+					location.href = "/overclass/main/friendDel?user_id="+user; 
+    				confirm.close()
+				}
+    			},{
+    				label: '닫기',
+    				action: function(cancel){
+    					cancel.close();
+    					}
+    			}]
+    	})
 	}
 </script>
 </html>
