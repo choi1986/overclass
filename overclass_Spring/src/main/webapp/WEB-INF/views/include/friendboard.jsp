@@ -111,7 +111,7 @@
                               <c:if test="${DocumentDTO.tag != null }">
                               <c:set var="tags" value="${fn:split(DocumentDTO.tag,',' )}"/>
                               <c:forEach items="${tags }" var="tag">
-                              <button class="btn btn-info">${tag}</button>
+                              <button type="button" class="btn btn-info" onclick="tagbtn('${tag}')">${tag}</button>
                               </c:forEach>
                               </c:if>
                            </div>
@@ -209,7 +209,10 @@
 
 
 $(document).ready(function() {
-	
+	function tagbtn(tag) {
+		alert(tag)
+		location.href="/overclass/find/tagfind?tag="+tag;
+	}
 	var result = '${msg}';
 	
 //신고
@@ -493,4 +496,5 @@ var template = Handlebars.compile(source);
 				}]
 		})
 	}
+})
 </script>
