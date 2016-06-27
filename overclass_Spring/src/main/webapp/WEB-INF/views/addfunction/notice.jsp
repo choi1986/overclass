@@ -1,3 +1,4 @@
+<%@page import="kr.co.overclass.domain.UserVO"%>
 <%@page import="kr.co.overclass.domain.FriendVO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -17,10 +18,12 @@
 			<input class="sub" type="button" value="요청수락<%=i+1 %>" id="req<%=i+1%>"><br><%
 		}
 	}else if(request.getAttribute("submit").equals("submit")){
+		UserVO user = (UserVO)session.getAttribute("login");
+		String user_id = user.getUser_id();
 		%><br><br><br><br><br>친구 등록 성공<br>
-		<a href="/overclass/notice/req?user_id=test1">요청목록으로</a>
-		<a href="main">메인으로</a><%
-	}
+		<a href="/overclass/notice/req?user_id=<%=user_id%>">요청목록으로</a>&nbsp;
+		<a href="overclass/main">메인으로</a><%
+	};
 %>
 
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -28,11 +31,11 @@
 	$(document).ready(function() {
 		$(".sub").click(function() {
 			var numtxt = $(this).val();
-			num = numtxt.substring(2,5);
+			var num = numtxt.substring(4,7);
 			var sender = $("#sen"+num).val();
-			//alert("요청자"+sender)
+			//alert("요청자"+sender);
 			var receiver = $("#rec"+num).val();
-			//alert("대상"+receiver)
+			//alert("대상"+receiver);
 			location.assign("/overclass/notice/friendSubmit?sender="+sender+"&receiver="+receiver)
 		})
 	})
