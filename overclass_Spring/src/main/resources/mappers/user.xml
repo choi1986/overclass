@@ -3,7 +3,7 @@
 <mapper namespace="user">
 	<select id="searchUser" resultType="user">
 		select * from oc_user
-		where user_id=#{user_id}
+		where LOWER(user_id)=LOWER(#{user_id})
 	</select>
 	<insert id="createUser">
 		insert into oc_user (user_id, user_pwd, user_name, user_email, user_tel, user_loc, user_hobby1, user_hobby2, user_birth, user_gender, user_pwdq, user_pwda)
