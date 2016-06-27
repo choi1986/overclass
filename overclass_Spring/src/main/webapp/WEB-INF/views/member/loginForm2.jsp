@@ -206,7 +206,7 @@
 		    				action: function(cancel){
 		    					cancel.close();
 		    			    	$("#register_form_join").attr('action','/overclass/dupl');
-		    			    	$("#dupl").click();
+		    					$("#register_form_join").submit();
 		    					}
 		    			}]
 		    	})
@@ -222,7 +222,7 @@
 		    				action: function(cancel){
 		    					cancel.close();
 		    			    	$("#register_form_join").attr('action','/overclass/dupl');
-		    			    	$("#dupl").click();
+		    					$("#register_form_join").submit();
 		    					}
 		    			}]
 		    	})
@@ -233,7 +233,23 @@
 			}
 		}) //join_join click 
 		$("#dupl").click(function() { //회원가입폼에서 중복검사버튼 눌렀을시
-			$("#register_form_join").attr('action','/overclass/dupl');
+			if (joinError.user_idCk==true) {
+				BootstrapDialog.show({
+		    		title: '', //알러트 타이틀 이름
+		    		message: '유효한 ID 입력 후 중복검사 해주세요!', //알러트 내용
+		    		type: BootstrapDialog.TYPE_DANGER,
+		    		buttons: [{
+		    				label: '닫기',
+		    				action: function(cancel){
+		    					cancel.close();
+		    					}
+		    			}]
+		    	})
+			}
+			else {
+				$("#register_form_join").attr('action','/overclass/dupl');
+				$("#register_form_join").submit();
+			}
 		}) //dupl click 
 
 		$("#que").click(function() {
@@ -654,7 +670,7 @@
                                           </div>
                                           
                                           <div class="col-sm-1">
-                                              <button class="btn btn-primary" type="submit" id="dupl">중복체크</button>
+                                              <button class="btn btn-primary" type="button" id="dupl">중복체크</button>
                                           </div>
                                       </div>
                                       

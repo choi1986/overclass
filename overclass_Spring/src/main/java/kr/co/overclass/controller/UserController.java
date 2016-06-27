@@ -72,9 +72,12 @@ public class UserController {
 	
 	@RequestMapping(value="/dupl", method=RequestMethod.POST) // 로그인 버튼 눌린 후
 	public String duplicate (JoinDTO dto, RedirectAttributes attr, HttpSession session, Model model) throws Exception { // 로그인 정보 전송
-		UserVO vo = service.searchUser(dto.getUser_id());
-		if (vo!=null) session.setAttribute("joinDuplCk", vo.getUser_id());
-		else  session.setAttribute("joinDuplCk", "");
+		if (dto.getUser_id()=="") session.setAttribute("joinDuplCk", dto.getUser_id());
+		else {
+			UserVO vo = service.searchUser(dto.getUser_id());
+			if (vo!=null) session.setAttribute("joinDuplCk", vo.getUser_id());
+			else  session.setAttribute("joinDuplCk", "");
+		}
 		session.setAttribute("joinDupl", dto); // 있다면 모델(->세션)에 객체 저장.
 		return "redirect:/";
 	}
