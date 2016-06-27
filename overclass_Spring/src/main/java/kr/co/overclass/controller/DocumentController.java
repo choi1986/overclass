@@ -140,8 +140,8 @@ public class DocumentController {
 	}
 	
 	//메인피드, 마이피드 글 조회 + 페이징
-	@RequestMapping(value={"","/myFeed","/mainFeed_Page","/myFeed_Page","friendFeed","friendFeed_page"},method=RequestMethod.GET)
-	public String mainlist(String page, String user_id, Model model, HttpServletRequest request, HttpSession session)throws Exception{
+	@RequestMapping(value={"","/myFeed","/mainFeed_Page","/myFeed_Page","friendFeed","friendFeed_Page"},method=RequestMethod.GET)
+	public String mainlist(String page, String user_id, Model model, HttpServletRequest request)throws Exception{
 		String url = request.getServletPath(); //requestMapping url주소값 얻어옴
 		UserVO vo = (UserVO) request.getSession().getAttribute("login"); //로그인정보 얻어옴
 		Criteria cri = new Criteria();
@@ -162,7 +162,7 @@ public class DocumentController {
 			maker.setTotalCount(service.mainFeed_count(vo.getUser_id()));
 			list = service.mainFeed_list(cri, vo.getUser_id());
 			forward = "document/mainForm";
-		} else if ( url.equals("/main/friendFeed") ) {
+		} else if ( url.equals("/main/friendFeed") || url.equals("/main/friendFeed_Page") ) {
 			UserVO friend = new UserVO();
 			System.out.println("친구이름:"+user_id);
 			list = service.myFeed_list(cri, user_id);
@@ -187,7 +187,7 @@ public class DocumentController {
 			if(!friTempList.get(i).getReceiver().equals(vo.getUser_id()))
 				friVoList.add(userService.searchUser(friTempList.get(i).getReceiver()));
 		}
-		session.setAttribute("friend_rel", friVoList);
+		request.getSession().setAttribute("friend_rel", friVoList);
 		
 		return forward;
 	}

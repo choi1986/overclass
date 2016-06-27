@@ -163,14 +163,14 @@
 			<div class="btn-toolbar">
 				<div class="btn-group">
 					<c:if test="${pageMaker.prev }">
-					<a href="/overclass/main/friendFeed_Page?page=${pageMaker.startPage -1 }">
+					<a href="/overclass/main/friendFeed_Page?page=${pageMaker.startPage -1 }&user_id=${friend.user_id }">
 						<button class="btn btn-default" type="button">«</button>
 					</a>
 					</c:if>
 				</div>
 				<div class="btn-group">
 					<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
-					<a href="/overclass/main/friendFeed_Page?page=${idx }">
+					<a href="/overclass/main/friendFeed_Page?page=${idx }&user_id=${friend.user_id }">
 						
 						<button class="<c:out value="${pageMaker.cri.page == idx?'btn btn-primary active':'btn btn-primary' }"/>">${idx }</button>
 					</a>
@@ -178,7 +178,7 @@
 				</div>
 				<div class="btn-group">
 					<c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
-					<a href="/overclass/main/friendFeed_Page?page=${pageMaker.endPage +1 }">
+					<a href="/overclass/main/friendFeed_Page?page=${pageMaker.endPage +1 }&user_id=${friend.user_id }">
 						<button class="btn btn-default" type="button">»</button>
 					</a>
 					</c:if>
