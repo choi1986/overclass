@@ -18,8 +18,8 @@ public class UserLoginServiceImpl implements UserLoginService {
 	}
 
 	@Override
-	public void createUserLogin (String user_id) throws Exception {
-		userLoginDAO.createUserLogin(user_id);
+	public int createUserLogin (String user_id) throws Exception {
+		return userLoginDAO.createUserLogin(user_id);
 	}
 
 	@Override

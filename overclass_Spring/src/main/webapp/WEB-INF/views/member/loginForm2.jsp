@@ -307,6 +307,7 @@
 			break;
 		case 11: // 취미2
 			if(data.value=="-- 선택 --") { msg='취미를 선택해주세요.'; joinError.user_hobby2Ck=true; }
+			else if(data.value==$("#user_hobby1").val()) { msg='첫번째 취미와 다르게 선택해주세요!'; joinError.user_hobby2Ck=true; }
 			else joinError.user_hobby2Ck=false;
 			$("#span9").text(msg);
 			break;
@@ -486,6 +487,21 @@
 				BootstrapDialog.show({
    					title: '', //알러트 타이틀 이름
    					message: '아이디, 비밀번호를 다시 확인해주세요!', //알러트 내용
+   					type: BootstrapDialog.TYPE_DANGER,
+    				buttons: [{
+    						label: '닫기',
+    						action: function(cancel){
+    							cancel.close();
+    							}
+   						}]
+   				})
+		</script>
+	</c:if>
+	<c:if test="${sessionScope.loginFail=='2'}"> <!-- 로그인 실패 모달 / 이미 같은 아이디로 로그인! -->
+		<script type="text/javascript">
+				BootstrapDialog.show({
+   					title: '', //알러트 타이틀 이름
+   					message: '해당 아이디는 이미 접속중입니다!', //알러트 내용
    					type: BootstrapDialog.TYPE_DANGER,
     				buttons: [{
     						label: '닫기',
