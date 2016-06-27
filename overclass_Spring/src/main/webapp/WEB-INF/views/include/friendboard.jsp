@@ -206,13 +206,12 @@
 
 
 <script>
-
-
-$(document).ready(function() {
 	function tagbtn(tag) {
 		alert(tag)
 		location.href="/overclass/find/tagfind?tag="+tag;
 	}
+
+$(document).ready(function() {
 	var result = '${msg}';
 	
 //신고

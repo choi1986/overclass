@@ -32,6 +32,7 @@ public class FindController {
 	@RequestMapping(value={"/tagfind","/tagfindpage"},method=RequestMethod.GET)
 	public String tagfind(String tag, String page, Model model, HttpServletRequest request) throws Exception {
 		String url = request.getServletPath(); //requestMapping url주소값 얻어옴
+		UserVO vo = (UserVO) request.getSession().getAttribute("login");
 		System.out.println(tag);
 		List<DocumentDTO> list = service.tagFind(tag);
 		Criteria cri = new Criteria();
@@ -43,6 +44,7 @@ public class FindController {
 		maker.setCri(cri);
 		maker.setTotalCount(service.tagcnt(tag));
 		
+		model.addAttribute("user",vo);
 		model.addAttribute("taglist",list);
 		model.addAttribute("pageMaker", maker);
 		return "addfunction/findForm";
