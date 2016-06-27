@@ -39,11 +39,15 @@ public class DocumentServiceImpl implements DocumentService {
 	@Override
 	public void create(DocumentVO vo) throws Exception {
 		String content = vo.getContent();
+		String tag = vo.getTag().trim();
 		//게시판에서 엔터키와, <, > 괄호 처리
+		tag = tag.replaceAll("<","&lt;");
+		tag = tag.replaceAll(">","&gt;");
 		content = content.replaceAll("<","&lt;");
 		content = content.replaceAll(">","&gt;");
 		content = content.replaceAll("\\n","<br/>");
 		vo.setContent(content);
+		vo.setTag(tag);
 		dao.create(vo);
 	}
 	

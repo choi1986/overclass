@@ -93,8 +93,6 @@
 				</li>
 				<!-- 메시지알림 끝-->
 
-
-
 				<!-- 새글알림 시작-->
 			<li id="alert_notificatoin_bar" class="dropdown">
 				<a data-toggle="dropdown" class="dropdown-toggle" href="#"> 
@@ -111,7 +109,7 @@
 								<span class="label label-primary">
 									<i class="icon_profile"></i>
 								</span>
-								<input type="text" id="reqCount" size="1"></b>건의 친구요청
+								<input type="text" id="reqCount" size="1">건의 친구요청
 								<span class="small italic pull-right">5분 전</span>
 							</a>
 						</li> --%>
@@ -187,16 +185,11 @@ var counttemp = Handlebars.compile(countsource);
 function find() {
 	if(event.keyCode == 13){
 		var formObj = $("#find_form");
-		var txtvar = $('#search_form').val();
+		var txtvar = $('#search_form').val().toLowerCase();
 		if(txtvar.substring(0,1)=='#'){ //태그검색
 			var txt = txtvar.substring(1,txtvar.length);
-			alert(txt)
-			/* formObj.attr("action","/overclass/find/tagfind?tag="+txt);
-			alert(formObj.attr("action"))
-			formObj.submit(); */
 			location.href="/overclass/find/tagfind?tag="+txt;
 		} else { //친구검색
-			alert(txtvar)
 			location.href="/overclass/find/friendfind?friend="+txtvar;
 		}
 	}

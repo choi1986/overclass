@@ -53,6 +53,7 @@ public class FindController {
 	@RequestMapping(value={"/friendfind","/friendfindpage"},method=RequestMethod.GET)
 	public String friendfind(String friend, String page, Model model, RedirectAttributes attr, HttpServletRequest request) throws Exception {
 		String url = request.getServletPath(); //requestMapping url주소값 얻어옴
+		UserVO vo = (UserVO) request.getSession().getAttribute("login");
 		Criteria cri = new Criteria();
 		if ( page != null) {
 			cri.setPage(Integer.parseInt(page));
@@ -65,6 +66,7 @@ public class FindController {
 		System.out.println(friend);
 		
 		List<UserVO> list = service.friendFind(friend);
+		model.addAttribute("user",vo);
 		model.addAttribute("friendlist",list);
 		forward = "addfunction/findForm";
 		return forward;

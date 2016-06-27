@@ -46,6 +46,15 @@ public class DocumentController {
 	private UserService userService;
 	String uploadPath;
 	
+	//파일업로드
+	private String uploadFile(String originName, byte[] fileData) throws Exception {
+		UUID uid = UUID.randomUUID();
+		String savedName = uid.toString() + "_" + originName; //uuid와 함께저장
+		File target = new File(uploadPath, savedName);
+		FileCopyUtils.copy(fileData, target); //실제 파일 업로드
+		return savedName;
+	}
+	
 	//메인피드, 마이피드에서 글쓰기
 	@RequestMapping(value={"/writeDoc","/mywriteDoc"}, method=RequestMethod.POST)
 	public String create(DocumentVO vo, RedirectAttributes attr, MultipartFile file, HttpServletRequest request) throws Exception {
@@ -110,17 +119,6 @@ public class DocumentController {
 		return "redirect:/main/myFeed";
 	}
 		
-	//파일업로드
-	private String uploadFile(String originName, byte[] fileData) throws Exception {
-		UUID uid = UUID.randomUUID();
-		String savedName = "";
-		if(!originName.equals("")){
-			savedName = uid.toString() + "_" + originName; //uuid와 함께저장
-			File target = new File(uploadPath, savedName);
-			FileCopyUtils.copy(fileData, target); //실제 파일 업로드
-		} 
-		return savedName;
-	}
 	
 	//메인피드, 마이피드 글 삭제
 	@RequestMapping(value={"/removeDoc","/myremoveDoc"},method=RequestMethod.GET)
@@ -158,13 +156,12 @@ public class DocumentController {
 			maker.setTotalCount(service.myFeed_count(vo.getUser_id()));
 			forward = "document/myFeed";
 		} else if( url.equals("/main") || url.equals("/main/mainFeed_Page")) {
-			logger.info("\""+user_id+"\"로 접속, "+vo.toString());
+			logger.info("\""+vo.getUser_id()+"\"로 접속, "+vo.toString());
 			maker.setTotalCount(service.mainFeed_count(vo.getUser_id()));
 			list = service.mainFeed_list(cri, vo.getUser_id());
 			forward = "document/mainForm";
 		} else if ( url.equals("/main/friendFeed") || url.equals("/main/friendFeed_Page") ) {
 			UserVO friend = new UserVO();
-			System.out.println("친구이름:"+user_id);
 			list = service.myFeed_list(cri, user_id);
 			maker.setTotalCount(service.myFeed_count(user_id));
 			friend = userService.searchUser(user_id);
