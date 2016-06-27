@@ -368,7 +368,7 @@ function searchDetailAddrFromCoords(coords, callback) {
 <script id="msgtoptemp" type="text/x-handlebars-template">
 <div class="notify-arrow notify-arrow-blue"></div>
 						<li>
-							<p class="blue">새로운 쪽지 {{count}}개</p>
+							<p class="blue">새로운 메시지 {{count}}개</p>
 						</li>
 </script>
 
@@ -696,6 +696,7 @@ ws.onmessage = function (event) {
 		if(data.protocol == 130) {
 			//msgtemp, msgtempNR
 			var htmlTxt = msgtop_template(data);
+			$("#sitebarMsgCount").text(data.count);
 			for(var i=0; i<data.list.length; i++){
 				if(data.list[i].read == 0){	// 안읽었으면
 					htmlTxt+=msg_templateNR(data.list[i]);

@@ -23,7 +23,7 @@
 			<div class="widget-foot">
 				<div class="row" style="margin-top: 25px;">
 					<div class="form-group col-lg-offset-1 col-lg-9 form-group has-success">
-						<input type="text" id="sendtext" class="form-control"
+						<input type="text" id="sendtext" class="form-control" readonly
 							placeholder="메시지를 입력하세요..." onkeydown="return chatEnter(event)">
 					</div>
 					<!-- <button type="button" id="txtsubmit" class="btn btn-success">보내기</button> -->
@@ -52,7 +52,7 @@
 							<img src="${flist.user_image }" class="img-circle" style="height: 30px; width: 30px;">
 						</a>
 					</td>
-					<td><a href="#" id="cl_${flist.user_id }">${flist.user_id }</a>
+					<td><a href="javascript:chatChange('${flist.user_id }');" id="cl_${flist.user_id }">${flist.user_id }</a>
 						<!-- <div class="btn-group">
                            <a data-toggle="dropdown" class="btn btn-link dropdown-toggle" type="button">teset1 
                            </a>
@@ -62,7 +62,8 @@
                            </ul>
                        </div> -->
 					</td>
-					<td>${flist.user_name }</td>
+					<td><a href="javascript:chatChange('${flist.user_id }');">${flist.user_name }</a></td>
+					
 				</tr>
 				</c:forEach>
 

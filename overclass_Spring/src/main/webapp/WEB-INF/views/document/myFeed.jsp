@@ -432,16 +432,21 @@
 	</a>
 </li>
 </script>
-
-
 <script id="msgtoptemp" type="text/x-handlebars-template">
 <div class="notify-arrow notify-arrow-blue"></div>
 						<li>
-							<p class="blue">새로운 쪽지 {{count}}개</p>
+							<p class="blue">새로운 메시지 {{count}}개</p>
 						</li>
 </script>
 
 <script>
+var msg_source = $("#msgtemp").html();
+var msg_template = Handlebars.compile(msg_source);
+var msgtop_source = $("#msgtoptemp").html();
+var msgtop_template = Handlebars.compile(msgtop_source);
+var msg_source_NR = $("#msgtempNR").html();
+var msg_templateNR = Handlebars.compile(msg_source_NR);
+
 //***********************   소       켓      ****************************************
 //소켓생성하기
 var sender='<%=user.getUser_id()%>';
@@ -451,9 +456,11 @@ var ws = new WebSocket('ws://192.168.0.131/overclass/chatting');
 //서버에서 메시지 날라올때
 ws.onmessage = function (event) {
 	var data = JSON.parse(event.data);
+	var sitebarCount = document.getElementById('sitebarMsgCount');
 		if(data.protocol == 130) {
 			//msgtemp, msgtempNR
 			var htmlTxt = msgtop_template(data);
+			$("#sitebarMsgCount").text(data.count);
 			for(var i=0; i<data.list.length; i++){
 				if(data.list[i].read == 0){	// 안읽었으면
 					htmlTxt+=msg_templateNR(data.list[i]);
@@ -1271,21 +1278,6 @@ var result = '${msg}';
 				$("#page_1").val() - 1
 			}
 		})
-
-		$("#mail_notificatoin_bar").click(function() { // 알림바 메시지 클릭 이벤트
-			$.ajax({
-				url : "addfunctionaction.do?action=msg_list4",
-				success : function(success) {
-					$("#msg4").html(success);
-				}
-			});
-			$.ajax({
-				url : "addfunctionaction.do?action=msg_num",
-				success : function(success) {
-					$("#msg4num").html(success);
-				}
-			});
-		});
 
 		$("#alert_notificatoin_bar").click(function() { // 알림바 알림 클릭 이벤트
 			$.ajax({

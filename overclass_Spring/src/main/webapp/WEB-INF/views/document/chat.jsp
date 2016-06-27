@@ -62,7 +62,7 @@
 <!-- 쪽지 리스트처리를 위한 템플릿 -->
 <script id="msgtemp" type="text/x-handlebars-template">
 <li>
-	<a href='javascript:chatChange({{user_id}});'>
+	<a href='/overclass/chat/?sender={{sender}}'>
 		<span class="photo">
 			<img alt="avatar" width='30' height='30' src='{{user_image}}'></span>
 		<span class="subject">
@@ -74,8 +74,8 @@
 </li>
 </script>
 <script id="msgtempNR" type="text/x-handlebars-template">
-<li style="background-color: gray;">
-	<a href='javascript:chatChange({{user_id}});'>
+<li style="background-color: #e6e6e6;">
+	<a href='/overclass/chat/?sender={{sender}}'>
 		<span class="photo">
 			<img alt="avatar" width='30' height='30' src='{{user_image}}'></span>
 		<span class="subject">
@@ -86,9 +86,12 @@
 	</a>
 </li>
 </script>
-
-
-
+<script id="msgtoptemp" type="text/x-handlebars-template">
+<div class="notify-arrow notify-arrow-blue"></div>
+						<li>
+							<p class="blue">새로운 메시지 {{count}}개</p>
+						</li>
+</script>
 
 <!-- 웹소켓부분 -->
 <script>
@@ -98,13 +101,20 @@
 	
 	var sourceme = $("#chatme").html();
 	var sourceother = $("#chatother").html();
-	var sourcebar = $("#msgtemp").html();
-	var sourcebarNR = $("#msgtempNR").html();
+	//var sourcebar = $("#msgtemp").html();
+	//var sourcebarNR = $("#msgtempNR").html();
 	
 	var templateme = Handlebars.compile(sourceme);
 	var templateother = Handlebars.compile(sourceother);
-	var templatesb = Handlebars.compile(sourcebar);
-	var templatesbNR = Handlebars.compile(sourcebarNR);
+	//var templatesb = Handlebars.compile(sourcebar);
+	//var templatesbNR = Handlebars.compile(sourcebarNR);
+	
+	var msg_source = $("#msgtemp").html();
+	var msg_template = Handlebars.compile(msg_source);
+	var msgtop_source = $("#msgtoptemp").html();
+	var msgtop_template = Handlebars.compile(msgtop_source);
+	var msg_source_NR = $("#msgtempNR").html();
+	var msg_templateNR = Handlebars.compile(msg_source_NR);
 	
 	// 소켓생성하기
 	var ws = new WebSocket('ws://192.168.0.131/overclass/chatting');
@@ -141,6 +151,7 @@
 			case 130:{
 				//msgtemp, msgtempNR
 				var htmlTxt = msgtop_template(data);
+				var sitebarCount = document.getElementById('sitebarMsgCount');
 				for(var i=0; i<data.list.length; i++){
 					if(data.list[i].read == 0){	// 안읽었으면
 						htmlTxt+=msg_templateNR(data.list[i]);
@@ -236,6 +247,7 @@
 	
 	// 채팅상대변경
 	function chatChange(user_id) {
+		document.getElementById("sendtext").readOnly = false;
 		if(document.getElementById('chatTo').firstChild.nodeValue != ' '){
 			var recei = document.getElementById('chatTo').firstChild.nodeValue;
 			var preChange = JSON.stringify({
@@ -253,7 +265,7 @@
 		$("#chatTo").text(user_id);
 		var changeMsg = JSON.stringify({
 			sender:sender,
-			receiver:user_id.trim(),
+			receiver:this.receiver.trim(),
 			protocol:110,
 			content:'CHANGE CHATTING USER'
 		});
@@ -261,6 +273,16 @@
 		ws.send(changeMsg);
 	}
 	
+	$.ajax({
+		url : "/overclass/msg/sitebarCount",
+		type:'POST',
+		data:{
+			user_id:'<%=user.getUser_id()%>'
+		},
+		success : function(success) {
+			$("#sitebarMsgCount").html(success);
+		}
+	});
 	
 </script>
 </html>
