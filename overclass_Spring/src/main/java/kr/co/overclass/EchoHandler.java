@@ -130,7 +130,7 @@ public class EchoHandler extends TextWebSocketHandler {
 					tomsg.setReceiver(frommsg.getReceiver());
 					tomsg.setProtocol(210);
 					tomsg.setContent(frommsg.getContent());
-					
+					tomsg.setUser_image(service.getImage(frommsg.getSender()));
 					
 					/* 
 					  	¡÷¿«!!!!!!!!!! 

@@ -71,4 +71,9 @@ public class MsgDAOImpl implements MsgDAO {
 	public void writeNR(MsgwsVO vo) throws Exception {
 		session.insert("msg.writeNR",vo);
 	}
+	
+	@Override
+	public String getImage(String sender) throws Exception {
+		return session.selectOne("msg.getImage",sender);
+	}
 }

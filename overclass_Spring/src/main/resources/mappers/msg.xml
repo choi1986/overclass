@@ -53,4 +53,9 @@
 		set read = 1
 		where sender = #{sender} and receiver = #{receiver}
 	</update>
+	
+	<select id="getImage" resultType="String">
+		select user_image from oc_user
+		where user_id = #{sender}
+	</select>
 </mapper>

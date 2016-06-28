@@ -30,7 +30,7 @@
 <script id="chatother" type="text/x-handlebars-template">
 <li class="by-me">
 	<div class="avatar pull-left">
-		<img src="{{user_image}}" alt="">
+		<img src="{{user_image}}" class="img-circle" style="width: 40px; height: 40px;">
 	</div>
 
 	<div class="chat-content">
@@ -46,7 +46,7 @@
 <script id="chatme" type="text/x-handlebars-template">
 <li class="by-other">
 	<div class="avatar pull-right">
-		<img src="{{user_image}}" alt="">
+		<img src="{{user_image}}" class="img-circle" style="width: 40px; height: 40px;">
 	</div>
 
 	<div class="chat-content" style="border-color: #ffd700;">
@@ -163,7 +163,7 @@
 			}break;
 			case 210:{
 				// 내가 지금 대화를 하고있는 상대한태서 온 메시지이면 화면에 표출
-				if(data.receiver == sender){
+				if(data.receiver == sender && data.sender == clickUser.trim()){
 					data.writedate = '방금전';
 					htmltxt = templateother(data);
 					$("#textout").append(htmltxt);
@@ -240,6 +240,7 @@
 			
 			var parseText = JSON.parse(text);
 			parseText.writedate = '방금전';
+			parseText.user_image = '<%=user.getUser_image()%>';
 			var htmltxt = templateme(parseText);
 			$("#textout").append(htmltxt);
 			$("#sendtext").val('');

@@ -116,4 +116,9 @@ public class MsgServiceImpl implements MsgService {
 	public void writeNR(MsgwsVO vo) throws Exception {
 		dao.writeNR(vo);
 	}
+	
+	@Override
+	public String getImage(String sender) throws Exception {
+		return dao.getImage(sender);
+	}
 }
