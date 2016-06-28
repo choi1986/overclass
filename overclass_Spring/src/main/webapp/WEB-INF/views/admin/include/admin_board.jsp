@@ -62,7 +62,7 @@
 										<div class="filebox col-lg-10">
 											<div class="col-lg-12" id="photo_div">
 													<a href="${reportDTO.image }" data-lightbox="image-${reportDTO.dno }" data-title="사진">
-														<img name="image" class="img-responsive img-thumbnail" src="${reportDTO.image }" width="500px" height="350px">
+														<img name="image" class="img-responsive img-thumbnail" src="${reportDTO.image }" style="height: 50%; width: 50%;">
 													</a>
 											</div>
 										</div>
