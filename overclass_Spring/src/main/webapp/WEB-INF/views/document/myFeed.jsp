@@ -35,7 +35,7 @@
 							<input type="hidden" name="user_id" value="${user.user_id }"> 
 						<div class="form-group">
 						<div class="fileboxImage control-label col-sm-offset-2 col-sm-9">
-							<label for="imagefile" class="btn btn-success"><span class="fa fa-camera-retro"></span> 프로필사진 변경</label>
+							<label for="imagefile" class="btn btn-success col-sm-9"><span class="fa fa-camera-retro"></span> 프로필사진 변경 </label>
 							<label id="image_default" class="btn btn-danger"><span class="fa fa-close"></span></label>
 							<input type="file" id="imagefile" name="imagefile" accept="image/gif, image/jpeg, image/png, image/bmp#">
 						</div>
@@ -326,7 +326,7 @@
 															<td onclick="friendFeed('${i.user_id }')"><img class="img-rounded" src="${i.user_image}" width='70px' height='70px'></td>
 															<td onclick="friendFeed('${i.user_id }')">${i.user_id }</td>
 															<td onclick="friendFeed('${i.user_id }')">${ i.user_name }</td>
-															<td onclick="friendFeed('${i.user_id }')"><i class="icon_pin_alt"></i>${i.user_loc }</td>
+															<td onclick="friendFeed('${i.user_id }')"><i class="icon_pin_alt" style="color: limegreen;"></i>${i.user_loc }</td>
 															<td>
 																<div class="col-sm-offset-8 col-sm-4">
 																	<button type="button" id="friendDel" onclick="friendDel('${i.user_id }')" class="btn btn-danger">  
