@@ -363,8 +363,6 @@ function searchDetailAddrFromCoords(coords, callback) {
 	</a>
 </li>
 </script>
-
-
 <script id="msgtoptemp" type="text/x-handlebars-template">
 <div class="notify-arrow notify-arrow-blue"></div>
 						<li>
@@ -618,44 +616,6 @@ $(document).ready(function() {
 		$("#dropdown_alr").slideToggle("slow")
 	})
 }); //ready
-
-
-function msg_open(msgidnum) {
-	var msg = document.getElementById(msgidnum);
-	$.ajax({
-		url : "addfunctionaction.do?action=msg_open",
-		data : {
-			user_id : msg.firstChild.nodeValue
-		},
-		success : function(success) {
-			$("#msg_body").html(success);
-			document.getElementById('msg_scroll').scrollTop = document
-					.getElementById('msg_scroll').scrollHeight;
-		},
-		error : function(xhr) {
-			alert("에러:" + xhr.status)
-		}
-	})//ajax()
-}
-
-function msg_write() {
-	var msg_content = document.getElementById('msg_write_content').value;
-	var msg_to_user = document.getElementById('msg_write_to').value;
-	var msg_from_user = document.getElementById('msg_write_from').value;
-	$.ajax({
-		url : "addfunctionaction.do?action=msg_write",
-		data : {
-			msg_to : msg_to_user,
-			msg_from : msg_from_user,
-			content : msg_content
-		},
-		success : function(result) {
-			$("#msg_body").html(result);
-			document.getElementById('msg_scroll').scrollTop = document
-					.getElementById('msg_scroll').scrollHeight;
-		}
-	})
-}
 
 //스크롤업
 function enterKey(e) {

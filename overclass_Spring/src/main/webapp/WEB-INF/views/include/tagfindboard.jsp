@@ -231,7 +231,17 @@ $(document).ready(function() {
 		alert()
 	} */
 	
-				
+	$.ajax({
+		url : "/overclass/msg/sitebarCount",
+		type:'POST',
+		data:{
+			user_id:'<%=user2.getUser_id()%>'
+		},
+		success : function(success) {
+			$("#sitebarMsgCount").html(success);
+		}
+	});
+	
 	var result = '${msg}';
 	
 	//글쓰기 성공시

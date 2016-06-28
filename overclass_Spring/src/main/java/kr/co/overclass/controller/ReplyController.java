@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.gson.Gson;
+
 import kr.co.overclass.domain.Criteria;
 import kr.co.overclass.domain.PageMaker;
 import kr.co.overclass.domain.ReplyVO;
@@ -80,13 +82,16 @@ public class ReplyController {
 	}
 	
 	@RequestMapping(value="/{rno}", method=RequestMethod.DELETE)
-	public ResponseEntity<String> replyRemove(@PathVariable("rno") int rno, String user_id) {
+	public ResponseEntity<String> replyRemove(@PathVariable("rno") int rno, @RequestBody UserVO temp) {
+		
+		/*Gson user = new Gson();
+		UserVO temp = user.fromJson(user_id, UserVO.class);*/
 		
 		ResponseEntity<String> entity = null;
 		logger.info("삭제요청된 댓글번호 : "+rno);
-		logger.info("로그인된 유저아이디 : "+user_id);
+		logger.info("로그인된 유저아이디 : "+temp.getUser_id());
 		try {
-			if(service.removeReply(rno,user_id)){
+			if(service.removeReply(rno,temp.getUser_id())){
 				entity = new ResponseEntity<String>("SUCCESS",HttpStatus.OK);
 			}else {
 				entity = new ResponseEntity<String>("FAIL",HttpStatus.OK);
