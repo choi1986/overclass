@@ -42,13 +42,13 @@
 										<label class="col-sm-2">
 											<a href="#"><img class="img-rounded" src="${DocumentDTO.user_image}" width='90px' height='90px' onclick="friendAdd('${DocumentDTO.writer }')"></a>
 										</label>
-										<div class="col-sm-10"> 
+										<div class="col-sm-10" id="change-transitions"> 
 											<h4><b>${DocumentDTO.writer } </b></h4><br>
 												 <h5>
 												 <span class="mapXY">
 												 	<span class="hidden">${DocumentDTO.mapXY}</span>
 													<%-- <a href="/overclass/main/map?mapXY=${DocumentDTO.mapXY}&mapLoc=${DocumentDTO.mapLoc}" id="locDoc"> --%>
-													<a href="#" onClick="window.open('/overclass/main/map?mapXY=${DocumentDTO.mapXY}&mapLoc=${DocumentDTO.mapLoc}','지도','width=900, height=600, toolbar=no, menubar=no, scrollbars=no, resizable=yes');return false;" id="locDoc">
+													<button type="button" data-value="fadeIn" class="btn btn-link" onClick="window.open('/overclass/main/map?mapXY=${DocumentDTO.mapXY}&mapLoc=${DocumentDTO.mapLoc}','지도','width=900, height=600, toolbar=no, menubar=no, scrollbars=no, resizable=yes');return false;" id="locDoc">
 													<c:if test="${DocumentDTO.mapLoc != null}">
 														<span class="fa fa-map-marker" style="color: green"> </span>
 													</c:if> 
@@ -56,7 +56,7 @@
 													<c:if test="${DocumentDTO.mapLoc != null}">
 														<span style="color: black;">에서</span>
 													</c:if>
-													</a>
+													</button>
 												 </span>
 													
 												</h5>
@@ -81,7 +81,7 @@
 										<div class="filebox col-sm-10">
 											<div class="col-sm-12" id="photo_div">
 											<a href="${DocumentDTO.image }" data-lightbox="image-${DocumentDTO.dno }" data-title="사진">
-												<img class="img-responsive img-thumbnail" src="${DocumentDTO.image }" style="width: 100%; height: 100%; position: relative; overflow: hidden;">
+												<img class="img-responsive img-thumbnail" src="${DocumentDTO.image }" style="width: 50%; height: 50%; position: relative; overflow: hidden;">
 											</a>
 											</div>
 										</div>
@@ -115,13 +115,13 @@
                         </div>
                         
                         <!-- 태그 -->
-                        <div class="form-group">
+                        <div class="form-group" id="change-transitions">
                            <label class="control-label col-sm-2" for="content">태그</label>
                            <div class="col-sm-9">
                               <c:if test="${DocumentDTO.tag != null }">
                               <c:set var="tags" value="${fn:split(DocumentDTO.tag,',' )}"/>
                               <c:forEach items="${tags }" var="tag">
-                              <button type="button" class="btn btn-info" onclick="tagbtn('${tag}')">${tag}</button>
+                              <button type="button" data-value="flash" class="btn btn-info" onclick="tagbtn('${tag}')">${tag}</button>
                               </c:forEach>
                               </c:if>
                            </div>

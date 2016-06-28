@@ -80,7 +80,7 @@
 		$('body').ripples({
 			   resolution: 512,
 			   dropRadius: 20,	
-			   perturbance: 0.04,
+			   perturbance: 0.02,
 			});
 			
 		$("#join").click(function() { //로그인 화면에서 회원가입버튼 눌렀을시
@@ -467,6 +467,7 @@
 	<c:choose>
 		<c:when test="${sessionScope.joinCk=='1'}"> <!-- 회원가입 성공 모달 -->
 			<script type="text/javascript">
+			$(document).ready(function(){
 					BootstrapDialog.show({
     					title: '', //알러트 타이틀 이름
     					message: '회원가입 성공!', //알러트 내용
@@ -478,10 +479,12 @@
     								}
     						}]
     				})
+			})
 			</script>
 		</c:when>
 		<c:when test="${sessionScope.joinCk=='0'}"> <!-- 회원가입 실패 모달 -->
 			<script type="text/javascript">
+			$(document).ready(function(){
 					BootstrapDialog.show({
 	    				title: '', //알러트 타이틀 이름
 	    				message: '회원가입 실패!', //알러트 내용
@@ -493,6 +496,7 @@
 	    							}
 	    					}]
 	    			})
+			})
 				</script>
 		</c:when>
 	</c:choose>
@@ -501,6 +505,7 @@
 	<c:choose>
 		<c:when test="${sessionScope.loginFail=='1'}"> <!-- 로그인 실패 모달 -->
 			<script type="text/javascript">
+			$(document).ready(function(){
 					BootstrapDialog.show({
 	   					title: '', //알러트 타이틀 이름
 	   					message: '아이디, 비밀번호를 다시 확인해주세요!', //알러트 내용
@@ -512,10 +517,12 @@
 	    							}
 	   						}]
 	   				})
+			})
 			</script>
 		</c:when>
 		<c:when test="${sessionScope.loginFail=='2'}"> <!-- 로그인X, 세션 해제 모달 -->
 			<script type="text/javascript">
+			$(document).ready(function(){
 					BootstrapDialog.show({
 	   					title: '', //알러트 타이틀 이름
 	   					message: '잘못된 접근이거나, 해당 아이디가 다른 곳에서 로그인 되었습니다.', //알러트 내용
@@ -527,10 +534,12 @@
 	    							}
 	   						}]
 	   				})
+			})
 			</script>
 		</c:when>
 		<c:when test="${sessionScope.loginFail=='3'}"> <!-- 로그인 제재 대상 모달 -->
 			<script type="text/javascript">
+			$(document).ready(function(){
 					BootstrapDialog.show({
 	   					title: '', //알러트 타이틀 이름
 	   					message: '해당 아이디는 신고되어 관리자에게 제재되었습니다.', //알러트 내용
@@ -542,6 +551,7 @@
 	    							}
 	   						}]
 	   				})
+			})
 			</script>
 		</c:when>
 	</c:choose>
@@ -550,6 +560,7 @@
 	<c:choose>
 		<c:when test="${sessionScope.searchID=='0'}"> <!-- 아이디 찾기에서 정보가 틀렸을때 -->
 			<script type="text/javascript">
+			$(document).ready(function(){
 				BootstrapDialog.show({
 					title : '', //알러트 타이틀 이름
 					message : '해당하는 아이디를 찾을 수 없습니다!', //알러트 내용
@@ -561,10 +572,12 @@
 						}
 					} ]
 				})
+			})
 			</script>
 		</c:when>
 		<c:when test="${sessionScope.searchID!=null}"> <!-- 아이디 찾기 성공했을 때 -->
 			<script type="text/javascript">
+			$(document).ready(function(){
 				BootstrapDialog.show({
 					title : '', //알러트 타이틀 이름
 					message : '아이디는 [${sessionScope.searchID}] 입니다!', //알러트 내용
@@ -576,6 +589,7 @@
 						}
 					} ]
 				})
+			})
 			</script>
 		</c:when>
 	</c:choose>
@@ -584,6 +598,7 @@
 	<c:choose>
 		<c:when test="${sessionScope.searchPwd=='suc'}"> <!-- 비밀번호 찾기 성공 -->
 			<script type="text/javascript">
+			$(document).ready(function(){
 				BootstrapDialog.show({
 					title : '', //알러트 타이틀 이름
 					message : '비밀번호를 정상적으로 변경하였습니다!', //알러트 내용
@@ -595,10 +610,12 @@
 						}
 					} ]
 				})
+			})
 			</script>
 		</c:when>
 		<c:when test="${sessionScope.searchPwd=='fail'}"> <!-- 비밀번호 찾기에서 정보가 틀렸을때 -->
 			<script type="text/javascript">
+			$(document).ready(function(){
 				BootstrapDialog.show({
 					title : '', //알러트 타이틀 이름
 					message : '입력 정보를 다시 확인해주세요!', //알러트 내용
@@ -610,10 +627,12 @@
 						}
 					} ]
 				})
+			})
 			</script>
 		</c:when>
 		<c:when test="${sessionScope.searchPwd=='pwdFail'}"> <!-- 비밀번호 찾기에서 비밀번호와 확인 비밀번호가 같지 않을때 -->
 			<script type="text/javascript">
+			$(document).ready(function(){
 				BootstrapDialog.show({
 					title : '', //알러트 타이틀 이름
 					message : '비밀번호와 확인 비밀번호가 같지 않습니다!', //알러트 내용
@@ -625,6 +644,7 @@
 						}
 					} ]
 				})
+			})
 			</script>
 		</c:when>
 	</c:choose>
@@ -645,11 +665,12 @@
                 <span class="input-group-addon"><i class="icon_key_alt"></i></span>
                 <input type="password" name="user_pwd" class="form-control" placeholder="패스워드">
             </div>
+            <div id="change-transitions">
             <label class="checkbox">
                 <input type="checkbox" name="useCookie"> 아이디 저장
-                <span class="pull-right"> <a type="button" class="btn btn-link" id="searchID" data-value="bounceIn" href="javascript:document.test.submit()">문제가 있나요?</a></span><!--  <a href="#"> -->
+                <span class="pull-right"> <button type="button" data-value="fadeInLeftBig" class="btn btn-link" id="searchID" data-value="bounceIn" onclick="javascript:document.test.submit()">문제가 있나요?</button></span><!--  <a href="#"> -->
             </label>
-            
+            </div>
             <div id="change-transitions" class="row">
 				<button type="submit" data-value="bounceIn" class="btn btn-primary btn-lg btn-block">로그인</button>
    		        <button type="button" data-value="fadeInLeftBig" class="btn btn-info btn-lg btn-block" id="join" >가입하기</button>

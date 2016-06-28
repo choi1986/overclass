@@ -151,7 +151,8 @@
 			case 130:{
 				//msgtemp, msgtempNR
 				var htmlTxt = msgtop_template(data);
-				var sitebarCount = document.getElementById('sitebarMsgCount');
+				//var sitebarCount = document.getElementById('sitebarMsgCount');
+				$("#sitebarMsgCount").text(data.count);
 				for(var i=0; i<data.list.length; i++){
 					if(data.list[i].read == 0){	// 안읽었으면
 						htmlTxt+=msg_templateNR(data.list[i]);

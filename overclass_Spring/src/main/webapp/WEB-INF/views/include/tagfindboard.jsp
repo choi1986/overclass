@@ -84,7 +84,7 @@
 										<div class="filebox col-sm-10">
 											<div class="col-sm-12" id="photo_div">
 											<a href="${DocumentDTO.image }" data-lightbox="image-${DocumentDTO.dno }" data-title="사진">
-												<img class="img-responsive img-thumbnail" src="${DocumentDTO.image }" style="width: 100%; height: 100%; position: relative; overflow: hidden;">
+												<img class="img-responsive img-thumbnail" src="${DocumentDTO.image }" style="width: 50%; height: 50%; position: relative; overflow: hidden;">
 											</a>
 											</div>
 										</div>
@@ -118,13 +118,13 @@
                         </div>
                         
                         <!-- 태그 -->
-                        <div class="form-group">
+                        <div class="form-group" id="change-transitions">
                            <label class="control-label col-sm-2" for="content">태그</label>
                            <div class="col-sm-9">
                               <c:if test="${DocumentDTO.tag != null }">
                               <c:set var="tags" value="${fn:split(DocumentDTO.tag,',' )}"/>
                               <c:forEach items="${tags }" var="tag">
-                              <button type="button" class="btn btn-info" onclick="tagbtn('${tag}')">${tag}</button>
+                              <button type="button" data-value="flash" class="btn btn-info" onclick="tagbtn('${tag}')">${tag}</button>
                               </c:forEach>
                               </c:if>
                            </div>

@@ -249,6 +249,7 @@ function find() {
 	}
 
 	function friendapply(applyfriendid) {
+		var barcount = $("#noticebar_count").text();
 		BootstrapDialog.show({
 			title : '', //알러트 타이틀 이름
 			message : '[' + applyfriendid + '] 님과 친구가 되시겠습니까?', //알러트 내용
@@ -279,6 +280,7 @@ function find() {
 									label: '확인', //알러트 버튼 이름
 									cssClass: 'btn-primary', //알러트 버튼 색바꾸기
 									action: function(confirm) {
+										$("#noticebar_count").text(--barcount);
 										confirm.close();
 									}
 									}]
@@ -325,6 +327,7 @@ function find() {
 										label: '확인', //알러트 버튼 이름
 										cssClass: 'btn-primary', //알러트 버튼 색바꾸기
 										action: function(confirm) {
+											$("#noticebar_count").text(--barcount);
 											confirm.close();
 										}
 										}]

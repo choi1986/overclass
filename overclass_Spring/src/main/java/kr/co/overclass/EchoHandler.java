@@ -116,6 +116,16 @@ public class EchoHandler extends TextWebSocketHandler {
 					map.put("sender", frommsg.getReceiver());
 					map.put("receiver", frommsg.getSender());
 					service.changeRead(map);
+					
+					// 그후 다시 해당클라에 메시지리스트전송
+					List<MsgDTO> list = service.sitebarDisplay(frommsg.getSender());
+					int count = service.count(frommsg.getSender());
+					
+					Map<String,Object> listmap = new HashMap<>();
+					listmap.put("protocol", 130);
+					listmap.put("list", list);
+					listmap.put("count", count);
+					session.sendMessage(new TextMessage(togson.toJson(listmap)));
 				}break;
 			case 140:{
 					// 대화를 하던 상대방이 보낸 메시지들 읽음표시

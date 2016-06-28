@@ -63,7 +63,7 @@
 							<a id="photoview" href="" data-lightbox="image-999999"
 								data-title="사진"> <img class="img-responsive img-thumbnail"
 								src="" id="photo"
-								style="width: 100%; height: 100%; position: relative; overflow: hidden;">
+								style="width: 50%; height: 50%; position: relative; overflow: hidden;">
 							</a> <br />
 							<a id="photoDel" href="#" class="hidden">삭제</a>
 						</div>
