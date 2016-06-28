@@ -5,6 +5,7 @@ public class MsgwsVO {
 	private String receiver;
 	private int protocol;
 	private String content;
+	private String user_image;
 	
 	public MsgwsVO() {
 	}
@@ -39,6 +40,14 @@ public class MsgwsVO {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public String getUser_image() {
+		return user_image;
+	}
+
+	public void setUser_image(String user_image) {
+		this.user_image = user_image;
 	}
 	
 }

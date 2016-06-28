@@ -17,4 +17,5 @@ public interface MsgDAO {
 	public List<ChatFriendListDTO> friendList(String user_id) throws Exception;
 	public List<MsgDTO> chatList(Map<String, String> map) throws Exception;
 	public void changeRead(Map<String, String> map) throws Exception;
+	public String getImage(String sender) throws Exception;
 }
