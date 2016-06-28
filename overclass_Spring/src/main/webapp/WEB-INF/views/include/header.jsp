@@ -62,10 +62,7 @@
 			<!-- 검색폼 시작 -->
 			<ul class="nav top-menu">
 				<li>
-					<form id="find_form" class="navbar-form" method="get" action="">
-						<input id="search_form" class="form-control" placeholder="#태그 / 아이디 / 이름"
-							type="text" onKeyDown="find()">
-					</form>
+					<input id="search_form" class="form-control" placeholder="#태그 / 아이디 / 이름" type="text" onKeyDown="find()">
 				</li>
 			</ul>
 			<!--  검색폼 끝 -->
