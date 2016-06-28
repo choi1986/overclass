@@ -190,6 +190,20 @@
 		    		buttons: [{
 		    				label: '닫기',
 		    				action: function(cancel){
+		    					$("#user_id").focus();
+		    					$("#user_pwd").focus();
+		    					$("#user_pwd_confirm").focus();
+		    					$("#user_name").focus();
+		    					$("#user_email").focus();
+		    					$("#user_tel1").focus();
+		    					$("#user_tel2").focus();
+		    					$("#user_tel3").focus();
+		    					$("#user_loc").focus();
+		    					$("#user_hobby1").focus();
+		    					$("#user_hobby2").focus();
+		    					$("#user_birth").focus();
+		    					$("#user_pwdq").focus();
+		    					$("#user_pwda").focus();
 		    					cancel.close();
 		    					}
 		    			}]
@@ -221,8 +235,9 @@
 		    				label: '닫기',
 		    				action: function(cancel){
 		    					cancel.close();
-		    			    	$("#register_form_join").attr('action','/overclass/dupl');
-		    					$("#register_form_join").submit();
+		    					$("#dupl").click();
+		    			    	//$("#register_form_join").attr('action','/overclass/dupl');
+		    					//$("#register_form_join").submit();
 		    					}
 		    			}]
 		    	})
