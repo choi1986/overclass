@@ -80,6 +80,7 @@ public class FindController {
 		model.addAttribute("pageMaker", maker);
 		model.addAttribute("user",vo);
 		model.addAttribute("friendlist",list);
+		
 		forward = "addfunction/findForm";
 		return forward;
 	}
