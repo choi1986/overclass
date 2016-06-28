@@ -30,7 +30,7 @@
 <script id="chatother" type="text/x-handlebars-template">
 <li class="by-me">
 	<div class="avatar pull-left">
-		<img src="img/user.jpg" alt="">
+		<img src="{{user_image}}" alt="">
 	</div>
 
 	<div class="chat-content">
@@ -46,7 +46,7 @@
 <script id="chatme" type="text/x-handlebars-template">
 <li class="by-other">
 	<div class="avatar pull-right">
-		<img src="img/user22.png" alt="">
+		<img src="{{user_image}}" alt="">
 	</div>
 
 	<div class="chat-content" style="border-color: #ffd700;">
@@ -208,7 +208,7 @@
 	
 	// 웹 소켓 서버가 닫힐 때,
 	ws.onclose = function() {
-		var currentChatUser = document.getElementById('chatTo').firstChild.nodeValue;
+		/* var currentChatUser = document.getElementById('chatTo').firstChild.nodeValue;
 		if(currentChatUser != ' '){
 			var preChange = JSON.stringify({
 				sender:sender,
@@ -217,12 +217,16 @@
 				content:'CHAT END'
 			});
 			ws.send(preChange);
-		}
+		} */
 	};
 	
 	// 채팅 입력부
 	function chatEnter(event) {
 		if(event.keyCode == 13){
+			if($("#sendtext").val() == ''){
+				alert('내용을 입력해주세요!')
+				return false;
+			}
 			var text = '';
 			this.receiver = document.getElementById('chatTo').firstChild.nodeValue;
 			text = JSON.stringify({

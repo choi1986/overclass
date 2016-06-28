@@ -178,69 +178,88 @@ var alarmtemp = Handlebars.compile(alarm);
 var counttemp = Handlebars.compile(countsource);
 
 function find() {
-	   if(event.keyCode == 13){
-	      var formObj = $("#find_form");
-	      var txtvar = $('#search_form').val().toLowerCase();
-	      if(txtvar.substring(0,1)=='#'){ //태그검색
-	         var txt = txtvar.substring(1,txtvar.length);
-	         location.href="/overclass/find/tagfind?tag="+txt;
-	      } else { //친구검색
-	         location.href="/overclass/find/friendfind?friend="+txtvar;
-	      }
-	      return false;
-	   }
+	if (event.keyCode == 13) {
+			var formObj = $("#find_form");
+			var txtvar = $('#search_form').val().toLowerCase();
+			var regtxt = txtvar.replace(/\s/gi, '');
+			if(regtxt == '') {
+				BootstrapDialog.show({
+		    		title: '', //알러트 타이틀 이름
+		    		message: '검색어를 입력하세요!', //알러트 내용
+		    		buttons: [{ //알러트 버튼 정의
+		    				icon: 'fa fa-check',
+		    				label: '확인',
+		    				cssClass: 'btn-primary',
+		    				hotkey:13,
+		    				action: function(cancel){
+		    					cancel.close();
+		   					}
+		    			}]
+		    	})
+				return false;
+			}
+			if (regtxt.substring(0, 1) == '#') { //태그검색
+				var txt = regtxt.substring(1, regtxt.length);
+				var regtxt = txt.replace(/\s/gi, '');
+				location.href = "/overclass/find/tagfind?tag=" + regtxt;
+			} else { //친구검색
+				location.href = "/overclass/find/friendfind?friend=" + regtxt;
+			}
+			return false;
+		}
 	}
 
-function friendlist(receiver){
-	var htmltxt='';
-	$.ajax({
-		url : "/overclass/friend/searchreq",
-		type:"POST",
-		headers:{
-			"Content-Type":"application/json",
-			"X-HTTP-Method-Override":"POST"
-		},
-		data:JSON.stringify({
-			receiver:receiver
-		}),
-		success : function(success) {
-			if(success.count != 0){
-				htmltxt = counttemp(success);
-				for(var i=0;i<success.list.length;i++){
-					htmltxt += alarmtemp(success.list[i]);
+	function friendlist(receiver) {
+		var htmltxt = '';
+		$.ajax({
+			url : "/overclass/friend/searchreq",
+			type : "POST",
+			headers : {
+				"Content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "POST"
+			},
+			data : JSON.stringify({
+				receiver : receiver
+			}),
+			success : function(success) {
+				if (success.count != 0) {
+					htmltxt = counttemp(success);
+					for (var i = 0; i < success.list.length; i++) {
+						htmltxt += alarmtemp(success.list[i]);
+					}
+					$("#notice").html(htmltxt);
+				} else {
+					htmltxt = counttemp(success);
+					$("#notice").html(htmltxt);
 				}
-				$("#notice").html(htmltxt);
-			}else{
-				htmltxt = counttemp(success);
-				$("#notice").html(htmltxt);
+				$("#noticebar_count").text(success.count);
+			},// success
+			error : function(xhr) {
+				console.log(xhr);
 			}
-			$("#noticebar_count").text(success.count);
-		},// success
-		error:function(xhr){
-			console.log(xhr);
-		}
-	})
-}
+		})
+	}
 
-function friendapply(applyfriendid) {
-	BootstrapDialog.show({
-		title: '', //알러트 타이틀 이름
-		message: '['+applyfriendid+'] 님과 친구가 되시겠습니까?', //알러트 내용
-		buttons: [{ //알러트 버튼 정의
-			icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
-			label: '확인', //알러트 버튼 이름
-			cssClass: 'btn-primary', //알러트 버튼 색바꾸기
-			action: function(confirm) {
-				$.ajax({
-					url:'/overclass/friend/applyfriend',
-					type:'post',
-					headers:{
-						"Content-Type":"application/json",
-						"X-HTTP-Method-Override":"POST"
-					},
-					data:JSON.stringify({
-						sender:applyfriendid,
-						receiver:'<%=user3.getUser_id()%>'
+	function friendapply(applyfriendid) {
+		BootstrapDialog.show({
+			title : '', //알러트 타이틀 이름
+			message : '[' + applyfriendid + '] 님과 친구가 되시겠습니까?', //알러트 내용
+			buttons : [
+					{ //알러트 버튼 정의
+						icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
+						label : '확인', //알러트 버튼 이름
+						cssClass : 'btn-primary', //알러트 버튼 색바꾸기
+						action : function(confirm) {
+							$.ajax({
+								url : '/overclass/friend/applyfriend',
+								type : 'post',
+								headers : {
+									"Content-Type" : "application/json",
+									"X-HTTP-Method-Override" : "POST"
+								},
+								data : JSON.stringify({
+									sender : applyfriendid,
+									receiver : '<%=user3.getUser_id()%>'
 					}),
 					success:function(result){
 						if(result == 'SUCCESS') {

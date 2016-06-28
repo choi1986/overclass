@@ -42,9 +42,9 @@
 	</select>
 	
 	<select id="chatList" resultType="msg">
-		select sender, receiver, content, TO_CHAR(writedate,'yyyymmddhh24miss') writedate, read
-		from oc_msg
-		where (sender = #{sender} and receiver = #{receiver}) OR (sender = #{receiver} and receiver = #{sender})
+		select sender, receiver, content, TO_CHAR(writedate,'yyyymmddhh24miss') writedate, read, user_image
+		from oc_msg, oc_user
+		where oc_msg.sender = oc_user.user_id AND ((sender = #{sender} and receiver = #{receiver}) OR (sender = #{receiver} and receiver = #{sender}))
 		order by writedate desc
 	</select>
 	

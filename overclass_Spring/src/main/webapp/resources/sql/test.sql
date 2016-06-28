@@ -89,3 +89,9 @@ select user_id, user_name, user_image
 		from oc_user
 		where user_id != 'test1' AND user_id != 'admin' AND user_id LIKE 'te' || '%'
 		order by user_id desc
+		
+		
+select sender, receiver, content, TO_CHAR(writedate,'yyyymmddhh24miss') writedate, read, user_image
+		from oc_msg, oc_user
+		where oc_msg.sender = oc_user.user_id AND ((sender = 'test1' and receiver = 'test3') OR (sender = 'test3' and receiver = 'test1'))
+		order by writedate desc
