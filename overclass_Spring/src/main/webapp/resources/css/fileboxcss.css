@@ -40,6 +40,20 @@
   border-radius: .30em;
 }
 
+.fileboxImageBtn {
+  display: inline-block;
+  padding: .5em .75em;
+  color: #ffffff;
+  font-size: inherit;
+  line-height: normal;
+  vertical-align: middle;
+  background-color: #324c57;/* #007aff; */
+  cursor: pointer;
+  border: 1px solid #e2e2e2;
+  border-bottom-color: #e2e2e2;
+  border-radius: .30em;
+}
+
 .filebox input[type="file"] {  /* 파일 필드 숨기기 */
   position: absolute;
   width: 1px;
