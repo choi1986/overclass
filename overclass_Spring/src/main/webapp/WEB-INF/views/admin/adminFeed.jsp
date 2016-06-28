@@ -91,7 +91,7 @@
 														<tr>
 															<th> 프로필</th>
 															<th> 아이디</th>
-															<th> 신고날짜</th>
+															<th> 신고날짜</th> 
 															<th> 신고사유</th>
 															<th><div class="col-sm-offset-8 col-sm-4"> 제재철회</div></th>
 														</tr>
