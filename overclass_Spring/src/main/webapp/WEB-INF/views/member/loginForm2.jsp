@@ -513,21 +513,6 @@
    				})
 		</script>
 	</c:if>
-	<c:if test="${sessionScope.loginFail=='2'}"> <!-- 로그인 실패 모달 / 이미 같은 아이디로 로그인! -->
-		<script type="text/javascript">
-				BootstrapDialog.show({
-   					title: '', //알러트 타이틀 이름
-   					message: '해당 아이디는 이미 접속중입니다!', //알러트 내용
-   					type: BootstrapDialog.TYPE_DANGER,
-    				buttons: [{
-    						label: '닫기',
-    						action: function(cancel){
-    							cancel.close();
-    							}
-   						}]
-   				})
-		</script>
-	</c:if>
 	<c:remove var="loginFail" scope="session" /> <!-- 회원가입 체크에 쓰인 세션 닫기 -->
 	
 	<c:choose>
