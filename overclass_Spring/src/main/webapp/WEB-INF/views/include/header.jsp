@@ -210,7 +210,9 @@ function friendlist(receiver){
 					htmltxt += alarmtemp(success.list[i]);
 				}
 				$("#notice").html(htmltxt);
-			}// if
+			}else{
+				$("#notice").html('');
+			}
 			$("#noticebar_count").text(success.count);
 		},// success
 		error:function(xhr){
