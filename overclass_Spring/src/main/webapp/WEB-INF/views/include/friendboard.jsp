@@ -70,8 +70,8 @@
 										</div>
 										<div class="filebox col-sm-10">
 											<div class="col-sm-12" id="photo_div">
-											<a href="${DocumentDTO.image }" data-lightbox="image-${DocumentDTO.dno }" data-title="사진">
-												<img class="img-responsive img-thumbnail" src="${DocumentDTO.image }" style="width: 100%; height: 100%; position: relative; overflow: hidden;">
+											<a href="${DocumentDTO.image }" data-lightbox="image-${DocumentDTO.dno }" data-title="사진"> 
+												<img class="img-responsive img-thumbnail" src="${DocumentDTO.image }" style="width: 50%; height: 50%; position: relative; overflow: hidden;">
 											</a>
 											</div>
 										</div>

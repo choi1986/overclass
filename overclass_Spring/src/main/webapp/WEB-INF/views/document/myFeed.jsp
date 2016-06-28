@@ -83,7 +83,7 @@
 							href="#recent-activity"><span class="fa fa-comment-o">&nbsp;&nbsp;글</span>
 						</a></li>
 						<li><a id="dropdown_2" data-toggle="tab" href="#profile"><span
-								class="fa fa-user">&nbsp;&nbsp;프로필수정</span> </a></li>
+								class="fa fa-user">&nbsp;&nbsp;개인정보 수정</span> </a></li>
 						<li class=""><a id="dropdown_3" data-toggle="tab"
 							href="#edit-profile"> <span class="fa fa-users">&nbsp;&nbsp;친구목록</span>
 						</a></li>
@@ -123,7 +123,7 @@
 								<div class="panel-body bio-graph-info">
 								<form id="modify" method="post" action="/overclass/main/modifyUser">
 									<div class="col-sm-13">
-										<h1>프로필 수정</h1>
+										<h1>개인정보 수정</h1>
 										<div class="row">
 											<div class="bio-row">
 												<div class="form-group">
@@ -323,7 +323,7 @@
 															<th> 아이디</th>
 															<th> 이름</th>
 															<th> 지역</th>
-															<th> 친구삭제</th>
+															<th><div class="col-sm-offset-8 col-sm-4"> 친구삭제</div></th>
 														</tr>
 														<c:forEach var="i" items="${friend_rel}" begin="0">
 														<tr id="friendlist_${i.user_id }">
