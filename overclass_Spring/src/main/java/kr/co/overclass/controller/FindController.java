@@ -33,7 +33,6 @@ public class FindController {
 	public String tagfind(String tag, String page, Model model, HttpServletRequest request) throws Exception {
 		String url = request.getServletPath(); //requestMapping url주소값 얻어옴
 		UserVO vo = (UserVO) request.getSession().getAttribute("login");
-		System.out.println(tag);
 		List<DocumentDTO> list = service.tagFind(tag);
 		Criteria cri = new Criteria();
 		if ( page != null) {

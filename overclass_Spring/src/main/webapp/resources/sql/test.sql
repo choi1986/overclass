@@ -20,7 +20,7 @@ insert into oc_user values('admin','admin','나관리','admin@overclass.co.kr','010
 '제주도','여행','요리','880505','남','보물제1호','스프링',
 sysdate,'/overclass/resources/img/profile_default.png',0,1);
 insert into oc_user values('test6','1234','테스트6','test6@test.com','010-1475-6759',
-'부산광역시','독서','여행','911001','남','나의 출신학교는?','서울대',
+'부산광역시','독서','여행','913801','남','나의 출신학교는?','서울대',
 sysdate,'/overclass/resources/img/profile_default.png',0,0,0,);
 
 
@@ -39,25 +39,25 @@ select * from OC_DOCUMENT;
 select * from OC_REPLY;
 
 insert into oc_report (reportno, reporter, dno, content)
-		values (oc_report_seq.nextval, 'test1', 110, '그냥');
+		values (oc_report_seq.nextval, 'test1', 132, '그냥');
 insert into oc_report (reportno, reporter, dno, content)
-		values (oc_report_seq.nextval, 'test1', 110, '그냥');
+		values (oc_report_seq.nextval, 'test1', 132, '그냥');
 insert into oc_report (reportno, reporter, dno, content)
-		values (oc_report_seq.nextval, 'test1', 110, '그냥');
+		values (oc_report_seq.nextval, 'test1', 132, '그냥');
 insert into oc_report (reportno, reporter, dno, content)
-		values (oc_report_seq.nextval, 'test1', 110, '그냥');
+		values (oc_report_seq.nextval, 'test1', 132, '그냥');
 insert into oc_report (reportno, reporter, dno, content)
-		values (oc_report_seq.nextval, 'test1', 110, '그냥');
+		values (oc_report_seq.nextval, 'test1', 132, '그냥');
 insert into oc_report (reportno, reporter, dno, content)
-		values (oc_report_seq.nextval, 'test1', 110, '그냥');
+		values (oc_report_seq.nextval, 'test1', 132, '그냥');
 insert into oc_report (reportno, reporter, dno, content)
-		values (oc_report_seq.nextval, 'test1', 110, '그냥');
+		values (oc_report_seq.nextval, 'test1', 132, '그냥');
 insert into oc_report (reportno, reporter, dno, content)
-		values (oc_report_seq.nextval, 'test1', 110, '그냥');
+		values (oc_report_seq.nextval, 'test1', 132, '그냥');
 insert into oc_report (reportno, reporter, dno, content)
-		values (oc_report_seq.nextval, 'test1', 110, '그냥');
+		values (oc_report_seq.nextval, 'test1', 132, '그냥');
 insert into oc_report (reportno, reporter, dno, content)
-		values (oc_report_seq.nextval, 'test1', 110, '그냥');
+		values (oc_report_seq.nextval, 'test1', 132, '그냥');
 
 insert into oc_bandoc (dno, writer, content, tag, image, goodcnt, user_image, reportno, report_content, reporter, reportdate)
 		(select oc_report.dno, oc_document.writer, oc_document.content, tag, image, goodcnt, user_image, reportno, oc_report.content report_content, reporter, reportdate 

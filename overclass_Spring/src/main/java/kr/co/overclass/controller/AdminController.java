@@ -77,6 +77,7 @@ public class AdminController {
 	@Transactional
 	@RequestMapping(value="/banDoc",method=RequestMethod.POST)
 	public String report_ban(int reportno, int dno, RedirectAttributes attr) throws Exception {
+		System.out.println(reportno+", "+dno);
 		service.banDoc(reportno); //신고된 글 정보 banDoc테이블에 저장
 		service.report_del(reportno); //report테이블에 신고정보 삭제
 		docService.delete(dno); //신고된 글 삭제
