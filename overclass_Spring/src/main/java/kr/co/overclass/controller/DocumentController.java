@@ -161,12 +161,24 @@ public class DocumentController {
 			list = service.mainFeed_list(cri, vo.getUser_id());
 			forward = "document/mainForm";
 		} else if ( url.equals("/main/friendFeed") || url.equals("/main/friendFeed_Page") ) {
-			UserVO friend = new UserVO();
-			list = service.myFeed_list(cri, user_id);
-			maker.setTotalCount(service.myFeed_count(user_id));
-			friend = userService.searchUser(user_id);
-			model.addAttribute("friend",friend);
-			forward = "document/friendFeed";
+			List<FriendVO> friVo =  friService.select_rel(vo.getUser_id());
+			boolean friCk=false;
+			for(int i=0; i<friVo.size(); i++) {
+				if(friVo.get(i).getSender().equals(user_id)||friVo.get(i).getReceiver().equals(user_id))
+					friCk=true;
+			}
+			if(friCk) {
+				UserVO friend = new UserVO();
+				list = service.myFeed_list(cri, user_id);
+				maker.setTotalCount(service.myFeed_count(user_id));
+				friend = userService.searchUser(user_id);
+				model.addAttribute("friend",friend);
+				forward = "document/friendFeed";
+			}
+			else {
+				model.addAttribute("friCk", "fail");
+				forward = "document/myFeed";
+			}
 		}
 		model.addAttribute("user",vo);
 		model.addAttribute("list", list);

@@ -353,6 +353,23 @@
 			</section>
 		</div>
 	</div>
+		<c:if test="${friCk=='fail'}"> <!-- 친구 페이지 이동 친구 검사 모달 -->
+			<script type="text/javascript">
+				$(document).ready(function() {
+					BootstrapDialog.show({
+						title : '', //알러트 타이틀 이름
+						message : '친구의 페이지만 접속할 수 있습니다!', //알러트 내용
+						type : BootstrapDialog.TYPE_DANGER,
+						buttons : [ {
+							label : '닫기',
+							action : function(cancel) {
+								cancel.close();
+							}
+						} ]
+					})
+				})
+			</script>
+		</c:if>
 	<c:choose>
 		<c:when test="${sessionScope.result=='success'}"> <!-- 친구 신청 성공 모달 -->
 			<script type="text/javascript">
