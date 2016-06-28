@@ -97,7 +97,7 @@
 										<c:if test="${reportDTO.tag != null }">
 											<c:set var="tags" value="${fn:split(reportDTO.tag,',' )}" />
 											<c:forEach items="${tags }" var="tag">
-												<button class="btn btn-info">${tag}</button>
+												<button type="button" class="btn btn-info">${tag}</button>
 											</c:forEach>
 										</c:if>
 									</div>

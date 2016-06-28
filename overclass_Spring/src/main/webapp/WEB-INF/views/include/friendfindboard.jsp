@@ -16,6 +16,7 @@
 						<th><h4>프로필</h4></th>
 						<th><h4>아이디</h4></th>
 						<th><h4>이름</h4></th>
+						<th><h4>지역</h4></th>
 					</tr>
 				</thead>
 				<c:forEach items="${friendlist }" var="UserVO">
@@ -24,6 +25,7 @@
 						<td><img class="img-circle" src="${UserVO.user_image}" width='40px' height='40px'></td>
 						<td><h4><strong>${UserVO.user_id }</strong></h4></td>
 						<td><h4>${UserVO.user_name }</h4></td>
+						<td><h4><i class="icon_pin_alt" style="color: limegreen;"></i>${UserVO.user_loc }</h4></td>
 					</tr>
 				</tbody>
 				</c:forEach>

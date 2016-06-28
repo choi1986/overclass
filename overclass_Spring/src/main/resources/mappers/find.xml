@@ -15,7 +15,7 @@
 	</select>
 	
 	<select id="friendfind" resultType="user">
-		select user_id, user_name, user_image
+		select user_id, user_name, user_image, user_loc
 		from oc_user
 		where user_id != #{my_id} AND user_id != 'admin' AND user_id LIKE #{user_id} || '%' OR user_name LIKE #{user_name} || '%' 
 		order by user_id desc

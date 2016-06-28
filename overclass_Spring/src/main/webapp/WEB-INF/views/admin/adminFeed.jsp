@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <!-- 헤더 -->
-<%@include file="../admin/include/admin_header.jsp"%>
+<%@include file="../include/header.jsp"%>
 <!-- 헤더끝 -->
 <section id="my_page" class="wrapper">
 	<div class="row">

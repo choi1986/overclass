@@ -25,8 +25,10 @@
 						<div class="row"><h4><b>${user.user_id }</b></h4></div>
 						<div class="row">
 						<div id="image_update_div" style="display: none;">
-							<button type="button" id="image_update" class="btn btn-success">변경</button>
-							<button type="button" id="image_cancel" class="btn btn-danger">취소</button>
+							<div id="change-transitions">
+								<button type="button" data-value="fadeIn" id="image_update" class="btn btn-success">변경</button>
+								<button type="button" data-value="shake" id="image_cancel" class="btn btn-danger">취소</button>
+							</div>
 						</div>
 						</div>
 						<!-- 파일 -->
@@ -35,9 +37,11 @@
 							<input type="hidden" name="user_id" value="${user.user_id }"> 
 						<div class="form-group">
 						<div class="fileboxImage control-label col-sm-offset-2 col-sm-9">
-							<label for="imagefile" class="btn btn-success"><span class="fa fa-camera-retro"></span> 프로필사진 변경</label>
-							<label id="image_default" class="btn btn-danger"><span class="fa fa-close"></span></label>
-							<input type="file" id="imagefile" name="imagefile" accept="image/gif, image/jpeg, image/png, image/bmp#">
+							<div id="change-transitions">
+								<label for="imagefile" class="btn btn-success col-sm-9"><span class="fa fa-camera-retro"></span> 프로필사진 변경 </label>
+								<button type="button" id="image_default" class="btn btn-danger fileboxImageBtn" data-value="fadeIn"><span class="fa fa-close"></span></button>
+								<input type="file" id="imagefile" name="imagefile" accept="image/gif, image/jpeg, image/png, image/bmp#">
+							</div>
 						</div>
 					</div>
 					</form>
@@ -319,14 +323,14 @@
 															<th> 아이디</th>
 															<th> 이름</th>
 															<th> 지역</th>
-															<th></th>
+															<th> 친구삭제</th>
 														</tr>
 														<c:forEach var="i" items="${friend_rel}" begin="0">
 														<tr >
 															<td onclick="friendFeed('${i.user_id }')"><img class="img-rounded" src="${i.user_image}" width='70px' height='70px'></td>
 															<td onclick="friendFeed('${i.user_id }')">${i.user_id }</td>
 															<td onclick="friendFeed('${i.user_id }')">${ i.user_name }</td>
-															<td onclick="friendFeed('${i.user_id }')"><i class="icon_pin_alt"></i>${i.user_loc }</td>
+															<td onclick="friendFeed('${i.user_id }')"><i class="icon_pin_alt" style="color: limegreen;"></i>${i.user_loc }</td>
 															<td>
 																<div class="col-sm-offset-8 col-sm-4">
 																	<button type="button" id="friendDel" onclick="friendDel('${i.user_id }')" class="btn btn-danger">  
