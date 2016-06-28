@@ -18,7 +18,7 @@
 	</select>
 	
 	<select id="ban_list" resultType="report">
-		select writer, user_image, report_content
+		select writer, user_image, report_content, reportdate
 		from oc_bandoc
 		order by reportno desc
 	</select>

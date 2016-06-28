@@ -82,26 +82,39 @@
 							<section class="panel">
 
 								<!-- 제제목록 -->
-								<c:forEach items="${ban_list}" var="reportDTO">
+								
 								<div class="panel-body bio-graph-info">
 									<div class="act-time">
 										<div class="activity-body act-in">
-											<span class="arrow"></span>
-											<div class="text">
-												<a href="${reportDTO.writer }" class="activity-img">
-												<img class="avatar" src="${reportDTO.user_image }">
-												</a>
-												<p class="attribution">
-													<a href="${reportDTO.writer }" style="color: red;"><b>${reportDTO.writer }</b></a>
-												</p>
-												<p class="attribution">
-													<a><b style="color: black;">신고사유: ${reportDTO.report_content }</b></a>
-												</p>
-											</div>
+											<table class="table table-striped table-advance table-hover">
+													<tbody>
+														<tr>
+															<th> 프로필</th>
+															<th> 아이디</th>
+															<th> 신고날짜</th>
+															<th> 신고사유</th>
+															<th><div class="col-sm-offset-8 col-sm-4"> 제재철회</div></th>
+														</tr>
+														<c:forEach items="${ban_list}" var="reportDTO">
+														<tr >
+															<td onclick=""><img class="img-rounded" src="${reportDTO.user_image }" width='70px' height='70px'></td>
+															<td onclick="">${reportDTO.writer }</td>
+															<td onclick="">${reportDTO.reportdate }</td>
+															<td onclick="">${reportDTO.report_content }</td>
+															<td>
+																<div class="col-sm-offset-8 col-sm-4">
+																	<button type="button" id="friendDel" onclick="" class="btn btn-danger">  
+																		<span class="fa fa-close"></span> 
+																	</button>
+																</div>
+															</td>
+														</tr>
+														</c:forEach>
+													</tbody>
+												</table>
 										</div>
 									</div>
 								</div>
-							</c:forEach>
 								<!-- 친구목록 끝 -->
 
 							</section>
