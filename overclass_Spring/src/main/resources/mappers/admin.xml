@@ -18,7 +18,7 @@
 	</select>
 	
 	<select id="ban_list" resultType="report">
-		select writer, user_image, report_content, reportdate
+		select writer, user_image, report_content, reportdate, reportno
 		from oc_bandoc
 		order by reportno desc
 	</select>
@@ -49,4 +49,9 @@
 				from oc_document, oc_user, oc_report
 				where oc_document.dno = oc_report.dno AND oc_user.user_id = oc_document.writer AND reportno = #{reportno})
 	</insert>
+	
+	<delete id="banDoc_del">
+		delete from oc_banDoc
+		where reportno = #{reportno}
+	</delete>
 </mapper>

@@ -90,4 +90,11 @@ public class AdminController {
 		service.report_del(reportno); //report테이블 신고정보 삭제
 		return "redirect:/admin";
 	}
+	
+	//제재 철회하기
+	@RequestMapping(value="/cancelBanDoc",method=RequestMethod.POST)
+	public String cancelBanDoc(int reportno, RedirectAttributes attr) throws Exception {
+		service.banDoc_del(reportno); //report테이블 신고정보 삭제
+		return "redirect:/admin";
+	}
 }

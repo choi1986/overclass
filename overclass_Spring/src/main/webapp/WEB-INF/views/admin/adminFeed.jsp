@@ -103,9 +103,14 @@
 															<td onclick="">${reportDTO.report_content }</td>
 															<td>
 																<div class="col-sm-offset-8 col-sm-4">
-																	<button type="button" id="friendDel" onclick="" class="btn btn-danger">  
+																<form class="form-horizontal" id="reportForm" method="post" action="/overclass/admin/cancelBanDoc">
+																	<span id="reportno${reportDTO.reportno }" class="hidden">${reportDTO.reportno }</span>
+																	<span class="banDoc_del">
+																	<button type="button" id="reportDel" onclick="" class="btn btn-danger">
 																		<span class="fa fa-close"></span> 
 																	</button>
+																	</span>
+																</form>
 																</div>
 															</td>
 														</tr>
@@ -241,6 +246,51 @@ var result = '${msg}';
 								BootstrapDialog.show({
 						    		title: '', //알러트 타이틀 이름
 						    		message: '신고가 철회 되었습니다.', //알러트 내용
+						    		buttons: [{ //알러트 버튼 정의
+						    				icon: 'fa fa-check',
+						    				label: '확인',
+						    				cssClass: 'btn-primary',
+						    				action: function(cancel){
+						    					location.href = "/overclass/admin"
+						    					cancel.close();
+						   					}
+						    			}]
+						    	}) 
+							},error:function(error){
+								alert(error.status+","+ error.statusText)
+							}
+						})
+						confirm.close()
+					}
+					},{
+						label: '닫기',
+						action: function(cancel){
+							cancel.close();
+							}
+					}]
+			})
+		})
+		$(".banDoc_del").click(function() { //제재 철회하기 버튼 클릭시
+			var reportno = this.parentNode.firstChild.nextSibling.firstChild.nodeValue
+			BootstrapDialog.show({
+				title: '', //알러트 타이틀 이름
+				message: '제재를 철회 하시겠습니까?', //알러트 내용
+				type: BootstrapDialog.TYPE_DANGER,
+				buttons: [{ //알러트 버튼 정의
+					icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
+					label: '철회', //알러트 버튼 이름
+					cssClass: 'btn-danger', //알러트 버튼 색바꾸기
+					hotkey:13,
+					action: function(confirm) {
+						$.ajax({
+							url:"/overclass/admin/cancelBanDoc",
+							type:"post",
+							data:{
+								reportno:reportno
+							},success:function(result){
+								BootstrapDialog.show({
+						    		title: '', //알러트 타이틀 이름
+						    		message: '제재가 철회 되었습니다.', //알러트 내용
 						    		buttons: [{ //알러트 버튼 정의
 						    				icon: 'fa fa-check',
 						    				label: '확인',

@@ -46,6 +46,12 @@ public class AdminServiceImpl implements AdminService{
 	public void banDoc(int reportno) throws Exception { //제제하기
 		dao.banDoc(reportno);
 	}
+	
+	@Override
+	public void banDoc_del(int reportno) throws Exception {
+		dao.banDoc_del(reportno);
+		
+	}
 
 	@Override
 	public void report_del(int reportno) throws Exception { //제제하고 글삭제
