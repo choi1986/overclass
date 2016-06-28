@@ -39,7 +39,7 @@
 	style="width: 300px; height: 660px; overflow: auto;">
 	<div class="panel-heading">
 		<h2>
-			<span class="fa fa-group"></span><strong> 친구목록</strong>
+			<span class="fa fa-group"></span><strong> 아이디목록</strong>
 		</h2>
 	</div>
 	<div class="panel-body">
