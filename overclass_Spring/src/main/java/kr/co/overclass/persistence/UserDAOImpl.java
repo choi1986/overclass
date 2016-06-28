@@ -45,6 +45,8 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public void deleteUser(String user_id) throws Exception {
+		session.delete("user.deleteUserReply", user_id);
+		session.delete("user.deleteUserDoc_Reply", user_id);
 		session.delete("user.deleteUserDoc", user_id);
 		session.delete("user.deleteUserGood", user_id);
 		session.delete("user.deleteUser", user_id);

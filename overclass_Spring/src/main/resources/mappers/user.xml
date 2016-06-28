@@ -17,6 +17,14 @@
 		update oc_user set user_image=#{user_image}
 		where user_id=LOWER(#{user_id})
 	</update>
+	<delete id="deleteUserDoc_Reply">
+		delete from oc_reply
+		where dno=(select dno from oc_document where writer=LOWER(#{user_id}))
+	</delete>
+	<delete id="deleteUserReply">
+		delete from oc_reply
+		where replyer=LOWER(#{user_id})
+	</delete>
 	<delete id="deleteUserDoc">
 		delete from oc_document
 		where writer=LOWER(#{user_id})
