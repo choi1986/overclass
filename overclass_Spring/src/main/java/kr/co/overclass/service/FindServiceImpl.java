@@ -10,7 +10,6 @@ import kr.co.overclass.domain.FriendVO;
 import kr.co.overclass.domain.UserVO;
 import kr.co.overclass.dto.DocumentDTO;
 import kr.co.overclass.persistence.FindDAO;
-import kr.co.overclass.persistence.FriendDAO;
 
 @Service
 public class FindServiceImpl implements FindService {

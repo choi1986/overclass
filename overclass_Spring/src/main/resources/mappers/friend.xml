@@ -9,8 +9,8 @@
   <!-- 친구 관계 삭제 -->
   <delete id="delete_rel">
   	delete from oc_friend_rel
-  	where sender = #{sender}
-  	and receiver = #{receiver}
+  	where (sender = #{sender} and receiver = #{receiver}) OR
+  	(sender = #{receiver} and receiver = #{sender})
   </delete>
   
   <!-- 친구 관계 검색(1명) -->
@@ -42,5 +42,18 @@
   <select id="select_req_send" resultType="friend">
   	select * from oc_friend_req
   	where sender = #{sender}
+  </select>
+  
+  <select id="findreq" resultType="int">
+  	select count(sender)
+  	from oc_friend_req
+  	where sender = #{sender} and receiver = #{receiver}
+  </select>
+  
+  <select id="findrel" resultType="int">
+  	select count(sender)
+  	from oc_friend_rel
+  	where (sender = #{sender} and receiver = #{receiver}) OR
+  	(sender = #{receiver} and receiver = #{sender})
   </select>
 </mapper>

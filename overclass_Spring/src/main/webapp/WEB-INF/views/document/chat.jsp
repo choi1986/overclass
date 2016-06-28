@@ -287,5 +287,13 @@
 	$("#cancel_image").attr("src","<%=user.getUser_image()%>");
 	$("#useridspan").text("<%=user.getUser_id()%>");
 	
+	friendlist('<%=user.getUser_id()%>');
+</script>
+<script>
+	$(document).ready(function(){
+		$("#alert_notificatoin_bar").click(function() { // 알림바 알림 클릭 이벤트
+			friendlist('<%=user.getUser_id()%>');
+		})
+	})
 </script>
 </html>

@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import kr.co.overclass.domain.Criteria;
+import kr.co.overclass.domain.FriendVO;
 import kr.co.overclass.domain.ReportVO;
 import kr.co.overclass.domain.UserVO;
 import kr.co.overclass.dto.DocumentDTO;

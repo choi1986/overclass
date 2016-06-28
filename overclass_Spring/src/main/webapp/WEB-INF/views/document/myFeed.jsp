@@ -1276,12 +1276,7 @@ var result = '${msg}';
 		})
 
 		$("#alert_notificatoin_bar").click(function() { // 알림바 알림 클릭 이벤트
-			$.ajax({
-				url : "addfunctionaction.do?action=notice",
-				success : function(success) {
-					$("#alert_notificatoin_bar").html(success);
-				}
-			})
+			friendlist('<%=user.getUser_id()%>');
 		})
 	}) // ready
 
@@ -1510,7 +1505,34 @@ var result = '${msg}';
     			cssClass: 'btn-danger', //알러트 버튼 색바꾸기
     			hotkey:13,
     			action: function(confirm) {
-					location.href = "/overclass/main/friendDel?user_id="+user; 
+    				$.ajax({
+						url:'/overclass/friend/delrel',
+						type:'post',
+						headers:{
+							"Content-Type":"application/json",
+							"X-HTTP-Method-Override":"POST"
+						},
+						data:JSON.stringify({
+							sender:'<%=user3.getUser_id()%>',
+							receiver:user
+						}),
+						success:function(result){
+							if(result == 'SUCCESS') {
+								BootstrapDialog.show({
+									title: '', //알러트 타이틀 이름
+									message: '친구를 삭제 했습니다.', //알러트 내용
+									buttons: [{ //알러트 버튼 정의
+										icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
+										label: '확인', //알러트 버튼 이름
+										cssClass: 'btn-primary', //알러트 버튼 색바꾸기
+										action: function(confirm) {
+											confirm.close();
+										}
+										}]
+								})// BootstrapDialog
+							}						
+						}
+					}); // ajax
     				confirm.close()
 				}
     			},{
