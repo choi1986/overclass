@@ -115,13 +115,13 @@
                         </div>
                         
                         <!-- 태그 -->
-                        <div class="form-group">
+                        <div class="form-group" id="change-transitions">
                            <label class="control-label col-sm-2" for="content">태그</label>
                            <div class="col-sm-9">
                               <c:if test="${DocumentDTO.tag != null }">
                               <c:set var="tags" value="${fn:split(DocumentDTO.tag,',' )}"/>
                               <c:forEach items="${tags }" var="tag">
-                              <button type="button" class="btn btn-info" onclick="tagbtn('${tag}')">${tag}</button>
+                              <button type="button" data-value="flash" class="btn btn-info" onclick="tagbtn('${tag}')">${tag}</button>
                               </c:forEach>
                               </c:if>
                            </div>
