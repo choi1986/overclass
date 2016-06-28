@@ -20,7 +20,7 @@ import kr.co.overclass.dto.JoinDTO;
 import kr.co.overclass.dto.LoginDTO;
 import kr.co.overclass.dto.SearchIDDTO;
 import kr.co.overclass.dto.SearchPwdDTO;
-import kr.co.overclass.service.UserLoginService;
+import kr.co.overclass.egovframework.EgovHttpSessionBindingListener;
 import kr.co.overclass.service.UserService;
 
 @Controller
@@ -29,29 +29,23 @@ public class UserController {
 	
 	@Inject
 	private UserService service;
-	
-	@Inject
-	private UserLoginService loginService;
 
 	@RequestMapping(value="/")
 	public String login (HttpSession session) throws Exception { // login 페이지로
 		UserVO vo = (UserVO)session.getAttribute("login");
 		if(vo!=null) {
 			session.removeAttribute("login");
-			loginService.deleteUserLogin(vo.getUser_id());
 		}
 		return "/member/loginForm2";
 	}
 	
 	@RequestMapping(value="/loginPost", method=RequestMethod.POST) // 로그인 버튼 눌린 후
-	public String loginPost (LoginDTO dto, HttpSession session, Model model) throws Exception { // 로그인 정보 전송
+	public String loginPost (LoginDTO dto, HttpServletRequest request, HttpSession session, Model model) throws Exception { // 로그인 정보 전송
 		UserVO vo = service.login(dto); // 로그인 시도한 아이디, 비번의 유저 정보를 가져옴
 		if (vo!=null) {
 			model.addAttribute("userVO", vo); // 있다면 모델(->세션)에 객체 저장.
-				if (loginService.searchUserLogin(vo.getUser_id())!=null) {
-					session.setAttribute("loginFail", "2");
-					return "/member/loginForm2";
-				}
+			EgovHttpSessionBindingListener listener = new EgovHttpSessionBindingListener();
+			request.getSession().setAttribute(vo.getUser_id(), listener);
 		}
 
 		/*쿠키정의*/
@@ -117,14 +111,13 @@ public class UserController {
 		service.updateUser(vo);
 		vo = service.searchUser(dto.getUser_id());
 		session.setAttribute("login", vo);
-		// attr.addFlashAttribute("msg", "Remove_SUCCESS");
-		// session.setAttribute("modifyCk", "1");
 		return "redirect:/main/myFeed";
 	}
 	
 	@RequestMapping(value="/main/leave") // 프로필 수정 버튼 눌린 후
 	public String leave (String user_id, RedirectAttributes attr, HttpServletRequest request) throws Exception {
 		service.deleteUser(user_id);
+		request.getSession().invalidate();
 		return "redirect:/";
 	}
 	
@@ -134,7 +127,6 @@ public class UserController {
 		
 		if (obj!=null) {
 			UserVO vo = (UserVO) obj;
-			loginService.deleteUserLogin(vo.getUser_id());
 			session.removeAttribute("login");
 			session.invalidate();
 			

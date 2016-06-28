@@ -1,6 +1,5 @@
 package kr.co.overclass.interceptor;
 
-import javax.inject.Inject;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,15 +10,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.overclass.domain.UserVO;
-import kr.co.overclass.service.UserLoginService;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter {
-	
-	@Inject
-	private UserLoginService loginService;
 	
 	private static final String LOGIN = "login";
 	private static final Logger logger = LoggerFactory.getLogger(LoginInterceptor.class);
@@ -33,7 +27,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		
 		if(vo!=null){
 			logger.info("남아있는 이전 세션의 정보를 삭제합니다.");
-			loginService.deleteUserLogin(vo.getUser_id());
 			session.removeAttribute(LOGIN);
 		}
 		
@@ -50,10 +43,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		
 		if (userVO != null){
 			logger.info("로그인 성공!");
-			if (loginService.createUserLogin(userVO.getUser_id())!=1) {
-				session.setAttribute("loginFail", "2");
-				return;
-			}
 			session.setAttribute(LOGIN, userVO); // 로그인 성공하면 객체를 세션에 저장
 
 			 if(request.getParameter("useCookie") != null){
