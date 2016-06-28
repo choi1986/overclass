@@ -1,6 +1,7 @@
 package kr.co.overclass.persistence;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -31,8 +32,8 @@ public class FindDAOImpl implements FindDAO{
 	}
 
 	@Override
-	public List<UserVO> friendFind(String friend) throws Exception {
-		return session.selectList("find.friendfind",friend);
+	public List<UserVO> friendFind(Map<String, Object> map) throws Exception {
+		return session.selectList("find.friendfind", map);
 	}
 
 	@Override

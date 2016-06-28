@@ -1,6 +1,8 @@
 package kr.co.overclass.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +31,7 @@ public class FindController {
 	@Inject
 	private FindService service;
 	
+	//태그검색
 	@RequestMapping(value={"/tagfind","/tagfindpage"},method=RequestMethod.GET)
 	public String tagfind(String tag, String page, Model model, HttpServletRequest request) throws Exception {
 		String url = request.getServletPath(); //requestMapping url주소값 얻어옴
@@ -49,22 +52,32 @@ public class FindController {
 		return "addfunction/findForm";
 	}
 	
+	//친구검색
 	@RequestMapping(value={"/friendfind","/friendfindpage"},method=RequestMethod.GET)
 	public String friendfind(String friend, String page, Model model, RedirectAttributes attr, HttpServletRequest request) throws Exception {
 		String url = request.getServletPath(); //requestMapping url주소값 얻어옴
 		UserVO vo = (UserVO) request.getSession().getAttribute("login");
+		String user = vo.getUser_id();
 		Criteria cri = new Criteria();
 		if ( page != null) {
 			cri.setPage(Integer.parseInt(page));
 		}
 		PageMaker maker = new PageMaker();
 		String forward = null;
+		Map<String, Object> map = new HashMap<>();
+		map.put("my_id", user);
+		map.put("user_id", friend);
+		map.put("user_name",friend);
 		maker.setCri(cri);
 		maker.setTotalCount(service.friendcnt(friend));
-		model.addAttribute("pageMaker", maker);
-		System.out.println(friend);
 		
-		List<UserVO> list = service.friendFind(friend);
+		model.addAttribute("pageMaker", maker);
+		
+		List<UserVO> list = service.friendFind(map);
+		System.out.println("유저+프렌드"+user+", "+friend);
+		System.out.println("맵유저"+map.get("my_id"));
+		System.out.println("맵프렌"+map.get("user_id"));
+		
 		model.addAttribute("user",vo);
 		model.addAttribute("friendlist",list);
 		forward = "addfunction/findForm";

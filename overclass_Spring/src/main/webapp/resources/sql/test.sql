@@ -83,3 +83,9 @@ select sender, receiver, content, TO_CHAR(writedate,'yyyymmddhh24miss') writedat
 		where (sender = 'test1' and receiver = 'test2') OR (sender = 'test2' and receiver = 'test1')
 		
 select * from oc_msg
+
+
+select user_id, user_name, user_image
+		from oc_user
+		where user_id != 'test1' AND user_id != 'admin' AND user_id LIKE 'te' || '%'
+		order by user_id desc

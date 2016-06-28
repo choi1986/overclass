@@ -1,6 +1,7 @@
 package kr.co.overclass.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -28,8 +29,8 @@ public class FindServiceImpl implements FindService {
 	}
 
 	@Override
-	public List<UserVO> friendFind(String friend) throws Exception {
-		return dao.friendFind(friend);
+	public List<UserVO> friendFind(Map<String, Object> map) throws Exception {
+		return dao.friendFind(map);
 	}
 
 	@Override
