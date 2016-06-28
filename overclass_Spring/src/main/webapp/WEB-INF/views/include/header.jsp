@@ -165,7 +165,7 @@
 </li>
 </script>
 <script id="alarmCount" type="text/x-handlebars-template">
-<div class="notify-arrow notify-arrow-blue"></div>
+<div class="notify-arrow notify-arrow-blue"></div> 
 						<li>
 							<p class="blue">새알림 {{count }}개</p>
 						</li>
