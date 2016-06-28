@@ -1,6 +1,7 @@
 package kr.co.overclass.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
@@ -18,9 +19,11 @@ import org.springframework.web.util.WebUtils;
 import kr.co.overclass.domain.UserVO;
 import kr.co.overclass.dto.JoinDTO;
 import kr.co.overclass.dto.LoginDTO;
+import kr.co.overclass.dto.ReportDTO;
 import kr.co.overclass.dto.SearchIDDTO;
 import kr.co.overclass.dto.SearchPwdDTO;
 import kr.co.overclass.egovframework.EgovHttpSessionBindingListener;
+import kr.co.overclass.service.AdminService;
 import kr.co.overclass.service.UserService;
 
 @Controller
@@ -29,6 +32,9 @@ public class UserController {
 	
 	@Inject
 	private UserService service;
+	
+	@Inject
+	private AdminService adminService;
 
 	@RequestMapping(value="/")
 	public String login (HttpSession session) throws Exception { // login 페이지로
@@ -43,6 +49,13 @@ public class UserController {
 	public String loginPost (LoginDTO dto, HttpServletRequest request, HttpSession session, Model model) throws Exception { // 로그인 정보 전송
 		UserVO vo = service.login(dto); // 로그인 시도한 아이디, 비번의 유저 정보를 가져옴
 		if (vo!=null) {
+			List<ReportDTO> reportDTO = adminService.ban_list();
+			for (int i=0; i<reportDTO.size(); i++) {
+				if (reportDTO.get(i).getWriter().equals(dto.getUser_id())) {
+					session.setAttribute("loginFail", "3");
+					return "/member/loginForm2";
+				}
+			}
 			model.addAttribute("userVO", vo); // 있다면 모델(->세션)에 객체 저장.
 			EgovHttpSessionBindingListener listener = new EgovHttpSessionBindingListener();
 			request.getSession().setAttribute(vo.getUser_id(), listener);
