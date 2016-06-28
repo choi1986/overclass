@@ -36,6 +36,9 @@ public class AdminDAOImpl implements AdminDAO{
 	public void banDoc(int reportno) throws Exception { //力力窍扁
 		session.insert("admin.banDoc", reportno);
 	}
+	public void banDoc_del(int reportno) throws Exception { //力力 昏力
+		session.delete("admin.banDoc_del", reportno);
+	}
 
 	@Override
 	public void report_del(int reportno) throws Exception { //力力窍绊 臂昏力
