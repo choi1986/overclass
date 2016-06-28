@@ -50,7 +50,7 @@ lightbox.option({
 <!-- 쪽지 리스트처리를 위한 템플릿 -->
 <script id="msgtemp" type="text/x-handlebars-template">
 <li>
-	<a href='/overclass/chat'>
+	<a href='/overclass/chat/?sender={{sender}}'>
 		<span class="photo">
 			<img alt="avatar" width='30' height='30' src='{{user_image}}'></span>
 		<span class="subject">
@@ -60,13 +60,24 @@ lightbox.option({
 		<span class="subject">{{content}}</span>
 	</a>
 </li>
-	
-
+</script>
+<script id="msgtempNR" type="text/x-handlebars-template">
+<li style="background-color: #e6e6e6;">
+	<a href='/overclass/chat/?sender={{sender}}'>
+		<span class="photo">
+			<img alt="avatar" width='30' height='30' src='{{user_image}}'></span>
+		<span class="subject">
+			<span class="from">{{sender}}</span>
+			<span class="time">{{writedate}}전</span>
+		</span>
+		<span class="subject">{{content}}</span>
+	</a>
+</li>
 </script>
 <script id="msgtoptemp" type="text/x-handlebars-template">
 <div class="notify-arrow notify-arrow-blue"></div>
 						<li>
-							<p class="blue">새로운 쪽지 {{count}}개</p>
+							<p class="blue">새로운 메시지 {{count}}개</p>
 						</li>
 </script>
 
@@ -308,12 +319,7 @@ $(document).ready(function() {
 	});
 
 	$("#alert_notificatoin_bar").click(function() { // 알림바 알림 클릭 이벤트
-		$.ajax({
-			url : "addfunctionaction.do?action=notice",
-			success : function(success) {
-				$("#alert_notificatoin_bar").html(success);
-			}
-		})
+		friendlist('<%=user.getUser_id()%>');
 	})
 	
 	$("#dropdown_alr").click(function() {

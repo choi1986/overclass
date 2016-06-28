@@ -376,8 +376,8 @@ var template = Handlebars.compile(source);
 				var htmlTxt='';
 				for(var i=0; i<result.list.length; i++){
 					htmlTxt+=template(result.list[i]);
-					$(reply_icon).html('댓글['+result.count+']&nbsp;&nbsp;&nbsp;&nbsp;')
 				}
+				$(reply_icon).html('댓글['+result.count+']&nbsp;&nbsp;&nbsp;&nbsp;')
 				// 페이징추가해야됨.
 				$(replydiv).html(htmlTxt);
 				printPaging(result.pageMaker, dno, reply_page);

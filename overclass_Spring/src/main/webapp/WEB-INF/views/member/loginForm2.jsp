@@ -190,6 +190,20 @@
 		    		buttons: [{
 		    				label: '닫기',
 		    				action: function(cancel){
+		    					$("#user_id").focus();
+		    					$("#user_pwd").focus();
+		    					$("#user_pwd_confirm").focus();
+		    					$("#user_name").focus();
+		    					$("#user_email").focus();
+		    					$("#user_tel1").focus();
+		    					$("#user_tel2").focus();
+		    					$("#user_tel3").focus();
+		    					$("#user_loc").focus();
+		    					$("#user_hobby1").focus();
+		    					$("#user_hobby2").focus();
+		    					$("#user_birth").focus();
+		    					$("#user_pwdq").focus();
+		    					$("#user_pwda").focus();
 		    					cancel.close();
 		    					}
 		    			}]
@@ -221,8 +235,9 @@
 		    				label: '닫기',
 		    				action: function(cancel){
 		    					cancel.close();
-		    			    	$("#register_form_join").attr('action','/overclass/dupl');
-		    					$("#register_form_join").submit();
+		    					$("#dupl").click();
+		    			    	//$("#register_form_join").attr('action','/overclass/dupl');
+		    					//$("#register_form_join").submit();
 		    					}
 		    			}]
 		    	})
@@ -422,6 +437,36 @@
 			})
 		</script>
 	</c:if>
+	<c:if test="${sessionScope.searchIDInfo!=null}"> <!-- 아이디 찾기 후 페이지에 기존의 데이터 뿌려주는 부분 -->
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#panel").hide(); //회원가입폼 감춤
+				$("#searchIDForm").show();
+				$("#searchPwdForm").show();
+
+				$("#user_name[role=searchID]").val("${sessionScope.searchIDInfo.user_name}");
+				$("#user_email[role=searchID]").val("${sessionScope.searchIDInfo.user_email}");
+				$("#user_birth[role=searchID]").val("${sessionScope.searchIDInfo.user_birth}"); cnt=1;
+			})
+		</script>
+	</c:if>
+	<c:if test="${sessionScope.searchPwdInfo!=null}"> <!-- 비번 찾기 후 페이지에 기존의 데이터 뿌려주는 부분 -->
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#panel").hide(); //회원가입폼 감춤
+				$("#searchIDForm").show();
+				$("#searchPwdForm").show();
+
+				$("#user_id[role=searchPwd]").val("${sessionScope.searchPwdInfo.user_id}");
+				$("#user_pwdq[role=searchPwd]").val("${sessionScope.searchPwdInfo.user_pwdq}");
+				$("#user_pwda[role=searchPwd]").val("${sessionScope.searchPwdInfo.user_pwda}");
+				$("#user_pwd").val("");
+				$("#user_pwd_confirm").val("");
+			})
+		</script>
+	</c:if>
+	<c:remove var="searchIDInfo" scope="session" />
+	<c:remove var="searchPwdInfo" scope="session" />
 	
 	<c:choose>
 		<c:when test="${sessionScope.joinDuplCk==''}"> <!-- 중복 검사 성공 모달 -->
@@ -895,21 +940,21 @@
                                   <div class="form-group ">
                                           <label for="username" class="control-label col-sm-4">이름 <span class="required">*</span></label>
                                           <div class="col-sm-4">
-                                              <input class="form-control " id="user_name" name="user_name" type="text" placeholder="ex) 홍길동" />
+                                              <input class="form-control " id="user_name" name="user_name" type="text" placeholder="ex) 홍길동" role="searchID" />
                                           </div>
                                       </div>
                                       
                                       <div class="form-group ">
                                           <label for="email" class="control-label col-sm-4">이메일 <span class="required">*</span></label>
                                           <div class="col-sm-4">
-                                              <input class="form-control " id="user_email" name="user_email" type="email" placeholder="ex) kosta113"/>
+                                              <input class="form-control " id="user_email" name="user_email" type="email" placeholder="ex) kosta113" role="searchID"/>
                                           </div><!--  onkeyup="allowEmail(this)" -->
                                       </div>
                                           
                                       <div class="form-group ">
                                           <label for="birth" class="control-label col-sm-4">생일 <span class="required">*</span></label>
                                           <div class="col-sm-4">
-                                              <input class=" form-control" id="user_birth" name="user_birth" type="text" placeholder="ex) 900317"/>
+                                              <input class=" form-control" id="user_birth" name="user_birth" type="text" placeholder="ex) 900317" role="searchID"/>
                                           </div>
                                       </div>
                                       
@@ -946,14 +991,14 @@
                                       		<input type="hidden" id="pwdErrorCk" name="pwdErrorCk"><!-- 에러났는지 카운트했던 것을 체크해서 비밀번호 변경 막음 -->
                                           <label for="fullname" class="control-label col-sm-4">아이디<span class="required">*</span></label>
                                           <div class="col-sm-4">
-                                              <input class=" form-control" id="user_id" name="user_id" type="text" />
+                                              <input class=" form-control" id="user_id" name="user_id" type="text" role="searchPwd"/>
                                           </div>
                                       </div>
                                           
                                            <div class="form-group">
                                             <label class="control-label col-sm-4">비밀번호찾기 질문<span class="required">*</span></label>
                                             <div class="col-sm-4">                               
-                                                <select class="form-control" id="user_pwdq" name="user_pwdq">
+                                                <select class="form-control" id="user_pwdq" name="user_pwdq" role="searchPwd">
                                                 	<option>-- 선택 --</option>  
                                                 	<option>나의 고향은?</option>  
                                                 	<option>나의 친한 친구 이름은?</option>  
@@ -968,7 +1013,7 @@
                                       <div class="form-group ">
                                           <label for="birth" class="control-label col-sm-4">비밀번호찾기 답변<span class="required">*</span></label>
                                           <div class="col-sm-4">
-                                              <input class=" form-control" id="user_pwda" name="user_pwda" type="text" placeholder="ex) 코딩하기" />
+                                              <input class=" form-control" id="user_pwda" name="user_pwda" type="text" placeholder="ex) 코딩하기" role="searchPwd"/>
                                           </div>
                                       </div>
                                       
