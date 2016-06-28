@@ -80,7 +80,7 @@
 									<div class="row">
 										<div class="option col-sm-8">
 											<input class="form-control input-sm m-bot15" type="text"
-												value="이태원 맛집" id="keyword" style="height: 20px;">
+												value="서울역" id="keyword" style="height: 20px;"> 
 										</div>
 										<div class="col-sm-offset-1">
 											<label class="col-sm-1"></label>
