@@ -59,6 +59,7 @@ public class FindController {
 		UserVO vo = (UserVO) request.getSession().getAttribute("login");
 		String user = vo.getUser_id();
 		Criteria cri = new Criteria();
+		System.out.println(friend);
 		if ( page != null) {
 			cri.setPage(Integer.parseInt(page));
 		}
@@ -74,9 +75,6 @@ public class FindController {
 		model.addAttribute("pageMaker", maker);
 		
 		List<UserVO> list = service.friendFind(map);
-		System.out.println("À¯Àú+ÇÁ·»µå"+user+", "+friend);
-		System.out.println("¸ÊÀ¯Àú"+map.get("my_id"));
-		System.out.println("¸ÊÇÁ·»"+map.get("user_id"));
 		
 		model.addAttribute("user",vo);
 		model.addAttribute("friendlist",list);
