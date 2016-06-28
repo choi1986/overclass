@@ -211,7 +211,8 @@ function friendlist(receiver){
 				}
 				$("#notice").html(htmltxt);
 			}else{
-				$("#notice").html('');
+				htmltxt = counttemp(success);
+				$("#notice").html(htmltxt);
 			}
 			$("#noticebar_count").text(success.count);
 		},// success
