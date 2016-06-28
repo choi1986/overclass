@@ -326,7 +326,7 @@
 															<th> 친구삭제</th>
 														</tr>
 														<c:forEach var="i" items="${friend_rel}" begin="0">
-														<tr >
+														<tr id="friendlist_${i.user_id }">
 															<td onclick="friendFeed('${i.user_id }')"><img class="img-rounded" src="${i.user_image}" width='70px' height='70px'></td>
 															<td onclick="friendFeed('${i.user_id }')">${i.user_id }</td>
 															<td onclick="friendFeed('${i.user_id }')">${ i.user_name }</td>
@@ -1526,6 +1526,7 @@ var result = '${msg}';
     			cssClass: 'btn-danger', //알러트 버튼 색바꾸기
     			hotkey:13,
     			action: function(confirm) {
+    				var hidefriend = '#friendlist_'+user;
     				$.ajax({
 						url:'/overclass/friend/delrel',
 						type:'post',
@@ -1547,8 +1548,7 @@ var result = '${msg}';
 										label: '확인', //알러트 버튼 이름
 										cssClass: 'btn-primary', //알러트 버튼 색바꾸기
 										action: function(confirm) {
-											
-											
+											$(hidefriend).hide();
 											confirm.close();
 										}
 										}]
