@@ -27,6 +27,7 @@ public class EchoHandler extends TextWebSocketHandler {
 	// 서버에 연결한 사용자들을 저장하는 리스트
 	private List<WebSocketSession> connectedUsers;
 	Map<String, WebSocketSession> users;	// 유저아이디와 웹소켓객체
+	Map<WebSocketSession,String> userssession;
 	//Vector<RoomVO> roomV;	// 채팅을 하는 유저들끼리의 세션을 저장할 백터
 	@Inject
 	private MsgService service;
@@ -35,6 +36,8 @@ public class EchoHandler extends TextWebSocketHandler {
 	public EchoHandler() {
 		connectedUsers = new ArrayList<WebSocketSession>();
 		users = new HashMap<>();
+		userssession = new HashMap<>();
+		
 		//roomV = new Vector<>();
 	}
 
@@ -81,6 +84,7 @@ public class EchoHandler extends TextWebSocketHandler {
 			case 100:{	// 접속했다는 프로토콜이 오면
 					// 같이온 sender와 Websession을 저장해서 해당 세션id가 누구인지를 이어줌
 					users.put(frommsg.getSender(), session);
+					userssession.put(session, frommsg.getSender());
 					logger.info("********** 유저ID : "+frommsg.getSender()+" 접속!! ************");
 					
 					// 메시지목록 전송
@@ -142,7 +146,6 @@ public class EchoHandler extends TextWebSocketHandler {
 						users.get(frommsg.getReceiver()).sendMessage(new TextMessage(togson.toJson(tomsg)));
 						
 						
-						
 						// 메시지목록 전송
 						List<MsgDTO> list = service.sitebarDisplay(frommsg.getReceiver());
 						int count = service.count(frommsg.getReceiver());
@@ -169,6 +172,8 @@ public class EchoHandler extends TextWebSocketHandler {
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		// 연결해제
 		logger.info(session.getId() + " 퇴장");
+		users.remove(userssession.get(session));
+		userssession.remove(session);
 		connectedUsers.remove(session);
 	}
 }
