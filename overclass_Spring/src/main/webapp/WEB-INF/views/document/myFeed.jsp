@@ -319,7 +319,7 @@
 															<th> 아이디</th>
 															<th> 이름</th>
 															<th> 지역</th>
-															<th></th>
+															<th> 친구삭제</th>
 														</tr>
 														<c:forEach var="i" items="${friend_rel}" begin="0">
 														<tr >

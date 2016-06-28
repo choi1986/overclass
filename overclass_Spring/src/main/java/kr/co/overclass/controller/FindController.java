@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.overclass.domain.Criteria;
+import kr.co.overclass.domain.FriendVO;
 import kr.co.overclass.domain.PageMaker;
 import kr.co.overclass.domain.UserVO;
 import kr.co.overclass.dto.DocumentDTO;
 import kr.co.overclass.service.FindService;
+import kr.co.overclass.service.FriendService;
 
 
 @Controller
@@ -30,6 +32,9 @@ public class FindController {
 	
 	@Inject
 	private FindService service;
+	
+	@Inject
+	private FriendService friendService;
 	
 	//태그검색
 	@RequestMapping(value={"/tagfind","/tagfindpage"},method=RequestMethod.GET)
@@ -57,9 +62,9 @@ public class FindController {
 	public String friendfind(String friend, String page, Model model, RedirectAttributes attr, HttpServletRequest request) throws Exception {
 		String url = request.getServletPath(); //requestMapping url주소값 얻어옴
 		UserVO vo = (UserVO) request.getSession().getAttribute("login");
+		FriendVO friendVO = new FriendVO();
 		String user = vo.getUser_id();
 		Criteria cri = new Criteria();
-		System.out.println(friend);
 		if ( page != null) {
 			cri.setPage(Integer.parseInt(page));
 		}
@@ -71,11 +76,8 @@ public class FindController {
 		map.put("user_name",friend);
 		maker.setCri(cri);
 		maker.setTotalCount(service.friendcnt(friend));
-		
-		model.addAttribute("pageMaker", maker);
-		
 		List<UserVO> list = service.friendFind(map);
-		
+		model.addAttribute("pageMaker", maker);
 		model.addAttribute("user",vo);
 		model.addAttribute("friendlist",list);
 		forward = "addfunction/findForm";

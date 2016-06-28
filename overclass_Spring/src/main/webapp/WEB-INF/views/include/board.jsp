@@ -560,15 +560,75 @@ var template = Handlebars.compile(source);
 			} // keycode if
 	}
 	function friendAdd(user) {
+		if( user == '<%=user2.getUser_id()%>'){
+			return false;
+		}
 		BootstrapDialog.show({
 			title: '', //알러트 타이틀 이름
-			message: '['+user+'] 친구 추가를 하시겠습니까?', //알러트 내용
+			message: '['+user+']님에게 친구 추가를 요청 하시겠습니까?', //알러트 내용
 			buttons: [{ //알러트 버튼 정의
 				icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
 				label: '추가', //알러트 버튼 이름
 				cssClass: 'btn-primary', //알러트 버튼 색바꾸기
 				action: function(confirm) {
-					alert("친구추가!"+user);
+					$.ajax({
+						url:'/overclass/friend/addfriend',
+						type:'post',
+						headers:{
+							"Content-Type":"application/json",
+							"X-HTTP-Method-Override":"POST"
+						},
+						data:JSON.stringify({
+							sender:'<%=user2.getUser_id()%>',
+							receiver:user
+						}),
+						success:function(result){
+							if(result == 'SUCCESS') {
+							BootstrapDialog.show({
+								title: '', //알러트 타이틀 이름
+								message: '['+user+']님에게 친구 추가 요청 완료!', //알러트 내용
+								buttons: [{ //알러트 버튼 정의
+									icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
+									label: '확인', //알러트 버튼 이름
+									cssClass: 'btn-primary', //알러트 버튼 색바꾸기
+									action: function(confirm) {
+										confirm.close();
+									}
+									}]
+							})// BootstrapDialog
+						}else if(result == 'DUPLICATE'){
+							BootstrapDialog.show({
+								title: '', //알러트 타이틀 이름
+								message: '이미 친구요청이 되어있습니다.', //알러트 내용
+								buttons: [{ //알러트 버튼 정의
+									icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
+									label: '확인', //알러트 버튼 이름
+									cssClass: 'btn-primary', //알러트 버튼 색바꾸기
+									action: function(confirm) {
+										confirm.close();
+									}
+									}]
+							})// BootstrapDialog
+						}else{
+							BootstrapDialog.show({
+								title: '', //알러트 타이틀 이름
+								message: '이미 친구입니다.', //알러트 내용
+								buttons: [{ //알러트 버튼 정의
+									icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
+									label: '확인', //알러트 버튼 이름
+									cssClass: 'btn-primary', //알러트 버튼 색바꾸기
+									action: function(confirm) {
+										confirm.close();
+									}
+									}]
+							})// BootstrapDialog
+						}	
+						},
+						error:function(xhr){
+							console.log(xhr);
+						}
+						
+					});	// ajax
 					confirm.close();
 				}
 				},{

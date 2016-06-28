@@ -36,7 +36,7 @@ public class FriendController {
 	@RequestMapping(value="/addfriend", method=RequestMethod.POST)
 	public ResponseEntity<String> addFriend(@RequestBody FriendVO vo){
 		ResponseEntity<String> entity = null;
-		
+		vo.toString();
 		try {
 			if(service.findRel(vo) == 0){	// 친구가 아니고
 				if(service.findReq(vo) == 0) {	// 친구요청중인게 없으면 친구요청
