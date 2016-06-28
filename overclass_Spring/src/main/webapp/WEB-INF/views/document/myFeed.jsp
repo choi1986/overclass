@@ -1543,6 +1543,8 @@ var result = '${msg}';
 										label: '확인', //알러트 버튼 이름
 										cssClass: 'btn-primary', //알러트 버튼 색바꾸기
 										action: function(confirm) {
+											
+											
 											confirm.close();
 										}
 										}]
