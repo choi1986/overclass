@@ -513,6 +513,21 @@
    				})
 		</script>
 	</c:if>
+	<c:if test="${sessionScope.loginFail=='2'}"> <!-- 로그인X, 세션 해제 모달 -->
+		<script type="text/javascript">
+				BootstrapDialog.show({
+   					title: '', //알러트 타이틀 이름
+   					message: '잘못된 접근이거나, 해당 아이디가 다른 곳에서 로그인 되었습니다.', //알러트 내용
+   					type: BootstrapDialog.TYPE_DANGER,
+    				buttons: [{
+    						label: '닫기',
+    						action: function(cancel){
+    							cancel.close();
+    							}
+   						}]
+   				})
+		</script>
+	</c:if>
 	<c:remove var="loginFail" scope="session" /> <!-- 회원가입 체크에 쓰인 세션 닫기 -->
 	
 	<c:choose>

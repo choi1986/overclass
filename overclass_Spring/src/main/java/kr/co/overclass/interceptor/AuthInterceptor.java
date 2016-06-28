@@ -31,6 +31,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 	    
 	    if(vo==null){
 	    	logger.info("현재 사용자는 로그인하지 않았습니다!!");
+	    	session.setAttribute("loginFail", "2");
 	    	saveDest(request);
 	    	
 	    	Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
