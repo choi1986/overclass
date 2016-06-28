@@ -1,6 +1,7 @@
 <%@page import="kr.co.overclass.domain.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <% UserVO user3 = (UserVO)session.getAttribute("login"); %>
 <!DOCTYPE html>
 <html>
@@ -60,6 +61,7 @@
 		<a href="/overclass/main" class="logo">OVER <span
 			class="lite">CLASS</span></a>
 		<!-- 로고 끝-->
+		<c:if test="${user.user_id != 'admin'}">
 		<div class="nav search-row" id="top_menu">
 			<!-- 검색폼 시작 -->
 			<ul class="nav top-menu">
@@ -69,12 +71,14 @@
 			</ul>
 			<!--  검색폼 끝 -->
 		</div>
+		</c:if>
 
 		<div class="top-nav notification-row">
 			<!-- 알림 드롭다운 -->
 			<ul class="nav pull-right top-menu">
 
 				<!-- 메세지알림 -->
+				<c:if test="${user.user_id != 'admin'}">
 				<li id="mail_notificatoin_bar" class="dropdown">
 					<a data-toggle="dropdown" class="dropdown-toggle" href="#"> 
 						<i class="icon-envelope-l"></i> 
@@ -88,6 +92,7 @@
 						</li>
 					</ul>
 				</li>
+			
 				<!-- 메시지알림 끝-->
 
 				<!-- 새글알림 시작-->
@@ -112,6 +117,7 @@
 						</li> --%>
 					</ul>
 				</li>
+				</c:if>
 				<!-- 새글알림 끝-->
 
 				<!-- 로그인한 유저정보 시작-->
@@ -125,6 +131,7 @@
 					</a>
 					<ul class="dropdown-menu extended logout">
 						<div class="log-arrow-up"></div>
+						<c:if test="${user.user_id != 'admin'}">
 						<li id="drop_myFeed" class="eborder-top">
 							<a href="/overclass/main/myFeed">
 								<i class="icon_profile"></i> 마이페이지
@@ -140,6 +147,7 @@
 								<i class="icon_clock_alt"></i> 메인페이지
 							 </a>
 						</li>
+						</c:if>
 						<li>
 							<a href="/overclass/logout">
 								<i class="icon_key_alt"></i> 로그아웃
