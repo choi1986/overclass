@@ -42,13 +42,13 @@
 										<label class="col-sm-2">
 											<a href="#"><img class="img-rounded" src="${DocumentDTO.user_image}" width='90px' height='90px' onclick="friendAdd('${DocumentDTO.writer }')"></a>
 										</label>
-										<div class="col-sm-10"> 
+										<div class="col-sm-10" id="change-transitions"> 
 											<h4><b>${DocumentDTO.writer } </b></h4><br>
 												 <h5>
 												 <span class="mapXY">
 												 	<span class="hidden">${DocumentDTO.mapXY}</span>
 													<%-- <a href="/overclass/main/map?mapXY=${DocumentDTO.mapXY}&mapLoc=${DocumentDTO.mapLoc}" id="locDoc"> --%>
-													<a href="#" onClick="window.open('/overclass/main/map?mapXY=${DocumentDTO.mapXY}&mapLoc=${DocumentDTO.mapLoc}','지도','width=900, height=600, toolbar=no, menubar=no, scrollbars=no, resizable=yes');return false;" id="locDoc">
+													<button type="button" data-value="fadeIn" class="btn btn-link" onClick="window.open('/overclass/main/map?mapXY=${DocumentDTO.mapXY}&mapLoc=${DocumentDTO.mapLoc}','지도','width=900, height=600, toolbar=no, menubar=no, scrollbars=no, resizable=yes');return false;" id="locDoc">
 													<c:if test="${DocumentDTO.mapLoc != null}">
 														<span class="fa fa-map-marker" style="color: green"> </span>
 													</c:if> 
@@ -56,7 +56,7 @@
 													<c:if test="${DocumentDTO.mapLoc != null}">
 														<span style="color: black;">에서</span>
 													</c:if>
-													</a>
+													</button>
 												 </span>
 													
 												</h5>
