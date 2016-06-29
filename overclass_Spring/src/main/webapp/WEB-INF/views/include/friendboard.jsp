@@ -206,10 +206,11 @@
 
 
 <script>
+	//태그이동
 	function tagbtn(tag) {
-		alert(tag)
 		location.href="/overclass/find/tagfind?tag="+tag;
 	}
+	
 	//신고
 	function reportDoc(dno) {
 	   BootstrapDialog.show({
