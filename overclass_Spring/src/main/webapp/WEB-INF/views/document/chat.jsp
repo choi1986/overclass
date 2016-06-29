@@ -117,7 +117,7 @@
 	var msg_templateNR = Handlebars.compile(msg_source_NR);
 	
 	// 소켓생성하기
-	var ws = new WebSocket('ws://192.168.0.131/overclass/chatting');
+	var ws = new WebSocket('ws://192.168.0.149/overclass/chatting');
 	
 	// 주의!!!
 	// 웹브라우저에서 localhost/overclass 로 접속했을땐 소켓이 localhost 으로만 접속됨.

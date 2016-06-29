@@ -641,7 +641,7 @@ $('#scrollUpTheme').attr('href', '/overclass/resources/css/image.css?1.1');
 //소켓생성하기
 var sender='<%=user.getUser_id()%>';
 
-var ws = new WebSocket('ws://192.168.0.131/overclass/chatting');
+var ws = new WebSocket('ws://192.168.0.149/overclass/chatting');
 
 // 서버에서 메시지 날라올때
 ws.onmessage = function (event) {
