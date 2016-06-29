@@ -273,135 +273,36 @@
 	   })
 	}
 
+	var source = $("#template").html();
+	var template = Handlebars.compile(source);
+	
 $(document).ready(function() {
 	var result = '${msg}';
 	
-var source = $("#template").html();
-var template = Handlebars.compile(source);
-	
-
 	var replyPage = 1;
 
-	function replyDisplayPage(dno, replyPage) {
-		var replydiv = '#reply_div' + dno;
-		var reply_page = '#reply_div_page_'+dno
-		var reply_icon = '#reply_icon'+dno+'_2';
-		$.ajax({
-			url : '/overclass/reply/list/' + dno + '/' + replyPage,
-			type : 'get',
-			success : function(result) {
-				var htmlTxt='';
-				for(var i=0; i<result.list.length; i++){
-					htmlTxt+=template(result.list[i]);
-					$(reply_icon).html('댓글['+result.count+']&nbsp;&nbsp;&nbsp;&nbsp;')
-				}
-				// 페이징추가해야됨.
-				$(replydiv).html(htmlTxt);
-				printPaging(result.pageMaker, dno, reply_page);
-			}
-		});
-	}
-	
-	var printPaging = function(pageMaker, dno, reply_page){
-		var pageStr = "";
-		
-		if(pageMaker.prev){
-			pageStr += "<li><a href='"+(pageMaker.startPage-1)+"'>«</a></li>"
-		}
-		
-		for (var i = pageMaker.startPage, len = pageMaker.endPage; i <= len; i++) {
-			var strClass = pageMaker.cri.page == i ? 'class=active' : '';
-			pageStr += "<li "+strClass+"><a href='javascript:replyDisplayPage("+dno+","+i+")'>" + i + "</a></li>";
-		}
-
-		if (pageMaker.next) {
-			pageStr += "<li><a href='" + (pageMaker.endPage + 1)
-					+ "'> >> </a></li>";
-		}
-		
-		$(reply_page).attr("style","display: show;")
-		$(reply_page).html(pageStr);
-	}
-	
-	function deleteModal(rno,dno){
+	function friendAdd(user) {
 		BootstrapDialog.show({
-			title : '', //알러트 타이틀 이름
-			message : '댓글을 삭제하시겠습니까?', //알러트 내용
-			type: BootstrapDialog.TYPE_DANGER,
-			buttons : [ { //알러트 버튼 정의
-				id : 'docWriteBt', //알러트 버튼의 아이디
-				icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
-				label : '확인', //알러트 버튼 이름
-				cssClass : 'btn-danger', //알러트 버튼 색바꾸기
-				hotkey : 13,
-				action : function(confirm) {
-					deleteReply(rno,dno);
+			title: '', //알러트 타이틀 이름
+			message: '['+user+'] 친구 추가를 하시겠습니까?', //알러트 내용
+			buttons: [{ //알러트 버튼 정의
+				icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
+				label: '추가', //알러트 버튼 이름
+				cssClass: 'btn-primary', //알러트 버튼 색바꾸기
+				action: function(confirm) {
+					alert("친구추가!"+user);
 					confirm.close();
-					
-				}},{
-    				label: '닫기',
-    				action: function(cancel){
-    					cancel.close();
-    					}
-    			}]
-    	})//BootstrapDialog
-	}//deleteReply
-	
-	function deleteReply(rno,dno){
-		$.ajax({
-			url:'/overclass/reply/'+rno,
-			type:'delete',
-			headers:{
-				"Content-Type":"application/json",
-				"X-HTTP-Method-Override":"POST"
-			},
-			data:JSON.stringify({
-				user_id:'<%=user2.getUser_id()%>'
-			}),
-			success:function(result){
-				if(result=='SUCCESS'){
-					// 성공모달
-					BootstrapDialog.show({
-						title : '', //알러트 타이틀 이름
-						message : '댓글이 삭제되었습니다.', //알러트 내용
-						buttons : [ { //알러트 버튼 정의
-							id : 'docWriteBt', //알러트 버튼의 아이디
-							icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
-							label : '확인', //알러트 버튼 이름
-							cssClass : 'btn-primary', //알러트 버튼 색바꾸기
-							hotkey : 13,
-							action : function(confirm) {
-								//댓글목록갱신
-								replyDisplayPage(dno,1);
-								confirm.close()
-							}
-						} ]
-					})
-				} else {
-					// 실패모달
-					BootstrapDialog.show({
-						title : '', //알러트 타이틀 이름
-						message : '댓글을 삭제하지 못했습니다.', //알러트 내용
-						buttons : [ { //알러트 버튼 정의
-							id : 'docWriteBt', //알러트 버튼의 아이디
-							icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
-							label : '확인', //알러트 버튼 이름
-							cssClass : 'btn-primary', //알러트 버튼 색바꾸기
-							hotkey : 13,
-							action : function(confirm) {
-								confirm.close()
-							}
-						} ]
-					});
-				}//else
-			},//success:function
-			error:function(status){
-				alert(status);
-				console.log(status);
-			}
-		})//ajax
+				}
+				},{
+					label: '닫기',
+					action: function(cancel){
+						cancel.close();
+						}
+				}]
+		})
 	}
-	
+})
+
 	function writeReply(event,dno){
 		var replyWriteTxt = '#reply_write'+dno;
 			if(event.keyCode == 13){
@@ -476,25 +377,124 @@ var template = Handlebars.compile(source);
 				return false;
 			} // keycode if
 	}
-	function friendAdd(user) {
-		BootstrapDialog.show({
-			title: '', //알러트 타이틀 이름
-			message: '['+user+'] 친구 추가를 하시겠습니까?', //알러트 내용
-			buttons: [{ //알러트 버튼 정의
-				icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
-				label: '추가', //알러트 버튼 이름
-				cssClass: 'btn-primary', //알러트 버튼 색바꾸기
-				action: function(confirm) {
-					alert("친구추가!"+user);
-					confirm.close();
-				}
-				},{
-					label: '닫기',
-					action: function(cancel){
-						cancel.close();
-						}
-				}]
-		})
+
+var printPaging = function(pageMaker, dno, reply_page){
+	var pageStr = "";
+	
+	if(pageMaker.prev){
+		pageStr += "<li><a href='"+(pageMaker.startPage-1)+"'>«</a></li>"
 	}
-})
+	
+	for (var i = pageMaker.startPage, len = pageMaker.endPage; i <= len; i++) {
+		var strClass = pageMaker.cri.page == i ? 'class=active' : '';
+		pageStr += "<li "+strClass+"><a href='javascript:replyDisplayPage("+dno+","+i+")'>" + i + "</a></li>";
+	}
+
+	if (pageMaker.next) {
+		pageStr += "<li><a href='" + (pageMaker.endPage + 1)
+				+ "'> >> </a></li>";
+	}
+	
+	$(reply_page).attr("style","display: show;")
+	$(reply_page).html(pageStr);
+}
+	
+function replyDisplayPage(dno, replyPage) {
+	var replydiv = '#reply_div' + dno;
+	var reply_page = '#reply_div_page_'+dno
+	var reply_icon = '#reply_icon'+dno+'_2';
+	$.ajax({
+		url : '/overclass/reply/list/' + dno + '/' + replyPage,
+		type : 'get',
+		success : function(result) {
+			var htmlTxt='';
+			for(var i=0; i<result.list.length; i++){
+				htmlTxt+=template(result.list[i]);
+				$(reply_icon).html('댓글['+result.count+']&nbsp;&nbsp;&nbsp;&nbsp;')
+			}
+			// 페이징추가해야됨.
+			$(replydiv).html(htmlTxt);
+			printPaging(result.pageMaker, dno, reply_page);
+		}
+	});
+}
+
+function deleteModal(rno,dno){
+	BootstrapDialog.show({
+		title : '', //알러트 타이틀 이름
+		message : '댓글을 삭제하시겠습니까?', //알러트 내용
+		type: BootstrapDialog.TYPE_DANGER,
+		buttons : [ { //알러트 버튼 정의
+			id : 'docWriteBt', //알러트 버튼의 아이디
+			icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
+			label : '확인', //알러트 버튼 이름
+			cssClass : 'btn-danger', //알러트 버튼 색바꾸기
+			hotkey : 13,
+			action : function(confirm) {
+				deleteReply(rno,dno);
+				confirm.close();
+				
+			}},{
+				label: '닫기',
+				action: function(cancel){
+					cancel.close();
+					}
+			}]
+	})//BootstrapDialog
+}//deleteReply
+
+function deleteReply(rno,dno){
+	$.ajax({
+		url:'/overclass/reply/'+rno,
+		type:'delete',
+		headers:{
+			"Content-Type":"application/json",
+			"X-HTTP-Method-Override":"POST"
+		},
+		data:JSON.stringify({
+			user_id:'<%=user2.getUser_id()%>'
+		}),
+		success:function(result){
+			if(result=='SUCCESS'){
+				// 성공모달
+				BootstrapDialog.show({
+					title : '', //알러트 타이틀 이름
+					message : '댓글이 삭제되었습니다.', //알러트 내용
+					buttons : [ { //알러트 버튼 정의
+						id : 'docWriteBt', //알러트 버튼의 아이디
+						icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
+						label : '확인', //알러트 버튼 이름
+						cssClass : 'btn-primary', //알러트 버튼 색바꾸기
+						hotkey : 13,
+						action : function(confirm) {
+							//댓글목록갱신
+							replyDisplayPage(dno,1);
+							confirm.close()
+						}
+					} ]
+				})
+			} else {
+				// 실패모달
+				BootstrapDialog.show({
+					title : '', //알러트 타이틀 이름
+					message : '댓글을 삭제하지 못했습니다.', //알러트 내용
+					buttons : [ { //알러트 버튼 정의
+						id : 'docWriteBt', //알러트 버튼의 아이디
+						icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
+						label : '확인', //알러트 버튼 이름
+						cssClass : 'btn-primary', //알러트 버튼 색바꾸기
+						hotkey : 13,
+						action : function(confirm) {
+							confirm.close()
+						}
+					} ]
+				});
+			}//else
+		},//success:function
+		error:function(status){
+			alert(status);
+			console.log(status);
+		}
+	})//ajax
+}
 </script>

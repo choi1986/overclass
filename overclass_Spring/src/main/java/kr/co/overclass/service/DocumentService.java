@@ -17,4 +17,5 @@ public interface DocumentService {
 	public int myFeed_count(String user_id) throws Exception; //마이피드 게시글 개수
 	public void imageUpdate(Map<String, String> map) throws Exception;
 	public DocumentDTO read_doc(int dno) throws Exception;//글 1건 조회
+	public List<DocumentDTO> myFeed_list(Criteria cri, String user_id, String myid) throws Exception; //마이피드 게시글 조회
 }

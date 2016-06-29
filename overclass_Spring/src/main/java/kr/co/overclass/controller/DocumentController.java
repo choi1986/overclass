@@ -169,7 +169,7 @@ public class DocumentController {
 			}
 			if(friCk) {
 				UserVO friend = new UserVO();
-				list = service.myFeed_list(cri, user_id);
+				list = service.myFeed_list(cri, user_id, vo.getUser_id());
 				maker.setTotalCount(service.myFeed_count(user_id));
 				friend = userService.searchUser(user_id);
 				model.addAttribute("friend",friend);
