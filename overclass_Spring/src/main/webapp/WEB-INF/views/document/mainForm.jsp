@@ -645,6 +645,7 @@ var ws = new WebSocket('ws://192.168.0.149/overclass/chatting');
 
 // 서버에서 메시지 날라올때
 ws.onmessage = function (event) {
+	console.log('데이터왔음');
 	var data = JSON.parse(event.data);
 		if(data.protocol == 130) {
 			//msgtemp, msgtempNR
