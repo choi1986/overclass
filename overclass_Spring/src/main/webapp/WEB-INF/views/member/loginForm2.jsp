@@ -715,7 +715,7 @@
             </div>
             <div id="change-transitions">
             <label class="checkbox">
-                <input type="checkbox" name="useCookie"> 아이디 저장
+                <input type="checkbox" name="useCookie"> 자동로그인
                 <span class="pull-right"> <button type="button" data-value="fadeInLeftBig" class="btn btn-link" id="searchID" data-value="bounceIn" onclick="javascript:document.test.submit()">문제가 있나요?</button></span><!--  <a href="#"> -->
             </label>
             </div>
