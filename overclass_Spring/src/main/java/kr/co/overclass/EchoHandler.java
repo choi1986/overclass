@@ -158,6 +158,7 @@ public class EchoHandler extends TextWebSocketHandler {
 						
 						// 메시지목록 전송
 						List<MsgDTO> list = service.sitebarDisplay(frommsg.getReceiver());
+						logger.info("서비스반환값 0번 : "+list.get(0).getSender()+", "+list.get(0).getContent());
 						int count = service.count(frommsg.getReceiver());
 						
 						Map<String,Object> map = new HashMap<>();

@@ -42,6 +42,7 @@ public class MsgDAOImpl implements MsgDAO {
 
 	@Override
 	public List<MsgDTO> sitebarDisplay(String receiver) throws Exception {
+		logger.info("조회하는 아이디 : "+receiver);
 		return session.selectList("msg.read4", receiver,new RowBounds(0, 4));
 	}
 
