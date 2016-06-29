@@ -799,6 +799,61 @@ function searchDetailAddrFromCoords(coords, callback) {
 </body>
 <script type="text/javascript">
 var result = '${msg}';
+//회원탈퇴 모달정의
+$("#member_leave").click(function() {
+	BootstrapDialog.show({
+		title: '',
+        message: '비밀번호 입력: <input id="pwd" type="password" class="form-control">',
+        size:BootstrapDialog.SIZE_SMALL,
+        type: BootstrapDialog.TYPE_DANGER,
+        buttons: [{
+            icon: 'fa fa-check',
+            label: '확인',
+            hotkey: 13,
+            cssClass: 'btn-danger',
+            action: function(dialogRef){
+                var pwd = dialogRef.getModalBody().find('#pwd').val();
+                if($.trim(pwd.toLowerCase()) !== '${user.user_pwd }') {
+                	BootstrapDialog.show({
+                		title: '',
+                		message: '비밀번호 틀림',
+                		type: BootstrapDialog.TYPE_primary,
+                		buttons: [{
+                			label:'닫기',
+                			hotkey:13,
+                			cssClass:'btn-primary',
+                			action: function(alert) {
+								alert.close()
+							}
+                		}]
+                	})
+                    $("#pwd").focus()
+                } else {
+                	BootstrapDialog.show({
+                		title: '',
+                		message: '회원탈퇴가 완료되었습니다',
+                		type: BootstrapDialog.TYPE_primary,
+                		buttons: [{
+                			label:'닫기',
+                			hotkey:13,
+                			cssClass:'btn-primary',
+                			action: function(alert) {
+								alert.close();
+								location.href="/overclass/main/leave?user_id=${user.user_id }";
+							}
+                		}]
+                	})
+              		dialogRef.close();
+                }
+            }
+        }, {
+            label: '닫기',
+            action: function(dialogRef){
+            	dialogRef.close();
+            }
+        }]
+    });	
+})
 	$(document).ready(function() {
 		modifyError = {
 				user_pwdCk : true,
@@ -1141,61 +1196,6 @@ var result = '${msg}';
 	    	})
 		})
 		
-		//회원탈퇴 모달정의
-		$("#member_leave").click(function() {
-			BootstrapDialog.show({
-				title: '',
-	            message: '비밀번호 입력: <input id="pwd" type="password" class="form-control">',
-	            size:BootstrapDialog.SIZE_SMALL,
-	            type: BootstrapDialog.TYPE_DANGER,
-	            buttons: [{
-	                icon: 'fa fa-check',
-	                label: '확인',
-	                hotkey: 13,
-	                cssClass: 'btn-danger',
-	                action: function(dialogRef){
-	                    var pwd = dialogRef.getModalBody().find('#pwd').val();
-		                if($.trim(pwd.toLowerCase()) !== '${user.user_pwd }') {
-		                	BootstrapDialog.show({
-		                		title: '',
-		                		message: '비밀번호 틀림',
-		                		type: BootstrapDialog.TYPE_primary,
-		                		buttons: [{
-		                			label:'닫기',
-		                			hotkey:13,
-		                			cssClass:'btn-primary',
-		                			action: function(alert) {
-										alert.close()
-									}
-		                		}]
-		                	})
-		                    $("#pwd").focus()
-		                } else {
-		                	BootstrapDialog.show({
-		                		title: '',
-		                		message: '회원탈퇴가 완료되었습니다',
-		                		type: BootstrapDialog.TYPE_primary,
-		                		buttons: [{
-		                			label:'닫기',
-		                			hotkey:13,
-		                			cssClass:'btn-primary',
-		                			action: function(alert) {
-										alert.close();
-										location.href("/overclass/main/leave?user_id=${user.user_id }");
-									}
-		                		}]
-		                	})
-	                  		dialogRef.close();
-		                }
-	                }
-	            }, {
-	                label: '닫기',
-	                action: function(dialogRef){
-	                	dialogRef.close();
-	                }
-	            }]
-	        });	
-		})
 		
 		//프로필수정 모달정의
 		$("#member_update").click(function() {
