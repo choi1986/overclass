@@ -210,71 +210,71 @@
 		alert(tag)
 		location.href="/overclass/find/tagfind?tag="+tag;
 	}
+	//신고
+	function reportDoc(dno) {
+	   BootstrapDialog.show({
+	      title: '', //알러트 타이틀 이름
+	      message: '신고사유: <input name="content" id="content" type="text" class="form-control">', //알러트 내용
+	      type: BootstrapDialog.TYPE_DANGER,
+	      buttons: [{ //알러트 버튼 정의
+	         icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
+	         label: '신고', //알러트 버튼 이름
+	         cssClass: 'btn-danger', //알러트 버튼 색바꾸기
+	         action: function(confirm) {
+	            var content = confirm.getModalBody().find('#content').val();
+	            if(content.trim() == '') {
+	            	BootstrapDialog.show({
+						title : '', //알러트 타이틀 이름
+						message : '신고사유를 입력해주세요', //알러트 내용
+						buttons : [ { //알러트 버튼 정의
+							icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
+							label : '확인', //알러트 버튼 이름
+							cssClass : 'btn-primary', //알러트 버튼 색바꾸기
+							action : function(confirm) {
+								confirm.close()
+							}
+						}]
+					});
+	            	return false;
+	            } else {
+		            $.ajax({
+		               url: "/overclass/admin/reportDoc",
+		               type: "post",
+		               data: {
+		                  reporter:'<%= user2.getUser_id() %>',
+		                  dno:dno,
+		                  content:content,
+		               },
+		               success: function(result) {
+		            	   BootstrapDialog.show({
+								title : '', //알러트 타이틀 이름
+								message : '신고가 접수되었습니다', //알러트 내용
+								buttons : [ { //알러트 버튼 정의
+									icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
+									label : '확인', //알러트 버튼 이름
+									cssClass : 'btn-primary', //알러트 버튼 색바꾸기
+									action : function(confirm) {
+										confirm.close()
+									}
+								} ]
+							});
+		               }
+		            })
+	            }
+	            confirm.close()
+	         }
+	         },{
+	            label: '닫기',
+	            action: function(cancel){
+	               cancel.close();
+	               }
+	         }]
+	   })
+	}
 
 $(document).ready(function() {
 	var result = '${msg}';
 	
-//신고
-function reportDoc(dno) {
-   BootstrapDialog.show({
-      title: '', //알러트 타이틀 이름
-      message: '신고사유: <input name="content" id="content" type="text" class="form-control">', //알러트 내용
-      type: BootstrapDialog.TYPE_DANGER,
-      buttons: [{ //알러트 버튼 정의
-         icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
-         label: '신고', //알러트 버튼 이름
-         cssClass: 'btn-danger', //알러트 버튼 색바꾸기
-         action: function(confirm) {
-            var content = confirm.getModalBody().find('#content').val();
-            if(content.trim() == '') {
-            	BootstrapDialog.show({
-					title : '', //알러트 타이틀 이름
-					message : '신고사유를 입력해주세요', //알러트 내용
-					buttons : [ { //알러트 버튼 정의
-						icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
-						label : '확인', //알러트 버튼 이름
-						cssClass : 'btn-primary', //알러트 버튼 색바꾸기
-						action : function(confirm) {
-							confirm.close()
-						}
-					}]
-				});
-            	return false;
-            } else {
-	            $.ajax({
-	               url: "/overclass/admin/reportDoc",
-	               type: "post",
-	               data: {
-	                  reporter:'<%= user2.getUser_id() %>',
-	                  dno:dno,
-	                  content:content,
-	               },
-	               success: function(result) {
-	            	   BootstrapDialog.show({
-							title : '', //알러트 타이틀 이름
-							message : '신고가 접수되었습니다', //알러트 내용
-							buttons : [ { //알러트 버튼 정의
-								icon : 'fa fa-check', //알러트버튼에 넣을 아이콘
-								label : '확인', //알러트 버튼 이름
-								cssClass : 'btn-primary', //알러트 버튼 색바꾸기
-								action : function(confirm) {
-									confirm.close()
-								}
-							} ]
-						});
-	               }
-	            })
-            }
-            confirm.close()
-         }
-         },{
-            label: '닫기',
-            action: function(cancel){
-               cancel.close();
-               }
-         }]
-   })
-}
 var source = $("#template").html();
 var template = Handlebars.compile(source);
 	
