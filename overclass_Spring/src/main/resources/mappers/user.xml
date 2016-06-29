@@ -17,6 +17,30 @@
 		update oc_user set user_image=#{user_image}
 		where user_id=LOWER(#{user_id})
 	</update>
+	<delete id="deleteUserFriendRel">
+		delete from oc_friend_rel
+		where sender=LOWER(#{user_id}) or receiver=LOWER(#{user_id})
+	</delete>
+	<delete id="deleteUserFriendReq">
+		delete from oc_friend_req
+		where sender=LOWER(#{user_id}) or receiver=LOWER(#{user_id})
+	</delete>
+	<delete id="deleteUserMsg">
+		delete from oc_msg
+		where sender=LOWER(#{user_id}) or receiver=LOWER(#{user_id})
+	</delete>
+	<delete id="deleteUserBanDoc">
+		delete from oc_bandoc
+		where writer=LOWER(#{user_id}) or reporter=LOWER(#{user_id})
+	</delete>
+	<delete id="deleteUserReportDoc">
+		delete from oc_report
+		where dno=(select dno from oc_document where writer=LOWER(#{user_id}))
+	</delete>
+	<delete id="deleteUserReport">
+		delete from oc_report
+		where reporter=LOWER(#{user_id})
+	</delete>
 	<delete id="deleteUserDoc_Reply">
 		delete from oc_reply
 		where dno=(select dno from oc_document where writer=LOWER(#{user_id}))
@@ -25,13 +49,17 @@
 		delete from oc_reply
 		where replyer=LOWER(#{user_id})
 	</delete>
-	<delete id="deleteUserDoc">
-		delete from oc_document
-		where writer=LOWER(#{user_id})
+	<delete id="deleteUserGoodDoc">
+		delete from oc_good
+		where dno=(select dno from oc_document where writer=LOWER(#{user_id}))
 	</delete>
 	<delete id="deleteUserGood">
 		delete from oc_good
 		where good_user=LOWER(#{user_id})
+	</delete>
+	<delete id="deleteUserDoc">
+		delete from oc_document
+		where writer=LOWER(#{user_id})
 	</delete>
 	<delete id="deleteUser">
 		delete from oc_user
