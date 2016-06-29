@@ -290,6 +290,7 @@
 		case 1: // 아이디
 			if(data.value.length<5) { msg='아이디를 5자리 이상 입력해주세요.'; joinError.user_idCk=true; }
 			else if(!data.value.match(/^[^ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*$/g)) { msg='아이디에 한글은 입력할 수 없습니다.'; joinError.user_idCk=true; }
+			else if(data.value.match(/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi)) { msg='아이디에 특수문자는 입력할 수 없습니다.'; joinError.user_idCk=true; }
 			else joinError.user_idCk=false;
 			$("#span1").text(msg);
 			break;
