@@ -1199,6 +1199,19 @@ var result = '${msg}';
 		
 		//프로필수정 모달정의
 		$("#member_update").click(function() {
+			$("#user_pwd").focus();
+			$("#user_pwd_confirm").focus();
+			$("#user_email").focus();
+			$("#user_tel1").focus();
+			$("#user_tel2").focus();
+			$("#user_tel3").focus();
+			$("#user_loc").focus();
+			$("#user_hobby1").focus();
+			$("#user_hobby2").focus();
+			$("#user_birth").focus();
+			$("#user_pwdq").focus();
+			$("#user_pwda").focus();
+			
 			modifyErrorCk=modifyError.user_pwdCk||modifyError.user_pwd_confirmCk||
 			modifyError.user_emailCk||modifyError.user_tel1Ck||modifyError.user_tel2Ck||modifyError.user_tel3Ck||
 			modifyError.user_locCk||modifyError.user_hobby1Ck||modifyError.user_hobby2Ck||modifyError.user_pwdqCk||
@@ -1213,18 +1226,6 @@ var result = '${msg}';
 		    		buttons: [{
 		    				label: '닫기',
 		    				action: function(cancel){
-		    					$("#user_pwd").focus();
-		    					$("#user_pwd_confirm").focus();
-		    					$("#user_email").focus();
-		    					$("#user_tel1").focus();
-		    					$("#user_tel2").focus();
-		    					$("#user_tel3").focus();
-		    					$("#user_loc").focus();
-		    					$("#user_hobby1").focus();
-		    					$("#user_hobby2").focus();
-		    					$("#user_birth").focus();
-		    					$("#user_pwdq").focus();
-		    					$("#user_pwda").focus();
 		    					cancel.close();
 		    					}
 		    			}]
