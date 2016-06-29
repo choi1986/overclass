@@ -35,7 +35,7 @@
 	</delete>
 	<delete id="deleteUserReportDoc">
 		delete from oc_report
-		where dno=(select dno from oc_document where writer=LOWER(#{user_id}))
+		where dno in (select dno from oc_document where writer=LOWER(#{user_id}))
 	</delete>
 	<delete id="deleteUserReport">
 		delete from oc_report
@@ -43,7 +43,7 @@
 	</delete>
 	<delete id="deleteUserDoc_Reply">
 		delete from oc_reply
-		where dno=(select dno from oc_document where writer=LOWER(#{user_id}))
+		where dno in (select dno from oc_document where writer=LOWER(#{user_id}))
 	</delete>
 	<delete id="deleteUserReply">
 		delete from oc_reply
@@ -51,7 +51,7 @@
 	</delete>
 	<delete id="deleteUserGoodDoc">
 		delete from oc_good
-		where dno=(select dno from oc_document where writer=LOWER(#{user_id}))
+		where dno in (select dno from oc_document where writer=LOWER(#{user_id}))
 	</delete>
 	<delete id="deleteUserGood">
 		delete from oc_good
