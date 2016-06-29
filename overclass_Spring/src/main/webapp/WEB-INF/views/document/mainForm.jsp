@@ -646,10 +646,13 @@ var ws = new WebSocket('ws://192.168.0.149/overclass/chatting');
 // 서버에서 메시지 날라올때
 ws.onmessage = function (event) {
 	var data = JSON.parse(event.data);
+		console.log('프로토콜값 : '+data.protocol);
 		if(data.protocol == 130) {
 			//msgtemp, msgtempNR
 			var htmlTxt = msgtop_template(data);
 			$("#sitebarMsgCount").text(data.count);
+			
+			console.log('데이터 : '+data.list)
 			for(var i=0; i<data.list.length; i++){
 				if(data.list[i].read == 0){	// 안읽었으면
 					htmlTxt+=msg_templateNR(data.list[i]);

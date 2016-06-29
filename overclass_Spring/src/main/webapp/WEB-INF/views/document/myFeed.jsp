@@ -1080,7 +1080,7 @@ var result = '${msg}';
 		    		buttons: [{ //알러트 버튼 정의
 		    			id: 'docWriteBt', //알러트 버튼의 아이디
 		    			icon: 'fa fa-check', //알러트버튼에 넣을 아이콘
-		    			label: '버튼', //알러트 버튼 이름
+		    			label: '등록', //알러트 버튼 이름
 		    			cssClass: 'btn-primary', //알러트 버튼 색바꾸기
 		    			hotkey:13,
 		    			action: function(confirm) {
