@@ -209,7 +209,7 @@ function find() {
 			if (regtxt.substring(0, 1) == '#') { //태그검색
 				var txt = regtxt.substring(1, regtxt.length);
 				var regtxt = txt.replace(/\s/gi, '');
-				var formattxt = regtxt.replace(/^#*/g, '') #
+				var formattxt = regtxt.replace(/^#*/g, '') 
 				if(formattxt.length != 0){
 					location.href = "/overclass/find/tagfind?tag=" + formattxt;
 				} else {
