@@ -209,8 +209,26 @@ function find() {
 			if (regtxt.substring(0, 1) == '#') { //태그검색
 				var txt = regtxt.substring(1, regtxt.length);
 				var regtxt = txt.replace(/\s/gi, '');
-				location.href = "/overclass/find/tagfind?tag=" + regtxt;
-			} else { //친구검색
+				var formattxt = regtxt.replace(/^#*/g, '')
+				if(formattxt.length != 0){
+					location.href = "/overclass/find/tagfind?tag=" + formattxt;
+				} else {
+					BootstrapDialog.show({
+			    		title: '', //알러트 타이틀 이름
+			    		message: '검색어를 입력하세요!', //알러트 내용
+			    		buttons: [{ //알러트 버튼 정의
+			    				icon: 'fa fa-check',
+			    				label: '확인',
+			    				cssClass: 'btn-primary',
+			    				hotkey:13,
+			    				action: function(cancel){
+			    					cancel.close();
+			   					}
+			    			}]
+			    	})
+				}
+			}
+			else { //친구검색
 				location.href = "/overclass/find/friendfind?friend=" + regtxt;
 			}
 			return false;
