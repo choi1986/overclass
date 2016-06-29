@@ -31,8 +31,10 @@ create table oc_document(
 	tag varchar2(210),
 	writedate date default sysdate,
 	image varchar2(300),
+	maploc varchar2(210),
 	goodcnt number default 0,
 	replycnt number default 0,
+	mapxy varchar2(210)
 	foreign key (writer) references oc_user (user_id)
 );
 
@@ -43,8 +45,8 @@ create sequence oc_document_seq
 	nocycle
 	nocache;
 
-drop table good cascade constraints;
-create table good(
+drop table oc_good cascade constraints;
+create table oc_good(
 	good_user varchar2(12) not null,
 	dno number not null,
 	foreign key (good_user) references oc_user (user_id),
@@ -75,7 +77,6 @@ create table oc_reply(
 	replyer varchar2(12) not null,
 	content varchar2(150) not null,
 	writedate date default sysdate,
-	read number default 0 not null,
 	foreign key (replyer) references oc_user (user_id),
 	foreign key (dno) references oc_document (dno)
 );
@@ -105,5 +106,29 @@ create table oc_msg(
 	receiver varchar2(12) not null,
 	content varchar2(210) not null,
 	writedate date default sysdate
+	read number default 0 not null
 );
 
+drop table oc_bandoc cascade constraints;
+create table oc_bandoc(
+	dno number not null, -- 신고된글의 글번호
+	writer varchar2(12), -- 신고된글의 글 작성자
+	content varchar2(120), -- 신고된글의 글 내용
+	tag varchar2(210), -- 신고된글의 태그
+	image varchar2(300), -- 신고된글의 사진
+	mapLoc varchar2(210),
+	mapXY varchar2(210),
+	goodcnt number, -- 신고된글의 좋아요 카운트
+	user_image varchar2(300), -- 신고된글의 작성자 프로필 사진 
+	reportno number primary key, -- 신고 번호
+	report_content varchar2(210), -- 신고 사유
+	reporter varchar2(12) not null, -- 신고자
+	reportdate date -- 신고처리일자
+);
+
+drop sequence oc_bandoc_seq;
+create sequence oc_bandoc_seq
+	start with 1
+	increment by 1
+	nocycle
+	nocache;
