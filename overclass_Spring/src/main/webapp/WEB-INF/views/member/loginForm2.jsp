@@ -182,6 +182,21 @@
 			$("#email2").show()
 		}
 		$("#join_join").click(function() { //회원가입폼에서 가입버튼 눌렀을시
+			$("#user_id").focus();
+			$("#user_pwd").focus();
+			$("#user_pwd_confirm").focus();
+			$("#user_name").focus();
+			$("#user_email").focus();
+			$("#user_tel1").focus();
+			$("#user_tel2").focus();
+			$("#user_tel3").focus();
+			$("#user_loc").focus();
+			$("#user_hobby1").focus();
+			$("#user_hobby2").focus();
+			$("#user_birth").focus();
+			$("#user_pwdq").focus();
+			$("#user_pwda").focus();
+			
 			if($("#joinErrorCk").val()=="true") {
 				BootstrapDialog.show({
 		    		title: '', //알러트 타이틀 이름
@@ -190,20 +205,6 @@
 		    		buttons: [{
 		    				label: '닫기',
 		    				action: function(cancel){
-		    					$("#user_id").focus();
-		    					$("#user_pwd").focus();
-		    					$("#user_pwd_confirm").focus();
-		    					$("#user_name").focus();
-		    					$("#user_email").focus();
-		    					$("#user_tel1").focus();
-		    					$("#user_tel2").focus();
-		    					$("#user_tel3").focus();
-		    					$("#user_loc").focus();
-		    					$("#user_hobby1").focus();
-		    					$("#user_hobby2").focus();
-		    					$("#user_birth").focus();
-		    					$("#user_pwdq").focus();
-		    					$("#user_pwda").focus();
 		    					cancel.close();
 		    					}
 		    			}]
