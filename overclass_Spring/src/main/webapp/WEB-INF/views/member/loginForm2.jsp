@@ -788,7 +788,7 @@
                                       <div class="form-group ">
                                           <label for="email" class="control-label col-sm-4">이메일 <span class="required">*</span></label>
                                           <div class="col-sm-4">
-                                              <input class="form-control " id="user_email" name="user_email" type="email" placeholder="ex) kosta113" onblur="regCk(5, this)"/>
+                                              <input class="form-control " id="user_email" name="user_email" type="email" placeholder="ex) kosta113@naver.com" onblur="regCk(5, this)"/>
                                           </div>
                                           <span id="span5" class="joinSpan"></span>
                                       </div>

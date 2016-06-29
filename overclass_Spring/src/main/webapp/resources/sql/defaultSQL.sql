@@ -13,10 +13,10 @@ create table oc_user(
 	user_pwdq varchar2(99) not null,
 	user_pwda varchar2(99) not null,
 	user_joindate date default sysdate,
-	user_image varchar2(300) default '/resources/img/profile_default.jpg',
+	user_image varchar2(300) default '/overclass/resources/img/profile_default.png',
 	user_logincnt number default 0,
 	user_admin number default 0,
-	sessionkey varchar2(50) not null default 'none',
+	sessionkey varchar2(50) default 'none' not null,
 	sessionlimit timestamp
 );
 
